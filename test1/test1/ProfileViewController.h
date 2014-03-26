@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface ProfileViewController : UIViewController
+
+@property (strong, nonatomic) NSString *fbName;
+@property (strong, nonatomic) NSString *fbID;
 
 @end

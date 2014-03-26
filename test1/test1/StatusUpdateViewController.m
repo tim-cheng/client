@@ -54,17 +54,17 @@
 	
     self.firebase = [[Firebase alloc] initWithUrl:@"https://monitortest.firebaseIO.com/"];
     [self.firebase observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        NSMutableArray* insertingRows = [NSMutableArray array];
-        int inCnt = [snapshot.value count];
-        int feedCnt = [self.feedArray count];
+        int inCnt = (int)[snapshot.value count];
+        int feedCnt = (int)[self.feedArray count];
+        NSArray *indexPaths = @[[NSIndexPath indexPathForRow:0 inSection:0]];
         if (inCnt > feedCnt) {
             for (int i=feedCnt; i<inCnt; i++) {
                 [self.feedArray addObject:snapshot.value[i]];
-                [insertingRows addObject:[NSIndexPath indexPathForRow:i-feedCnt inSection:0]];
+                //[self.feedView beginUpdates];
+                [self.feedView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+                //[self.feedView endUpdates];
+
             }
-            [self.feedView beginUpdates];
-            [self.feedView insertRowsAtIndexPaths:insertingRows withRowAnimation:UITableViewRowAnimationAutomatic];;
-            [self.feedView endUpdates];
         } else {
             NSLog(@"inconsistency!");
         }
@@ -82,6 +82,8 @@
                   user:(id<FBGraphUser>)user
 {
     self.profilePictureView.profileID = user.id;
+    self.profilePictureView.layer.cornerRadius = 10.0f;
+
     self.fbID = user.id;
     self.nameLabel.text = user.name;
     
@@ -100,8 +102,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"ShowSelfProfile"]) {
-        self.profileVC = ([segue.destinationViewController isKindOfClass:[StatusUpdateViewController class]]) ? segue.destinationViewController : nil;
+        self.profileVC = ([segue.destinationViewController isKindOfClass:[ProfileViewController class]]) ? segue.destinationViewController : nil;
         NSLog(@"ready to segue");
+        self.profileVC.fbID = self.fbID;
+        self.profileVC.fbName = self.nameLabel.text;
     }
 }
 
@@ -185,7 +189,7 @@
     NSDictionary *feed = self.feedArray[[self.feedArray count] - 1 - indexPath.row];
     
     FBProfilePictureView *imgView = (FBProfilePictureView*)[cell.contentView viewWithTag:10];
-    [imgView.layer setCornerRadius:10.0f];
+    imgView.layer.cornerRadius = 10.0f;
     
     if (feed[@"fb_id"]) {
         imgView.profileID = feed[@"fb_id"];

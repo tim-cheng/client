@@ -10,6 +10,9 @@
 
 @interface ProfileViewController ()
 
+@property (strong, nonatomic) IBOutlet FBProfilePictureView *profilePictureView;
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+
 - (IBAction) didTapBackButton:(id)sender;
 @end
 
@@ -28,6 +31,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.profilePictureView.profileID = self.fbID;
+    self.profilePictureView.layer.cornerRadius = 10.0f;
+    self.nameLabel.text = self.fbName;
 }
 
 - (void)didReceiveMemoryWarning
