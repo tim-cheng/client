@@ -11,6 +11,7 @@
 #import "NSStrinAdditions.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "NSDate+TimeAgo.h"
+#import "ProfileViewController.h"
 
 
 @interface StatusUpdateViewController () <UITextFieldDelegate,
@@ -19,7 +20,7 @@
                               UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UITextField *statusField;
-@property (strong, nonatomic) IBOutlet UIImageView *userImageView;
+//@property (strong, nonatomic) IBOutlet UIImageView *userImageView;
 @property (strong, nonatomic) IBOutlet UITableView *feedView;
 
 @property (strong, nonatomic) IBOutlet FBProfilePictureView *profilePictureView;
@@ -30,8 +31,10 @@
 @property (strong, nonatomic) NSDateFormatter *myFormatter;
 @property (strong, nonatomic) NSString *fbID;
 
-- (IBAction) didTapButton:(id)sender;
-- (IBAction) didTapUploadButton:(id)sender;
+@property (strong, nonatomic) ProfileViewController *profileVC;
+
+//- (IBAction) didTapButton:(id)sender;
+//- (IBAction) didTapUploadButton:(id)sender;
 
 @end
 
@@ -81,6 +84,25 @@
     self.profilePictureView.profileID = user.id;
     self.fbID = user.id;
     self.nameLabel.text = user.name;
+    
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(tapSelfProfile:)];
+    [self.profilePictureView addGestureRecognizer:singleFingerTap];
+    
+}
+
+- (void)tapSelfProfile:(UITapGestureRecognizer *)recognizer
+{
+    [self performSegueWithIdentifier:@"ShowSelfProfile" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"ShowSelfProfile"]) {
+        self.profileVC = ([segue.destinationViewController isKindOfClass:[StatusUpdateViewController class]]) ? segue.destinationViewController : nil;
+        NSLog(@"ready to segue");
+    }
 }
 
 
@@ -114,26 +136,26 @@
 
 #pragma mark UIImagePickerControllerDelegate
 
-- (void) imagePickerController:(UIImagePickerController *)picker
-         didFinishPickingImage:(UIImage *)image
-                   editingInfo:(NSDictionary *)editingInfo
-{
-    self.userImageView.image = image;
-    [self dismissModalViewControllerAnimated:YES];
-}
+//- (void) imagePickerController:(UIImagePickerController *)picker
+//         didFinishPickingImage:(UIImage *)image
+//                   editingInfo:(NSDictionary *)editingInfo
+//{
+//    self.userImageView.image = image;
+//    [self dismissModalViewControllerAnimated:YES];
+//}
 
 #pragma mark IBActions
 
-- (IBAction) didTapButton:(id)sender
-{
-    UIImagePickerController *pickerController = [[UIImagePickerController alloc]
-                                                 init];
-    pickerController.delegate = self;
-    [self presentViewController:pickerController animated:YES completion:NULL];
-}
+//- (IBAction) didTapButton:(id)sender
+//{
+//    UIImagePickerController *pickerController = [[UIImagePickerController alloc]
+//                                                 init];
+//    pickerController.delegate = self;
+//    [self presentViewController:pickerController animated:YES completion:NULL];
+//}
 
-- (IBAction) didTapUploadButton:(id)sender
-{
+//- (IBAction) didTapUploadButton:(id)sender
+//{
 //    NSData *imageData = UIImageJPEGRepresentation(self.userImageView.image, 0.9);
 //    NSString *imageString = [NSString base64StringFromData:imageData length:[imageData length]];
 //    
@@ -143,7 +165,7 @@
 //        Firebase* newImageRef = [self.firebase childByAppendingPath:indexPath];
 //        [newImageRef setValue:@{@"myImage": imageString, @"someObjectId": @"null"}];
 //    }];
-}
+//}
 
 #pragma mark UITableViewDataSource
 

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		288FB5B618E1EA8300214DC5 /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */; };
 		288FB5B718E1EA8300214DC5 /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 288FB5B518E1EA8300214DC5 /* NSDateTimeAgo.bundle */; };
+		288FB5C018E2905A00214DC5 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5BF18E2905A00214DC5 /* ProfileViewController.m */; };
 		28C3733C18DEB974007DCE38 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C3733B18DEB973007DCE38 /* SystemConfiguration.framework */; };
 		28C7AE7C18DE059F004F485D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C7AE7B18DE059F004F485D /* Foundation.framework */; };
 		28C7AE7E18DE059F004F485D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C7AE7D18DE059F004F485D /* CoreGraphics.framework */; };
@@ -45,6 +46,8 @@
 		288FB5B318E1EA8300214DC5 /* NSDate+TimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgo.h"; sourceTree = "<group>"; };
 		288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeAgo.m"; sourceTree = "<group>"; };
 		288FB5B518E1EA8300214DC5 /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
+		288FB5BE18E2905A00214DC5 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		288FB5BF18E2905A00214DC5 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		28C3733B18DEB973007DCE38 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		28C3733D18DEBBDD007DCE38 /* NSStrinAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStrinAdditions.h; sourceTree = "<group>"; };
 		28C7AE7818DE059F004F485D /* test1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test1.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +156,8 @@
 				28C7AE8218DE059F004F485D /* Supporting Files */,
 				28F1BBE618E1556700C59302 /* LoginUIViewController.h */,
 				28F1BBE718E1556700C59302 /* LoginUIViewController.m */,
+				288FB5BE18E2905A00214DC5 /* ProfileViewController.h */,
+				288FB5BF18E2905A00214DC5 /* ProfileViewController.m */,
 			);
 			path = test1;
 			sourceTree = "<group>";
@@ -292,6 +297,7 @@
 				28F1BBE818E1556700C59302 /* LoginUIViewController.m in Sources */,
 				28C7AE9218DE059F004F485D /* StatusUpdateViewController.m in Sources */,
 				28C7AE8C18DE059F004F485D /* AppDelegate.m in Sources */,
+				288FB5C018E2905A00214DC5 /* ProfileViewController.m in Sources */,
 				28C7AE8818DE059F004F485D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

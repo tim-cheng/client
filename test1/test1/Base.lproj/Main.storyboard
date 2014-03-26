@@ -9,8 +9,8 @@
             <objects>
                 <viewController id="44y-98-USm" customClass="LoginUIViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="TTo-F5-NT1"/>
-                        <viewControllerLayoutGuide type="bottom" id="nkP-z9-F0Z"/>
+                        <viewControllerLayoutGuide type="top" id="RSJ-v7-Pf1"/>
+                        <viewControllerLayoutGuide type="bottom" id="D87-VC-vhf"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="J6g-uN-t9f">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -30,8 +30,8 @@
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="StatusUpdateViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                        <viewControllerLayoutGuide type="top" id="brN-Xi-3mI"/>
+                        <viewControllerLayoutGuide type="bottom" id="kwr-NI-sVQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -44,30 +44,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QSW-fT-x46">
-                                <rect key="frame" x="65" y="506" width="64" height="53"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ynP-eY-GkW">
-                                <rect key="frame" x="154" y="518" width="74" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Select">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="didTapButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Dyp-bq-A0A"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ejo-Sp-qXd">
-                                <rect key="frame" x="236" y="518" width="64" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Upload">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="didTapUploadButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="N3j-AQ-rqA"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="status" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I1f-zV-x1D">
                                 <rect key="frame" x="112" y="72" width="198" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -75,12 +51,12 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rZA-eT-Wvb" customClass="FBProfilePictureView">
-                                <rect key="frame" x="8" y="20" width="96" height="92"/>
+                                <rect key="frame" x="8" y="20" width="89" height="82"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="aKQ-PJ-qcO">
-                                <rect key="frame" x="8" y="115" width="307" height="389"/>
+                                <rect key="frame" x="8" y="115" width="307" height="445"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -132,12 +108,56 @@
                         <outlet property="nameLabel" destination="EHG-Od-HGt" id="xKy-WQ-CVo"/>
                         <outlet property="profilePictureView" destination="rZA-eT-Wvb" id="Ais-UP-iwV"/>
                         <outlet property="statusField" destination="I1f-zV-x1D" id="YSC-9r-Gg0"/>
-                        <outlet property="userImageView" destination="QSW-fT-x46" id="MNc-zd-SpT"/>
+                        <segue destination="fp9-2d-2bw" kind="modal" identifier="ShowSelfProfile" id="hZH-Ss-MaD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="305" y="65"/>
+            <point key="canvasLocation" x="309" y="65"/>
+        </scene>
+        <!--Profile View Controller - Title-->
+        <scene sceneID="CD3-Wm-eBN">
+            <objects>
+                <viewController id="fp9-2d-2bw" customClass="ProfileViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rc9-YG-KKp"/>
+                        <viewControllerLayoutGuide type="bottom" id="R32-eq-feU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Vnd-OX-WpS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0LL-5k-rCJ" customClass="FBProfilePictureView">
+                                <rect key="frame" x="12" y="30" width="89" height="82"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="not logged in" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zq9-xa-83u">
+                                <rect key="frame" x="116" y="55" width="133" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R25-Ic-hPi">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem title="Back" id="2n0-V1-dAr">
+                                        <connections>
+                                            <action selector="didTapBackButton:" destination="81r-ny-mBy" id="M4m-e3-ygy"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="DFA-9J-qgy"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="81r-ny-mBy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="800" y="65"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
