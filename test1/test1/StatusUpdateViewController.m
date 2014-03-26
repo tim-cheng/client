@@ -26,10 +26,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 
 @property (strong, nonatomic) Firebase *firebase;
-
 @property (strong, nonatomic) NSMutableArray *feedArray;
-
 @property (strong, nonatomic) NSDateFormatter *myFormatter;
+@property (strong, nonatomic) NSString *fbID;
 
 - (IBAction) didTapButton:(id)sender;
 - (IBAction) didTapUploadButton:(id)sender;
@@ -80,6 +79,7 @@
                   user:(id<FBGraphUser>)user
 {
     self.profilePictureView.profileID = user.id;
+    self.fbID = user.id;
     self.nameLabel.text = user.name;
 }
 
@@ -95,11 +95,17 @@
         NSString *indexPath = [NSString stringWithFormat: @"%ld", dataLength];
         Firebase* newStatusRef = [self.firebase childByAppendingPath:indexPath];
         
-        [newStatusRef setValue:@{
-                                 @"user":self.nameLabel.text,
-                                 @"status":textField.text,
-                                 @"time":[self.myFormatter stringFromDate:[NSDate date]]
-                                 }];
+        NSMutableDictionary *dict =[[NSMutableDictionary alloc]
+                                    initWithDictionary:@{
+                                                         @"user":self.nameLabel.text,
+                                                         @"status":textField.text,
+                                                         @"time":[self.myFormatter stringFromDate:[NSDate date]]
+                                                         }];
+        
+        if (self.fbID) {
+            [dict addEntriesFromDictionary:@{@"fb_id" : self.fbID}];
+        }
+        [newStatusRef setValue:dict];
         textField.text = @"";
     }];
     
@@ -148,14 +154,28 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"SettingsCell";
+    static NSString *cellIdentifier = @"FeedCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
     NSDictionary *feed = self.feedArray[[self.feedArray count] - 1 - indexPath.row];
-    cell.textLabel.text = feed[@"status"];
+    
+    FBProfilePictureView *imgView = (FBProfilePictureView*)[cell.contentView viewWithTag:10];
+    [imgView.layer setCornerRadius:10.0f];
+    
+    if (feed[@"fb_id"]) {
+        imgView.profileID = feed[@"fb_id"];
+    } else {
+        // TOODO:
+        if (self.fbID) {
+            imgView.profileID = self.fbID;
+        }
+    }
+    
+    UILabel *name = (UILabel *)[cell.contentView viewWithTag:11];
+    name.text = feed[@"user"];
     
     NSString *timeString = feed[@"time"];
     NSString *displayTime = @"long ago";
@@ -163,8 +183,12 @@
         NSDate *time = [self.myFormatter dateFromString:feed[@"time"]];
         displayTime = [time timeAgo];
     }
-    cell.detailTextLabel.textColor = [UIColor grayColor];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", feed[@"user"], displayTime];
+    UILabel *time = (UILabel *)[cell.contentView viewWithTag:12];
+    time.text = displayTime;
+
+    UITextView *status = (UITextView *)[cell.contentView viewWithTag:13];
+    status.text = feed[@"status"];
+    
     return cell;
 }
 
