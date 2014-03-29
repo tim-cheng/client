@@ -13,6 +13,8 @@
 @property (strong, nonatomic) IBOutlet FBProfilePictureView *profilePictureView;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 
+@property (strong, nonatomic) IBOutlet UITextView *aboutMeView;
+
 - (IBAction) didTapBackButton:(id)sender;
 @end
 
@@ -34,6 +36,17 @@
     self.profilePictureView.profileID = self.fbID;
     self.profilePictureView.layer.cornerRadius = 10.0f;
     self.nameLabel.text = self.fbName;
+    
+    [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        if (!error) {
+            // Success! Include your code to handle the results here
+            // NSLog(@"user info: %@", result);
+            self.aboutMeView.text = [result description];
+        } else {
+            // An error occurred, we need to handle the error
+            // See: https://developers.facebook.com/docs/ios/errors
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning
