@@ -19,7 +19,8 @@
 @interface StatusUpdateViewController () <UITextFieldDelegate,
                               UIImagePickerControllerDelegate,
                               UINavigationControllerDelegate,
-                              UITableViewDataSource>
+                              UITableViewDataSource,
+                              UIScrollViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *statusField;
 //@property (strong, nonatomic) IBOutlet UIImageView *userImageView;
@@ -35,7 +36,8 @@
 @property (strong, nonatomic) NSDateFormatter *myFormatter;
 @property (strong, nonatomic) NSString *fbID;
 
-@property (strong, nonatomic) NSArray *emoticons;
+@property (strong, nonatomic) NSMutableDictionary *emoticons;
+@property (strong, nonatomic) NSString *currentEmotion;
 
 
 @property (strong, nonatomic) ProfileViewController *profileVC;
@@ -106,19 +108,45 @@
         }
     }];
     
-    self.emoticons = @[
-        [UIImage imageNamed:@"emoticon_happy.png"],
-        [UIImage imageNamed:@"emoticon_straight_face.png"],
-        [UIImage imageNamed:@"emoticon_sad.png"],
-        [UIImage imageNamed:@"emoticon_nervous.png"],
-        [UIImage imageNamed:@"emoticon_oh_no.png"],
-        [UIImage imageNamed:@"emoticon_lol.png"],
-        [UIImage imageNamed:@"emoticon_smile.png"],
-        ];
+    self.emoticons = [[NSMutableDictionary alloc] init];
+    UIImage *img;
+    
+    img = [UIImage imageNamed:@"emoticon_happy.png"];
+    img.accessibilityIdentifier = @"happy";
+    self.emoticons[@"happy"] = img;
+
+    img = [UIImage imageNamed:@"emoticon_straight_face.png"];
+    img.accessibilityIdentifier = @"flat";
+    self.emoticons[@"flat"] = img;
+
+    img = [UIImage imageNamed:@"emoticon_sad.png"];
+    img.accessibilityIdentifier = @"sad";
+    self.emoticons[@"sad"] = img;
+
+    img = [UIImage imageNamed:@"emoticon_nervous.png"];
+    img.accessibilityIdentifier = @"nervous";
+    self.emoticons[@"nervous"] = img;
+
+    img = [UIImage imageNamed:@"emoticon_oh_no.png"];
+    img.accessibilityIdentifier = @"oh_no";
+    self.emoticons[@"oh_no"] = img;
+
+    img = [UIImage imageNamed:@"emoticon_nervous.png"];
+    img.accessibilityIdentifier = @"nervous";
+    self.emoticons[@"nervous"] = img;
+
+    img = [UIImage imageNamed:@"emoticon_lol.png"];
+    img.accessibilityIdentifier = @"lol";
+    self.emoticons[@"lol"] = img;
+
+    img = [UIImage imageNamed:@"emoticon_smile.png"];
+    img.accessibilityIdentifier = @"smile";
+    self.emoticons[@"smile"] = img;
+
     
     InfiniteScrollPicker *isp = [[InfiniteScrollPicker alloc] initWithFrame:CGRectMake(10, 80, 300, 100)];
     [isp setItemSize:CGSizeMake(50, 50)];
-    [isp setImageAry:self.emoticons];
+    [isp setImageAry:[self.emoticons allValues]];
     [self.view addSubview:isp];
 }
 
@@ -172,7 +200,14 @@
     if (self.fbID) {
         dict[@"fb_id"] = self.fbID;
     }
+    
+    if (self.currentEmotion) {
+        dict[@"mood"] = self.currentEmotion;
+    }
+    
     textField.text = @"";
+    
+    
 
     [self.postRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         [self postToSnapshot:snapshot fromDict:dict forRef:self.postRef];
@@ -272,9 +307,18 @@
     status.text = feed[@"status"];
     
     UIImageView *icon = (UIImageView *)[cell.contentView viewWithTag:14];
-    icon.image = self.emoticons[arc4random() % self.emoticons.count];
+    if (feed[@"mood"]) {
+        icon.image = self.emoticons[feed[@"mood"]];
+    } else {
+        //icon.image = self.emoticons[@"straight"];
+    }
     
     return cell;
 }
 
+- (void)infiniteScrollPicker:(InfiniteScrollPicker *)infiniteScrollPicker didSelectAtImage:(UIImage *)buttonIndex
+{
+    NSLog(@"snapped %@!", buttonIndex.accessibilityIdentifier);
+    self.currentEmotion = buttonIndex.accessibilityIdentifier;
+}
 @end
