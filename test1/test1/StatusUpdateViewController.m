@@ -12,6 +12,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "NSDate+TimeAgo.h"
 #import "ProfileViewController.h"
+#import "DBClient.h"
 
 
 @interface StatusUpdateViewController () <UITextFieldDelegate,
@@ -26,19 +27,28 @@
 @property (strong, nonatomic) IBOutlet FBProfilePictureView *profilePictureView;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 
-@property (strong, nonatomic) Firebase *firebase;
+@property (strong, nonatomic) Firebase *postRef;
+@property (strong, nonatomic) Firebase *profileRef;
+@property (strong, nonatomic) NSArray *friends;
 @property (strong, nonatomic) NSMutableArray *feedArray;
 @property (strong, nonatomic) NSDateFormatter *myFormatter;
 @property (strong, nonatomic) NSString *fbID;
+
 
 @property (strong, nonatomic) ProfileViewController *profileVC;
 
 //- (IBAction) didTapButton:(id)sender;
 //- (IBAction) didTapUploadButton:(id)sender;
+- (IBAction) logOut:(id)sender;
 
 @end
 
 @implementation StatusUpdateViewController
+
+- (NSString *)baseLocForUid:(NSString *)uid
+{
+    return [NSString stringWithFormat:@"https://monitortest.firebaseIO.com/user/%@", uid];
+}
 
 - (void)viewDidLoad
 {
@@ -51,47 +61,52 @@
     self.feedView.dataSource = self;
     self.statusField.delegate = self;
 
-	
-    self.firebase = [[Firebase alloc] initWithUrl:@"https://monitortest.firebaseIO.com/"];
-    [self.firebase observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        int inCnt = (int)[snapshot.value count];
-        int feedCnt = (int)[self.feedArray count];
-        NSArray *indexPaths = @[[NSIndexPath indexPathForRow:0 inSection:0]];
-        if (inCnt > feedCnt) {
-            for (int i=feedCnt; i<inCnt; i++) {
-                [self.feedArray addObject:snapshot.value[i]];
-                //[self.feedView beginUpdates];
-                [self.feedView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-                //[self.feedView endUpdates];
+    // customize profilePicture
+    self.profilePictureView.layer.cornerRadius = 10.0f;
+    UITapGestureRecognizer *singleFingerTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(tapSelfProfile:)];
+    [self.profilePictureView addGestureRecognizer:singleFingerTap];
+    
+    NSString *baseLoc = [self baseLocForUid:[[DBClient client] loggedInUserId]];
 
-            }
-        } else {
-            NSLog(@"inconsistency!");
+    Firebase *profileRef = [[Firebase alloc] initWithUrl:[baseLoc stringByAppendingString:@"/profile"]];
+    [profileRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        NSLog(@"profile: %@", snapshot.value);
+
+        self.nameLabel.text = [NSString stringWithFormat:@"%@ %@", snapshot.value[@"first_name"], snapshot.value[@"last_name"]];
+        self.fbID = snapshot.value[@"fb_id"];
+        self.profilePictureView.profileID = self.fbID;
+        if ([snapshot.value[@"friend"] isKindOfClass:[NSArray class]]) {
+            self.friends = snapshot.value[@"friend"];
         }
     }];
     
+    self.postRef = [[Firebase alloc] initWithUrl:[baseLoc stringByAppendingString:@"/post"]];
+    [self.postRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        NSLog(@"post: %@", snapshot.value);
+        if ([snapshot.value isKindOfClass:[NSArray class]]) {
+            int inCnt = (int)[snapshot.value count];
+            int feedCnt = (int)[self.feedArray count];
+            NSArray *indexPaths = @[[NSIndexPath indexPathForRow:0 inSection:0]];
+            if (inCnt > feedCnt) {
+                for (int i=feedCnt; i<inCnt; i++) {
+                    [self.feedArray addObject:snapshot.value[i]];
+                    //[self.feedView beginUpdates];
+                    [self.feedView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+                    //[self.feedView endUpdates];
+                }
+            } else {
+                NSLog(@"inconsistency!");
+            }
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)updateUserInfo:(FBLoginView *)loginView
-                  user:(id<FBGraphUser>)user
-{
-    self.profilePictureView.profileID = user.id;
-    self.profilePictureView.layer.cornerRadius = 10.0f;
-
-    self.fbID = user.id;
-    self.nameLabel.text = user.name;
-    
-    UITapGestureRecognizer *singleFingerTap =
-    [[UITapGestureRecognizer alloc] initWithTarget:self
-                                            action:@selector(tapSelfProfile:)];
-    [self.profilePictureView addGestureRecognizer:singleFingerTap];
-    
 }
 
 - (void)tapSelfProfile:(UITapGestureRecognizer *)recognizer
@@ -110,31 +125,47 @@
 }
 
 
+
+- (void) postToSnapshot:(FDataSnapshot *)snapshot fromDict:(NSDictionary *)dict forRef:(Firebase *)ref
+{
+    long dataLength = snapshot.childrenCount;
+    NSString *indexPath = [NSString stringWithFormat: @"%ld", dataLength];
+    Firebase* newStatusRef = [ref childByAppendingPath:indexPath];
+    [newStatusRef setValue:dict];
+}
+
 #pragma mark UITextFieldDelgate
+
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     
-    [self.firebase observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        long dataLength = snapshot.childrenCount;
-        NSString *indexPath = [NSString stringWithFormat: @"%ld", dataLength];
-        Firebase* newStatusRef = [self.firebase childByAppendingPath:indexPath];
-        
-        NSMutableDictionary *dict =[[NSMutableDictionary alloc]
-                                    initWithDictionary:@{
-                                                         @"user":self.nameLabel.text,
-                                                         @"status":textField.text,
-                                                         @"time":[self.myFormatter stringFromDate:[NSDate date]]
-                                                         }];
-        
-        if (self.fbID) {
-            [dict addEntriesFromDictionary:@{@"fb_id" : self.fbID}];
-        }
-        [newStatusRef setValue:dict];
-        textField.text = @"";
+    
+    NSMutableDictionary *dict =[[NSMutableDictionary alloc]
+                                initWithDictionary:@{
+                                                     @"user":self.nameLabel.text,
+                                                     @"status":textField.text,
+                                                     @"time":[self.myFormatter stringFromDate:[NSDate date]]
+                                                     }];
+    
+    if (self.fbID) {
+        dict[@"fb_id"] = self.fbID;
+    }
+    textField.text = @"";
+
+    [self.postRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        [self postToSnapshot:snapshot fromDict:dict forRef:self.postRef];
     }];
     
+    for (NSString *fid in self.friends) {
+        NSString *friendBaseLoc = [self baseLocForUid:fid];
+        Firebase *friendPostRef = [[Firebase alloc] initWithUrl:[friendBaseLoc stringByAppendingString:@"/post"]];
+        [friendPostRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+            [self postToSnapshot:snapshot fromDict:dict forRef:friendPostRef];
+        }];
+    }
+
     return NO;
 }
 
@@ -170,6 +201,11 @@
 //        [newImageRef setValue:@{@"myImage": imageString, @"someObjectId": @"null"}];
 //    }];
 //}
+
+- (IBAction) logOut:(id)sender
+{
+    [self performSegueWithIdentifier:@"LogOut" sender:self];
+}
 
 #pragma mark UITableViewDataSource
 

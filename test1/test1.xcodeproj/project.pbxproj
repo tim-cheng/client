@@ -7,9 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2808BA5518E7C4A700CC64B7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2808BA5418E7C4A700CC64B7 /* Security.framework */; };
+		2808BA5818E7C5ED00CC64B7 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA5718E7C5ED00CC64B7 /* KeychainItemWrapper.m */; };
 		288FB5B618E1EA8300214DC5 /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */; };
 		288FB5B718E1EA8300214DC5 /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 288FB5B518E1EA8300214DC5 /* NSDateTimeAgo.bundle */; };
 		288FB5C018E2905A00214DC5 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5BF18E2905A00214DC5 /* ProfileViewController.m */; };
+		288FB5F418E6887100214DC5 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5F318E6887100214DC5 /* SignUpViewController.m */; };
+		288FB5F718E68E6300214DC5 /* ConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5F618E68E6300214DC5 /* ConnectViewController.m */; };
+		288FB5F918E742BA00214DC5 /* FirebaseSimpleLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288FB5F818E742BA00214DC5 /* FirebaseSimpleLogin.framework */; };
+		288FB5FB18E742EC00214DC5 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288FB5FA18E742EC00214DC5 /* Social.framework */; };
+		288FB5FD18E742F200214DC5 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288FB5FC18E742F200214DC5 /* Accounts.framework */; };
+		288FB60018E745EB00214DC5 /* DBClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5FF18E745EB00214DC5 /* DBClient.m */; };
+		288FB60318E7495E00214DC5 /* FBClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB60218E7495E00214DC5 /* FBClient.m */; };
 		28C3733C18DEB974007DCE38 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C3733B18DEB973007DCE38 /* SystemConfiguration.framework */; };
 		28C7AE7C18DE059F004F485D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C7AE7B18DE059F004F485D /* Foundation.framework */; };
 		28C7AE7E18DE059F004F485D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C7AE7D18DE059F004F485D /* CoreGraphics.framework */; };
@@ -43,11 +52,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2808BA5418E7C4A700CC64B7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		2808BA5618E7C5ED00CC64B7 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		2808BA5718E7C5ED00CC64B7 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		288FB5B318E1EA8300214DC5 /* NSDate+TimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgo.h"; sourceTree = "<group>"; };
 		288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeAgo.m"; sourceTree = "<group>"; };
 		288FB5B518E1EA8300214DC5 /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
 		288FB5BE18E2905A00214DC5 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		288FB5BF18E2905A00214DC5 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		288FB5F218E6887100214DC5 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		288FB5F318E6887100214DC5 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		288FB5F518E68E6300214DC5 /* ConnectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectViewController.h; sourceTree = "<group>"; };
+		288FB5F618E68E6300214DC5 /* ConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectViewController.m; sourceTree = "<group>"; };
+		288FB5F818E742BA00214DC5 /* FirebaseSimpleLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseSimpleLogin.framework; path = ../FirebaseSimpleLogin.framework; sourceTree = "<group>"; };
+		288FB5FA18E742EC00214DC5 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		288FB5FC18E742F200214DC5 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		288FB5FE18E745EB00214DC5 /* DBClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBClient.h; sourceTree = "<group>"; };
+		288FB5FF18E745EB00214DC5 /* DBClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBClient.m; sourceTree = "<group>"; };
+		288FB60118E7495E00214DC5 /* FBClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBClient.h; sourceTree = "<group>"; };
+		288FB60218E7495E00214DC5 /* FBClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBClient.m; sourceTree = "<group>"; };
 		28C3733B18DEB973007DCE38 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		28C3733D18DEBBDD007DCE38 /* NSStrinAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStrinAdditions.h; sourceTree = "<group>"; };
 		28C7AE7818DE059F004F485D /* test1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test1.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +105,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2808BA5518E7C4A700CC64B7 /* Security.framework in Frameworks */,
+				288FB5FD18E742F200214DC5 /* Accounts.framework in Frameworks */,
+				288FB5FB18E742EC00214DC5 /* Social.framework in Frameworks */,
+				288FB5F918E742BA00214DC5 /* FirebaseSimpleLogin.framework in Frameworks */,
 				28F1BBE518E14FDC00C59302 /* FacebookSDK.framework in Frameworks */,
 				28F1BBE318E14DDB00C59302 /* libicucore.dylib in Frameworks */,
 				28F1BBE118E14DD000C59302 /* libstdc++.dylib in Frameworks */,
@@ -128,6 +155,10 @@
 		28C7AE7A18DE059F004F485D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2808BA5418E7C4A700CC64B7 /* Security.framework */,
+				288FB5FC18E742F200214DC5 /* Accounts.framework */,
+				288FB5FA18E742EC00214DC5 /* Social.framework */,
+				288FB5F818E742BA00214DC5 /* FirebaseSimpleLogin.framework */,
 				28F1BBE418E14FDC00C59302 /* FacebookSDK.framework */,
 				28F1BBE218E14DDB00C59302 /* libicucore.dylib */,
 				28F1BBE018E14DD000C59302 /* libstdc++.dylib */,
@@ -144,6 +175,8 @@
 		28C7AE8118DE059F004F485D /* test1 */ = {
 			isa = PBXGroup;
 			children = (
+				2808BA5618E7C5ED00CC64B7 /* KeychainItemWrapper.h */,
+				2808BA5718E7C5ED00CC64B7 /* KeychainItemWrapper.m */,
 				288FB5B318E1EA8300214DC5 /* NSDate+TimeAgo.h */,
 				288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */,
 				28C3733D18DEBBDD007DCE38 /* NSStrinAdditions.h */,
@@ -158,6 +191,14 @@
 				28F1BBE718E1556700C59302 /* LoginUIViewController.m */,
 				288FB5BE18E2905A00214DC5 /* ProfileViewController.h */,
 				288FB5BF18E2905A00214DC5 /* ProfileViewController.m */,
+				288FB5F218E6887100214DC5 /* SignUpViewController.h */,
+				288FB5F318E6887100214DC5 /* SignUpViewController.m */,
+				288FB5F518E68E6300214DC5 /* ConnectViewController.h */,
+				288FB5F618E68E6300214DC5 /* ConnectViewController.m */,
+				288FB5FE18E745EB00214DC5 /* DBClient.h */,
+				288FB5FF18E745EB00214DC5 /* DBClient.m */,
+				288FB60118E7495E00214DC5 /* FBClient.h */,
+				288FB60218E7495E00214DC5 /* FBClient.m */,
 			);
 			path = test1;
 			sourceTree = "<group>";
@@ -296,8 +337,13 @@
 				288FB5B618E1EA8300214DC5 /* NSDate+TimeAgo.m in Sources */,
 				28F1BBE818E1556700C59302 /* LoginUIViewController.m in Sources */,
 				28C7AE9218DE059F004F485D /* StatusUpdateViewController.m in Sources */,
+				288FB5F718E68E6300214DC5 /* ConnectViewController.m in Sources */,
 				28C7AE8C18DE059F004F485D /* AppDelegate.m in Sources */,
 				288FB5C018E2905A00214DC5 /* ProfileViewController.m in Sources */,
+				2808BA5818E7C5ED00CC64B7 /* KeychainItemWrapper.m in Sources */,
+				288FB60318E7495E00214DC5 /* FBClient.m in Sources */,
+				288FB60018E745EB00214DC5 /* DBClient.m in Sources */,
+				288FB5F418E6887100214DC5 /* SignUpViewController.m in Sources */,
 				28C7AE8818DE059F004F485D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

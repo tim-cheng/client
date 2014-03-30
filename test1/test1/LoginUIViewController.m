@@ -7,12 +7,24 @@
 //
 
 #import "LoginUIViewController.h"
+#import "SignUpViewController.h"
 #import "StatusUpdateViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "DBClient.h"
+#import "KeychainItemWrapper.h"
 
 @interface LoginUIViewController() <FBLoginViewDelegate>
 
 @property (strong,nonatomic) StatusUpdateViewController *statusVC;
+@property (strong,nonatomic) SignUpViewController *signupVC;
+
+@property (strong,nonatomic) IBOutlet UITextField *emailField;
+@property (strong,nonatomic) IBOutlet UITextField *passwordField;
+
+@property (strong,nonatomic) KeychainItemWrapper *keychainItem;
+
+- (IBAction)login:(id)sender;
+- (IBAction)signup:(id)sender;
 
 @end
 
@@ -21,10 +33,45 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-    //FBLoginView *loginView = [[FBLoginView alloc] init];
+    self.keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"PLLogin" accessGroup:nil];
     
-    FBLoginView *loginView = [[FBLoginView alloc] initWithReadPermissions:@[@"basic_info", @"email", @"user_about_me"]];
+    NSString *username = [self.keychainItem objectForKey:(__bridge id)kSecAttrAccount];
+    if (username && username.length) {
+        self.emailField.text = username;
+        NSData *pwdData = [self.keychainItem objectForKey:(__bridge id)kSecValueData];
+        NSString *password = [NSString stringWithUTF8String:[pwdData bytes]];
+        if (password && password.length) {
+            self.passwordField.text = password;
+        }
+    }
+}
+
+- (IBAction)login:(id)sender
+{
+    [[DBClient client].firebaseAuth loginWithEmail:self.emailField.text andPassword:self.passwordField.text
+                               withCompletionBlock:^(NSError* error, FAUser* user) {
+                                   if (error != nil) {
+                                       // There was an error logging in to this account
+                                       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login Failed"
+                                                                                       message:[error description]
+                                                                                      delegate:nil
+                                                                             cancelButtonTitle:@"OK"
+                                                                             otherButtonTitles:nil];
+                                       [alert show];
+                                   } else {
+                                       [DBClient client].loggedInUserId = user.userId;
+                                       [self.keychainItem setObject:[self.passwordField.text dataUsingEncoding:NSUTF8StringEncoding]
+                                                             forKey:(__bridge id)kSecValueData];
+                                       [self.keychainItem setObject:self.emailField.text
+                                                             forKey:(__bridge id)kSecAttrAccount];
+                                       [self performSegueWithIdentifier:@"LoggedIn" sender:self];
+                                   }
+                               }];
+}
+
+- (IBAction)signup:(id)sender
+{
+    FBLoginView *loginView = [[FBLoginView alloc] initWithReadPermissions:@[@"basic_info", @"email"]];
     
     // Align the button in the center horizontally
     loginView.frame = CGRectOffset(loginView.frame, (self.view.center.x - (loginView.frame.size.width / 2)), (self.view.center.y - (loginView.frame.size.height / 2)));
@@ -39,7 +86,7 @@
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView
 {
     NSLog(@"FB logged in ... ");
-    [self performSegueWithIdentifier:@"LoggedIn" sender:self];
+    [self performSegueWithIdentifier:@"SignUp" sender:self];
 }
 
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
@@ -47,7 +94,10 @@
 {
     NSLog(@"FB profile fetched ... ");
     if (self.statusVC) {
-        [self.statusVC updateUserInfo:loginView user:user];
+        //[self.statusVC updateUserInfo:loginView user:user];
+    }
+    if (self.signupVC) {
+        [self.signupVC updateUserInfo:loginView user:user];
     }
 }
 
@@ -55,9 +105,10 @@
 {
     if ([segue.identifier isEqualToString:@"LoggedIn"]) {
         self.statusVC = ([segue.destinationViewController isKindOfClass:[StatusUpdateViewController class]]) ? segue.destinationViewController : nil;
-//        controller.subject = ([sender isKindOfClass:[Subject class]]) ? subject : nil;
         NSLog(@"ready to segue");
-        
+    } else if ([segue.identifier isEqualToString:@"SignUp"]) {
+        self.signupVC = ([segue.destinationViewController isKindOfClass:[SignUpViewController class]]) ? segue.destinationViewController : nil;
+        NSLog(@"ready to segue");
     }
 }
 
