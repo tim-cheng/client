@@ -120,9 +120,7 @@
                    // There was an error logging in to this account
                } else {
                    // We are now logged in
-                   NSString *loc = [NSString stringWithFormat:@"https://monitortest.firebaseIO.com/user/%@", self.userId];
-                   Firebase* nameRef = [[Firebase alloc] initWithUrl:loc];
-                   [nameRef setValue:@{ @"profile" : @{
+                   [[DBClient refForUserId:self.userId] setValue:@{ @"profile" : @{
                                                        @"first_name" : self.firstNameLabel.text,
                                                        @"last_name" : self.lastNameLabel.text,
                                                        @"email" : self.emailField.text,
@@ -131,6 +129,11 @@
                                                        },
                                        @"post" : @[]
                                        }];
+                   
+                   if (self.fbId) {
+                       [[DBClient refForFBUserId:self.fbId] setValue:@{@"id" : self.userId}];
+                   }
+                   
                    [DBClient client].loggedInUserId = self.userId;
                    [self proceedToConnect];
                }

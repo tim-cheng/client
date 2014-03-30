@@ -42,6 +42,7 @@
         NSString *password = [NSString stringWithUTF8String:[pwdData bytes]];
         if (password && password.length) {
             self.passwordField.text = password;
+            [self login:self];
         }
     }
 }
@@ -92,7 +93,7 @@
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
                             user:(id<FBGraphUser>)user
 {
-    NSLog(@"FB profile fetched ... ");
+    NSLog(@"FB profile fetched ... %@", user);
     if (self.statusVC) {
         //[self.statusVC updateUserInfo:loginView user:user];
     }

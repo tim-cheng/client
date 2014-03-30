@@ -14,6 +14,16 @@
 @interface DBClient : NSObject
 
 + (DBClient *)client;
+
++ (NSString *)baseURL;
++ (NSString *)urlForUserId:(NSString *)userId;
++ (NSString *)urlForFBUserId:(NSString *)fbId;
++ (NSString *)urlForLoggedInUser;
+
++ (Firebase *)refForBase;
++ (Firebase *)refForUserId:(NSString *)userId;
++ (Firebase *)refForFBUserId:(NSString *)fbId;
+
 @property (strong, nonatomic) Firebase *firebase;
 @property (strong, nonatomic) FirebaseSimpleLogin *firebaseAuth;
 @property (strong, nonatomic) NSString *loggedInUserId;

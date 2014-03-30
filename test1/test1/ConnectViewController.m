@@ -8,6 +8,7 @@
 
 #import "ConnectViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "DBClient.h"
 
 @interface ConnectViewController ()
 
@@ -38,6 +39,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)addFriendWithId:(NSString *)userId
+{
+    NSLog(@"found and add friend: %@", userId);
+    NSString *baseLoc = [NSString stringWithFormat:@"%@/friend/%@", [DBClient urlForLoggedInUser], userId];
+    Firebase *friendRef = [[Firebase alloc] initWithUrl:baseLoc];
+    [friendRef setValue: @{@"src" : @"fb"}];
+}
+
 - (IBAction) connectFacebook:(id)sender
 {
     FBRequest* friendsRequest = [FBRequest requestForMyFriends];
@@ -45,9 +54,19 @@
                                                   NSDictionary* result,
                                                   NSError *error) {
         NSArray* friends = [result objectForKey:@"data"];
-        NSLog(@"Found: %i friends", friends.count);
+        //NSLog(@"Found: %i friends", friends.count);
         for (NSDictionary<FBGraphUser>* friend in friends) {
-            NSLog(@"I have a friend named %@ with id %@", friend.name, friend.id);
+            //NSLog(@"I have a friend named %@", friend);
+            Firebase *ref = [DBClient refForFBUserId:friend.id];
+            [ref observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+                if ([snapshot.value isKindOfClass:[NSDictionary class]]) {
+                    NSString *userId = snapshot.value[@"id"];
+                    if (userId) {
+                        // fb user exist in system, add to friend list
+                        [self addFriendWithId:userId];
+                    }
+                }
+            }];
         }
     }];
 }

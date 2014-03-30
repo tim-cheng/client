@@ -13,5 +13,6 @@
 
 @property (strong, nonatomic) NSString *fbName;
 @property (strong, nonatomic) NSString *fbID;
+@property (strong, nonatomic) NSMutableArray *friends;
 
 @end

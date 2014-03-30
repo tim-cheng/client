@@ -45,11 +45,6 @@
 
 @implementation StatusUpdateViewController
 
-- (NSString *)baseLocForUid:(NSString *)uid
-{
-    return [NSString stringWithFormat:@"https://monitortest.firebaseIO.com/user/%@", uid];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -68,23 +63,29 @@
                                             action:@selector(tapSelfProfile:)];
     [self.profilePictureView addGestureRecognizer:singleFingerTap];
     
-    NSString *baseLoc = [self baseLocForUid:[[DBClient client] loggedInUserId]];
+    NSString *baseLoc = [DBClient urlForLoggedInUser];
 
     Firebase *profileRef = [[Firebase alloc] initWithUrl:[baseLoc stringByAppendingString:@"/profile"]];
-    [profileRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    [profileRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         NSLog(@"profile: %@", snapshot.value);
 
         self.nameLabel.text = [NSString stringWithFormat:@"%@ %@", snapshot.value[@"first_name"], snapshot.value[@"last_name"]];
         self.fbID = snapshot.value[@"fb_id"];
         self.profilePictureView.profileID = self.fbID;
-        if ([snapshot.value[@"friend"] isKindOfClass:[NSArray class]]) {
-            self.friends = snapshot.value[@"friend"];
+    }];
+
+    Firebase *friendRef = [[Firebase alloc] initWithUrl:[baseLoc stringByAppendingString:@"/friend"]];
+    [friendRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        if ([snapshot.value isKindOfClass:[NSDictionary class]]) {
+            self.friends = [snapshot.value allKeys];
+            NSLog(@"friends :%@", self.friends);
         }
+        
     }];
     
     self.postRef = [[Firebase alloc] initWithUrl:[baseLoc stringByAppendingString:@"/post"]];
     [self.postRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        NSLog(@"post: %@", snapshot.value);
+        //NSLog(@"post: %@", snapshot.value);
         if ([snapshot.value isKindOfClass:[NSArray class]]) {
             int inCnt = (int)[snapshot.value count];
             int feedCnt = (int)[self.feedArray count];
@@ -121,6 +122,7 @@
         NSLog(@"ready to segue");
         self.profileVC.fbID = self.fbID;
         self.profileVC.fbName = self.nameLabel.text;
+        self.profileVC.friends = [self.friends mutableCopy];
     }
 }
 
@@ -159,7 +161,7 @@
     }];
     
     for (NSString *fid in self.friends) {
-        NSString *friendBaseLoc = [self baseLocForUid:fid];
+        NSString *friendBaseLoc = [DBClient urlForUserId:fid];
         Firebase *friendPostRef = [[Firebase alloc] initWithUrl:[friendBaseLoc stringByAppendingString:@"/post"]];
         [friendPostRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
             [self postToSnapshot:snapshot fromDict:dict forRef:friendPostRef];

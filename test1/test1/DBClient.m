@@ -27,10 +27,49 @@
     return sharedInstance;
 }
 
++ (NSString *)baseURL
+{
+    return @"https://monitortest.firebaseIO.com";
+}
+
++ (NSString *)urlForUserId:(NSString *)userId
+{
+    return [NSString stringWithFormat:@"%@/user/%@", [self baseURL], userId];
+
+}
+
++ (NSString *)urlForFBUserId:(NSString *)fbId
+{
+    return [NSString stringWithFormat:@"%@/fbuser/%@", [self baseURL], fbId];
+    
+}
+
++ (NSString *)urlForLoggedInUser
+{
+    return [self urlForUserId:[self client].loggedInUserId];
+    
+}
+
++ (Firebase *)refForBase
+{
+    return [[Firebase alloc] initWithUrl:[self baseURL]];
+}
+
++ (Firebase *)refForUserId:(NSString *)userId
+{
+    return [[Firebase alloc] initWithUrl:[self urlForUserId:userId]];
+}
+
+
++ (Firebase *)refForFBUserId:(NSString *)fbId
+{
+    return [[Firebase alloc] initWithUrl:[self urlForFBUserId:fbId]];
+}
+
 - (id)init
 {
     self = [super init];
-    self.firebase = [[Firebase alloc] initWithUrl:@"https://monitortest.firebaseIO.com/"];
+    self.firebase = [[Firebase alloc] initWithUrl:[[self class] baseURL]];
     self.firebaseAuth = [[FirebaseSimpleLogin alloc] initWithRef:self.firebase];
     return self;
 }
