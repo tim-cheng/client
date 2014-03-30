@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		2808BA5518E7C4A700CC64B7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2808BA5418E7C4A700CC64B7 /* Security.framework */; };
 		2808BA5818E7C5ED00CC64B7 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA5718E7C5ED00CC64B7 /* KeychainItemWrapper.m */; };
+		2808BA5B18E881B100CC64B7 /* InfiniteScrollPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA5A18E881B100CC64B7 /* InfiniteScrollPicker.m */; };
+		2808BA5E18E881DB00CC64B7 /* UIView+viewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA5D18E881DB00CC64B7 /* UIView+viewController.m */; };
+		2808BA6218E8846800CC64B7 /* emoticon_happy.png in Resources */ = {isa = PBXBuildFile; fileRef = 2808BA5F18E8846800CC64B7 /* emoticon_happy.png */; };
+		2808BA6318E8846800CC64B7 /* emoticon_sad.png in Resources */ = {isa = PBXBuildFile; fileRef = 2808BA6018E8846800CC64B7 /* emoticon_sad.png */; };
+		2808BA6418E8846800CC64B7 /* emoticon_straight_face.png in Resources */ = {isa = PBXBuildFile; fileRef = 2808BA6118E8846800CC64B7 /* emoticon_straight_face.png */; };
+		2808BA6918E885A900CC64B7 /* emoticon_lol.png in Resources */ = {isa = PBXBuildFile; fileRef = 2808BA6518E885A900CC64B7 /* emoticon_lol.png */; };
+		2808BA6A18E885A900CC64B7 /* emoticon_nervous.png in Resources */ = {isa = PBXBuildFile; fileRef = 2808BA6618E885A900CC64B7 /* emoticon_nervous.png */; };
+		2808BA6B18E885A900CC64B7 /* emoticon_oh_no.png in Resources */ = {isa = PBXBuildFile; fileRef = 2808BA6718E885A900CC64B7 /* emoticon_oh_no.png */; };
+		2808BA6C18E885A900CC64B7 /* emoticon_smile.png in Resources */ = {isa = PBXBuildFile; fileRef = 2808BA6818E885A900CC64B7 /* emoticon_smile.png */; };
 		288FB5B618E1EA8300214DC5 /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */; };
 		288FB5B718E1EA8300214DC5 /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 288FB5B518E1EA8300214DC5 /* NSDateTimeAgo.bundle */; };
 		288FB5C018E2905A00214DC5 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5BF18E2905A00214DC5 /* ProfileViewController.m */; };
@@ -55,6 +64,17 @@
 		2808BA5418E7C4A700CC64B7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		2808BA5618E7C5ED00CC64B7 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		2808BA5718E7C5ED00CC64B7 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
+		2808BA5918E881B100CC64B7 /* InfiniteScrollPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfiniteScrollPicker.h; sourceTree = "<group>"; };
+		2808BA5A18E881B100CC64B7 /* InfiniteScrollPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfiniteScrollPicker.m; sourceTree = "<group>"; };
+		2808BA5C18E881DB00CC64B7 /* UIView+viewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+viewController.h"; sourceTree = "<group>"; };
+		2808BA5D18E881DB00CC64B7 /* UIView+viewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+viewController.m"; sourceTree = "<group>"; };
+		2808BA5F18E8846800CC64B7 /* emoticon_happy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon_happy.png; sourceTree = "<group>"; };
+		2808BA6018E8846800CC64B7 /* emoticon_sad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon_sad.png; sourceTree = "<group>"; };
+		2808BA6118E8846800CC64B7 /* emoticon_straight_face.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon_straight_face.png; sourceTree = "<group>"; };
+		2808BA6518E885A900CC64B7 /* emoticon_lol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon_lol.png; sourceTree = "<group>"; };
+		2808BA6618E885A900CC64B7 /* emoticon_nervous.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon_nervous.png; sourceTree = "<group>"; };
+		2808BA6718E885A900CC64B7 /* emoticon_oh_no.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon_oh_no.png; sourceTree = "<group>"; };
+		2808BA6818E885A900CC64B7 /* emoticon_smile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoticon_smile.png; sourceTree = "<group>"; };
 		288FB5B318E1EA8300214DC5 /* NSDate+TimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgo.h"; sourceTree = "<group>"; };
 		288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeAgo.m"; sourceTree = "<group>"; };
 		288FB5B518E1EA8300214DC5 /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
@@ -175,6 +195,10 @@
 		28C7AE8118DE059F004F485D /* test1 */ = {
 			isa = PBXGroup;
 			children = (
+				2808BA5C18E881DB00CC64B7 /* UIView+viewController.h */,
+				2808BA5D18E881DB00CC64B7 /* UIView+viewController.m */,
+				2808BA5918E881B100CC64B7 /* InfiniteScrollPicker.h */,
+				2808BA5A18E881B100CC64B7 /* InfiniteScrollPicker.m */,
 				2808BA5618E7C5ED00CC64B7 /* KeychainItemWrapper.h */,
 				2808BA5718E7C5ED00CC64B7 /* KeychainItemWrapper.m */,
 				288FB5B318E1EA8300214DC5 /* NSDate+TimeAgo.h */,
@@ -206,6 +230,13 @@
 		28C7AE8218DE059F004F485D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2808BA6518E885A900CC64B7 /* emoticon_lol.png */,
+				2808BA6618E885A900CC64B7 /* emoticon_nervous.png */,
+				2808BA6718E885A900CC64B7 /* emoticon_oh_no.png */,
+				2808BA6818E885A900CC64B7 /* emoticon_smile.png */,
+				2808BA5F18E8846800CC64B7 /* emoticon_happy.png */,
+				2808BA6018E8846800CC64B7 /* emoticon_sad.png */,
+				2808BA6118E8846800CC64B7 /* emoticon_straight_face.png */,
 				288FB5B518E1EA8300214DC5 /* NSDateTimeAgo.bundle */,
 				28C7AE8318DE059F004F485D /* test1-Info.plist */,
 				28C7AE8418DE059F004F485D /* InfoPlist.strings */,
@@ -312,10 +343,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2808BA6318E8846800CC64B7 /* emoticon_sad.png in Resources */,
+				2808BA6218E8846800CC64B7 /* emoticon_happy.png in Resources */,
+				2808BA6418E8846800CC64B7 /* emoticon_straight_face.png in Resources */,
+				2808BA6B18E885A900CC64B7 /* emoticon_oh_no.png in Resources */,
 				28C7AE9418DE059F004F485D /* Images.xcassets in Resources */,
 				288FB5B718E1EA8300214DC5 /* NSDateTimeAgo.bundle in Resources */,
 				28C7AE8618DE059F004F485D /* InfoPlist.strings in Resources */,
 				28C7AE8F18DE059F004F485D /* Main.storyboard in Resources */,
+				2808BA6A18E885A900CC64B7 /* emoticon_nervous.png in Resources */,
+				2808BA6918E885A900CC64B7 /* emoticon_lol.png in Resources */,
+				2808BA6C18E885A900CC64B7 /* emoticon_smile.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,8 +374,10 @@
 			files = (
 				288FB5B618E1EA8300214DC5 /* NSDate+TimeAgo.m in Sources */,
 				28F1BBE818E1556700C59302 /* LoginUIViewController.m in Sources */,
+				2808BA5E18E881DB00CC64B7 /* UIView+viewController.m in Sources */,
 				28C7AE9218DE059F004F485D /* StatusUpdateViewController.m in Sources */,
 				288FB5F718E68E6300214DC5 /* ConnectViewController.m in Sources */,
+				2808BA5B18E881B100CC64B7 /* InfiniteScrollPicker.m in Sources */,
 				28C7AE8C18DE059F004F485D /* AppDelegate.m in Sources */,
 				288FB5C018E2905A00214DC5 /* ProfileViewController.m in Sources */,
 				2808BA5818E7C5ED00CC64B7 /* KeychainItemWrapper.m in Sources */,

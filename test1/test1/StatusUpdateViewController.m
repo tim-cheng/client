@@ -13,6 +13,7 @@
 #import "NSDate+TimeAgo.h"
 #import "ProfileViewController.h"
 #import "DBClient.h"
+#import "InfiniteScrollPicker.h"
 
 
 @interface StatusUpdateViewController () <UITextFieldDelegate,
@@ -33,6 +34,8 @@
 @property (strong, nonatomic) NSMutableArray *feedArray;
 @property (strong, nonatomic) NSDateFormatter *myFormatter;
 @property (strong, nonatomic) NSString *fbID;
+
+@property (strong, nonatomic) NSArray *emoticons;
 
 
 @property (strong, nonatomic) ProfileViewController *profileVC;
@@ -102,6 +105,21 @@
             }
         }
     }];
+    
+    self.emoticons = @[
+        [UIImage imageNamed:@"emoticon_happy.png"],
+        [UIImage imageNamed:@"emoticon_straight_face.png"],
+        [UIImage imageNamed:@"emoticon_sad.png"],
+        [UIImage imageNamed:@"emoticon_nervous.png"],
+        [UIImage imageNamed:@"emoticon_oh_no.png"],
+        [UIImage imageNamed:@"emoticon_lol.png"],
+        [UIImage imageNamed:@"emoticon_smile.png"],
+        ];
+    
+    InfiniteScrollPicker *isp = [[InfiniteScrollPicker alloc] initWithFrame:CGRectMake(10, 80, 300, 100)];
+    [isp setItemSize:CGSizeMake(50, 50)];
+    [isp setImageAry:self.emoticons];
+    [self.view addSubview:isp];
 }
 
 - (void)didReceiveMemoryWarning
@@ -252,6 +270,9 @@
 
     UITextView *status = (UITextView *)[cell.contentView viewWithTag:13];
     status.text = feed[@"status"];
+    
+    UIImageView *icon = (UIImageView *)[cell.contentView viewWithTag:14];
+    icon.image = self.emoticons[arc4random() % self.emoticons.count];
     
     return cell;
 }
