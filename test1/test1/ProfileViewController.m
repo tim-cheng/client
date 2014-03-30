@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) IBOutlet FBProfilePictureView *profilePictureView;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *numOfFriendsLabel;
 @property (strong, nonatomic) IBOutlet UITableView *friendsView;
 
 
@@ -52,6 +53,8 @@
 
     self.friendsView.dataSource = self;
     NSLog(@"profile friends: %@", self.friends);
+    
+    self.numOfFriendsLabel.text = [NSString stringWithFormat:@"%d friends", [self.friends count]];
     
     for (NSString *fid in self.friends) {
         NSArray *indexPaths = @[[NSIndexPath indexPathForRow:0 inSection:0]];
@@ -105,15 +108,22 @@
     
     NSString *fid = self.friends[indexPath.row];
     
-    cell.textLabel.text = fid;
-    cell.detailTextLabel.text = fid;
-    
     NSString *userLoc = [DBClient urlForUserId:fid];
     Firebase *profileRef = [[Firebase alloc] initWithUrl:[userLoc stringByAppendingString:@"/profile"]];
     [profileRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         NSLog(@"profile: %@", snapshot.value);
-        cell.textLabel.text = [NSString stringWithFormat:@"%@ %@ - %@", snapshot.value[@"first_name"], snapshot.value[@"last_name"], snapshot.value[@"email"]];
-//        cell.detailTextLabel.text = snapshot.value[@"email"];
+
+        FBProfilePictureView *imgView = (FBProfilePictureView*)[cell.contentView viewWithTag:10];
+        imgView.layer.cornerRadius = 10.0f;
+        if (snapshot.value[@"fb_id"]) {
+            imgView.profileID = snapshot.value[@"fb_id"];
+        }
+
+        UILabel *name = (UILabel *)[cell.contentView viewWithTag:21];
+        name.text = [NSString stringWithFormat:@"%@ %@", snapshot.value[@"first_name"], snapshot.value[@"last_name"]];
+        
+        UILabel *email = (UILabel *)[cell.contentView viewWithTag:22];
+        email.text = snapshot.value[@"email"];
     }];
 
     return cell;

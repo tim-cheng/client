@@ -42,7 +42,7 @@
         NSString *password = [NSString stringWithUTF8String:[pwdData bytes]];
         if (password && password.length) {
             self.passwordField.text = password;
-            [self login:self];
+            //[self login:self];
         }
     }
 }
