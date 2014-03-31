@@ -79,7 +79,8 @@
     
     loginView.delegate = self;
     
-    [self.view addSubview:loginView];
+    //[self.view addSubview:loginView];
+    [self performSegueWithIdentifier:@"SignUp" sender:self];
 }
 
 #pragma mark FBLoginViewDelegate
@@ -87,7 +88,7 @@
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView
 {
     NSLog(@"FB logged in ... ");
-    [self performSegueWithIdentifier:@"SignUp" sender:self];
+    
 }
 
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView

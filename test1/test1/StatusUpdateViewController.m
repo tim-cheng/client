@@ -85,10 +85,11 @@
     Firebase *profileRef = [[Firebase alloc] initWithUrl:[baseLoc stringByAppendingString:@"/profile"]];
     [profileRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         NSLog(@"profile: %@", snapshot.value);
-
-        self.nameLabel.text = [NSString stringWithFormat:@"%@ %@", snapshot.value[@"first_name"], snapshot.value[@"last_name"]];
-        self.fbID = snapshot.value[@"fb_id"];
-        self.profilePictureView.profileID = self.fbID;
+        if ([snapshot.value isKindOfClass:[NSDictionary class]]) {
+            self.nameLabel.text = [NSString stringWithFormat:@"%@ %@", snapshot.value[@"first_name"], snapshot.value[@"last_name"]];
+            self.fbID = snapshot.value[@"fb_id"];
+            self.profilePictureView.profileID = self.fbID;
+        }
     }];
 
     Firebase *friendRef = [[Firebase alloc] initWithUrl:[baseLoc stringByAppendingString:@"/friend"]];
@@ -427,8 +428,9 @@
                                                                   handler:^(FBOSIntegratedShareDialogResult result, NSError *error) {
                          NSLog(@"dialog dismissed: %d, %@", result, error);
                      }];
-                     
-                     
+
+//                     [FBDialogs presentShareDialogWithLink:nil name:postTxt handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+//                     }];
                      
                  } else {
                      NSLog(@"got error: %@", error);
