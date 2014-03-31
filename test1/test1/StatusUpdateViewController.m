@@ -15,6 +15,7 @@
 #import "DBClient.h"
 #import "InfiniteScrollPicker.h"
 #import "SWTableViewCell.h"
+#import "WXApi.h"
 
 @interface FeedTableViewCell : SWTableViewCell
 
@@ -47,6 +48,7 @@
 @property (strong, nonatomic) NSString *fbID;
 
 @property (strong, nonatomic) NSMutableDictionary *emoticons;
+@property (strong, nonatomic) NSMutableDictionary *emoticonChars;
 @property (strong, nonatomic) NSString *currentEmotion;
 
 
@@ -119,39 +121,43 @@
     }];
     
     self.emoticons = [[NSMutableDictionary alloc] init];
+    self.emoticonChars = [[NSMutableDictionary alloc] init];
     UIImage *img;
     
     img = [UIImage imageNamed:@"emoticon_happy.png"];
     img.accessibilityIdentifier = @"happy";
     self.emoticons[@"happy"] = img;
+    self.emoticonChars[@"happy"] = @"\U0001F604";
 
     img = [UIImage imageNamed:@"emoticon_straight_face.png"];
     img.accessibilityIdentifier = @"flat";
     self.emoticons[@"flat"] = img;
+    self.emoticonChars[@"flat"] = @"\U0001F614";
 
     img = [UIImage imageNamed:@"emoticon_sad.png"];
     img.accessibilityIdentifier = @"sad";
     self.emoticons[@"sad"] = img;
+    self.emoticonChars[@"sad"] = @"\U0001F622";
 
     img = [UIImage imageNamed:@"emoticon_nervous.png"];
     img.accessibilityIdentifier = @"nervous";
     self.emoticons[@"nervous"] = img;
+    self.emoticonChars[@"nervous"] = @"\U0001F616";
 
     img = [UIImage imageNamed:@"emoticon_oh_no.png"];
     img.accessibilityIdentifier = @"oh_no";
     self.emoticons[@"oh_no"] = img;
-
-    img = [UIImage imageNamed:@"emoticon_nervous.png"];
-    img.accessibilityIdentifier = @"nervous";
-    self.emoticons[@"nervous"] = img;
+    self.emoticonChars[@"oh_no"] = @"\U0001F635";
 
     img = [UIImage imageNamed:@"emoticon_lol.png"];
     img.accessibilityIdentifier = @"lol";
     self.emoticons[@"lol"] = img;
+    self.emoticonChars[@"lol"] = @"\U0001F606";
 
     img = [UIImage imageNamed:@"emoticon_smile.png"];
     img.accessibilityIdentifier = @"smile";
     self.emoticons[@"smile"] = img;
+    self.emoticonChars[@"smile"] = @"\U0001F60F";
 
     
     InfiniteScrollPicker *isp = [[InfiniteScrollPicker alloc] initWithFrame:CGRectMake(10, 80, 300, 100)];
@@ -309,11 +315,11 @@
 //                                                    icon:[UIImage imageNamed:@"list.png"]];
         
         [rightUtilityButtons sw_addUtilityButtonWithColor:
-         [UIColor colorWithRed:0.78f green:0.78f blue:0.8f alpha:1.0]
-                                                    title:@"Share"];
+         [UIColor colorWithRed:0.23046875f green:0.34765625f blue:0.59765625f alpha:1.0]
+                                                    title:@"Facebook"];
         [rightUtilityButtons sw_addUtilityButtonWithColor:
-         [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
-                                                    title:@"Delete"];
+         [UIColor colorWithRed:0.231f green:0.8f blue:0.388 alpha:1.0f]
+                                                    title:@"WeChat"];
         
         weakCell.leftUtilityButtons = leftUtilityButtons;
         weakCell.rightUtilityButtons = rightUtilityButtons;
@@ -391,10 +397,22 @@
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
 {
+    NSIndexPath *indexPath = [self.feedView indexPathForCell:cell];
+//    NSLog(@"count = %d, row = %d", [self.feedArray count], indexPath.row);
+    NSDictionary *feed = self.feedArray[[self.feedArray count] - 1 - indexPath.row];
+    NSString *postTxt = feed[@"status"];
+    
+    UIImage *img = nil;
+    if (feed[@"mood"] && self.emoticons[feed[@"mood"]]) {
+        img = self.emoticons[feed[@"mood"]];
+        postTxt = [postTxt stringByAppendingString:self.emoticonChars[feed[@"mood"]]];
+    }
+    NSLog(@"my status = %@", postTxt);
+    
     switch (index) {
         case 0:
         {
-            NSLog(@"Share button was pressed");
+            NSLog(@"Share to FB");
             NSArray *permissionsNeeded = @[@"publish_actions"];
             [FBSession openActiveSessionWithPublishPermissions:permissionsNeeded
                                                defaultAudience:FBSessionDefaultAudienceOnlyMe
@@ -402,20 +420,16 @@
                                              completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
                  if (!error) {
                      NSLog(@"got publish permission");
-
-                     NSIndexPath *indexPath = [self.feedView indexPathForCell:cell];
-                     NSLog(@"count = %d, row = %d", [self.feedArray count], indexPath.row);
-                     NSDictionary *feed = self.feedArray[[self.feedArray count] - 1 - indexPath.row];
-                     NSString *status = feed[@"status"];
-                     
-                     NSLog(@"my status = %@", status);
                      [FBDialogs presentOSIntegratedShareDialogModallyFrom:self
-                                                              initialText:status
-                                                                    image:nil
+                                                              initialText:postTxt
+                                                                    image:img
                                                                       url:nil
                                                                   handler:^(FBOSIntegratedShareDialogResult result, NSError *error) {
                          NSLog(@"dialog dismissed: %d, %@", result, error);
                      }];
+                     
+                     
+                     
                  } else {
                      NSLog(@"got error: %@", error);
                  }
@@ -425,13 +439,21 @@
         }
         case 1:
         {
-            NSLog(@"DeleteButton was pressed");
-            // Delete button was pressed
-//            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-//            
-//            [_testArray removeObjectAtIndex:cellIndexPath.row];
-//            [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath]
-//                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+            NSLog(@"Share to WeChat");
+            // share to WeChat
+//            WXMediaMessage *message = [WXMediaMessage message];
+//            message.title = @"Some Title";
+//            message.description = status;
+//            [message setThumbImage:img];
+            
+            SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+//            req.bText = NO;
+//            req.message = message;
+            req.bText = YES;
+            req.text = postTxt;
+            req.scene = WXSceneTimeline;
+            [WXApi sendReq:req];
+
             break;
         }
         default:

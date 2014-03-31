@@ -45,6 +45,10 @@
     NSString *baseLoc = [NSString stringWithFormat:@"%@/friend/%@", [DBClient urlForLoggedInUser], userId];
     Firebase *friendRef = [[Firebase alloc] initWithUrl:baseLoc];
     [friendRef setValue: @{@"src" : @"fb"}];
+    
+    baseLoc = [NSString stringWithFormat:@"%@/following/%@", userId, [DBClient urlForLoggedInUser]];
+    friendRef = [[Firebase alloc] initWithUrl:baseLoc];
+    [friendRef setValue: @{@"src" : @"fb"}];
 }
 
 - (IBAction) connectFacebook:(id)sender

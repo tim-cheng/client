@@ -24,6 +24,7 @@
 		2808BA7D18E8C87F00CC64B7 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA7518E8C87E00CC64B7 /* SWTableViewCell.m */; };
 		2808BA7E18E8C87F00CC64B7 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA7718E8C87E00CC64B7 /* SWUtilityButtonTapGestureRecognizer.m */; };
 		2808BA7F18E8C87F00CC64B7 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA7918E8C87E00CC64B7 /* SWUtilityButtonView.m */; };
+		2808BA8A18E921EF00CC64B7 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2808BA8718E921EF00CC64B7 /* libWeChatSDK.a */; };
 		288FB5B618E1EA8300214DC5 /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */; };
 		288FB5B718E1EA8300214DC5 /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 288FB5B518E1EA8300214DC5 /* NSDateTimeAgo.bundle */; };
 		288FB5C018E2905A00214DC5 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5BF18E2905A00214DC5 /* ProfileViewController.m */; };
@@ -95,6 +96,9 @@
 		2808BA7818E8C87E00CC64B7 /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
 		2808BA7918E8C87E00CC64B7 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
 		2808BA8018E8D36400CC64B7 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		2808BA8718E921EF00CC64B7 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWeChatSDK.a; path = ../../WeChat/libWeChatSDK.a; sourceTree = "<group>"; };
+		2808BA8818E921EF00CC64B7 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXApi.h; path = ../../WeChat/WXApi.h; sourceTree = "<group>"; };
+		2808BA8918E921EF00CC64B7 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXApiObject.h; path = ../../WeChat/WXApiObject.h; sourceTree = "<group>"; };
 		288FB5B318E1EA8300214DC5 /* NSDate+TimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgo.h"; sourceTree = "<group>"; };
 		288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeAgo.m"; sourceTree = "<group>"; };
 		288FB5B518E1EA8300214DC5 /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
@@ -145,6 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2808BA8A18E921EF00CC64B7 /* libWeChatSDK.a in Frameworks */,
 				288FB5FB18E742EC00214DC5 /* Social.framework in Frameworks */,
 				2808BA5518E7C4A700CC64B7 /* Security.framework in Frameworks */,
 				288FB5FD18E742F200214DC5 /* Accounts.framework in Frameworks */,
@@ -173,6 +178,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2808BA8618E921D600CC64B7 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				2808BA8718E921EF00CC64B7 /* libWeChatSDK.a */,
+				2808BA8818E921EF00CC64B7 /* WXApi.h */,
+				2808BA8918E921EF00CC64B7 /* WXApiObject.h */,
+			);
+			name = Libs;
+			sourceTree = "<group>";
+		};
 		28C7AE6F18DE059F004F485D = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +231,7 @@
 		28C7AE8118DE059F004F485D /* test1 */ = {
 			isa = PBXGroup;
 			children = (
+				2808BA8618E921D600CC64B7 /* Libs */,
 				2808BA6D18E8C87E00CC64B7 /* NSMutableArray+SWUtilityButtons.h */,
 				2808BA6E18E8C87E00CC64B7 /* NSMutableArray+SWUtilityButtons.m */,
 				2808BA6F18E8C87E00CC64B7 /* SWCellScrollView.h */,
@@ -547,6 +563,10 @@
 		28C7AEAB18DE059F004F485D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv7s,
+					armv7,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -562,6 +582,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/test1",
+					/private/tmp/wchat/SDKExport,
+					/Users/timcheng/tutor/WeChat,
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -572,6 +594,10 @@
 		28C7AEAC18DE059F004F485D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					armv7s,
+					armv7,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -587,6 +613,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/test1",
+					/private/tmp/wchat/SDKExport,
+					/Users/timcheng/tutor/WeChat,
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

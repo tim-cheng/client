@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 # import <FacebookSDK/FacebookSDK.h>
+#import "WXApi.h"
 
 @implementation AppDelegate
 
@@ -15,6 +16,9 @@
 {
     // Override point for customization after application launch.
     [FBLoginView class];
+    
+    [WXApi registerApp:@"wx8cf2405f83961488" withDescription:@"ParenLink"];
+    
     return YES;
 }
 							
@@ -50,11 +54,30 @@
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
+    
+    NSLog(@"openURL");
+    
     // Call FBAppCall's handleOpenURL:sourceApplication to handle Facebook app responses
     BOOL wasHandled = [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
     
     // You can add your app-specific url handling code here if needed
     return wasHandled;
+
+    
+    //return  [WXApi handleOpenURL:url delegate:_sendMsgToWechatMgr];
 }
+
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    NSLog(@"handleOpenURL");
+    return YES;
+//    return  [WXApi handleOpenURL:url delegate:_sendMsgToWechatMgr];
+}
+
+//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+//{
+//    return  [WXApi handleOpenURL:url delegate:_sendMsgToWechatMgr];
+//}
 
 @end

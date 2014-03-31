@@ -41,6 +41,14 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>wx8cf2405f83961488</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>weixin</string>
+		</dict>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
 				<string>fb551158834997242</string>
 			</array>
 		</dict>
