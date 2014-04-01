@@ -66,6 +66,14 @@
 {
     [super viewDidLoad];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+    
+    self.statusField.returnKeyType = UIReturnKeySend;
+    
     self.myFormatter = [[NSDateFormatter alloc] init];
     [self.myFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
 
@@ -173,6 +181,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)dismissKeyboard
+{
+    [self.statusField resignFirstResponder];
+}
+
 - (void)tapSelfProfile:(UITapGestureRecognizer *)recognizer
 {
     [self performSegueWithIdentifier:@"ShowSelfProfile" sender:self];
@@ -200,7 +213,6 @@
 }
 
 #pragma mark UITextFieldDelgate
-
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

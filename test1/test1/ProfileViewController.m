@@ -105,6 +105,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     NSString *fid = self.friends[indexPath.row];
     
@@ -113,7 +114,7 @@
     [profileRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         NSLog(@"profile: %@", snapshot.value);
 
-        FBProfilePictureView *imgView = (FBProfilePictureView*)[cell.contentView viewWithTag:10];
+        FBProfilePictureView *imgView = (FBProfilePictureView*)[cell.contentView viewWithTag:20];
         imgView.layer.cornerRadius = 10.0f;
         if (snapshot.value[@"fb_id"]) {
             imgView.profileID = snapshot.value[@"fb_id"];
