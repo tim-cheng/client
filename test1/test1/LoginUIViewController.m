@@ -9,6 +9,7 @@
 #import "LoginUIViewController.h"
 #import "SignUpViewController.h"
 #import "StatusUpdateViewController.h"
+#import "EmojiPickerViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "DBClient.h"
 #import "KeychainItemWrapper.h"
@@ -17,6 +18,7 @@
 
 @property (strong,nonatomic) StatusUpdateViewController *statusVC;
 @property (strong,nonatomic) SignUpViewController *signupVC;
+@property (strong,nonatomic) EmojiPickerViewController *emojiVC;
 
 @property (strong,nonatomic) IBOutlet UITextField *emailField;
 @property (strong,nonatomic) IBOutlet UITextField *passwordField;
@@ -65,7 +67,8 @@
                                                              forKey:(__bridge id)kSecValueData];
                                        [self.keychainItem setObject:self.emailField.text
                                                              forKey:(__bridge id)kSecAttrAccount];
-                                       [self performSegueWithIdentifier:@"LoggedIn" sender:self];
+                                       //[self performSegueWithIdentifier:@"LoggedIn" sender:self];
+                                       [self performSegueWithIdentifier:@"PickEmoji" sender:self];
                                    }
                                }];
 }
@@ -101,16 +104,20 @@
     if (self.signupVC) {
         [self.signupVC updateUserInfo:loginView user:user];
     }
+    if (self.emojiVC) {
+        self.emojiVC.fbID = user.id;
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"LoggedIn"]) {
         self.statusVC = ([segue.destinationViewController isKindOfClass:[StatusUpdateViewController class]]) ? segue.destinationViewController : nil;
-        NSLog(@"ready to segue");
     } else if ([segue.identifier isEqualToString:@"SignUp"]) {
         self.signupVC = ([segue.destinationViewController isKindOfClass:[SignUpViewController class]]) ? segue.destinationViewController : nil;
-        NSLog(@"ready to segue");
+    } else if ([segue.identifier isEqualToString:@"PickEmoji"]) {
+        //
+        self.emojiVC = ([segue.destinationViewController isKindOfClass:[EmojiPickerViewController class]]) ? segue.destinationViewController : nil;
     }
 }
 

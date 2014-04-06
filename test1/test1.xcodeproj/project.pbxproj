@@ -25,6 +25,9 @@
 		2808BA7E18E8C87F00CC64B7 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA7718E8C87E00CC64B7 /* SWUtilityButtonTapGestureRecognizer.m */; };
 		2808BA7F18E8C87F00CC64B7 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA7918E8C87E00CC64B7 /* SWUtilityButtonView.m */; };
 		2808BA8A18E921EF00CC64B7 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2808BA8718E921EF00CC64B7 /* libWeChatSDK.a */; };
+		2819F41918F12562008DB3F6 /* RNGridMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 2819F41818F12562008DB3F6 /* RNGridMenu.m */; };
+		2819F41B18F1258A008DB3F6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2819F41A18F1258A008DB3F6 /* QuartzCore.framework */; };
+		2819F41D18F12595008DB3F6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2819F41C18F12595008DB3F6 /* Accelerate.framework */; };
 		288FB5B618E1EA8300214DC5 /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */; };
 		288FB5B718E1EA8300214DC5 /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 288FB5B518E1EA8300214DC5 /* NSDateTimeAgo.bundle */; };
 		288FB5C018E2905A00214DC5 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5BF18E2905A00214DC5 /* ProfileViewController.m */; };
@@ -35,6 +38,7 @@
 		288FB5FD18E742F200214DC5 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288FB5FC18E742F200214DC5 /* Accounts.framework */; };
 		288FB60018E745EB00214DC5 /* DBClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5FF18E745EB00214DC5 /* DBClient.m */; };
 		288FB60318E7495E00214DC5 /* FBClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB60218E7495E00214DC5 /* FBClient.m */; };
+		28BE125A18EE977100077233 /* EmojiPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BE125918EE977100077233 /* EmojiPickerViewController.m */; };
 		28C3733C18DEB974007DCE38 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C3733B18DEB973007DCE38 /* SystemConfiguration.framework */; };
 		28C7AE7C18DE059F004F485D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C7AE7B18DE059F004F485D /* Foundation.framework */; };
 		28C7AE7E18DE059F004F485D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C7AE7D18DE059F004F485D /* CoreGraphics.framework */; };
@@ -99,6 +103,10 @@
 		2808BA8718E921EF00CC64B7 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWeChatSDK.a; path = ../../WeChat/libWeChatSDK.a; sourceTree = "<group>"; };
 		2808BA8818E921EF00CC64B7 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXApi.h; path = ../../WeChat/WXApi.h; sourceTree = "<group>"; };
 		2808BA8918E921EF00CC64B7 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXApiObject.h; path = ../../WeChat/WXApiObject.h; sourceTree = "<group>"; };
+		2819F41718F12562008DB3F6 /* RNGridMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNGridMenu.h; sourceTree = "<group>"; };
+		2819F41818F12562008DB3F6 /* RNGridMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNGridMenu.m; sourceTree = "<group>"; };
+		2819F41A18F1258A008DB3F6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		2819F41C18F12595008DB3F6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		288FB5B318E1EA8300214DC5 /* NSDate+TimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgo.h"; sourceTree = "<group>"; };
 		288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeAgo.m"; sourceTree = "<group>"; };
 		288FB5B518E1EA8300214DC5 /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
@@ -115,6 +123,8 @@
 		288FB5FF18E745EB00214DC5 /* DBClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBClient.m; sourceTree = "<group>"; };
 		288FB60118E7495E00214DC5 /* FBClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBClient.h; sourceTree = "<group>"; };
 		288FB60218E7495E00214DC5 /* FBClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBClient.m; sourceTree = "<group>"; };
+		28BE125818EE977100077233 /* EmojiPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiPickerViewController.h; sourceTree = "<group>"; };
+		28BE125918EE977100077233 /* EmojiPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiPickerViewController.m; sourceTree = "<group>"; };
 		28C3733B18DEB973007DCE38 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		28C3733D18DEBBDD007DCE38 /* NSStrinAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStrinAdditions.h; sourceTree = "<group>"; };
 		28C7AE7818DE059F004F485D /* test1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test1.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,6 +159,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2819F41D18F12595008DB3F6 /* Accelerate.framework in Frameworks */,
+				2819F41B18F1258A008DB3F6 /* QuartzCore.framework in Frameworks */,
 				2808BA8A18E921EF00CC64B7 /* libWeChatSDK.a in Frameworks */,
 				288FB5FB18E742EC00214DC5 /* Social.framework in Frameworks */,
 				2808BA5518E7C4A700CC64B7 /* Security.framework in Frameworks */,
@@ -178,14 +190,72 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2808BA8618E921D600CC64B7 /* Libs */ = {
+		2808BA8618E921D600CC64B7 /* WeChat */ = {
 			isa = PBXGroup;
 			children = (
 				2808BA8718E921EF00CC64B7 /* libWeChatSDK.a */,
 				2808BA8818E921EF00CC64B7 /* WXApi.h */,
 				2808BA8918E921EF00CC64B7 /* WXApiObject.h */,
 			);
-			name = Libs;
+			name = WeChat;
+			sourceTree = "<group>";
+		};
+		2819F41618F12541008DB3F6 /* RNGridMenu */ = {
+			isa = PBXGroup;
+			children = (
+				2819F41718F12562008DB3F6 /* RNGridMenu.h */,
+				2819F41818F12562008DB3F6 /* RNGridMenu.m */,
+			);
+			name = RNGridMenu;
+			sourceTree = "<group>";
+		};
+		2819F41E18F12C9A008DB3F6 /* SWTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2808BA6D18E8C87E00CC64B7 /* NSMutableArray+SWUtilityButtons.h */,
+				2808BA6E18E8C87E00CC64B7 /* NSMutableArray+SWUtilityButtons.m */,
+				2808BA6F18E8C87E00CC64B7 /* SWCellScrollView.h */,
+				2808BA7018E8C87E00CC64B7 /* SWCellScrollView.m */,
+				2808BA7118E8C87E00CC64B7 /* SWConstants.h */,
+				2808BA7218E8C87E00CC64B7 /* SWLongPressGestureRecognizer.h */,
+				2808BA7318E8C87E00CC64B7 /* SWLongPressGestureRecognizer.m */,
+				2808BA7418E8C87E00CC64B7 /* SWTableViewCell.h */,
+				2808BA7518E8C87E00CC64B7 /* SWTableViewCell.m */,
+				2808BA7618E8C87E00CC64B7 /* SWUtilityButtonTapGestureRecognizer.h */,
+				2808BA7718E8C87E00CC64B7 /* SWUtilityButtonTapGestureRecognizer.m */,
+				2808BA7818E8C87E00CC64B7 /* SWUtilityButtonView.h */,
+				2808BA7918E8C87E00CC64B7 /* SWUtilityButtonView.m */,
+			);
+			name = SWTableViewCell;
+			sourceTree = "<group>";
+		};
+		2819F41F18F12CDF008DB3F6 /* InfiniteScrollPicker */ = {
+			isa = PBXGroup;
+			children = (
+				2808BA5C18E881DB00CC64B7 /* UIView+viewController.h */,
+				2808BA5D18E881DB00CC64B7 /* UIView+viewController.m */,
+				2808BA5918E881B100CC64B7 /* InfiniteScrollPicker.h */,
+				2808BA5A18E881B100CC64B7 /* InfiniteScrollPicker.m */,
+			);
+			name = InfiniteScrollPicker;
+			sourceTree = "<group>";
+		};
+		2819F42018F12D13008DB3F6 /* KeychainItemWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				2808BA5618E7C5ED00CC64B7 /* KeychainItemWrapper.h */,
+				2808BA5718E7C5ED00CC64B7 /* KeychainItemWrapper.m */,
+			);
+			name = KeychainItemWrapper;
+			sourceTree = "<group>";
+		};
+		2819F42118F12D61008DB3F6 /* TimeAgo */ = {
+			isa = PBXGroup;
+			children = (
+				288FB5B318E1EA8300214DC5 /* NSDate+TimeAgo.h */,
+				288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */,
+			);
+			name = TimeAgo;
 			sourceTree = "<group>";
 		};
 		28C7AE6F18DE059F004F485D = {
@@ -210,15 +280,17 @@
 		28C7AE7A18DE059F004F485D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				28F1BBE418E14FDC00C59302 /* FacebookSDK.framework */,
+				28F1BBDE18E14DB300C59302 /* Firebase.framework */,
+				2819F41C18F12595008DB3F6 /* Accelerate.framework */,
+				2819F41A18F1258A008DB3F6 /* QuartzCore.framework */,
 				2808BA8018E8D36400CC64B7 /* AdSupport.framework */,
 				2808BA5418E7C4A700CC64B7 /* Security.framework */,
 				288FB5FC18E742F200214DC5 /* Accounts.framework */,
 				288FB5FA18E742EC00214DC5 /* Social.framework */,
 				288FB5F818E742BA00214DC5 /* FirebaseSimpleLogin.framework */,
-				28F1BBE418E14FDC00C59302 /* FacebookSDK.framework */,
 				28F1BBE218E14DDB00C59302 /* libicucore.dylib */,
 				28F1BBE018E14DD000C59302 /* libstdc++.dylib */,
-				28F1BBDE18E14DB300C59302 /* Firebase.framework */,
 				28C3733B18DEB973007DCE38 /* SystemConfiguration.framework */,
 				28C7AE7B18DE059F004F485D /* Foundation.framework */,
 				28C7AE7D18DE059F004F485D /* CoreGraphics.framework */,
@@ -231,28 +303,12 @@
 		28C7AE8118DE059F004F485D /* test1 */ = {
 			isa = PBXGroup;
 			children = (
-				2808BA8618E921D600CC64B7 /* Libs */,
-				2808BA6D18E8C87E00CC64B7 /* NSMutableArray+SWUtilityButtons.h */,
-				2808BA6E18E8C87E00CC64B7 /* NSMutableArray+SWUtilityButtons.m */,
-				2808BA6F18E8C87E00CC64B7 /* SWCellScrollView.h */,
-				2808BA7018E8C87E00CC64B7 /* SWCellScrollView.m */,
-				2808BA7118E8C87E00CC64B7 /* SWConstants.h */,
-				2808BA7218E8C87E00CC64B7 /* SWLongPressGestureRecognizer.h */,
-				2808BA7318E8C87E00CC64B7 /* SWLongPressGestureRecognizer.m */,
-				2808BA7418E8C87E00CC64B7 /* SWTableViewCell.h */,
-				2808BA7518E8C87E00CC64B7 /* SWTableViewCell.m */,
-				2808BA7618E8C87E00CC64B7 /* SWUtilityButtonTapGestureRecognizer.h */,
-				2808BA7718E8C87E00CC64B7 /* SWUtilityButtonTapGestureRecognizer.m */,
-				2808BA7818E8C87E00CC64B7 /* SWUtilityButtonView.h */,
-				2808BA7918E8C87E00CC64B7 /* SWUtilityButtonView.m */,
-				2808BA5C18E881DB00CC64B7 /* UIView+viewController.h */,
-				2808BA5D18E881DB00CC64B7 /* UIView+viewController.m */,
-				2808BA5918E881B100CC64B7 /* InfiniteScrollPicker.h */,
-				2808BA5A18E881B100CC64B7 /* InfiniteScrollPicker.m */,
-				2808BA5618E7C5ED00CC64B7 /* KeychainItemWrapper.h */,
-				2808BA5718E7C5ED00CC64B7 /* KeychainItemWrapper.m */,
-				288FB5B318E1EA8300214DC5 /* NSDate+TimeAgo.h */,
-				288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */,
+				2819F42118F12D61008DB3F6 /* TimeAgo */,
+				2819F42018F12D13008DB3F6 /* KeychainItemWrapper */,
+				2819F41F18F12CDF008DB3F6 /* InfiniteScrollPicker */,
+				2819F41E18F12C9A008DB3F6 /* SWTableViewCell */,
+				2819F41618F12541008DB3F6 /* RNGridMenu */,
+				2808BA8618E921D600CC64B7 /* WeChat */,
 				28C3733D18DEBBDD007DCE38 /* NSStrinAdditions.h */,
 				28C7AE8A18DE059F004F485D /* AppDelegate.h */,
 				28C7AE8B18DE059F004F485D /* AppDelegate.m */,
@@ -273,6 +329,8 @@
 				288FB5FF18E745EB00214DC5 /* DBClient.m */,
 				288FB60118E7495E00214DC5 /* FBClient.h */,
 				288FB60218E7495E00214DC5 /* FBClient.m */,
+				28BE125818EE977100077233 /* EmojiPickerViewController.h */,
+				28BE125918EE977100077233 /* EmojiPickerViewController.m */,
 			);
 			path = test1;
 			sourceTree = "<group>";
@@ -425,9 +483,11 @@
 				288FB5B618E1EA8300214DC5 /* NSDate+TimeAgo.m in Sources */,
 				28F1BBE818E1556700C59302 /* LoginUIViewController.m in Sources */,
 				2808BA5E18E881DB00CC64B7 /* UIView+viewController.m in Sources */,
+				28BE125A18EE977100077233 /* EmojiPickerViewController.m in Sources */,
 				28C7AE9218DE059F004F485D /* StatusUpdateViewController.m in Sources */,
 				288FB5F718E68E6300214DC5 /* ConnectViewController.m in Sources */,
 				2808BA5B18E881B100CC64B7 /* InfiniteScrollPicker.m in Sources */,
+				2819F41918F12562008DB3F6 /* RNGridMenu.m in Sources */,
 				28C7AE8C18DE059F004F485D /* AppDelegate.m in Sources */,
 				2808BA7C18E8C87F00CC64B7 /* SWLongPressGestureRecognizer.m in Sources */,
 				288FB5C018E2905A00214DC5 /* ProfileViewController.m in Sources */,
