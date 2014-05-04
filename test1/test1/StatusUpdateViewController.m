@@ -74,9 +74,13 @@
     
     self.statusField.returnKeyType = UIReturnKeySend;
     
+    // https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/DataFormatting/Articles/dfDateFormatting10_4.html#//apple_ref/doc/uid/TP40002369-SW1
     self.myFormatter = [[NSDateFormatter alloc] init];
-    [self.myFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
-
+    NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+    [self.myFormatter setLocale:enUSPOSIXLocale];
+    [self.myFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
+    [self.myFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    
     self.feedArray = [[NSMutableArray alloc] initWithCapacity:100];
     self.feedView.dataSource = self;
     self.statusField.delegate = self;

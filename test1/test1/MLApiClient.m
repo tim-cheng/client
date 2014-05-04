@@ -14,6 +14,9 @@
 @property (strong, nonatomic) NSString *baseURLString;
 @property (strong, nonatomic) NSOperationQueue *requestQueue;
 
+@property (strong, nonatomic) NSString *loggedInAuth;
+@property (assign, nonatomic) NSInteger loggedInUserId;
+
 @end
 
 @implementation MLApiClient
@@ -74,6 +77,14 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
     return [[NSString alloc] initWithData:mutableData encoding:NSASCIIStringEncoding];
 }
 
+- (NSString *)authStringEmail:(NSString *)email
+                     password:(NSString *)password
+{
+    NSString *basicAuthCredentials = [NSString stringWithFormat:@"%@:%@", email, password];
+    NSString *authValue = [NSString stringWithFormat:@"Basic %@", AFBase64EncodedStringFromString(basicAuthCredentials)];
+    return authValue;
+}
+
 - (NSURLRequest *)loginWithEmail:(NSString *)email
                         password:(NSString *)password
                          success:(MLApiClientSuccess)successCallback
@@ -85,10 +96,7 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:15.0f];
     request.HTTPMethod = @"GET";
-    
-    NSString *basicAuthCredentials = [NSString stringWithFormat:@"%@:%@", email, password];
-    NSString *authValue = [NSString stringWithFormat:@"Basic %@", AFBase64EncodedStringFromString(basicAuthCredentials)];
-    [request setValue:authValue forHTTPHeaderField:@"Authorization"];
+    [request setValue:[self authStringEmail:email password:password] forHTTPHeaderField:@"Authorization"];
     
     return [self makeRequest:request success:successCallback failure:failureCallback];
 }
@@ -134,5 +142,45 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
                            }];
     return request;
 }
+
+- (void) setLoggedInInfoWithEamil:(NSString *)email
+                         password:(NSString *)password
+                           userId:(NSInteger)userId
+{
+    NSLog(@"set logged in user info...");
+    self.loggedInAuth = [self authStringEmail:email password:password];
+    self.loggedInUserId = userId;
+}
+
+- (NSURLRequest *)userInfoFromId:(NSInteger)userId
+                         success:(MLApiClientSuccess)successCallback
+                         failure:(MLApiClientFailure)failureCallback
+{
+    NSInteger uid = (userId < 0) ? self.loggedInUserId : userId;
+    NSString * path = @"/users";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/%d", self.protocol, self.baseURLString, path, uid]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:15.0f];
+    request.HTTPMethod = @"GET";
+    [request setValue:self.loggedInAuth forHTTPHeaderField:@"Authorization"];
+    return [self makeRequest:request success:successCallback failure:failureCallback];
+}
+
+- (NSURLRequest *)postsFromId:(NSInteger)userId
+                      success:(MLApiClientSuccess)successCallback
+                      failure:(MLApiClientFailure)failureCallback
+{
+    NSInteger uid = (userId < 0) ? self.loggedInUserId : userId;
+    NSString * path = @"/posts";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@?user_id=%d", self.protocol, self.baseURLString, path, uid]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:15.0f];
+    request.HTTPMethod = @"GET";
+    [request setValue:self.loggedInAuth forHTTPHeaderField:@"Authorization"];
+    return [self makeRequest:request success:successCallback failure:failureCallback];
+}
+
 
 @end

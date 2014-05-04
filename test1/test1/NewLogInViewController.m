@@ -60,10 +60,16 @@
 
 - (IBAction)login:(id)sender
 {
-    [[MLApiClient client] loginWithEmail:self.emailField.text
-                                password:self.passwordField.text
+    
+    NSString *email = self.emailField.text;
+    NSString *password = self.passwordField.text;
+    [[MLApiClient client] loginWithEmail:email
+                                password:password
                                  success:^(NSHTTPURLResponse *response, id responseJSON) {
                                      NSLog(@"!!!!!Login succeeded!!!!, %@", responseJSON);
+                                     [[MLApiClient client] setLoggedInInfoWithEamil:email
+                                                                           password:password
+                                                                             userId:[responseJSON[@"id"] integerValue]];
                                      dispatch_async(dispatch_get_main_queue(), ^{
                                          [self performSegueWithIdentifier:@"MainFeed" sender:self];
                                      });

@@ -222,6 +222,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		28080FA81916909500FE8EF2 /* third-party */ = {
+			isa = PBXGroup;
+			children = (
+				28C3733D18DEBBDD007DCE38 /* NSStrinAdditions.h */,
+			);
+			name = "third-party";
+			sourceTree = "<group>";
+		};
+		28080FA9191690C900FE8EF2 /* Original */ = {
+			isa = PBXGroup;
+			children = (
+				28F1BBE618E1556700C59302 /* LoginUIViewController.h */,
+				28F1BBE718E1556700C59302 /* LoginUIViewController.m */,
+				288FB5BE18E2905A00214DC5 /* ProfileViewController.h */,
+				288FB5BF18E2905A00214DC5 /* ProfileViewController.m */,
+				288FB5F218E6887100214DC5 /* SignUpViewController.h */,
+				288FB5F318E6887100214DC5 /* SignUpViewController.m */,
+				288FB5F518E68E6300214DC5 /* ConnectViewController.h */,
+				288FB5F618E68E6300214DC5 /* ConnectViewController.m */,
+				288FB5FE18E745EB00214DC5 /* DBClient.h */,
+				288FB5FF18E745EB00214DC5 /* DBClient.m */,
+				288FB60118E7495E00214DC5 /* FBClient.h */,
+				288FB60218E7495E00214DC5 /* FBClient.m */,
+				28BE125818EE977100077233 /* EmojiPickerViewController.h */,
+				28BE125918EE977100077233 /* EmojiPickerViewController.m */,
+				2819F42518F13170008DB3F6 /* ComposePostViewController.h */,
+				2819F42618F13170008DB3F6 /* ComposePostViewController.m */,
+				281DEAE718F525E800119DB6 /* LeaderboardViewController.h */,
+				281DEAE818F525E800119DB6 /* LeaderboardViewController.m */,
+				281DEAEF18F9B65500119DB6 /* ScoreFeedViewController.h */,
+				281DEAF018F9B65600119DB6 /* ScoreFeedViewController.m */,
+				28C7AE9018DE059F004F485D /* StatusUpdateViewController.h */,
+				28C7AE9118DE059F004F485D /* StatusUpdateViewController.m */,
+			);
+			name = Original;
+			sourceTree = "<group>";
+		};
 		2808BA8618E921D600CC64B7 /* WeChat */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,6 +372,8 @@
 		28C7AE8118DE059F004F485D /* test1 */ = {
 			isa = PBXGroup;
 			children = (
+				28080FA9191690C900FE8EF2 /* Original */,
+				28080FA81916909500FE8EF2 /* third-party */,
 				2819F42118F12D61008DB3F6 /* TimeAgo */,
 				2819F42018F12D13008DB3F6 /* KeychainItemWrapper */,
 				2819F41F18F12CDF008DB3F6 /* InfiniteScrollPicker */,
@@ -342,33 +381,10 @@
 				2819F41618F12541008DB3F6 /* RNGridMenu */,
 				2808BA8618E921D600CC64B7 /* WeChat */,
 				28C7AE8D18DE059F004F485D /* Main.storyboard */,
-				28C3733D18DEBBDD007DCE38 /* NSStrinAdditions.h */,
 				28C7AE8A18DE059F004F485D /* AppDelegate.h */,
 				28C7AE8B18DE059F004F485D /* AppDelegate.m */,
-				28C7AE9018DE059F004F485D /* StatusUpdateViewController.h */,
-				28C7AE9118DE059F004F485D /* StatusUpdateViewController.m */,
 				28C7AE9318DE059F004F485D /* Images.xcassets */,
 				28C7AE8218DE059F004F485D /* Supporting Files */,
-				28F1BBE618E1556700C59302 /* LoginUIViewController.h */,
-				28F1BBE718E1556700C59302 /* LoginUIViewController.m */,
-				288FB5BE18E2905A00214DC5 /* ProfileViewController.h */,
-				288FB5BF18E2905A00214DC5 /* ProfileViewController.m */,
-				288FB5F218E6887100214DC5 /* SignUpViewController.h */,
-				288FB5F318E6887100214DC5 /* SignUpViewController.m */,
-				288FB5F518E68E6300214DC5 /* ConnectViewController.h */,
-				288FB5F618E68E6300214DC5 /* ConnectViewController.m */,
-				288FB5FE18E745EB00214DC5 /* DBClient.h */,
-				288FB5FF18E745EB00214DC5 /* DBClient.m */,
-				288FB60118E7495E00214DC5 /* FBClient.h */,
-				288FB60218E7495E00214DC5 /* FBClient.m */,
-				28BE125818EE977100077233 /* EmojiPickerViewController.h */,
-				28BE125918EE977100077233 /* EmojiPickerViewController.m */,
-				2819F42518F13170008DB3F6 /* ComposePostViewController.h */,
-				2819F42618F13170008DB3F6 /* ComposePostViewController.m */,
-				281DEAE718F525E800119DB6 /* LeaderboardViewController.h */,
-				281DEAE818F525E800119DB6 /* LeaderboardViewController.m */,
-				281DEAEF18F9B65500119DB6 /* ScoreFeedViewController.h */,
-				281DEAF018F9B65600119DB6 /* ScoreFeedViewController.m */,
 				28E67A7318FBBDE2001F81E1 /* NewLogInViewController.h */,
 				28E67A7418FBBDE2001F81E1 /* NewLogInViewController.m */,
 				28149FDD190E191200AB20D4 /* MainFeedViewController.h */,
