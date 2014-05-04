@@ -182,5 +182,9 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
     return [self makeRequest:request success:successCallback failure:failureCallback];
 }
 
+- (NSInteger)userId
+{
+    return self.loggedInUserId;
+}
 
 @end

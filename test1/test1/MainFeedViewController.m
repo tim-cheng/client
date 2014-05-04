@@ -117,11 +117,11 @@
     // set post text
     UITextView *postTextView = (UITextView *)[cell.contentView viewWithTag:10];
     if (postTextView) {
-        postTextView.text = self.postArray[indexPath.row][@"Body"];
+        postTextView.text = self.postArray[indexPath.row][@"body"];
     }
     
     // set time ago
-    NSString *timeString = self.postArray[indexPath.row][@"CreatedAt"];
+    NSString *timeString = self.postArray[indexPath.row][@"created_at"];
 //    NSString *timeString = @"2014-05-04T09:50:24Z";
     NSString *displayTime = @"long ago";
     if (timeString) {
@@ -131,6 +131,12 @@
     }
     UILabel *time = (UILabel *)[cell.contentView viewWithTag:11];
     time.text = displayTime;
+    
+    // set comments/stars
+    UILabel *nComments = (UILabel *)[cell.contentView viewWithTag:12];
+    nComments.text = [self.postArray[indexPath.row][@"num_comments"] stringValue];
+    UILabel *nStars = (UILabel *)[cell.contentView viewWithTag:13];
+    nStars.text = [self.postArray[indexPath.row][@"num_stars"] stringValue];
 
     return cell;
     

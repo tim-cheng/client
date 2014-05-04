@@ -11,8 +11,10 @@ typedef void (^MLApiClientFailure)(NSHTTPURLResponse *response, id responseJSON,
 
 #import <Foundation/Foundation.h>
 
+
 @interface MLApiClient : NSObject
 
+@property (readonly, nonatomic) NSInteger userId;
 
 + (MLApiClient *)client;
 
