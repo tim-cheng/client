@@ -9,6 +9,9 @@
 #import "FBClient.h"
 
 @interface FBClient()
+
+@property (strong, nonatomic) NSMutableDictionary *dict;
+
 @end
 
 @implementation FBClient
@@ -26,6 +29,9 @@
 - (id)init
 {
     self = [super init];
+    if (self) {
+        _dict = [[NSMutableDictionary alloc] init];
+    }
     return self;
 }
 

@@ -12,4 +12,7 @@
 
 + (FBClient *)client;
 
+@property (strong, nonatomic) NSString *id;
+@property (strong, nonatomic) NSString *user_name;
+
 @end

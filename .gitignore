@@ -1,2 +1,7 @@
 
 *.xcuserstate
+
+go/*
+
+
+*.xccheckout

@@ -10,6 +10,7 @@
 #import "SignUpViewController.h"
 #import "StatusUpdateViewController.h"
 #import "EmojiPickerViewController.h"
+#import "ComposePostViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "DBClient.h"
 #import "KeychainItemWrapper.h"
@@ -19,6 +20,7 @@
 @property (strong,nonatomic) StatusUpdateViewController *statusVC;
 @property (strong,nonatomic) SignUpViewController *signupVC;
 @property (strong,nonatomic) EmojiPickerViewController *emojiVC;
+@property (strong,nonatomic) ComposePostViewController *compostVC;
 
 @property (strong,nonatomic) IBOutlet UITextField *emailField;
 @property (strong,nonatomic) IBOutlet UITextField *passwordField;
@@ -68,7 +70,8 @@
                                        [self.keychainItem setObject:self.emailField.text
                                                              forKey:(__bridge id)kSecAttrAccount];
                                        //[self performSegueWithIdentifier:@"LoggedIn" sender:self];
-                                       [self performSegueWithIdentifier:@"PickEmoji" sender:self];
+                                       //[self performSegueWithIdentifier:@"PickEmoji" sender:self];
+                                       [self performSegueWithIdentifier:@"Compose" sender:self];
                                    }
                                }];
 }
@@ -107,6 +110,9 @@
     if (self.emojiVC) {
         self.emojiVC.fbID = user.id;
     }
+    if (self.compostVC) {
+        self.compostVC.fbID = user.id;
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -116,8 +122,9 @@
     } else if ([segue.identifier isEqualToString:@"SignUp"]) {
         self.signupVC = ([segue.destinationViewController isKindOfClass:[SignUpViewController class]]) ? segue.destinationViewController : nil;
     } else if ([segue.identifier isEqualToString:@"PickEmoji"]) {
-        //
         self.emojiVC = ([segue.destinationViewController isKindOfClass:[EmojiPickerViewController class]]) ? segue.destinationViewController : nil;
+    } else if ([segue.identifier isEqualToString:@"Compose"]) {
+        self.compostVC = ([segue.destinationViewController isKindOfClass:[ComposePostViewController class]]) ? segue.destinationViewController : nil;
     }
 }
 
