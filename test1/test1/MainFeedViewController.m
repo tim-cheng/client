@@ -8,6 +8,7 @@
 
 #import "MainFeedViewController.h"
 #import "MLApiClient.h"
+#import "MLUserInfo.h"
 #import "NSDate+TimeAgo.h"
 
 @interface MainFeedViewController () <UITableViewDataSource>
@@ -49,18 +50,17 @@
     self.mainFeedView.dataSource = self;
 
     // load user info
-    [[MLApiClient client] userInfoFromId:-1
-                                 success:^(NSHTTPURLResponse *response, id responseJSON) {
-                                     NSLog(@"!!!!get userInfo succeeded!!!!, %@", responseJSON);
-                                     dispatch_async(dispatch_get_main_queue(), ^{
-                                         self.headerName.text = [NSString stringWithFormat:@"%@ %@",responseJSON[@"first_name"],responseJSON[@"last_name"]];
-                                         self.headerConnections.text = [NSString stringWithFormat:@"%d 1st   %d 2nd", [responseJSON[@"num_degree1"] integerValue], [responseJSON[@"num_degree2"] integerValue]];
-                                     });
-                                 } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
-                                     NSLog(@"!!!!!get userInfo failed");
-                                 }];
+    [[MLUserInfo instance] userInfoFromId:[MLApiClient client].userId
+                                  success:^(id responseJSON) {
+                                      dispatch_async(dispatch_get_main_queue(), ^{
+                                          self.headerName.text = responseJSON[@"full_name"];
+                                          self.headerConnections.text = [NSString stringWithFormat:@"%d 1st   %d 2nd", [responseJSON[@"num_degree1"] integerValue], [responseJSON[@"num_degree2"] integerValue]];
+                                      });
+                                  }];
+    
     // load posts
     [[MLApiClient client] postsFromId:-1
+                               degree:1
                               success:^(NSHTTPURLResponse *response, id responseJSON) {
                                   NSLog(@"!!!!get posts succeeded!!!!, %@", responseJSON);
                                   [self.postArray addObjectsFromArray:responseJSON];
@@ -137,9 +137,19 @@
     nComments.text = [self.postArray[indexPath.row][@"num_comments"] stringValue];
     UILabel *nStars = (UILabel *)[cell.contentView viewWithTag:13];
     nStars.text = [self.postArray[indexPath.row][@"num_stars"] stringValue];
+    
+    // set user name / description
+    [[MLUserInfo instance] userInfoFromId:([self.postArray[indexPath.row][@"user_id"] integerValue])
+                                  success:^(id responseJSON) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UILabel *posterName = (UILabel *)[cell.contentView viewWithTag:14];
+            posterName.text = responseJSON[@"full_name"];
+            UILabel *posterDesc = (UILabel *)[cell.contentView viewWithTag:15];
+            posterDesc.text = responseJSON[@"description"];
+        });
+    }];
 
     return cell;
-    
 }
 
 

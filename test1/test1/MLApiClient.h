@@ -33,6 +33,7 @@ typedef void (^MLApiClientFailure)(NSHTTPURLResponse *response, id responseJSON,
                          failure:(MLApiClientFailure)failureCallback;
 
 - (NSURLRequest *)postsFromId:(NSInteger)userId
+                       degree:(NSInteger)degree
                       success:(MLApiClientSuccess)successCallback
                       failure:(MLApiClientFailure)failureCallback;
 

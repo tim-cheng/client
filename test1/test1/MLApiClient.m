@@ -168,12 +168,13 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
 }
 
 - (NSURLRequest *)postsFromId:(NSInteger)userId
+                       degree:(NSInteger)degree
                       success:(MLApiClientSuccess)successCallback
                       failure:(MLApiClientFailure)failureCallback
 {
     NSInteger uid = (userId < 0) ? self.loggedInUserId : userId;
     NSString * path = @"/posts";
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@?user_id=%d", self.protocol, self.baseURLString, path, uid]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@?user_id=%d&degree=%d", self.protocol, self.baseURLString, path, uid, degree]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:15.0f];
