@@ -11,6 +11,7 @@
 #import "ScoreFeedViewController.h"
 #import "FBClient.h"
 #import "MLApiClient.h"
+#import "KeychainItemWrapper.h"
 
 @interface NewLogInViewController () <FBLoginViewDelegate>
 
@@ -18,6 +19,7 @@
 
 @property (strong,nonatomic) IBOutlet UITextField *emailField;
 @property (strong,nonatomic) IBOutlet UITextField *passwordField;
+@property (strong,nonatomic) KeychainItemWrapper *keychainItem;
 
 - (IBAction)login:(id)sender;
 
@@ -37,6 +39,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"MLLogin" accessGroup:nil];
+    NSString *username = [self.keychainItem objectForKey:(__bridge id)kSecAttrAccount];
+    if (username && username.length) {
+        self.emailField.text = username;
+        NSData *pwdData = [self.keychainItem objectForKey:(__bridge id)kSecValueData];
+        NSString *password = [NSString stringWithUTF8String:[pwdData bytes]];
+        if (password && password.length) {
+            self.passwordField.text = password;
+        }
+    }
     // Do any additional setup after loading the view.
 //    FBLoginView *loginView = [[FBLoginView alloc] initWithReadPermissions:@[@"basic_info", @"email"]];
 //    // Align the button in the center horizontally
@@ -70,6 +82,12 @@
                                      [[MLApiClient client] setLoggedInInfoWithEamil:email
                                                                            password:password
                                                                              userId:[responseJSON[@"id"] integerValue]];
+                                     // save credential to keychain
+                                     [self.keychainItem setObject:[self.passwordField.text dataUsingEncoding:NSUTF8StringEncoding]
+                                                           forKey:(__bridge id)kSecValueData];
+                                     [self.keychainItem setObject:self.emailField.text
+                                                           forKey:(__bridge id)kSecAttrAccount];
+
                                      dispatch_async(dispatch_get_main_queue(), ^{
                                          [self performSegueWithIdentifier:@"MainFeed" sender:self];
                                      });
