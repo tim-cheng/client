@@ -536,6 +536,20 @@
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ll2-0Q-R4x">
+                                        <rect key="frame" x="278" y="220" width="32" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="shuffle_64.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EBe-Dc-Yye">
+                                        <rect key="frame" x="10" y="220" width="32" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="camera_64.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -561,10 +575,10 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJX-1T-Znv">
-                                        <rect key="frame" x="254" y="14" width="46" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJX-1T-Znv">
+                                        <rect key="frame" x="268" y="23" width="32" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Post">
+                                        <state key="normal" image="compose_64.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -593,7 +607,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MUh-G7-YDe">
-                                                    <rect key="frame" x="13" y="0.0" width="34" height="32"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="34" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="11" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdK-EC-a73">
@@ -621,7 +635,9 @@
                     <connections>
                         <outlet property="commentFeedView" destination="sPN-7O-e5z" id="krm-S7-YhF"/>
                         <outlet property="commentField" destination="i5j-18-Fvm" id="Q51-Sh-vem"/>
+                        <outlet property="composeCameraButton" destination="EBe-Dc-Yye" id="j0U-vp-mA6"/>
                         <outlet property="composeView" destination="rfQ-tT-ey6" id="BVR-an-zoj"/>
+                        <outlet property="composeswitchButton" destination="Ll2-0Q-R4x" id="kwc-ma-mCq"/>
                         <outlet property="headerConnections" destination="mCn-nH-vWU" id="khg-PO-ygX"/>
                         <outlet property="headerName" destination="Azp-hf-q61" id="SHe-ym-gM3"/>
                         <outlet property="headerView" destination="HLV-lY-PMw" id="kij-62-G43"/>
@@ -1015,12 +1031,15 @@
     <resources>
         <image name="FB-f-Logo__blue_50.png" width="50" height="50"/>
         <image name="FB-f-Logo__white_50.png" width="50" height="50"/>
+        <image name="camera_64.png" width="64" height="64"/>
         <image name="comment_off_24.png" width="24" height="24"/>
         <image name="comment_on_24.png" width="24" height="24"/>
+        <image name="compose_64.png" width="64" height="64"/>
         <image name="heart_off_24.png" width="24" height="24"/>
         <image name="heart_on_24.png" width="24" height="24"/>
         <image name="s2.png" width="195" height="195"/>
         <image name="s3.png" width="195" height="194"/>
+        <image name="shuffle_64.png" width="64" height="64"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

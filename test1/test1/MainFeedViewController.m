@@ -31,6 +31,9 @@
 @property (strong, nonatomic) IBOutlet UITextField *commentField;
 @property (assign, nonatomic) NSInteger commentPostId;
 
+@property (strong, nonatomic) IBOutlet UIButton *composeCameraButton;
+@property (strong, nonatomic) IBOutlet UIButton *composeswitchButton;
+
 - (IBAction)compose:(id)sender;
 
 @end

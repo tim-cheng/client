@@ -17,6 +17,9 @@
 		28080FBD191833FC00FE8EF2 /* comment_on_24.png in Resources */ = {isa = PBXBuildFile; fileRef = 28080FB9191833FC00FE8EF2 /* comment_on_24.png */; };
 		28080FBE191833FC00FE8EF2 /* heart_off_24.png in Resources */ = {isa = PBXBuildFile; fileRef = 28080FBA191833FC00FE8EF2 /* heart_off_24.png */; };
 		28080FBF191833FC00FE8EF2 /* heart_on_24.png in Resources */ = {isa = PBXBuildFile; fileRef = 28080FBB191833FC00FE8EF2 /* heart_on_24.png */; };
+		28080FCD19183EF600FE8EF2 /* camera_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28080FCA19183EF500FE8EF2 /* camera_64.png */; };
+		28080FCE19183EF600FE8EF2 /* compose_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28080FCB19183EF600FE8EF2 /* compose_64.png */; };
+		28080FCF19183EF600FE8EF2 /* shuffle_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28080FCC19183EF600FE8EF2 /* shuffle_64.png */; };
 		2808BA5518E7C4A700CC64B7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2808BA5418E7C4A700CC64B7 /* Security.framework */; };
 		2808BA5818E7C5ED00CC64B7 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA5718E7C5ED00CC64B7 /* KeychainItemWrapper.m */; };
 		2808BA5B18E881B100CC64B7 /* InfiniteScrollPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA5A18E881B100CC64B7 /* InfiniteScrollPicker.m */; };
@@ -106,6 +109,9 @@
 		28080FB9191833FC00FE8EF2 /* comment_on_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment_on_24.png; sourceTree = "<group>"; };
 		28080FBA191833FC00FE8EF2 /* heart_off_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart_off_24.png; sourceTree = "<group>"; };
 		28080FBB191833FC00FE8EF2 /* heart_on_24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart_on_24.png; sourceTree = "<group>"; };
+		28080FCA19183EF500FE8EF2 /* camera_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_64.png; sourceTree = "<group>"; };
+		28080FCB19183EF600FE8EF2 /* compose_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compose_64.png; sourceTree = "<group>"; };
+		28080FCC19183EF600FE8EF2 /* shuffle_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shuffle_64.png; sourceTree = "<group>"; };
 		2808BA5418E7C4A700CC64B7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		2808BA5618E7C5ED00CC64B7 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		2808BA5718E7C5ED00CC64B7 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
@@ -419,6 +425,9 @@
 		28C7AE8218DE059F004F485D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				28080FCA19183EF500FE8EF2 /* camera_64.png */,
+				28080FCB19183EF600FE8EF2 /* compose_64.png */,
+				28080FCC19183EF600FE8EF2 /* shuffle_64.png */,
 				28080FB8191833FC00FE8EF2 /* comment_off_24.png */,
 				28080FB9191833FC00FE8EF2 /* comment_on_24.png */,
 				28080FBA191833FC00FE8EF2 /* heart_off_24.png */,
@@ -552,9 +561,11 @@
 				280A68641904D2C700C2475D /* s3.png in Resources */,
 				28080FB01917F1D100FE8EF2 /* heart-2x.png in Resources */,
 				28080FBC191833FC00FE8EF2 /* comment_off_24.png in Resources */,
+				28080FCD19183EF600FE8EF2 /* camera_64.png in Resources */,
 				2808BA6218E8846800CC64B7 /* emoticon_happy.png in Resources */,
 				281DEAEB18F52BAC00119DB6 /* sherry.png in Resources */,
 				280A68651904D2C700C2475D /* s4.png in Resources */,
+				28080FCF19183EF600FE8EF2 /* shuffle_64.png in Resources */,
 				2819F42B18F137B7008DB3F6 /* FB-f-Logo__white_50.png in Resources */,
 				28080FB21917F67600FE8EF2 /* comment-square-3x.png in Resources */,
 				2808BA6418E8846800CC64B7 /* emoticon_straight_face.png in Resources */,
@@ -566,6 +577,7 @@
 				280A68621904D2C700C2475D /* s1.png in Resources */,
 				28080FBD191833FC00FE8EF2 /* comment_on_24.png in Resources */,
 				28080FAE1917F1B100FE8EF2 /* comment-square-2x.png in Resources */,
+				28080FCE19183EF600FE8EF2 /* compose_64.png in Resources */,
 				2819F42A18F137B7008DB3F6 /* FB-f-Logo__blue_50.png in Resources */,
 				28080FB41917F68500FE8EF2 /* heart-3x.png in Resources */,
 				2808BA6A18E885A900CC64B7 /* emoticon_nervous.png in Resources */,
