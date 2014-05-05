@@ -34,6 +34,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *composeCameraButton;
 @property (strong, nonatomic) IBOutlet UIButton *composeswitchButton;
 
+@property (strong, nonatomic) IBOutlet UIImageView *profileImage;
+
+
 - (IBAction)compose:(id)sender;
 
 @end
@@ -79,6 +82,11 @@
     
     self.commentField.delegate = self;
     
+    self.profileImage.layer.borderWidth = 1.0f;
+    self.profileImage.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.profileImage.layer.cornerRadius = 20;
+    self.profileImage.clipsToBounds = YES;
+
     [self loadPosts];
 }
 
@@ -194,6 +202,12 @@
         cell.contentView.tag = [self.postArray[indexPath.row][@"id"] integerValue] + 1000;
         
         // set post text
+        UIImageView *userImage = (UIImageView *)[cell.contentView viewWithTag:20];
+        userImage.layer.borderWidth = 1.0f;
+        userImage.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+        userImage.layer.cornerRadius = 20;
+        userImage.clipsToBounds = YES;
+
         UITextView *postTextView = (UITextView *)[cell.contentView viewWithTag:10];
         if (postTextView) {
             postTextView.text = self.postArray[indexPath.row][@"body"];

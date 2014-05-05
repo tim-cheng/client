@@ -465,7 +465,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="271"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="s3.png" translatesAutoresizingMaskIntoConstraints="NO" id="60k-WI-xgj">
+                                                <imageView userInteractionEnabled="NO" tag="20" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="s3.png" translatesAutoresizingMaskIntoConstraints="NO" id="60k-WI-xgj">
                                                     <rect key="frame" x="20" y="9" width="40" height="39"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
@@ -643,6 +643,7 @@
                         <outlet property="headerView" destination="HLV-lY-PMw" id="kij-62-G43"/>
                         <outlet property="mainFeedView" destination="f3e-D1-lZc" id="aub-e6-MHn"/>
                         <outlet property="postTextView" destination="qqP-tA-spz" id="dCf-qa-HBO"/>
+                        <outlet property="profileImage" destination="RbR-hu-hOc" id="IJV-cB-59i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yva-45-7iu" userLabel="First Responder" sceneMemberID="firstResponder"/>
