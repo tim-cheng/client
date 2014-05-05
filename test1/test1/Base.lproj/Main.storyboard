@@ -543,17 +543,40 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="emoticon_sad.png" translatesAutoresizingMaskIntoConstraints="NO" id="O1B-R8-t6v">
-                                <rect key="frame" x="260" y="23" width="40" height="41"/>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rfQ-tT-ey6">
+                                <rect key="frame" x="0.0" y="68" width="320" height="520"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Share what's new" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qqP-tA-spz">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="267"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" red="1" green="0.48971857546202291" blue="0.47119061445121679" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJX-1T-Znv">
+                                <rect key="frame" x="254" y="16" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Post">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="compose:" destination="Yva-45-7iu" eventType="touchUpInside" id="ujj-Ks-ETw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="composeView" destination="rfQ-tT-ey6" id="BVR-an-zoj"/>
                         <outlet property="headerConnections" destination="mCn-nH-vWU" id="khg-PO-ygX"/>
                         <outlet property="headerName" destination="Azp-hf-q61" id="SHe-ym-gM3"/>
                         <outlet property="mainFeedView" destination="f3e-D1-lZc" id="aub-e6-MHn"/>
+                        <outlet property="postTextView" destination="qqP-tA-spz" id="dCf-qa-HBO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yva-45-7iu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -942,7 +965,6 @@
     <resources>
         <image name="FB-f-Logo__blue_50.png" width="50" height="50"/>
         <image name="FB-f-Logo__white_50.png" width="50" height="50"/>
-        <image name="emoticon_sad.png" width="512" height="512"/>
         <image name="sherry.png" width="157" height="157"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

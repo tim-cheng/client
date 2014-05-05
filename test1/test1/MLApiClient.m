@@ -183,9 +183,44 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
     return [self makeRequest:request success:successCallback failure:failureCallback];
 }
 
+- (NSURLRequest *)sendPostFromId:(NSInteger)userId
+                            body:(NSString *)body
+                         success:(MLApiClientSuccess)successCallback
+                         failure:(MLApiClientFailure)failureCallback
+{
+    NSInteger uid = (userId < 0) ? self.loggedInUserId : userId;
+    NSString * path = @"/posts";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@", self.protocol, self.baseURLString, path]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:15.0f];
+    
+    NSString *params = [NSString stringWithFormat:@"user_id=%d&body=%@", uid, [self urlEncode:body]];
+    NSData *postData = [params dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    request.HTTPMethod = @"POST";
+    [request setValue:self.loggedInAuth forHTTPHeaderField:@"Authorization"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%d", [postData length]] forHTTPHeaderField:@"Content-Length"];
+    request.HTTPBody = postData;
+    return [self makeRequest:request success:successCallback failure:failureCallback];
+}
+
+
+
 - (NSInteger)userId
 {
     return self.loggedInUserId;
+}
+
+
+- (NSString *)urlEncode:(NSString *)param
+{
+    return CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                              (__bridge CFStringRef)param,
+                                                              NULL,
+                                                              CFSTR("!*'();:@&=+$,/?%#[]"),
+                                                              kCFStringEncodingUTF8));
 }
 
 @end

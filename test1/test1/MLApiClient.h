@@ -9,6 +9,8 @@
 typedef void (^MLApiClientSuccess)(NSHTTPURLResponse *response, id responseJSON);
 typedef void (^MLApiClientFailure)(NSHTTPURLResponse *response, id responseJSON, NSError *error);
 
+#define kApiClientUserSelf -1
+
 #import <Foundation/Foundation.h>
 
 
@@ -36,5 +38,10 @@ typedef void (^MLApiClientFailure)(NSHTTPURLResponse *response, id responseJSON,
                        degree:(NSInteger)degree
                       success:(MLApiClientSuccess)successCallback
                       failure:(MLApiClientFailure)failureCallback;
+
+- (NSURLRequest *)sendPostFromId:(NSInteger)userId
+                            body:(NSString *)body
+                         success:(MLApiClientSuccess)successCallback
+                         failure:(MLApiClientFailure)failureCallback;
 
 @end

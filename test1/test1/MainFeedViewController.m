@@ -11,16 +11,20 @@
 #import "MLUserInfo.h"
 #import "NSDate+TimeAgo.h"
 
-@interface MainFeedViewController () <UITableViewDataSource>
+@interface MainFeedViewController () <UITableViewDataSource, UITextViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *postArray;
 
 @property (strong, nonatomic) IBOutlet UITableView *mainFeedView;
+@property (strong, nonatomic) IBOutlet UIView *composeView;
+@property (strong, nonatomic) IBOutlet UITextView *postTextView;
 
 @property (strong, nonatomic) IBOutlet UILabel *headerName;
 @property (strong, nonatomic) IBOutlet UILabel *headerConnections;
 
 @property (strong, nonatomic) NSDateFormatter *myFormatter;
+
+- (IBAction)compose:(id)sender;
 
 @end
 
@@ -58,30 +62,49 @@
                                       });
                                   }];
     
-    // load posts
-    [[MLApiClient client] postsFromId:-1
-                               degree:1
-                              success:^(NSHTTPURLResponse *response, id responseJSON) {
-                                  NSLog(@"!!!!get posts succeeded!!!!, %@", responseJSON);
-                                  [self.postArray addObjectsFromArray:responseJSON];
-                                  NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-                                  for (int i=0; i<[self.postArray count]; i++) {
-                                      [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-                                  }
-                                  dispatch_async(dispatch_get_main_queue(), ^{
-                                      [self.mainFeedView beginUpdates];
-                                      [self.mainFeedView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-                                      [self.mainFeedView endUpdates];
-                                  });
-                              } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
-                                  NSLog(@"!!!!!get posts failed");
-                              }];
+    // prepare composeView
+    [self.postTextView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
+    self.postTextView.delegate = self;
+    
+    [self loadPosts];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)loadPosts
+{
+    // load posts
+    [[MLApiClient client] postsFromId:[MLApiClient client].userId
+                               degree:1
+                              success:^(NSHTTPURLResponse *response, id responseJSON) {
+                                  NSLog(@"!!!!get posts succeeded!!!!, %@", responseJSON);
+                                  dispatch_async(dispatch_get_main_queue(), ^{
+
+                                      [self.mainFeedView beginUpdates];
+                                      NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+                                      if ([self.postArray count] > 0) {
+                                          for (int i=0; i<[self.postArray count]; i++) {
+                                              [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                                          }
+                                          [self.mainFeedView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+                                          [self.postArray removeAllObjects];
+                                          [indexPaths removeAllObjects];
+                                      }
+                                      
+                                      [self.postArray addObjectsFromArray:responseJSON];
+                                      for (int i=0; i<[self.postArray count]; i++) {
+                                          [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                                      }
+                                      [self.mainFeedView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+                                      [self.mainFeedView endUpdates];
+                                  });
+                              } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+                                  NSLog(@"!!!!!get posts failed");
+                              }];
 }
 
 /*
@@ -118,6 +141,7 @@
     UITextView *postTextView = (UITextView *)[cell.contentView viewWithTag:10];
     if (postTextView) {
         postTextView.text = self.postArray[indexPath.row][@"body"];
+        [postTextView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
     }
     
     // set time ago
@@ -150,6 +174,43 @@
     }];
 
     return cell;
+}
+
+#pragma mark UITextFieldDelgate
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    textView.text = @"";
+    return YES;
+}
+
+#pragma mark - IBAction
+- (IBAction)compose:(id)sender
+{
+    self.composeView.hidden = !self.composeView.hidden;
+    if (!self.composeView.hidden) {
+        // composing
+    } else {
+        [self.postTextView resignFirstResponder];
+        [[MLApiClient client] sendPostFromId:kApiClientUserSelf
+                                        body:self.postTextView.text
+                                     success:^(NSHTTPURLResponse *response, id responseJSON) {
+                                         NSLog(@"!!!!! post succeeded!!!!! ");
+                                         [self loadPosts];
+                                         
+                                     } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+                                         NSLog(@"!!!!! post failed !!!!!! ");
+                                     }];
+    }
+    
+}
+
+// http://stackoverflow.com/questions/22013768/center-the-text-in-a-uitextview-vertical-and-horizontal-align
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    UITextView *txtview = object;
+    CGFloat topoffset = ([txtview bounds].size.height - [txtview contentSize].height * [txtview zoomScale])/2.0;
+    topoffset = ( topoffset < 0.0 ? 0.0 : topoffset );
+    txtview.contentOffset = (CGPoint){.x = 0, .y = -topoffset};
 }
 
 
