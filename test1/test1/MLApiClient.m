@@ -244,6 +244,32 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
     return [self makeRequest:request success:successCallback failure:failureCallback];
 }
 
+- (NSURLRequest *)setStarFromId:(NSInteger)userId
+                         postId:(NSInteger)postId
+                         enable:(BOOL)enable
+                        success:(MLApiClientSuccess)successCallback
+                        failure:(MLApiClientFailure)failureCallback
+{
+    NSInteger uid = (userId < 0) ? self.loggedInUserId : userId;
+    NSString * path = @"/posts";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/%d/stars", self.protocol, self.baseURLString, path, postId]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:15.0f];
+    
+    NSString *params = [NSString stringWithFormat:@"user_id=%d", uid];
+    NSData *postData = [params dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    
+    request.HTTPMethod = enable ? @"PUT" : @"DELETE";
+    [request setValue:self.loggedInAuth forHTTPHeaderField:@"Authorization"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%d", [postData length]] forHTTPHeaderField:@"Content-Length"];
+    request.HTTPBody = postData;
+    return [self makeRequest:request success:successCallback failure:failureCallback];
+    
+}
+
+
 - (NSInteger)userId
 {
     return self.loggedInUserId;

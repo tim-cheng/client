@@ -54,4 +54,10 @@ typedef void (^MLApiClientFailure)(NSHTTPURLResponse *response, id responseJSON,
                             success:(MLApiClientSuccess)successCallback
                             failure:(MLApiClientFailure)failureCallback;
 
+- (NSURLRequest *)setStarFromId:(NSInteger)userId
+                         postId:(NSInteger)postId
+                         enable:(BOOL)enable
+                        success:(MLApiClientSuccess)successCallback
+                        failure:(MLApiClientFailure)failureCallback;
+
 @end

@@ -157,12 +157,29 @@
     }
 }
 
+- (void)tapOnStar:(UITapGestureRecognizer *)gest
+{
+    UIImageView *img = (UIImageView*)gest.view;
+    NSInteger postId = [img superview].tag - 1000;
+    [[MLApiClient client] setStarFromId: kApiClientUserSelf
+                                 postId:postId
+                                 enable:YES
+                                 success:^(NSHTTPURLResponse *response, id responseJSON) {
+                                     NSLog(@"!!!!! add star succeeded!!!!! ");
+                                     [self loadPosts];
+                                     
+                                 } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+                                     NSLog(@"!!!!! add star failed !!!!!! ");
+                                 }];
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == self.mainFeedView) {
         static NSString *cellIdentifier = @"MainFeedCell";
         UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (cell == nil) {
+            NSLog(@"cell view here... I am here...");
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
         }
         
@@ -189,9 +206,23 @@
         
         // set comments/stars
         UILabel *nComments = (UILabel *)[cell.contentView viewWithTag:12];
-        nComments.text = [self.postArray[indexPath.row][@"num_comments"] stringValue];
+        if (nComments) {
+            nComments.text = [self.postArray[indexPath.row][@"num_comments"] stringValue];
+        }
         UILabel *nStars = (UILabel *)[cell.contentView viewWithTag:13];
-        nStars.text = [self.postArray[indexPath.row][@"num_stars"] stringValue];
+        if (nStars) {
+            nStars.text = [self.postArray[indexPath.row][@"num_stars"] stringValue];
+        }
+        
+        UIImageView *star = (UIImageView *)[cell.contentView viewWithTag:17];
+        if (star) {
+            UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]
+                                                 initWithTarget:self
+                                                 action:@selector(tapOnStar:)];
+            [singleTap setNumberOfTapsRequired:1];
+            star.userInteractionEnabled = YES;
+            [star addGestureRecognizer:singleTap];
+        }
         
         // set user name / description
         [[MLUserInfo instance] userInfoFromId:([self.postArray[indexPath.row][@"user_id"] integerValue])
@@ -301,10 +332,9 @@
                 self.commentFeedView.hidden = YES;
                 self.commentFeedView.dataSource = nil;
                 [self.commentField resignFirstResponder];
+                [self loadPosts];
             });
         }
-        
-        
         return NO;
     }
 }
