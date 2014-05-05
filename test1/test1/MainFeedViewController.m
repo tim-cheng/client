@@ -11,9 +11,10 @@
 #import "MLUserInfo.h"
 #import "NSDate+TimeAgo.h"
 
-@interface MainFeedViewController () <UITableViewDataSource, UITextViewDelegate>
+@interface MainFeedViewController () <UITableViewDataSource, UITextViewDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) NSMutableArray *postArray;
+@property (strong, nonatomic) NSMutableArray *commentArray;
 
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 @property (strong, nonatomic) IBOutlet UITableView *mainFeedView;
@@ -26,8 +27,9 @@
 @property (strong, nonatomic) NSDateFormatter *myFormatter;
 @property (assign, nonatomic) BOOL isCommentMode;
 
-@property (assign, nonatomic) IBOutlet UITableView *commentFeedView;
-@property (assign, nonatomic) IBOutlet UITextField *commentField;
+@property (strong, nonatomic) IBOutlet UITableView *commentFeedView;
+@property (strong, nonatomic) IBOutlet UITextField *commentField;
+@property (assign, nonatomic) NSInteger commentPostId;
 
 - (IBAction)compose:(id)sender;
 
@@ -57,6 +59,7 @@
 
     self.postArray = [[NSMutableArray alloc] initWithCapacity:100];
     self.mainFeedView.dataSource = self;
+    self.commentArray = [[NSMutableArray alloc] initWithCapacity:100];
 
     // load user info
     [[MLUserInfo instance] userInfoFromId:[MLApiClient client].userId
@@ -71,6 +74,8 @@
     [self.postTextView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
     self.postTextView.delegate = self;
     
+    self.commentField.delegate = self;
+    
     [self loadPosts];
 }
 
@@ -82,7 +87,6 @@
 
 - (void)loadPosts
 {
-    // load posts
     [[MLApiClient client] postsFromId:[MLApiClient client].userId
                                degree:1
                               success:^(NSHTTPURLResponse *response, id responseJSON) {
@@ -112,6 +116,35 @@
                               }];
 }
 
+- (void)loadCommentsForPostId:(NSInteger)postId
+{
+    [[MLApiClient client] commentsFromId:postId
+                              success:^(NSHTTPURLResponse *response, id responseJSON) {
+                                  NSLog(@"!!!!get comments succeeded!!!!, %@", responseJSON);
+                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                      [self.commentFeedView beginUpdates];
+                                      NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+                                      if ([self.commentArray count] > 0) {
+                                          for (int i=0; i<[self.commentArray count]; i++) {
+                                              [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                                          }
+                                          [self.commentFeedView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+                                          [self.commentArray removeAllObjects];
+                                          [indexPaths removeAllObjects];
+                                      }
+                                      
+                                      [self.commentArray addObjectsFromArray:responseJSON];
+                                      for (int i=0; i<[self.commentArray count]; i++) {
+                                          [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                                      }
+                                      [self.commentFeedView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+                                      [self.commentFeedView endUpdates];
+                                  });
+                              } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+                                  NSLog(@"!!!!!get comments failed");
+                              }];
+}
+
 
 #pragma mark UITableViewDataSource
 
@@ -120,7 +153,7 @@
     if (tableView == self.mainFeedView) {
         return [self.postArray count];
     } else {
-        return 4;
+        return [self.commentArray count];
     }
 }
 
@@ -133,10 +166,12 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
         }
         
+        // TODO: save post_id tag
+        cell.contentView.tag = [self.postArray[indexPath.row][@"id"] integerValue] + 1000;
+        
         // set post text
         UITextView *postTextView = (UITextView *)[cell.contentView viewWithTag:10];
         if (postTextView) {
-            NSLog(@"!!!! tag = %d", postTextView.tag);
             postTextView.text = self.postArray[indexPath.row][@"body"];
             [postTextView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
             postTextView.delegate = self;
@@ -147,7 +182,6 @@
         NSString *displayTime = @"long ago";
         if (timeString) {
             NSDate *time = [self.myFormatter dateFromString:timeString];
-            NSLog(@"%@ time is %@", timeString, time);
             displayTime = [time timeAgo];
         }
         UILabel *time = (UILabel *)[cell.contentView viewWithTag:11];
@@ -179,14 +213,49 @@
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
         }
+        // set comment body
         UILabel *comment = (UILabel *)[cell.contentView viewWithTag:11];
-        comment.text = @"my comment!!!";
-        
+        comment.text = self.commentArray[indexPath.row][@"body"];
+        // set time ago
+        NSString *timeString = self.commentArray[indexPath.row][@"created_at"];
+        NSString *displayTime = @"long ago";
+        if (timeString) {
+            NSDate *time = [self.myFormatter dateFromString:timeString];
+            displayTime = [time timeAgo];
+        }
+        UILabel *time = (UILabel *)[cell.contentView viewWithTag:12];
+        time.text = displayTime;
         return cell;
     }
 }
 
 #pragma mark UITextFieldDelgate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return YES;
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    NSLog(@"should return........");
+    [textField resignFirstResponder];
+    // post comments
+    [[MLApiClient client] sendCommentFromId:[MLApiClient client].userId
+                                     postId:self.commentPostId
+                                       body:textField.text
+                                    success:^(NSHTTPURLResponse *response, id responseJSON) {
+                                        NSLog(@"!!!!post comment succeeded");
+                                        self.commentField.text = @"";
+                                        if (self.commentPostId) {
+                                            [self loadCommentsForPostId:self.commentPostId];
+                                        }
+                                    } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+                                        NSLog(@"!!!!post comment failed");
+                                    }];
+    
+    return YES;
+}
+
+#pragma mark UITextViewDelgate
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
@@ -196,12 +265,13 @@
     } else {
         // find current indexPath
         NSIndexPath *indexPath = [self.mainFeedView indexPathForCell:(UITableViewCell*)[[[textView superview] superview] superview]];
-        NSLog(@"indexPath.row =%@, %d", indexPath, indexPath.row);
+        NSLog(@"indexPath.row =%@, %d, %d", indexPath, indexPath.row, self.commentPostId);
         // compose
         NSLog(@"!!!!!tapped...");
         
         self.isCommentMode = !self.isCommentMode;
         if (self.isCommentMode) {
+            self.commentPostId = [textView superview].tag - 1000;
             [UIApplication sharedApplication].statusBarHidden = YES;
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.headerView.hidden = YES;
@@ -215,9 +285,11 @@
                 self.mainFeedView.scrollEnabled = NO;
                 self.commentFeedView.hidden = NO;
                 self.commentFeedView.dataSource = self;
+                [self loadCommentsForPostId:self.commentPostId];
                 [self.commentFeedView reloadData];
             });
         } else {
+            self.commentPostId = 0;
             [UIApplication sharedApplication].statusBarHidden = NO;
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.headerView.hidden = NO;
@@ -227,7 +299,8 @@
                 self.mainFeedView.frame = newFrame;
                 self.mainFeedView.scrollEnabled = YES;
                 self.commentFeedView.hidden = YES;
-                self.commentFeedView.dataSource     = nil;
+                self.commentFeedView.dataSource = nil;
+                [self.commentField resignFirstResponder];
             });
         }
         

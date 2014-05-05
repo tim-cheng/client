@@ -39,9 +39,19 @@ typedef void (^MLApiClientFailure)(NSHTTPURLResponse *response, id responseJSON,
                       success:(MLApiClientSuccess)successCallback
                       failure:(MLApiClientFailure)failureCallback;
 
+- (NSURLRequest *)commentsFromId:(NSInteger)userId
+                         success:(MLApiClientSuccess)successCallback
+                         failure:(MLApiClientFailure)failureCallback;
+
 - (NSURLRequest *)sendPostFromId:(NSInteger)userId
                             body:(NSString *)body
                          success:(MLApiClientSuccess)successCallback
                          failure:(MLApiClientFailure)failureCallback;
+
+- (NSURLRequest *)sendCommentFromId:(NSInteger)userId
+                             postId:(NSInteger)postId
+                               body:(NSString *)body
+                            success:(MLApiClientSuccess)successCallback
+                            failure:(MLApiClientFailure)failureCallback;
 
 @end
