@@ -498,11 +498,11 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
-                                                <imageView userInteractionEnabled="NO" tag="16" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="comment-square-2x.png" translatesAutoresizingMaskIntoConstraints="NO" id="leJ-IC-tWU">
+                                                <imageView userInteractionEnabled="NO" tag="16" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="comment_off_24.png" highlightedImage="comment_on_24.png" translatesAutoresizingMaskIntoConstraints="NO" id="leJ-IC-tWU">
                                                     <rect key="frame" x="200" y="240" width="16" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" tag="17" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="heart-2x.png" translatesAutoresizingMaskIntoConstraints="NO" id="Hcl-mi-0rS">
+                                                <imageView userInteractionEnabled="NO" tag="17" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="heart_off_24.png" highlightedImage="heart_on_24.png" translatesAutoresizingMaskIntoConstraints="NO" id="Hcl-mi-0rS">
                                                     <rect key="frame" x="254" y="240" width="16" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -519,7 +519,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.57464676831917638" green="0.90104830994897955" blue="0.59698778467788893" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" red="0.72784846490743993" green="0.85169813312224318" blue="0.90104830994897955" alpha="1" colorSpace="calibratedRGB"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -1015,8 +1015,10 @@
     <resources>
         <image name="FB-f-Logo__blue_50.png" width="50" height="50"/>
         <image name="FB-f-Logo__white_50.png" width="50" height="50"/>
-        <image name="comment-square-2x.png" width="16" height="16"/>
-        <image name="heart-2x.png" width="16" height="16"/>
+        <image name="comment_off_24.png" width="24" height="24"/>
+        <image name="comment_on_24.png" width="24" height="24"/>
+        <image name="heart_off_24.png" width="24" height="24"/>
+        <image name="heart_on_24.png" width="24" height="24"/>
         <image name="s2.png" width="195" height="195"/>
         <image name="s3.png" width="195" height="194"/>
     </resources>

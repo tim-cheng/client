@@ -161,13 +161,17 @@
 {
     UIImageView *img = (UIImageView*)gest.view;
     NSInteger postId = [img superview].tag - 1000;
+    
+    BOOL enable = img.highlighted ? NO : YES;
+    
+    NSLog(@"tap on star: %d", enable);
+    
     [[MLApiClient client] setStarFromId: kApiClientUserSelf
                                  postId:postId
-                                 enable:YES
+                                 enable:enable
                                  success:^(NSHTTPURLResponse *response, id responseJSON) {
                                      NSLog(@"!!!!! add star succeeded!!!!! ");
                                      [self loadPosts];
-                                     
                                  } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
                                      NSLog(@"!!!!! add star failed !!!!!! ");
                                  }];
@@ -222,6 +226,9 @@
             [singleTap setNumberOfTapsRequired:1];
             star.userInteractionEnabled = YES;
             [star addGestureRecognizer:singleTap];
+            if ([self.postArray[indexPath.row][@"self_star"] integerValue] > 0) {
+                star.highlighted = YES;
+            }
         }
         
         // set user name / description
