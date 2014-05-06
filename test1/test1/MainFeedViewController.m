@@ -13,7 +13,7 @@
 #import "UIImage+ImageEffects.h"
 
 
-@interface MainFeedViewController () <UITableViewDataSource, UITextViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface MainFeedViewController () <UITableViewDataSource, UITextViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) NSMutableArray *postArray;
 @property (strong, nonatomic) NSMutableArray *commentArray;
@@ -381,13 +381,25 @@
     [self dismissModalViewControllerAnimated:YES];
     UIGraphicsEndImageContext();
     
-    newImage = [newImage applyBlurWithRadius:5 tintColor:[UIColor colorWithWhite:1 alpha:0.2] saturationDeltaFactor:1.8 maskImage:nil];
-    
     UIImageView *imageView = [[UIImageView alloc] initWithImage:newImage];
+    imageView.tag = 30;
     [self.postTextView addSubview:imageView ];
     [self.postTextView sendSubviewToBack:imageView ];
+    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(SwipeRecognizer:)];
+    recognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    recognizer.numberOfTouchesRequired = 1;
+    recognizer.delegate = self;
+    [self.postTextView addGestureRecognizer:recognizer];
 }
 
+#pragma mark UIGestureRecognizerDelegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([touch.view isKindOfClass:[UIView class]])
+    {
+        return YES;
+    }
+    return NO;
+}
 
 #pragma mark - IBAction
 - (IBAction)compose:(id)sender
@@ -432,5 +444,16 @@
     txtview.contentOffset = (CGPoint){.x = 0, .y = -topoffset};
 }
 
+
+- (void) SwipeRecognizer:(UISwipeGestureRecognizer *)sender {
+    if ( sender.direction == UISwipeGestureRecognizerDirectionRight ){
+        NSLog(@" *** WRITE CODE FOR SWIPE RIGHT ***");
+        UITextView *textView = (UITextView *)sender.view;
+        UIImageView *imageView = (UIImageView *)[textView viewWithTag:30];
+        if (imageView) {
+            imageView.image = [imageView.image applyBlurWithRadius:5 tintColor:[UIColor colorWithWhite:0.2 alpha:0.2] saturationDeltaFactor:1.8 maskImage:nil];
+        }
+    }
+}
 
 @end
