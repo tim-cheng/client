@@ -15,6 +15,8 @@
 
 @interface MainFeedViewController () <UITableViewDataSource, UITextViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
+@property (strong, nonatomic) NSMutableDictionary *cachedPostPicture;
+
 @property (strong, nonatomic) NSMutableArray *postArray;
 @property (strong, nonatomic) NSMutableArray *commentArray;
 
@@ -90,6 +92,8 @@
     self.profileImage.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.profileImage.layer.cornerRadius = 20;
     self.profileImage.clipsToBounds = YES;
+    
+    self.cachedPostPicture = [[NSMutableDictionary alloc] init];
 
     [self loadPosts];
 }
@@ -203,7 +207,8 @@
         }
         
         // TODO: save post_id tag
-        cell.contentView.tag = [self.postArray[indexPath.row][@"id"] integerValue] + 1000;
+        NSInteger postId = [self.postArray[indexPath.row][@"id"] integerValue];
+        cell.contentView.tag = postId + 1000;
         
         // set post text
         UIImageView *userImage = (UIImageView *)[cell.contentView viewWithTag:20];
@@ -219,6 +224,20 @@
             [postTextView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
             postTextView.delegate = self;
         }
+
+        // add background
+        if (self.cachedPostPicture[@(postId)]) {
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:self.cachedPostPicture[@(postId)]];
+            imageView.tag = 30;
+            [cell.contentView addSubview:imageView ];
+            [cell.contentView sendSubviewToBack:imageView ];
+        } else {
+            UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:30];
+            if (imageView) {
+                [imageView removeFromSuperview];
+            }
+        }
+
         
         // set time ago
         NSString *timeString = self.postArray[indexPath.row][@"created_at"];
@@ -413,6 +432,15 @@
                                         body:self.postTextView.text
                                      success:^(NSHTTPURLResponse *response, id responseJSON) {
                                          NSLog(@"!!!!! post succeeded!!!!! ");
+                                         int postId = [responseJSON[@"id"] intValue];
+                                         if (postId > 0) {
+                                             // save the background
+                                             UIImageView *imagView = (UIImageView *)[self.postTextView viewWithTag:30];
+                                             if (imagView && imagView.image) {
+                                                 self.cachedPostPicture[@(postId)] = imagView.image;
+                                                 // TODO: should post to backend
+                                             }
+                                         }
                                          [self loadPosts];
                                          
                                      } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
@@ -451,7 +479,7 @@
         UITextView *textView = (UITextView *)sender.view;
         UIImageView *imageView = (UIImageView *)[textView viewWithTag:30];
         if (imageView) {
-            imageView.image = [imageView.image applyBlurWithRadius:5 tintColor:[UIColor colorWithWhite:0.2 alpha:0.2] saturationDeltaFactor:1.8 maskImage:nil];
+            imageView.image = [imageView.image applyBlurWithRadius:2 tintColor:[UIColor colorWithWhite:0.2 alpha:0.2] saturationDeltaFactor:1.8 maskImage:nil];
         }
     }
 }
