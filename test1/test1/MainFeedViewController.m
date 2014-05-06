@@ -10,8 +10,10 @@
 #import "MLApiClient.h"
 #import "MLUserInfo.h"
 #import "NSDate+TimeAgo.h"
+#import "UIImage+ImageEffects.h"
 
-@interface MainFeedViewController () <UITableViewDataSource, UITextViewDelegate, UITextFieldDelegate>
+
+@interface MainFeedViewController () <UITableViewDataSource, UITextViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) NSMutableArray *postArray;
 @property (strong, nonatomic) NSMutableArray *commentArray;
@@ -36,8 +38,9 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *profileImage;
 
-
 - (IBAction)compose:(id)sender;
+- (IBAction)composeSelectImage:(id)sender;
+- (IBAction)composeShuffleBackground:(id)sender;
 
 @end
 
@@ -365,6 +368,27 @@
     }
 }
 
+#pragma mark UIImagePickerControllerDelegate
+
+- (void) imagePickerController:(UIImagePickerController *)picker
+         didFinishPickingImage:(UIImage *)image
+                   editingInfo:(NSDictionary *)editingInfo
+{
+    CGSize newSize = self.postTextView.frame.size;
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    [self dismissModalViewControllerAnimated:YES];
+    UIGraphicsEndImageContext();
+    
+    newImage = [newImage applyBlurWithRadius:5 tintColor:[UIColor colorWithWhite:1 alpha:0.2] saturationDeltaFactor:1.8 maskImage:nil];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:newImage];
+    [self.postTextView addSubview:imageView ];
+    [self.postTextView sendSubviewToBack:imageView ];
+}
+
+
 #pragma mark - IBAction
 - (IBAction)compose:(id)sender
 {
@@ -385,6 +409,20 @@
     }
     
 }
+
+- (IBAction)composeSelectImage:(id)sender
+{
+    UIImagePickerController *pickerController = [[UIImagePickerController alloc]
+                                                 init];
+    pickerController.delegate = self;
+    [self presentViewController:pickerController animated:YES completion:NULL];
+}
+
+- (IBAction)composeShuffleBackground:(id)sender
+{
+    
+}
+
 
 // http://stackoverflow.com/questions/22013768/center-the-text-in-a-uitextview-vertical-and-horizontal-align
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {

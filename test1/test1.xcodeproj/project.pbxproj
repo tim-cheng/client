@@ -20,6 +20,8 @@
 		28080FCD19183EF600FE8EF2 /* camera_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28080FCA19183EF500FE8EF2 /* camera_64.png */; };
 		28080FCE19183EF600FE8EF2 /* compose_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28080FCB19183EF600FE8EF2 /* compose_64.png */; };
 		28080FCF19183EF600FE8EF2 /* shuffle_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28080FCC19183EF600FE8EF2 /* shuffle_64.png */; };
+		28080FD51918A00100FE8EF2 /* UIImage+BlurredFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 28080FD21918A00100FE8EF2 /* UIImage+BlurredFrame.m */; };
+		28080FD61918A00100FE8EF2 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 28080FD41918A00100FE8EF2 /* UIImage+ImageEffects.m */; };
 		2808BA5518E7C4A700CC64B7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2808BA5418E7C4A700CC64B7 /* Security.framework */; };
 		2808BA5818E7C5ED00CC64B7 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA5718E7C5ED00CC64B7 /* KeychainItemWrapper.m */; };
 		2808BA5B18E881B100CC64B7 /* InfiniteScrollPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA5A18E881B100CC64B7 /* InfiniteScrollPicker.m */; };
@@ -112,6 +114,10 @@
 		28080FCA19183EF500FE8EF2 /* camera_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_64.png; sourceTree = "<group>"; };
 		28080FCB19183EF600FE8EF2 /* compose_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compose_64.png; sourceTree = "<group>"; };
 		28080FCC19183EF600FE8EF2 /* shuffle_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shuffle_64.png; sourceTree = "<group>"; };
+		28080FD11918A00100FE8EF2 /* UIImage+BlurredFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+BlurredFrame.h"; sourceTree = "<group>"; };
+		28080FD21918A00100FE8EF2 /* UIImage+BlurredFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BlurredFrame.m"; sourceTree = "<group>"; };
+		28080FD31918A00100FE8EF2 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		28080FD41918A00100FE8EF2 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		2808BA5418E7C4A700CC64B7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		2808BA5618E7C5ED00CC64B7 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		2808BA5718E7C5ED00CC64B7 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
@@ -284,6 +290,17 @@
 			name = Original;
 			sourceTree = "<group>";
 		};
+		28080FD019189FD600FE8EF2 /* UIImageBlur */ = {
+			isa = PBXGroup;
+			children = (
+				28080FD11918A00100FE8EF2 /* UIImage+BlurredFrame.h */,
+				28080FD21918A00100FE8EF2 /* UIImage+BlurredFrame.m */,
+				28080FD31918A00100FE8EF2 /* UIImage+ImageEffects.h */,
+				28080FD41918A00100FE8EF2 /* UIImage+ImageEffects.m */,
+			);
+			name = UIImageBlur;
+			sourceTree = "<group>";
+		};
 		2808BA8618E921D600CC64B7 /* WeChat */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,6 +414,7 @@
 		28C7AE8118DE059F004F485D /* test1 */ = {
 			isa = PBXGroup;
 			children = (
+				28080FD019189FD600FE8EF2 /* UIImageBlur */,
 				28080FA9191690C900FE8EF2 /* Original */,
 				28080FA81916909500FE8EF2 /* third-party */,
 				2819F42118F12D61008DB3F6 /* TimeAgo */,
@@ -618,6 +636,7 @@
 				2808BA7C18E8C87F00CC64B7 /* SWLongPressGestureRecognizer.m in Sources */,
 				288FB5C018E2905A00214DC5 /* ProfileViewController.m in Sources */,
 				2808BA7D18E8C87F00CC64B7 /* SWTableViewCell.m in Sources */,
+				28080FD51918A00100FE8EF2 /* UIImage+BlurredFrame.m in Sources */,
 				2808BA5818E7C5ED00CC64B7 /* KeychainItemWrapper.m in Sources */,
 				28149FDF190E191200AB20D4 /* MainFeedViewController.m in Sources */,
 				288FB60318E7495E00214DC5 /* FBClient.m in Sources */,
@@ -628,6 +647,7 @@
 				2808BA7B18E8C87F00CC64B7 /* SWCellScrollView.m in Sources */,
 				28080FAC1916E4A200FE8EF2 /* MLUserInfo.m in Sources */,
 				288FB5F418E6887100214DC5 /* SignUpViewController.m in Sources */,
+				28080FD61918A00100FE8EF2 /* UIImage+ImageEffects.m in Sources */,
 				2808BA7E18E8C87F00CC64B7 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				28C7AE8818DE059F004F485D /* main.m in Sources */,
 				28E67A7518FBBDE2001F81E1 /* NewLogInViewController.m in Sources */,

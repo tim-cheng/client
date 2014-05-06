@@ -542,6 +542,9 @@
                                         <state key="normal" image="shuffle_64.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="composeShuffleBackground:" destination="Yva-45-7iu" eventType="touchUpInside" id="2JG-uG-Aqr"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EBe-Dc-Yye">
                                         <rect key="frame" x="10" y="220" width="32" height="32"/>
@@ -549,6 +552,9 @@
                                         <state key="normal" image="camera_64.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="composeSelectImage:" destination="Yva-45-7iu" eventType="touchUpInside" id="1fA-oN-ACW"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
