@@ -12,6 +12,7 @@
 @interface MLUserInfo ()
 
 @property (strong, nonatomic) NSMutableDictionary *userInfoCache;
+@property (strong, nonatomic) NSMutableDictionary *userPictureCache;
 
 @end
 
@@ -59,12 +60,31 @@
                                      }];
     }
 }
+- (UIImage *)userPicture:(NSInteger)userId
+{
+    if (self.userPictureCache[@(userId)]) {
+        return self.userPictureCache[@(userId)];
+    } else {
+        NSURL *url = [[MLApiClient client] userPictureUrl:userId];
+        if (url) {
+            NSData *imageData = [NSData dataWithContentsOfURL:url];
+            UIImage *image = [UIImage imageWithData:imageData];
+            if (image) {
+                self.userPictureCache[@(userId)] = image;
+            }
+            return image;
+        }
+    }
+    return nil;
+}
+
 
 - (id) init
 {
     self = [super init];
     if (self) {
         self.userInfoCache = [[NSMutableDictionary alloc] init];
+        self.userPictureCache = [[NSMutableDictionary alloc] init];
     }
     return self;
 }

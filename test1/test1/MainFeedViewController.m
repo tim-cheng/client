@@ -82,6 +82,7 @@
     
     self.commentField.delegate = self;
     
+    self.profileImage.image = [[MLUserInfo instance] userPicture:[MLApiClient client].userId];
     self.profileImage.layer.borderWidth = 1.0f;
     self.profileImage.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.profileImage.layer.cornerRadius = 20;
@@ -203,6 +204,7 @@
         
         // set post text
         UIImageView *userImage = (UIImageView *)[cell.contentView viewWithTag:20];
+        userImage.image = [[MLUserInfo instance] userPicture:[self.postArray[indexPath.row][@"user_id"] integerValue]];
         userImage.layer.borderWidth = 1.0f;
         userImage.layer.borderColor = [[UIColor lightGrayColor] CGColor];
         userImage.layer.cornerRadius = 20;

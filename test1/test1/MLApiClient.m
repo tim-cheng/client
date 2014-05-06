@@ -262,6 +262,13 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
     return [self makeRequest:request success:successCallback failure:failureCallback];
 }
 
+- (NSURL *)userPictureUrl:(NSInteger)userId
+{
+    NSInteger uid = (userId < 0) ? self.loggedInUserId : userId;
+    NSString * path = @"/users";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/%d/picture", self.protocol, self.baseURLString, path, uid]];
+    return url;
+}
 
 - (NSInteger)userId
 {

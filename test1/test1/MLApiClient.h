@@ -20,6 +20,8 @@ typedef void (^MLApiClientFailure)(NSHTTPURLResponse *response, id responseJSON,
 
 + (MLApiClient *)client;
 
+- (NSURL *)userPictureUrl:(NSInteger)userId;
+
 - (NSURLRequest *)loginWithEmail:(NSString *)email
                         password:(NSString *)password
                          success:(MLApiClientSuccess)successCallback

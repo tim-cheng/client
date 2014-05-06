@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 typedef void (^MLUserInfoSuccess)(id responseJSON);
 
@@ -15,6 +16,8 @@ typedef void (^MLUserInfoSuccess)(id responseJSON);
 
 + (MLUserInfo *)instance;
 - (void) userInfoFromId:(NSInteger)userId success:(MLUserInfoSuccess)callback;
+- (UIImage *)userPicture:(NSInteger)userId;
+
 
 @end
 
