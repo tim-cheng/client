@@ -296,6 +296,13 @@
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
         }
+        UIImageView *userImg = (UIImageView*)[cell.contentView viewWithTag:10];
+        userImg.image = [[MLUserInfo instance] userPicture:[self.commentArray[indexPath.row][@"user_id"] integerValue]];
+        userImg.layer.borderWidth = 1.0f;
+        userImg.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+        userImg.layer.cornerRadius = 16;
+        userImg.clipsToBounds = YES;
+
         // set comment body
         UILabel *comment = (UILabel *)[cell.contentView viewWithTag:11];
         comment.text = self.commentArray[indexPath.row][@"body"];
