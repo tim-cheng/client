@@ -433,12 +433,14 @@
             icon.imageView.image = [UIImage imageNamed:@"post_64.png"];
         });
     } else {
+        NSString *txt = self.postTextView.text;
         dispatch_async(dispatch_get_main_queue(), ^{
             icon.imageView.image = [UIImage imageNamed:@"compose2_64.png"];
+            self.postTextView.text = @"Share what's new";
         });
         [self.postTextView resignFirstResponder];
         [[MLApiClient client] sendPostFromId:kApiClientUserSelf
-                                        body:self.postTextView.text
+                                        body:txt
                                      success:^(NSHTTPURLResponse *response, id responseJSON) {
                                          NSLog(@"!!!!! post succeeded!!!!! ");
                                          int postId = [responseJSON[@"id"] intValue];
