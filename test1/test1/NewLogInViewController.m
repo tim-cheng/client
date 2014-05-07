@@ -12,6 +12,7 @@
 #import "FBClient.h"
 #import "MLApiClient.h"
 #import "KeychainItemWrapper.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface NewLogInViewController () <FBLoginViewDelegate>
 
@@ -20,6 +21,7 @@
 @property (strong,nonatomic) IBOutlet UITextField *emailField;
 @property (strong,nonatomic) IBOutlet UITextField *passwordField;
 @property (strong,nonatomic) KeychainItemWrapper *keychainItem;
+@property (strong,nonatomic) IBOutlet FBLoginView *fbLoginView;
 
 - (IBAction)login:(id)sender;
 
@@ -39,6 +41,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.fbLoginView.readPermissions = @[@"basic_info", @"email"];
+    self.fbLoginView.delegate = self;
+    
     self.keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"MLLogin" accessGroup:nil];
     NSString *username = [self.keychainItem objectForKey:(__bridge id)kSecAttrAccount];
     if (username && username.length) {
@@ -49,12 +54,6 @@
             self.passwordField.text = password;
         }
     }
-    // Do any additional setup after loading the view.
-//    FBLoginView *loginView = [[FBLoginView alloc] initWithReadPermissions:@[@"basic_info", @"email"]];
-//    // Align the button in the center horizontally
-//    loginView.frame = CGRectOffset(loginView.frame, (self.view.center.x - (loginView.frame.size.width / 2)), (self.view.center.y - (loginView.frame.size.height / 2)));
-//    loginView.delegate = self;
-//    [self.view addSubview:loginView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,7 +78,7 @@
                                 password:password
                                  success:^(NSHTTPURLResponse *response, id responseJSON) {
                                      NSLog(@"!!!!!Login succeeded!!!!, %@", responseJSON);
-                                     [[MLApiClient client] setLoggedInInfoWithEamil:email
+                                     [[MLApiClient client] setLoggedInInfoWithEmail:email
                                                                            password:password
                                                                              userId:[responseJSON[@"id"] integerValue]];
                                      // save credential to keychain
@@ -112,17 +111,37 @@
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView
 {
     NSLog(@"FB logged in ... ");
-    [self performSegueWithIdentifier:@"MainFeed" sender:self];
+    //[self performSegueWithIdentifier:@"MainFeed" sender:self];
     
 }
 
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
                             user:(id<FBGraphUser>)user
 {
-    NSLog(@"FB profile fetched ... %@", user);
-    [FBClient client].id = user.id;
-    [FBClient client].user_name = user.name;
-    [self.scoreFeedVC updateInfo];
+    NSString *email = user[@"email"];
+    NSString *accessToken = [[[FBSession activeSession] accessTokenData] accessToken];
+    NSString *loginEmail = [NSString stringWithFormat:@"%@@fb", email];
+    
+    NSLog(@"FB profile fetched ... %@, %@, %@", user, loginEmail, accessToken);
+    
+    [[MLApiClient client] loginWithFB:email
+                          accessToken:accessToken
+                            firstName:user[@"first_name"]
+                             lastName:user[@"last_name"]
+                              success:^(NSHTTPURLResponse *response, id responseJSON) {
+                                  NSLog(@"!!!!!FB Login succeeded!!!!, %@", responseJSON);
+                                  [[MLApiClient client] setLoggedInInfoWithEmail:loginEmail
+                                                                        password:@"fAcEbOoK"
+                                                                          userId:[responseJSON[@"id"] integerValue]];
+                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                      [self performSegueWithIdentifier:@"MainFeed" sender:self];
+                                  });
+                              } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+                                  NSLog(@"!!!!!FB Login failed!!!!, %@", responseJSON);
+                              }];
+    //[FBClient client].id = user.id;
+    //[FBClient client].user_name = user.name;
+    //[self.scoreFeedVC updateInfo];
 }
 
 

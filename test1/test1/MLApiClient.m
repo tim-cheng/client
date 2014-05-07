@@ -101,6 +101,25 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
     return [self makeRequest:request success:successCallback failure:failureCallback];
 }
 
+- (NSURLRequest *)loginWithFB:(NSString *)email
+                  accessToken:(NSString *)accessToken
+                    firstName:firstName
+                     lastName:lastName
+                      success:(MLApiClientSuccess)successCallback
+                      failure:(MLApiClientFailure)failureCallback
+{
+    NSString * path = @"/login_facebook";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@?first_name=%@&last_name=%@", self.protocol, self.baseURLString, path, [self urlEncode:firstName], [self urlEncode:lastName]]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:15.0f];
+    request.HTTPMethod = @"GET";
+    [request setValue:[self authStringEmail:email password:accessToken] forHTTPHeaderField:@"Authorization"];
+
+    return [self makeRequest:request success:successCallback failure:failureCallback];
+}
+
+
 - (NSURLRequest *)makeRequest:(NSURLRequest *)request
                       success:(MLApiClientSuccess)success
                       failure:(MLApiClientFailure)failure
@@ -143,7 +162,7 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
     return request;
 }
 
-- (void) setLoggedInInfoWithEamil:(NSString *)email
+- (void) setLoggedInInfoWithEmail:(NSString *)email
                          password:(NSString *)password
                            userId:(NSInteger)userId
 {

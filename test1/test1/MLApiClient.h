@@ -27,7 +27,14 @@ typedef void (^MLApiClientFailure)(NSHTTPURLResponse *response, id responseJSON,
                          success:(MLApiClientSuccess)successCallback
                          failure:(MLApiClientFailure)failureCallback;
 
-- (void) setLoggedInInfoWithEamil:(NSString *)email
+- (NSURLRequest *)loginWithFB:(NSString *)email
+                  accessToken:(NSString *)accessToken
+                    firstName:firstName
+                     lastName:lastName
+                      success:(MLApiClientSuccess)successCallback
+                      failure:(MLApiClientFailure)failureCallback;
+
+- (void) setLoggedInInfoWithEmail:(NSString *)email
                          password:(NSString *)password
                            userId:(NSInteger)userId;
 

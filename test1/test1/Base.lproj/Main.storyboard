@@ -350,11 +350,17 @@
                                     <action selector="login:" destination="yYN-RH-4QA" eventType="touchUpInside" id="kkl-4Q-Hbl"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ubj-UX-klI" customClass="FBLoginView">
+                                <rect key="frame" x="44" y="263" width="233" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="emailField" destination="u0d-pA-AI6" id="ipW-sU-EGx"/>
+                        <outlet property="fbLoginView" destination="Ubj-UX-klI" id="Cgt-DJ-X3F"/>
                         <outlet property="passwordField" destination="Nqd-Z2-N2E" id="lUv-dB-OP8"/>
                         <segue destination="8nG-FM-sTg" kind="modal" identifier="NewLogIn" id="16b-J1-GT6"/>
                         <segue destination="r5F-NV-Qj7" kind="modal" identifier="MainFeed" id="hjh-B1-ygY"/>
