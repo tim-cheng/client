@@ -128,11 +128,16 @@
                           accessToken:accessToken
                             firstName:user[@"first_name"]
                              lastName:user[@"last_name"]
+                                 fbId:user[@"id"]
                               success:^(NSHTTPURLResponse *response, id responseJSON) {
                                   NSLog(@"!!!!!FB Login succeeded!!!!, %@", responseJSON);
                                   [[MLApiClient client] setLoggedInInfoWithEmail:loginEmail
                                                                         password:@"fAcEbOoK"
                                                                           userId:[responseJSON[@"id"] integerValue]];
+                                  if (response.statusCode == 201) {
+                                      // just created new user, need to upload photo
+                                      NSLog(@"new FB user created!!!");
+                                  }
                                   dispatch_async(dispatch_get_main_queue(), ^{
                                       [self performSegueWithIdentifier:@"MainFeed" sender:self];
                                   });

@@ -29,15 +29,15 @@ typedef void (^MLApiClientFailure)(NSHTTPURLResponse *response, id responseJSON,
 
 - (NSURLRequest *)loginWithFB:(NSString *)email
                   accessToken:(NSString *)accessToken
-                    firstName:firstName
-                     lastName:lastName
+                    firstName:(NSString *)firstName
+                     lastName:(NSString *)lastName
+                         fbId:(NSString *)fbId
                       success:(MLApiClientSuccess)successCallback
                       failure:(MLApiClientFailure)failureCallback;
 
 - (void) setLoggedInInfoWithEmail:(NSString *)email
                          password:(NSString *)password
                            userId:(NSInteger)userId;
-
 
 - (NSURLRequest *)userInfoFromId:(NSInteger)userId
                          success:(MLApiClientSuccess)successCallback

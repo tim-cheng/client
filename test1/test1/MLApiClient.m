@@ -103,13 +103,14 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
 
 - (NSURLRequest *)loginWithFB:(NSString *)email
                   accessToken:(NSString *)accessToken
-                    firstName:firstName
-                     lastName:lastName
+                    firstName:(NSString *)firstName
+                     lastName:(NSString *)lastName
+                         fbId:(NSString *)fbId
                       success:(MLApiClientSuccess)successCallback
                       failure:(MLApiClientFailure)failureCallback
 {
     NSString * path = @"/login_facebook";
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@?first_name=%@&last_name=%@", self.protocol, self.baseURLString, path, [self urlEncode:firstName], [self urlEncode:lastName]]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@?first_name=%@&last_name=%@&fb_id=%@", self.protocol, self.baseURLString, path, [self urlEncode:firstName], [self urlEncode:lastName], [self urlEncode:fbId]]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:15.0f];
