@@ -81,6 +81,8 @@
 		28C7AEA518DE059F004F485D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 28C7AEA318DE059F004F485D /* InfoPlist.strings */; };
 		28C7AEA718DE059F004F485D /* test1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C7AEA618DE059F004F485D /* test1Tests.m */; };
 		28E67A7518FBBDE2001F81E1 /* NewLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E67A7418FBBDE2001F81E1 /* NewLogInViewController.m */; };
+		28F00EAD191A1A2200DC2F42 /* compose2_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F00EAB191A1A2200DC2F42 /* compose2_64.png */; };
+		28F00EB0191A1C3900DC2F42 /* post_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F00EAF191A1C3900DC2F42 /* post_64.png */; };
 		28F1BBDF18E14DB300C59302 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F1BBDE18E14DB300C59302 /* Firebase.framework */; };
 		28F1BBE118E14DD000C59302 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F1BBE018E14DD000C59302 /* libstdc++.dylib */; };
 		28F1BBE318E14DDB00C59302 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F1BBE218E14DDB00C59302 /* libicucore.dylib */; };
@@ -209,6 +211,8 @@
 		28C7AEA618DE059F004F485D /* test1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = test1Tests.m; sourceTree = "<group>"; };
 		28E67A7318FBBDE2001F81E1 /* NewLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewLogInViewController.h; sourceTree = "<group>"; };
 		28E67A7418FBBDE2001F81E1 /* NewLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLogInViewController.m; sourceTree = "<group>"; };
+		28F00EAB191A1A2200DC2F42 /* compose2_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compose2_64.png; sourceTree = "<group>"; };
+		28F00EAF191A1C3900DC2F42 /* post_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = post_64.png; sourceTree = "<group>"; };
 		28F1BBDE18E14DB300C59302 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Firebase.framework; path = ../Firebase.framework; sourceTree = "<group>"; };
 		28F1BBE018E14DD000C59302 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		28F1BBE218E14DDB00C59302 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
@@ -443,6 +447,7 @@
 		28C7AE8218DE059F004F485D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				28F00EAB191A1A2200DC2F42 /* compose2_64.png */,
 				28080FCA19183EF500FE8EF2 /* camera_64.png */,
 				28080FCB19183EF600FE8EF2 /* compose_64.png */,
 				28080FCC19183EF600FE8EF2 /* shuffle_64.png */,
@@ -455,6 +460,7 @@
 				28080FAF1917F1D100FE8EF2 /* heart-2x.png */,
 				28080FB31917F68500FE8EF2 /* heart-3x.png */,
 				280A685E1904D2C700C2475D /* s1.png */,
+				28F00EAF191A1C3900DC2F42 /* post_64.png */,
 				280A685F1904D2C700C2475D /* s2.png */,
 				280A68601904D2C700C2475D /* s3.png */,
 				280A68611904D2C700C2475D /* s4.png */,
@@ -577,6 +583,7 @@
 				2808BA6318E8846800CC64B7 /* emoticon_sad.png in Resources */,
 				28080FBF191833FC00FE8EF2 /* heart_on_24.png in Resources */,
 				280A68641904D2C700C2475D /* s3.png in Resources */,
+				28F00EAD191A1A2200DC2F42 /* compose2_64.png in Resources */,
 				28080FB01917F1D100FE8EF2 /* heart-2x.png in Resources */,
 				28080FBC191833FC00FE8EF2 /* comment_off_24.png in Resources */,
 				28080FCD19183EF600FE8EF2 /* camera_64.png in Resources */,
@@ -600,6 +607,7 @@
 				28080FB41917F68500FE8EF2 /* heart-3x.png in Resources */,
 				2808BA6A18E885A900CC64B7 /* emoticon_nervous.png in Resources */,
 				2808BA6918E885A900CC64B7 /* emoticon_lol.png in Resources */,
+				28F00EB0191A1C3900DC2F42 /* post_64.png in Resources */,
 				280A68631904D2C700C2475D /* s2.png in Resources */,
 				28080FBE191833FC00FE8EF2 /* heart_off_24.png in Resources */,
 				2808BA6C18E885A900CC64B7 /* emoticon_smile.png in Resources */,

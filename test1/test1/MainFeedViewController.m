@@ -426,9 +426,16 @@
 - (IBAction)compose:(id)sender
 {
     self.composeView.hidden = !self.composeView.hidden;
+    UIButton *icon = (UIButton *)sender;
     if (!self.composeView.hidden) {
         // composing
+        dispatch_async(dispatch_get_main_queue(), ^{
+            icon.imageView.image = [UIImage imageNamed:@"post_64.png"];
+        });
     } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            icon.imageView.image = [UIImage imageNamed:@"compose2_64.png"];
+        });
         [self.postTextView resignFirstResponder];
         [[MLApiClient client] sendPostFromId:kApiClientUserSelf
                                         body:self.postTextView.text
