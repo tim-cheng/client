@@ -129,6 +129,8 @@
                                       }
                                       [self.mainFeedView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
                                       [self.mainFeedView endUpdates];
+                                      // scroll to top
+                                      [self.mainFeedView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
                                   });
                               } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
                                   NSLog(@"!!!!!get posts failed");
