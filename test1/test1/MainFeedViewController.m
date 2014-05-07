@@ -320,12 +320,13 @@
     NSLog(@"should return........");
     [textField resignFirstResponder];
     // post comments
+    NSString *txt = textField.text;
+    textField.text = @"";
     [[MLApiClient client] sendCommentFromId:[MLApiClient client].userId
                                      postId:self.commentPostId
-                                       body:textField.text
+                                       body:txt
                                     success:^(NSHTTPURLResponse *response, id responseJSON) {
                                         NSLog(@"!!!!post comment succeeded");
-                                        self.commentField.text = @"";
                                         if (self.commentPostId) {
                                             [self loadCommentsForPostId:self.commentPostId];
                                         }
