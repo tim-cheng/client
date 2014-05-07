@@ -206,6 +206,8 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
         }
         
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         // TODO: save post_id tag
         NSInteger postId = [self.postArray[indexPath.row][@"id"] integerValue];
         cell.contentView.tag = postId + 1000;
