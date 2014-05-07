@@ -163,6 +163,20 @@
                                   });
                               } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
                                   NSLog(@"!!!!!get comments failed");
+                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                      // remove all comments
+                                      [self.commentFeedView beginUpdates];
+                                      NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+                                      if ([self.commentArray count] > 0) {
+                                          for (int i=0; i<[self.commentArray count]; i++) {
+                                              [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                                          }
+                                          [self.commentFeedView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+                                          [self.commentArray removeAllObjects];
+                                          [indexPaths removeAllObjects];
+                                      }
+                                      [self.commentFeedView endUpdates];
+                                  });
                               }];
 }
 
@@ -376,8 +390,8 @@
                 self.mainFeedView.scrollEnabled = NO;
                 self.commentFeedView.hidden = NO;
                 self.commentFeedView.dataSource = self;
+                NSLog(@"post id = %d\n", self.commentPostId);
                 [self loadCommentsForPostId:self.commentPostId];
-                [self.commentFeedView reloadData];
             });
         } else {
             self.commentPostId = 0;
@@ -444,6 +458,9 @@
         });
     } else {
         NSString *txt = self.postTextView.text;
+        if ([txt isEqualToString:@"Share what's new"]) {
+            return;
+        }
         dispatch_async(dispatch_get_main_queue(), ^{
             icon.imageView.image = [UIImage imageNamed:@"compose2_64.png"];
             self.postTextView.text = @"Share what's new";
