@@ -77,7 +77,7 @@
                                   success:^(id responseJSON) {
                                       dispatch_async(dispatch_get_main_queue(), ^{
                                           self.headerName.text = responseJSON[@"full_name"];
-                                          self.headerConnections.text = [NSString stringWithFormat:@"%d 1st   %d 2nd", [responseJSON[@"num_degree1"] integerValue], [responseJSON[@"num_degree2"] integerValue]];
+                                          self.headerConnections.text = [NSString stringWithFormat:@"%d 1°   %d 2°", [responseJSON[@"num_degree1"] integerValue], [responseJSON[@"num_degree2"] integerValue]];
                                       });
                                   }];
     
