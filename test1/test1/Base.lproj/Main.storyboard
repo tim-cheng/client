@@ -477,11 +477,11 @@
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                                 <imageView userInteractionEnabled="NO" tag="16" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="comment_off_24.png" highlightedImage="comment_on_24.png" id="leJ-IC-tWU">
-                                                    <rect key="frame" x="200" y="240" width="16" height="16"/>
+                                                    <rect key="frame" x="192" y="232" width="32" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" tag="17" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart_off_24.png" highlightedImage="heart_on_24.png" id="Hcl-mi-0rS">
-                                                    <rect key="frame" x="254" y="240" width="16" height="16"/>
+                                                    <rect key="frame" x="246" y="232" width="32" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="12" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="izu-IQ-RW0">
