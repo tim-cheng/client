@@ -29,7 +29,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *headerConnections;
 
 @property (strong, nonatomic) NSDateFormatter *myFormatter;
-@property (assign, nonatomic) BOOL isCommentMode;
 
 @property (strong, nonatomic) IBOutlet UITableView *commentFeedView;
 @property (strong, nonatomic) IBOutlet UITextField *commentField;
@@ -43,6 +42,7 @@
 - (IBAction)compose:(id)sender;
 - (IBAction)composeSelectImage:(id)sender;
 - (IBAction)composeShuffleBackground:(id)sender;
+- (IBAction)closeComment:(id)sender;
 
 @end
 
@@ -192,6 +192,38 @@
     }
 }
 
+- (void)tapOnComment:(UITapGestureRecognizer *)gest
+{
+    UIImageView *img = (UIImageView*)gest.view;
+    NSInteger postId = [img superview].tag - 1000;
+    UITableViewCell *cell = (UITableViewCell*)[[[img superview] superview] superview];
+    NSIndexPath *indexPath = [self.mainFeedView indexPathForCell:cell];
+    
+    if (self.commentFeedView.hidden) {
+        self.commentPostId = postId;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIButton *closeButton = (UIButton *)[cell.contentView viewWithTag:18];
+            closeButton.hidden = NO;
+            
+            self.headerView.hidden = YES;
+            CGRect newFrame = self.mainFeedView.frame;
+            newFrame.origin.y = 0;
+            //                newFrame.size.height = 272;
+            self.mainFeedView.frame = newFrame;
+            [self.mainFeedView scrollToRowAtIndexPath:indexPath
+                                     atScrollPosition:UITableViewScrollPositionTop
+                                             animated:NO];
+            self.mainFeedView.scrollEnabled = NO;
+            self.commentFeedView.hidden = NO;
+            self.commentFeedView.dataSource = self;
+            NSLog(@"post id = %d\n", self.commentPostId);
+            [self loadCommentsForPostId:self.commentPostId];
+            [UIApplication sharedApplication].statusBarHidden = YES;
+        });
+    }
+
+}
+
 - (void)tapOnStar:(UITapGestureRecognizer *)gest
 {
     UIImageView *img = (UIImageView*)gest.view;
@@ -277,6 +309,19 @@
             nStars.text = [self.postArray[indexPath.row][@"num_stars"] stringValue];
         }
         
+        UIImageView *comment = (UIImageView *)[cell.contentView viewWithTag:16];
+        if (comment) {
+            UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]
+                                                 initWithTarget:self
+                                                 action:@selector(tapOnComment:)];
+            [singleTap setNumberOfTapsRequired:1];
+            comment.userInteractionEnabled = YES;
+            [comment addGestureRecognizer:singleTap];
+            if ([self.postArray[indexPath.row][@"num_comments"] integerValue] > 0) {
+                comment.highlighted = YES;
+            }
+        }
+
         UIImageView *star = (UIImageView *)[cell.contentView viewWithTag:17];
         if (star) {
             UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]
@@ -289,6 +334,8 @@
                 star.highlighted = YES;
             }
         }
+
+
         
         // set user name / description
         [[MLUserInfo instance] userInfoFromId:([self.postArray[indexPath.row][@"user_id"] integerValue])
@@ -336,12 +383,19 @@
 #pragma mark UITextFieldDelgate
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    CGRect newFrame = self.commentFeedView.frame;
+    newFrame.size.height = 80;
+    self.commentFeedView.frame = newFrame;
     return YES;
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSLog(@"should return........");
     [textField resignFirstResponder];
+    CGRect newFrame = self.commentFeedView.frame;
+    newFrame.size.height = 272;
+    self.commentFeedView.frame = newFrame;
+
     // post comments
     NSString *txt = textField.text;
     textField.text = @"";
@@ -368,47 +422,6 @@
         textView.text = @"";
         return YES;
     } else {
-        // find current indexPath
-        NSIndexPath *indexPath = [self.mainFeedView indexPathForCell:(UITableViewCell*)[[[textView superview] superview] superview]];
-        NSLog(@"indexPath.row =%@, %d, %d", indexPath, indexPath.row, self.commentPostId);
-        // compose
-        NSLog(@"!!!!!tapped...");
-        
-        self.isCommentMode = !self.isCommentMode;
-        if (self.isCommentMode) {
-            self.commentPostId = [textView superview].tag - 1000;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.headerView.hidden = YES;
-                CGRect newFrame = self.mainFeedView.frame;
-                newFrame.origin.y = 0;
-//                newFrame.size.height = 272;
-                self.mainFeedView.frame = newFrame;
-                [self.mainFeedView scrollToRowAtIndexPath:indexPath
-                                     atScrollPosition:UITableViewScrollPositionTop
-                                             animated:NO];
-                self.mainFeedView.scrollEnabled = NO;
-                self.commentFeedView.hidden = NO;
-                self.commentFeedView.dataSource = self;
-                NSLog(@"post id = %d\n", self.commentPostId);
-                [self loadCommentsForPostId:self.commentPostId];
-                [UIApplication sharedApplication].statusBarHidden = YES;
-            });
-        } else {
-            self.commentPostId = 0;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.headerView.hidden = NO;
-                CGRect newFrame = self.mainFeedView.frame;
-                newFrame.origin.y = 68;
-//                newFrame.size.height = 520;
-                self.mainFeedView.frame = newFrame;
-                self.mainFeedView.scrollEnabled = YES;
-                self.commentFeedView.hidden = YES;
-                self.commentFeedView.dataSource = nil;
-                [self.commentField resignFirstResponder];
-                [self loadPosts];
-                [UIApplication sharedApplication].statusBarHidden = NO;
-            });
-        }
         return NO;
     }
 }
@@ -496,9 +509,28 @@
     [self presentViewController:pickerController animated:YES completion:NULL];
 }
 
-- (IBAction)composeShuffleBackground:(id)sender
+- (IBAction)composeShuffleBackground:(UIButton *)button
 {
     
+}
+
+- (IBAction)closeComment:(UIButton *)button
+{
+    button.hidden = YES;
+    self.commentPostId = 0;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.headerView.hidden = NO;
+        CGRect newFrame = self.mainFeedView.frame;
+        newFrame.origin.y = 68;
+        //                newFrame.size.height = 520;
+        self.mainFeedView.frame = newFrame;
+        self.mainFeedView.scrollEnabled = YES;
+        self.commentFeedView.hidden = YES;
+        self.commentFeedView.dataSource = nil;
+        [self.commentField resignFirstResponder];
+        [self loadPosts];
+        [UIApplication sharedApplication].statusBarHidden = NO;
+    });
 }
 
 

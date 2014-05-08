@@ -496,6 +496,16 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button hidden="YES" opaque="NO" tag="18" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GWS-f6-BVX">
+                                                    <rect key="frame" x="20" y="233" width="32" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" image="return_64.png">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="closeComment:" destination="Yva-45-7iu" eventType="touchUpInside" id="p6u-2s-Nrv"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.72784846490743993" green="0.85169813312224318" blue="0.90104830994897955" alpha="1" colorSpace="calibratedRGB"/>
                                         </tableViewCellContentView>
@@ -1006,6 +1016,7 @@
         <image name="compose2_64.png" width="64" height="64"/>
         <image name="heart_off_24.png" width="24" height="24"/>
         <image name="heart_on_24.png" width="24" height="24"/>
+        <image name="return_64.png" width="64" height="64"/>
         <image name="s2.png" width="195" height="195"/>
         <image name="s3.png" width="195" height="194"/>
         <image name="shuffle_64.png" width="64" height="64"/>
