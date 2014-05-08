@@ -153,7 +153,7 @@
                                           [self.commentArray removeAllObjects];
                                           [indexPaths removeAllObjects];
                                       }
-                                      
+
                                       [self.commentArray addObjectsFromArray:responseJSON];
                                       for (int i=0; i<[self.commentArray count]; i++) {
                                           [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
@@ -377,12 +377,11 @@
         self.isCommentMode = !self.isCommentMode;
         if (self.isCommentMode) {
             self.commentPostId = [textView superview].tag - 1000;
-            [UIApplication sharedApplication].statusBarHidden = YES;
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.headerView.hidden = YES;
                 CGRect newFrame = self.mainFeedView.frame;
                 newFrame.origin.y = 0;
-                newFrame.size.height = 272;
+//                newFrame.size.height = 272;
                 self.mainFeedView.frame = newFrame;
                 [self.mainFeedView scrollToRowAtIndexPath:indexPath
                                      atScrollPosition:UITableViewScrollPositionTop
@@ -392,21 +391,22 @@
                 self.commentFeedView.dataSource = self;
                 NSLog(@"post id = %d\n", self.commentPostId);
                 [self loadCommentsForPostId:self.commentPostId];
+                [UIApplication sharedApplication].statusBarHidden = YES;
             });
         } else {
             self.commentPostId = 0;
-            [UIApplication sharedApplication].statusBarHidden = NO;
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.headerView.hidden = NO;
                 CGRect newFrame = self.mainFeedView.frame;
                 newFrame.origin.y = 68;
-                newFrame.size.height = 520;
+//                newFrame.size.height = 520;
                 self.mainFeedView.frame = newFrame;
                 self.mainFeedView.scrollEnabled = YES;
                 self.commentFeedView.hidden = YES;
                 self.commentFeedView.dataSource = nil;
                 [self.commentField resignFirstResponder];
                 [self loadPosts];
+                [UIApplication sharedApplication].statusBarHidden = NO;
             });
         }
         return NO;
