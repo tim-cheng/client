@@ -109,35 +109,32 @@
 
 - (void)loadPosts
 {
-    [[MLApiClient client] postsFromId:[MLApiClient client].userId
-                               degree:1
-                              success:^(NSHTTPURLResponse *response, id responseJSON) {
-                                  NSLog(@"!!!!get posts succeeded!!!!, %@", responseJSON);
-                                  dispatch_async(dispatch_get_main_queue(), ^{
-
-                                      [self.mainFeedView beginUpdates];
-                                      NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-                                      if ([self.postArray count] > 0) {
-                                          for (int i=0; i<[self.postArray count]; i++) {
-                                              [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-                                          }
-                                          [self.mainFeedView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
-                                          [self.postArray removeAllObjects];
-                                          [indexPaths removeAllObjects];
-                                      }
-                                      
-                                      [self.postArray addObjectsFromArray:responseJSON];
-                                      for (int i=0; i<[self.postArray count]; i++) {
-                                          [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-                                      }
-                                      [self.mainFeedView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
-                                      [self.mainFeedView endUpdates];
-                                      // scroll to top
-                                      [self.mainFeedView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
-                                  });
-                              } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
-                                  NSLog(@"!!!!!get posts failed");
-                              }];
+    [[MLPostInfo instance] loadPostInfoFromId:[MLApiClient client].userId
+                                       degree:1
+                                      success:^(id responseJSON) {
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                              
+                                              [self.mainFeedView beginUpdates];
+                                              NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+                                              if ([self.postArray count] > 0) {
+                                                  for (int i=0; i<[self.postArray count]; i++) {
+                                                      [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                                                  }
+                                                  [self.mainFeedView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+                                                  [self.postArray removeAllObjects];
+                                                  [indexPaths removeAllObjects];
+                                              }
+                                              
+                                              [self.postArray addObjectsFromArray:responseJSON];
+                                              for (int i=0; i<[self.postArray count]; i++) {
+                                                  [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                                              }
+                                              [self.mainFeedView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+                                              [self.mainFeedView endUpdates];
+                                              // scroll to top
+                                              [self.mainFeedView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+                                          });
+                                      }];
 }
 
 - (void)loadCommentsForPostId:(NSInteger)postId
@@ -520,35 +517,20 @@
         if ([txt isEqualToString:@"Share what's new"]) {
             return;
         }
+        [self.postTextView resignFirstResponder];
+        
+        UIImageView *imagView = (UIImageView *)[self.postTextView viewWithTag:30];
+        [[MLPostInfo instance] postInfoFromId:kApiClientUserSelf
+                                         body:txt
+                                        image:imagView.image
+                                      success:^(id responseJSON) {
+                                          [self loadPosts];
+                                      }];
         dispatch_async(dispatch_get_main_queue(), ^{
             icon.imageView.image = [UIImage imageNamed:@"compose2_64.png"];
             self.postTextView.text = @"Share what's new";
+            [imagView removeFromSuperview];
         });
-        [self.postTextView resignFirstResponder];
-        [[MLApiClient client] sendPostFromId:kApiClientUserSelf
-                                        body:txt
-                                     success:^(NSHTTPURLResponse *response, id responseJSON) {
-                                         NSLog(@"!!!!! post succeeded!!!!! ");
-                                         int postId = [responseJSON[@"id"] intValue];
-                                         if (postId > 0) {
-                                             // save the background
-                                             UIImageView *imagView = (UIImageView *)[self.postTextView viewWithTag:30];
-                                             if (imagView && self.composeBgImg) {
-                                                 [[MLApiClient client] sendPostPictureId:[responseJSON[@"id"] integerValue]
-                                                                                   image:imagView.image
-                                                                                 success:nil
-                                                                                 failure:nil];
-                                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                                     [imagView removeFromSuperview];
-                                                     // TODO: remove gesture recognizer on postTextView
-                                                 });
-                                             }
-                                         }
-                                         [self loadPosts];
-                                         
-                                     } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
-                                         NSLog(@"!!!!! post failed !!!!!! ");
-                                     }];
     }
     
 }

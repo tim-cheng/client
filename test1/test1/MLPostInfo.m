@@ -14,6 +14,8 @@
 @property (strong, nonatomic) NSMutableDictionary *postInfoCache;
 @property (strong, nonatomic) NSMutableDictionary *postPictureCache;
 
+@property (strong, nonatomic) NSDictionary *pendingPost;
+
 @end
 
 @implementation MLPostInfo
@@ -28,9 +30,36 @@
     return sharedInstance;
 }
 
-- (void) postInfoFromId:(NSInteger)postId success:(MLPostInfoSuccess)callback
+
+- (void) postInfoFromId:(NSInteger)userId
+                   body:(NSString *)body
+                  image:(UIImage *)image
+                success:(MLPostInfoSuccess)callback
 {
-    
+    [[MLApiClient client] sendPostFromId:userId
+                                    body:body
+                                 success:^(NSHTTPURLResponse *response, id responseJSON) {
+                                     int postId = [responseJSON[@"id"] intValue];
+                                     if (image) {
+                                         self.postPictureCache[@(postId)] = image;
+                                         // save the background
+                                         [[MLApiClient client] sendPostPictureId:[responseJSON[@"id"] integerValue]
+                                                                           image:image
+                                                                         success:^(NSHTTPURLResponse *response, id responseJSON) {
+                                                                             if (callback) {
+                                                                                 callback(responseJSON);
+                                                                             }
+                                                                         } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+                                                                             NSLog(@"failed to post picture");
+                                                                         }];
+                                     } else {
+                                         if (callback) {
+                                             callback(responseJSON);
+                                         }
+                                     }
+                                 } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+                                     
+                                 }];
 }
 
 - (UIImage *)postPicture:(NSInteger)postId
@@ -50,6 +79,23 @@
     }
     return nil;
 }
+
+- (void) loadPostInfoFromId:(NSInteger)userId
+                     degree:(NSInteger)degree
+                    success:(MLPostInfoSuccess)callback
+{
+    [[MLApiClient client] postsFromId:userId
+                               degree:degree
+                              success:^(NSHTTPURLResponse *response, id responseJSON) {
+                                  NSLog(@"!!!!get posts succeeded!!!!, %@", responseJSON);
+                                  if (callback ) {
+                                      callback(responseJSON);
+                                  }
+                              } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+                                  NSLog(@"!!!!!get posts failed");
+                              }];
+}
+
 
 - (id) init
 {

@@ -13,7 +13,16 @@ typedef void (^MLPostInfoSuccess)(id responseJSON);
 @interface MLPostInfo : NSObject
 
 + (MLPostInfo *)instance;
-- (void) postInfoFromId:(NSInteger)postId success:(MLPostInfoSuccess)callback;
 - (UIImage *)postPicture:(NSInteger)postId;
+
+- (void) postInfoFromId:(NSInteger)userId
+                   body:(NSString *)body
+                  image:(UIImage *)image
+                success:(MLPostInfoSuccess)callback;
+
+- (void) loadPostInfoFromId:(NSInteger)userId
+                     degree:(NSInteger)degree
+                    success:(MLPostInfoSuccess)callback;
+
 
 @end
