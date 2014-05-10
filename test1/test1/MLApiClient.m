@@ -35,8 +35,8 @@
 - (id)init
 {
 //    return [self initWithProtocol:@"http" baseURLString:@"localhost:8080"];
-    return [self initWithProtocol:@"http" baseURLString:@"192.168.0.102:8080"];
-//    return [self initWithProtocol:@"http" baseURLString:@"107.170.210.171:8080"];
+//    return [self initWithProtocol:@"http" baseURLString:@"192.168.0.102:8080"];
+    return [self initWithProtocol:@"http" baseURLString:@"107.170.210.171:8080"];
 
 }
 

@@ -519,7 +519,7 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Share what's new" textAlignment="center" id="qqP-tA-spz">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="267"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <color key="backgroundColor" red="1" green="0.48971857546202291" blue="0.47119061445121679" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.099137054691903773" green="0.31045488728388143" blue="0.51528619260204089" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
