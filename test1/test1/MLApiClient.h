@@ -21,6 +21,7 @@ typedef void (^MLApiClientFailure)(NSHTTPURLResponse *response, id responseJSON,
 + (MLApiClient *)client;
 
 - (NSURL *)userPictureUrl:(NSInteger)userId;
+- (NSURL *)postPictureUrl:(NSInteger)postId;
 
 - (NSURLRequest *)loginWithEmail:(NSString *)email
                         password:(NSString *)password
@@ -56,6 +57,11 @@ typedef void (^MLApiClientFailure)(NSHTTPURLResponse *response, id responseJSON,
                             body:(NSString *)body
                          success:(MLApiClientSuccess)successCallback
                          failure:(MLApiClientFailure)failureCallback;
+
+- (NSURLRequest *)sendPostPictureId:(NSInteger)postId
+                              image:(UIImage *)image
+                            success:(MLApiClientSuccess)successCallback
+                            failure:(MLApiClientFailure)failureCallback;
 
 - (NSURLRequest *)sendCommentFromId:(NSInteger)userId
                              postId:(NSInteger)postId

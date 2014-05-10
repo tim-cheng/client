@@ -35,7 +35,8 @@
 - (id)init
 {
 //    return [self initWithProtocol:@"http" baseURLString:@"localhost:8080"];
-    return [self initWithProtocol:@"http" baseURLString:@"107.170.210.171:8080"];
+    return [self initWithProtocol:@"http" baseURLString:@"192.168.0.102:8080"];
+//    return [self initWithProtocol:@"http" baseURLString:@"107.170.210.171:8080"];
 
 }
 
@@ -242,6 +243,26 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
     return [self makeRequest:request success:successCallback failure:failureCallback];
 }
 
+- (NSURLRequest *)sendPostPictureId:(NSInteger)postId
+                              image:(UIImage *)image
+                            success:(MLApiClientSuccess)successCallback
+                            failure:(MLApiClientFailure)failureCallback
+{
+    NSString * path = @"/posts";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/%d/picture", self.protocol, self.baseURLString, path, postId]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:15.0f];
+    NSData *postData = UIImageJPEGRepresentation(image, 0.9f);
+    request.HTTPMethod = @"POST";
+    [request setValue:self.loggedInAuth forHTTPHeaderField:@"Authorization"];
+    [request setValue:@"image/jpeg" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%d", [postData length]] forHTTPHeaderField:@"Content-Length"];
+    request.HTTPBody = postData;
+    return [self makeRequest:request success:successCallback failure:failureCallback];
+}
+
+
 - (NSURLRequest *)sendCommentFromId:(NSInteger)userId
                              postId:(NSInteger)postId
                                body:(NSString *)body
@@ -289,6 +310,13 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
     NSInteger uid = (userId < 0) ? self.loggedInUserId : userId;
     NSString * path = @"/users";
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/%d/picture", self.protocol, self.baseURLString, path, uid]];
+    return url;
+}
+
+- (NSURL *)postPictureUrl:(NSInteger)postId
+{
+    NSString * path = @"/posts";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/%d/picture", self.protocol, self.baseURLString, path, postId]];
     return url;
 }
 

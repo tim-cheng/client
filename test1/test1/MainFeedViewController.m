@@ -9,6 +9,7 @@
 #import "MainFeedViewController.h"
 #import "MLApiClient.h"
 #import "MLUserInfo.h"
+#import "MLPostInfo.h"
 #import "NSDate+TimeAgo.h"
 #import "UIImage+ImageEffects.h"
 
@@ -19,8 +20,6 @@
                                       UIImagePickerControllerDelegate,
                                       UINavigationControllerDelegate,
                                       UIGestureRecognizerDelegate>
-
-@property (strong, nonatomic) NSMutableDictionary *cachedPostPicture;
 
 @property (strong, nonatomic) NSMutableArray *postArray;
 @property (strong, nonatomic) NSMutableArray *commentArray;
@@ -99,8 +98,6 @@
     self.profileImage.layer.cornerRadius = 20;
     self.profileImage.clipsToBounds = YES;
     
-    self.cachedPostPicture = [[NSMutableDictionary alloc] init];
-
     [self loadPosts];
 }
 
@@ -313,29 +310,19 @@
         }
 
         // add background
-        NSDictionary *cachedPostPic = self.cachedPostPicture[@(postId)];
-        if (cachedPostPic) {
-            UIImage *postPic;
-            if ([cachedPostPic[@"blur"] integerValue] == 0) {
-                postPic = cachedPostPic[@"img"];
-            } else {
-                postPic = [cachedPostPic[@"img"] applyBlurWithRadius:2
-                                                     iterationsCount:[cachedPostPic[@"blur"] integerValue]
-                                                           tintColor:[UIColor colorWithWhite:0.2 alpha:0.2]
-                                               saturationDeltaFactor:1.8
-                                                           maskImage:nil];
-            }
-            UIImageView *imageView = [[UIImageView alloc] initWithImage:postPic];
+        UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:30];
+        if (imageView) {
+            [imageView removeFromSuperview];
+        }
+        if ([self.postArray[indexPath.row][@"has_picture"] boolValue]) {
+            // has picture
+            UIImage *image = [[MLPostInfo instance] postPicture:postId];
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
             imageView.tag = 30;
+//            imageView.contentMode = UIViewContentModeScaleAspectFit;
             [cell.contentView addSubview:imageView ];
             [cell.contentView sendSubviewToBack:imageView ];
-        } else {
-            UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:30];
-            if (imageView) {
-                [imageView removeFromSuperview];
-            }
         }
-
         
         // set time ago
         NSString *timeString = self.postArray[indexPath.row][@"created_at"];
@@ -547,13 +534,14 @@
                                              // save the background
                                              UIImageView *imagView = (UIImageView *)[self.postTextView viewWithTag:30];
                                              if (imagView && self.composeBgImg) {
-                                                 self.cachedPostPicture[@(postId)] = @{@"img" : self.composeBgImg,
-                                                                                       @"blur" : @(self.composeBgImgBlurLvl)};
+                                                 [[MLApiClient client] sendPostPictureId:[responseJSON[@"id"] integerValue]
+                                                                                   image:imagView.image
+                                                                                 success:nil
+                                                                                 failure:nil];
                                                  dispatch_async(dispatch_get_main_queue(), ^{
                                                      [imagView removeFromSuperview];
-                                                     // remove gesture recognizer on postTextView
+                                                     // TODO: remove gesture recognizer on postTextView
                                                  });
-                                                 // TODO: should post to backend
                                              }
                                          }
                                          [self loadPosts];

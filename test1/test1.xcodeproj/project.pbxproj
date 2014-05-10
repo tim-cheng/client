@@ -55,6 +55,7 @@
 		281DEAEB18F52BAC00119DB6 /* sherry.png in Resources */ = {isa = PBXBuildFile; fileRef = 281DEAEA18F52BAC00119DB6 /* sherry.png */; };
 		281DEAF118F9B65600119DB6 /* ScoreFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281DEAF018F9B65600119DB6 /* ScoreFeedViewController.m */; };
 		286AD8B4191B4E620026CDFB /* return_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AD8B3191B4E620026CDFB /* return_64.png */; };
+		286AD8B7191EC6900026CDFB /* MLPostInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 286AD8B6191EC6900026CDFB /* MLPostInfo.m */; };
 		288FB5B618E1EA8300214DC5 /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */; };
 		288FB5B718E1EA8300214DC5 /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 288FB5B518E1EA8300214DC5 /* NSDateTimeAgo.bundle */; };
 		288FB5C018E2905A00214DC5 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5BF18E2905A00214DC5 /* ProfileViewController.m */; };
@@ -172,6 +173,8 @@
 		281DEAEF18F9B65500119DB6 /* ScoreFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreFeedViewController.h; sourceTree = "<group>"; };
 		281DEAF018F9B65600119DB6 /* ScoreFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreFeedViewController.m; sourceTree = "<group>"; };
 		286AD8B3191B4E620026CDFB /* return_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = return_64.png; sourceTree = "<group>"; };
+		286AD8B5191EC6900026CDFB /* MLPostInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPostInfo.h; sourceTree = "<group>"; };
+		286AD8B6191EC6900026CDFB /* MLPostInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPostInfo.m; sourceTree = "<group>"; };
 		288FB5B318E1EA8300214DC5 /* NSDate+TimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgo.h"; sourceTree = "<group>"; };
 		288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeAgo.m"; sourceTree = "<group>"; };
 		288FB5B518E1EA8300214DC5 /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
@@ -442,6 +445,8 @@
 				28080FA619161C7100FE8EF2 /* MLApiClient.m */,
 				28080FAA1916E4A100FE8EF2 /* MLUserInfo.h */,
 				28080FAB1916E4A200FE8EF2 /* MLUserInfo.m */,
+				286AD8B5191EC6900026CDFB /* MLPostInfo.h */,
+				286AD8B6191EC6900026CDFB /* MLPostInfo.m */,
 			);
 			path = test1;
 			sourceTree = "<group>";
@@ -640,6 +645,7 @@
 				28BE125A18EE977100077233 /* EmojiPickerViewController.m in Sources */,
 				28C7AE9218DE059F004F485D /* StatusUpdateViewController.m in Sources */,
 				288FB5F718E68E6300214DC5 /* ConnectViewController.m in Sources */,
+				286AD8B7191EC6900026CDFB /* MLPostInfo.m in Sources */,
 				2808BA5B18E881B100CC64B7 /* InfiniteScrollPicker.m in Sources */,
 				281DEAE918F525E800119DB6 /* LeaderboardViewController.m in Sources */,
 				2819F42718F13170008DB3F6 /* ComposePostViewController.m in Sources */,
