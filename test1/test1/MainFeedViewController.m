@@ -36,6 +36,8 @@
 @property (strong, nonatomic) IBOutlet UIView *composeView;
 @property (strong, nonatomic) IBOutlet UIButton *composeCameraButton;
 @property (strong, nonatomic) IBOutlet UIButton *composeswitchButton;
+@property (strong, nonatomic) UIImage *composeBgImg;
+@property (assign, nonatomic) NSInteger composeBgImgBlurLvl;
 
 @property (strong, nonatomic) IBOutlet UITableView *commentFeedView;
 @property (strong, nonatomic) IBOutlet UITextField *commentField;
@@ -239,12 +241,31 @@
 }
 
 - (void) SwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    if ( sender.direction == UISwipeGestureRecognizerDirectionRight ){
+    if (sender.direction == UISwipeGestureRecognizerDirectionRight){
         NSLog(@" *** WRITE CODE FOR SWIPE RIGHT ***");
         UITextView *textView = (UITextView *)sender.view;
         UIImageView *imageView = (UIImageView *)[textView viewWithTag:30];
         if (imageView) {
-            imageView.image = [imageView.image applyBlurWithRadius:2 tintColor:[UIColor colorWithWhite:0.2 alpha:0.2] saturationDeltaFactor:1.8 maskImage:nil];
+            self.composeBgImgBlurLvl++;
+            imageView.image = [self.composeBgImg applyBlurWithRadius:2
+                                                     iterationsCount:self.composeBgImgBlurLvl
+                                                           tintColor:[UIColor colorWithWhite:0.2 alpha:0.2]
+                                               saturationDeltaFactor:1.8
+                                                           maskImage:nil];
+        }
+    } else if (sender.direction == UISwipeGestureRecognizerDirectionLeft) {
+        NSLog(@" *** WRITE CODE FOR SWIPE LEFT ***");
+        if (self.composeBgImgBlurLvl > 0) {
+            UITextView *textView = (UITextView *)sender.view;
+            UIImageView *imageView = (UIImageView *)[textView viewWithTag:30];
+            if (imageView) {
+                self.composeBgImgBlurLvl--;
+                imageView.image = [self.composeBgImg applyBlurWithRadius:2
+                                                         iterationsCount:self.composeBgImgBlurLvl
+                                                               tintColor:[UIColor colorWithWhite:0.2 alpha:0.2]
+                                                   saturationDeltaFactor:1.8
+                                                               maskImage:nil];
+            }
         }
     }
 }
@@ -292,8 +313,19 @@
         }
 
         // add background
-        if (self.cachedPostPicture[@(postId)]) {
-            UIImageView *imageView = [[UIImageView alloc] initWithImage:self.cachedPostPicture[@(postId)]];
+        NSDictionary *cachedPostPic = self.cachedPostPicture[@(postId)];
+        if (cachedPostPic) {
+            UIImage *postPic;
+            if ([cachedPostPic[@"blur"] integerValue] == 0) {
+                postPic = cachedPostPic[@"img"];
+            } else {
+                postPic = [cachedPostPic[@"img"] applyBlurWithRadius:2
+                                                     iterationsCount:[cachedPostPic[@"blur"] integerValue]
+                                                           tintColor:[UIColor colorWithWhite:0.2 alpha:0.2]
+                                               saturationDeltaFactor:1.8
+                                                           maskImage:nil];
+            }
+            UIImageView *imageView = [[UIImageView alloc] initWithImage:postPic];
             imageView.tag = 30;
             [cell.contentView addSubview:imageView ];
             [cell.contentView sendSubviewToBack:imageView ];
@@ -455,15 +487,26 @@
     [self dismissModalViewControllerAnimated:YES];
     UIGraphicsEndImageContext();
     
+    self.composeBgImg = newImage;
+    self.composeBgImgBlurLvl = 0;
+    
     UIImageView *imageView = [[UIImageView alloc] initWithImage:newImage];
     imageView.tag = 30;
     [self.postTextView addSubview:imageView ];
     [self.postTextView sendSubviewToBack:imageView ];
-    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(SwipeRecognizer:)];
-    recognizer.direction = UISwipeGestureRecognizerDirectionRight;
-    recognizer.numberOfTouchesRequired = 1;
-    recognizer.delegate = self;
-    [self.postTextView addGestureRecognizer:recognizer];
+    
+    UISwipeGestureRecognizer *recognizerR = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(SwipeRecognizer:)];
+    recognizerR.direction = UISwipeGestureRecognizerDirectionRight;
+    recognizerR.numberOfTouchesRequired = 1;
+    recognizerR.delegate = self;
+    [self.postTextView addGestureRecognizer:recognizerR];
+
+    UISwipeGestureRecognizer *recognizerL = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(SwipeRecognizer:)];
+    recognizerL.direction = UISwipeGestureRecognizerDirectionLeft;
+    recognizerL.numberOfTouchesRequired = 1;
+    recognizerL.delegate = self;
+    [self.postTextView addGestureRecognizer:recognizerL];
+
 }
 
 #pragma mark - UIGestureRecognizerDelegate
@@ -503,8 +546,13 @@
                                          if (postId > 0) {
                                              // save the background
                                              UIImageView *imagView = (UIImageView *)[self.postTextView viewWithTag:30];
-                                             if (imagView && imagView.image) {
-                                                 self.cachedPostPicture[@(postId)] = imagView.image;
+                                             if (imagView && self.composeBgImg) {
+                                                 self.cachedPostPicture[@(postId)] = @{@"img" : self.composeBgImg,
+                                                                                       @"blur" : @(self.composeBgImgBlurLvl)};
+                                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                                     [imagView removeFromSuperview];
+                                                     // remove gesture recognizer on postTextView
+                                                 });
                                                  // TODO: should post to backend
                                              }
                                          }
