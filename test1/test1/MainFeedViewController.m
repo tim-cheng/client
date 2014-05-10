@@ -13,7 +13,12 @@
 #import "UIImage+ImageEffects.h"
 
 
-@interface MainFeedViewController () <UITableViewDataSource, UITextViewDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
+@interface MainFeedViewController () <UITableViewDataSource,
+                                      UITextViewDelegate,
+                                      UITextFieldDelegate,
+                                      UIImagePickerControllerDelegate,
+                                      UINavigationControllerDelegate,
+                                      UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) NSMutableDictionary *cachedPostPicture;
 
@@ -21,23 +26,22 @@
 @property (strong, nonatomic) NSMutableArray *commentArray;
 
 @property (strong, nonatomic) IBOutlet UIView *headerView;
-@property (strong, nonatomic) IBOutlet UITableView *mainFeedView;
-@property (strong, nonatomic) IBOutlet UIView *composeView;
-@property (strong, nonatomic) IBOutlet UITextView *postTextView;
-
+@property (strong, nonatomic) IBOutlet UIImageView *profileImage;
 @property (strong, nonatomic) IBOutlet UILabel *headerName;
 @property (strong, nonatomic) IBOutlet UILabel *headerConnections;
 
-@property (strong, nonatomic) NSDateFormatter *myFormatter;
+@property (strong, nonatomic) IBOutlet UITableView *mainFeedView;
+@property (strong, nonatomic) IBOutlet UITextView *postTextView;
+
+@property (strong, nonatomic) IBOutlet UIView *composeView;
+@property (strong, nonatomic) IBOutlet UIButton *composeCameraButton;
+@property (strong, nonatomic) IBOutlet UIButton *composeswitchButton;
 
 @property (strong, nonatomic) IBOutlet UITableView *commentFeedView;
 @property (strong, nonatomic) IBOutlet UITextField *commentField;
 @property (assign, nonatomic) NSInteger commentPostId;
 
-@property (strong, nonatomic) IBOutlet UIButton *composeCameraButton;
-@property (strong, nonatomic) IBOutlet UIButton *composeswitchButton;
-
-@property (strong, nonatomic) IBOutlet UIImageView *profileImage;
+@property (strong, nonatomic) NSDateFormatter *myFormatter;
 
 - (IBAction)compose:(id)sender;
 - (IBAction)composeSelectImage:(id)sender;
@@ -180,17 +184,7 @@
                               }];
 }
 
-
-#pragma mark UITableViewDataSource
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if (tableView == self.mainFeedView) {
-        return [self.postArray count];
-    } else {
-        return [self.commentArray count];
-    }
-}
+#pragma mark - GestureRecognizer
 
 - (void)tapOnComment:(UITapGestureRecognizer *)gest
 {
@@ -221,7 +215,7 @@
             [UIApplication sharedApplication].statusBarHidden = YES;
         });
     }
-
+    
 }
 
 - (void)tapOnStar:(UITapGestureRecognizer *)gest
@@ -236,12 +230,34 @@
     [[MLApiClient client] setStarFromId: kApiClientUserSelf
                                  postId:postId
                                  enable:enable
-                                 success:^(NSHTTPURLResponse *response, id responseJSON) {
-                                     NSLog(@"!!!!! add star succeeded!!!!! ");
-                                     [self loadPosts];
-                                 } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
-                                     NSLog(@"!!!!! add star failed !!!!!! ");
-                                 }];
+                                success:^(NSHTTPURLResponse *response, id responseJSON) {
+                                    NSLog(@"!!!!! add star succeeded!!!!! ");
+                                    [self loadPosts];
+                                } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+                                    NSLog(@"!!!!! add star failed !!!!!! ");
+                                }];
+}
+
+- (void) SwipeRecognizer:(UISwipeGestureRecognizer *)sender {
+    if ( sender.direction == UISwipeGestureRecognizerDirectionRight ){
+        NSLog(@" *** WRITE CODE FOR SWIPE RIGHT ***");
+        UITextView *textView = (UITextView *)sender.view;
+        UIImageView *imageView = (UIImageView *)[textView viewWithTag:30];
+        if (imageView) {
+            imageView.image = [imageView.image applyBlurWithRadius:2 tintColor:[UIColor colorWithWhite:0.2 alpha:0.2] saturationDeltaFactor:1.8 maskImage:nil];
+        }
+    }
+}
+
+#pragma mark - UITableViewDataSource
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (tableView == self.mainFeedView) {
+        return [self.postArray count];
+    } else {
+        return [self.commentArray count];
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -380,7 +396,7 @@
     }
 }
 
-#pragma mark UITextFieldDelgate
+#pragma mark - UITextFieldDelgate
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     CGRect newFrame = self.commentFeedView.frame;
@@ -414,7 +430,7 @@
     return YES;
 }
 
-#pragma mark UITextViewDelgate
+#pragma mark - UITextViewDelgate
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
@@ -426,7 +442,7 @@
     }
 }
 
-#pragma mark UIImagePickerControllerDelegate
+#pragma mark - UIImagePickerControllerDelegate
 
 - (void) imagePickerController:(UIImagePickerController *)picker
          didFinishPickingImage:(UIImage *)image
@@ -450,7 +466,7 @@
     [self.postTextView addGestureRecognizer:recognizer];
 }
 
-#pragma mark UIGestureRecognizerDelegate
+#pragma mark - UIGestureRecognizerDelegate
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     if ([touch.view isKindOfClass:[UIView class]])
     {
@@ -533,6 +549,7 @@
     });
 }
 
+#pragma mark - Observer
 
 // http://stackoverflow.com/questions/22013768/center-the-text-in-a-uitextview-vertical-and-horizontal-align
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -542,16 +559,5 @@
     txtview.contentOffset = (CGPoint){.x = 0, .y = -topoffset};
 }
 
-
-- (void) SwipeRecognizer:(UISwipeGestureRecognizer *)sender {
-    if ( sender.direction == UISwipeGestureRecognizerDirectionRight ){
-        NSLog(@" *** WRITE CODE FOR SWIPE RIGHT ***");
-        UITextView *textView = (UITextView *)sender.view;
-        UIImageView *imageView = (UIImageView *)[textView viewWithTag:30];
-        if (imageView) {
-            imageView.image = [imageView.image applyBlurWithRadius:2 tintColor:[UIColor colorWithWhite:0.2 alpha:0.2] saturationDeltaFactor:1.8 maskImage:nil];
-        }
-    }
-}
 
 @end
