@@ -47,7 +47,7 @@
 - (IBAction)compose:(id)sender;
 - (IBAction)composeSelectImage:(id)sender;
 - (IBAction)composeShuffleBackground:(id)sender;
-- (IBAction)closeComment:(id)sender;
+- (IBAction)closeComment:(UIButton *)button;
 
 @end
 
@@ -182,36 +182,55 @@
 
 #pragma mark - GestureRecognizer
 
+- (void)toggleComment:(NSInteger)postId cell:(UITableViewCell *)cell open:(BOOL)open
+{
+    if (open) {
+        NSIndexPath *indexPath = [self.mainFeedView indexPathForCell:cell];
+        if (self.commentFeedView.hidden) {
+            self.commentPostId = postId;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIButton *closeButton = (UIButton *)[cell.contentView viewWithTag:18];
+                closeButton.hidden = NO;
+                
+                self.headerView.hidden = YES;
+                CGRect newFrame = self.mainFeedView.frame;
+                newFrame.origin.y = 0;
+                self.mainFeedView.frame = newFrame;
+                [self.mainFeedView scrollToRowAtIndexPath:indexPath
+                                         atScrollPosition:UITableViewScrollPositionTop
+                                                 animated:NO];
+                self.mainFeedView.scrollEnabled = NO;
+                self.commentFeedView.hidden = NO;
+                self.commentFeedView.dataSource = self;
+                NSLog(@"post id = %d\n", self.commentPostId);
+                [self loadCommentsForPostId:self.commentPostId];
+                [UIApplication sharedApplication].statusBarHidden = YES;
+            });
+        }
+    } else {
+        self.commentPostId = 0;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.headerView.hidden = NO;
+            CGRect newFrame = self.mainFeedView.frame;
+            newFrame.origin.y = 68;
+            //                newFrame.size.height = 520;
+            self.mainFeedView.frame = newFrame;
+            self.mainFeedView.scrollEnabled = YES;
+            self.commentFeedView.hidden = YES;
+            self.commentFeedView.dataSource = nil;
+            [self.commentField resignFirstResponder];
+            [self loadPosts];
+            [UIApplication sharedApplication].statusBarHidden = NO;
+        });
+    }
+}
+
 - (void)tapOnComment:(UITapGestureRecognizer *)gest
 {
     UIImageView *img = (UIImageView*)gest.view;
     NSInteger postId = [img superview].tag - 1000;
     UITableViewCell *cell = (UITableViewCell*)[[[img superview] superview] superview];
-    NSIndexPath *indexPath = [self.mainFeedView indexPathForCell:cell];
-    
-    if (self.commentFeedView.hidden) {
-        self.commentPostId = postId;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIButton *closeButton = (UIButton *)[cell.contentView viewWithTag:18];
-            closeButton.hidden = NO;
-            
-            self.headerView.hidden = YES;
-            CGRect newFrame = self.mainFeedView.frame;
-            newFrame.origin.y = 0;
-            //                newFrame.size.height = 272;
-            self.mainFeedView.frame = newFrame;
-            [self.mainFeedView scrollToRowAtIndexPath:indexPath
-                                     atScrollPosition:UITableViewScrollPositionTop
-                                             animated:NO];
-            self.mainFeedView.scrollEnabled = NO;
-            self.commentFeedView.hidden = NO;
-            self.commentFeedView.dataSource = self;
-            NSLog(@"post id = %d\n", self.commentPostId);
-            [self loadCommentsForPostId:self.commentPostId];
-            [UIApplication sharedApplication].statusBarHidden = YES;
-        });
-    }
-    
+    [self toggleComment:postId cell:cell open:YES];
 }
 
 - (void)tapOnStar:(UITapGestureRecognizer *)gest
@@ -454,6 +473,9 @@
         textView.text = @"";
         return YES;
     } else {
+        NSInteger postId = [textView superview].tag - 1000;
+        UITableViewCell *cell = (UITableViewCell*)[[[textView superview] superview] superview];
+        [self toggleComment:postId cell:cell open:(self.commentPostId == 0)];
         return NO;
     }
 }
@@ -551,20 +573,7 @@
 - (IBAction)closeComment:(UIButton *)button
 {
     button.hidden = YES;
-    self.commentPostId = 0;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.headerView.hidden = NO;
-        CGRect newFrame = self.mainFeedView.frame;
-        newFrame.origin.y = 68;
-        //                newFrame.size.height = 520;
-        self.mainFeedView.frame = newFrame;
-        self.mainFeedView.scrollEnabled = YES;
-        self.commentFeedView.hidden = YES;
-        self.commentFeedView.dataSource = nil;
-        [self.commentField resignFirstResponder];
-        [self loadPosts];
-        [UIApplication sharedApplication].statusBarHidden = NO;
-    });
+    [self toggleComment:0 cell:nil open:NO];
 }
 
 #pragma mark - Observer
