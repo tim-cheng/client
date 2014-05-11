@@ -331,13 +331,6 @@
         userImage.layer.cornerRadius = 20;
         userImage.clipsToBounds = YES;
 
-        UITextView *postTextView = (UITextView *)[cell.contentView viewWithTag:10];
-        if (postTextView) {
-            postTextView.text = self.postArray[indexPath.row][@"body"];
-            [postTextView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
-            postTextView.delegate = self;
-            [self observeValueForKeyPath:nil ofObject:postTextView change:nil context:nil];
-        }
 
         // add background
         UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:30];
@@ -353,7 +346,15 @@
             [cell.contentView addSubview:imageView ];
             [cell.contentView sendSubviewToBack:imageView ];
         }
-        
+
+        UITextView *postTextView = (UITextView *)[cell.contentView viewWithTag:10];
+        if (postTextView) {
+            postTextView.text = self.postArray[indexPath.row][@"body"];
+            //[postTextView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
+            postTextView.delegate = self;
+            [self observeValueForKeyPath:nil ofObject:postTextView change:nil context:nil];
+        }
+
         // set time ago
         NSString *timeString = self.postArray[indexPath.row][@"created_at"];
         NSString *displayTime = @"long ago";
