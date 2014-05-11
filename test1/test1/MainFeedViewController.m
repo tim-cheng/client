@@ -269,7 +269,7 @@
     if (sender.direction == UISwipeGestureRecognizerDirectionRight){
         NSLog(@" *** WRITE CODE FOR SWIPE RIGHT ***");
         UITextView *textView = (UITextView *)sender.view;
-        UIImageView *imageView = (UIImageView *)[textView viewWithTag:30];
+        UIImageView *imageView = (UIImageView *)[[textView superview] viewWithTag:30];
         if (imageView) {
             self.composeBgImgBlurLvl++;
             imageView.image = [self.composeBgImg applyBlurWithRadius:2
@@ -282,7 +282,7 @@
         NSLog(@" *** WRITE CODE FOR SWIPE LEFT ***");
         if (self.composeBgImgBlurLvl > 0) {
             UITextView *textView = (UITextView *)sender.view;
-            UIImageView *imageView = (UIImageView *)[textView viewWithTag:30];
+            UIImageView *imageView = (UIImageView *)[[textView superview] viewWithTag:30];
             if (imageView) {
                 self.composeBgImgBlurLvl--;
                 imageView.image = [self.composeBgImg applyBlurWithRadius:2
@@ -504,7 +504,7 @@
                    editingInfo:(NSDictionary *)editingInfo
 {
     // remove originial
-    UIImageView *imageView = (UIImageView *)[self.postTextView viewWithTag:30];
+    UIImageView *imageView = (UIImageView *)[[self.postTextView superview] viewWithTag:30];
     if (imageView) {
         [imageView removeFromSuperview];
     }
@@ -536,8 +536,9 @@
     
     imageView = [[UIImageView alloc] initWithImage:newImage];
     imageView.tag = 30;
-    [self.postTextView addSubview:imageView ];
-    [self.postTextView sendSubviewToBack:imageView ];
+    [[self.postTextView superview] insertSubview:imageView belowSubview:self.postTextView];
+    self.postTextView.backgroundColor = [UIColor clearColor];
+    [self observeValueForKeyPath:nil ofObject:self.postTextView change:nil context:nil];
     
     UISwipeGestureRecognizer *recognizerR = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(SwipeRecognizer:)];
     recognizerR.direction = UISwipeGestureRecognizerDirectionRight;
@@ -579,7 +580,7 @@
         }
         [self.postTextView resignFirstResponder];
         
-        UIImageView *imagView = (UIImageView *)[self.postTextView viewWithTag:30];
+        UIImageView *imagView = (UIImageView *)[[self.postTextView superview] viewWithTag:30];
         [[MLPostInfo instance] postInfoFromId:kApiClientUserSelf
                                          body:txt
                                         image:imagView.image
@@ -590,6 +591,7 @@
             icon.imageView.image = [UIImage imageNamed:@"compose2_64.png"];
             self.postTextView.text = @"Share what's new";
             [imagView removeFromSuperview];
+            self.postTextView.backgroundColor = [UIColor colorWithRed:0.0991371 green:0.310455 blue:0.515286 alpha:1.0];
         });
     }
     
@@ -618,7 +620,7 @@
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     UITextView *txtview = object;
     CGFloat topoffset = ([txtview bounds].size.height - [txtview contentSize].height * [txtview zoomScale])/2.0;
-    NSLog(@"!!!bounds =%f, %f", [txtview bounds].size.width, [txtview bounds].size.height);
+    NSLog(@"!!!bounds =%f, %f", [txtview contentSize].width, [txtview contentSize].height);
     topoffset = ( topoffset < 0.0 ? 0.0 : topoffset );
     txtview.contentOffset = (CGPoint){.x = 0, .y = -topoffset};
 }
