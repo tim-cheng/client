@@ -416,7 +416,7 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     CGRect newFrame = self.commentFeedView.frame;
-    newFrame.size.height = 80;
+    newFrame.size.height = 32;
     self.commentFeedView.frame = newFrame;
     return YES;
 }
@@ -425,7 +425,7 @@
     NSLog(@"should return........");
     [textField resignFirstResponder];
     CGRect newFrame = self.commentFeedView.frame;
-    newFrame.size.height = 272;
+    newFrame.size.height = 248;
     self.commentFeedView.frame = newFrame;
 
     // post comments
