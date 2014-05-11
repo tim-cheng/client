@@ -349,10 +349,12 @@
 
         UITextView *postTextView = (UITextView *)[cell.contentView viewWithTag:10];
         if (postTextView) {
-            postTextView.text = self.postArray[indexPath.row][@"body"];
-            //[postTextView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
-            postTextView.delegate = self;
-            [self observeValueForKeyPath:nil ofObject:postTextView change:nil context:nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                postTextView.text = self.postArray[indexPath.row][@"body"];
+                //[postTextView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
+                postTextView.delegate = self;
+                [self observeValueForKeyPath:nil ofObject:postTextView change:nil context:nil];
+            });
         }
 
         // set time ago
@@ -623,9 +625,12 @@
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     UITextView *txtview = object;
     CGFloat topoffset = ([txtview bounds].size.height - [txtview contentSize].height * [txtview zoomScale])/2.0;
-    //NSLog(@"!!!bounds =%f, %f", [txtview contentSize].width, [txtview contentSize].height);
+    //NSLog(@"!!!bounds [%@] =%f, %f", txtview.text, [txtview contentSize].width, [txtview contentSize].height);
     topoffset = ( topoffset < 0.0 ? 0.0 : topoffset );
-    txtview.contentOffset = (CGPoint){.x = 0, .y = -topoffset};
+    //NSLog(@"topoffset=%f", topoffset);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        txtview.contentOffset = (CGPoint){.x = 0, .y = -topoffset};
+    });
 }
 
 
