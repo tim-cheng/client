@@ -229,7 +229,7 @@
     UIImageView *img = (UIImageView*)gest.view;
     NSInteger postId = [img superview].tag - 1000;
     UITableViewCell *cell = (UITableViewCell*)[[[img superview] superview] superview];
-    [self toggleComment:postId cell:cell open:YES];
+    [self toggleComment:postId cell:cell open:(self.commentPostId == 0)];
 }
 
 - (void)tapOnStar:(UITapGestureRecognizer *)gest
