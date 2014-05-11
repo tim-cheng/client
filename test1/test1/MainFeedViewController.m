@@ -488,15 +488,16 @@
     CGRect newRect;
     if (image.size.width < image.size.height) {
         float offset = (image.size.height - image.size.width) / 2;
-        newRect = CGRectMake(0, offset, image.size.width, image.size.width);
+        // note, CGImage is not rotated
+        newRect = CGRectMake(offset, 0, image.size.width, image.size.width);
     } else {
         float offset = (image.size.width - image.size.height) / 2;
-        newRect = CGRectMake(offset, 0, image.size.width, image.size.width);
+        newRect = CGRectMake(offset, 0, image.size.height, image.size.height);
     }
     CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], newRect);
-    UIImage *cropImage = [UIImage imageWithCGImage:imageRef];
+    UIImage *cropImage = [UIImage imageWithCGImage:imageRef scale:image.scale orientation:image.imageOrientation];
     CGImageRelease(imageRef);
-    
+
     // scale
     CGSize newSize = self.postTextView.frame.size;
     UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
