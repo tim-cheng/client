@@ -498,6 +498,12 @@
          didFinishPickingImage:(UIImage *)image
                    editingInfo:(NSDictionary *)editingInfo
 {
+    // remove originial
+    UIImageView *imageView = (UIImageView *)[self.postTextView viewWithTag:30];
+    if (imageView) {
+        [imageView removeFromSuperview];
+    }
+
     // crop
     CGRect newRect;
     if (image.size.width < image.size.height) {
@@ -523,7 +529,7 @@
     self.composeBgImg = newImage;
     self.composeBgImgBlurLvl = 0;
     
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:newImage];
+    imageView = [[UIImageView alloc] initWithImage:newImage];
     imageView.tag = 30;
     [self.postTextView addSubview:imageView ];
     [self.postTextView sendSubviewToBack:imageView ];
