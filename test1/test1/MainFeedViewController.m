@@ -487,6 +487,16 @@
     }
 }
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if (textView == self.postTextView) {
+        if([text isEqualToString:@"\n"]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void) imagePickerController:(UIImagePickerController *)picker
