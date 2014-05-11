@@ -98,6 +98,8 @@
     self.profileImage.layer.cornerRadius = 20;
     self.profileImage.clipsToBounds = YES;
     
+    self.mainFeedView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     [self loadPostsAndScroll:NO];
 }
 
