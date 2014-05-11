@@ -98,7 +98,7 @@
     self.profileImage.layer.cornerRadius = 20;
     self.profileImage.clipsToBounds = YES;
     
-    [self loadPosts];
+    [self loadPostsAndScroll:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -107,7 +107,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)loadPosts
+- (void)loadPostsAndScroll:(BOOL)needScroll
 {
     [[MLPostInfo instance] loadPostInfoFromId:[MLApiClient client].userId
                                        degree:1
@@ -131,8 +131,10 @@
                                               }
                                               [self.mainFeedView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
                                               [self.mainFeedView endUpdates];
-                                              // scroll to top
-                                              [self.mainFeedView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+                                              if (needScroll) {
+                                                  // scroll to top
+                                                  [self.mainFeedView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+                                              }
                                           });
                                       }];
 }
@@ -189,9 +191,6 @@
         if (self.commentFeedView.hidden) {
             self.commentPostId = postId;
             dispatch_async(dispatch_get_main_queue(), ^{
-                UIButton *closeButton = (UIButton *)[cell.contentView viewWithTag:18];
-                closeButton.hidden = NO;
-                
                 self.headerView.hidden = YES;
                 CGRect newFrame = self.mainFeedView.frame;
                 newFrame.origin.y = 0;
@@ -219,7 +218,7 @@
             self.commentFeedView.hidden = YES;
             self.commentFeedView.dataSource = nil;
             [self.commentField resignFirstResponder];
-            [self loadPosts];
+            [self loadPostsAndScroll:NO];
             [UIApplication sharedApplication].statusBarHidden = NO;
         });
     }
@@ -241,13 +240,12 @@
     BOOL enable = img.highlighted ? NO : YES;
     
     NSLog(@"tap on star: %d", enable);
-    
     [[MLApiClient client] setStarFromId: kApiClientUserSelf
                                  postId:postId
                                  enable:enable
                                 success:^(NSHTTPURLResponse *response, id responseJSON) {
                                     NSLog(@"!!!!! add star succeeded!!!!! ");
-                                    [self loadPosts];
+                                    [self loadPostsAndScroll:NO];
                                 } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
                                     NSLog(@"!!!!! add star failed !!!!!! ");
                                 }];
@@ -486,9 +484,23 @@
          didFinishPickingImage:(UIImage *)image
                    editingInfo:(NSDictionary *)editingInfo
 {
+    // crop
+    CGRect newRect;
+    if (image.size.width < image.size.height) {
+        float offset = (image.size.height - image.size.width) / 2;
+        newRect = CGRectMake(0, offset, image.size.width, image.size.width);
+    } else {
+        float offset = (image.size.width - image.size.height) / 2;
+        newRect = CGRectMake(offset, 0, image.size.width, image.size.width);
+    }
+    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], newRect);
+    UIImage *cropImage = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    
+    // scale
     CGSize newSize = self.postTextView.frame.size;
     UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
-    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    [cropImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     [self dismissModalViewControllerAnimated:YES];
     UIGraphicsEndImageContext();
@@ -546,7 +558,7 @@
                                          body:txt
                                         image:imagView.image
                                       success:^(id responseJSON) {
-                                          [self loadPosts];
+                                          [self loadPostsAndScroll:YES];
                                       }];
         dispatch_async(dispatch_get_main_queue(), ^{
             icon.imageView.image = [UIImage imageNamed:@"compose2_64.png"];
@@ -572,8 +584,6 @@
 
 - (IBAction)closeComment:(UIButton *)button
 {
-    button.hidden = YES;
-    [self toggleComment:0 cell:nil open:NO];
 }
 
 #pragma mark - Observer
