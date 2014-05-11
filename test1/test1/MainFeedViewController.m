@@ -132,6 +132,7 @@
                                                   [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
                                               }
                                               [self.mainFeedView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+                                              
                                               [self.mainFeedView endUpdates];
                                               if (needScroll) {
                                                   // scroll to top
@@ -335,6 +336,7 @@
             postTextView.text = self.postArray[indexPath.row][@"body"];
             [postTextView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
             postTextView.delegate = self;
+            [self observeValueForKeyPath:nil ofObject:postTextView change:nil context:nil];
         }
 
         // add background
