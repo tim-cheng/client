@@ -622,7 +622,7 @@
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     UITextView *txtview = object;
     CGFloat topoffset = ([txtview bounds].size.height - [txtview contentSize].height * [txtview zoomScale])/2.0;
-    NSLog(@"!!!bounds =%f, %f", [txtview contentSize].width, [txtview contentSize].height);
+    //NSLog(@"!!!bounds =%f, %f", [txtview contentSize].width, [txtview contentSize].height);
     topoffset = ( topoffset < 0.0 ? 0.0 : topoffset );
     txtview.contentOffset = (CGPoint){.x = 0, .y = -topoffset};
 }
