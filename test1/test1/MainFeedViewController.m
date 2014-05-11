@@ -446,19 +446,14 @@
 #pragma mark - UITextFieldDelgate
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    CGRect newFrame = self.commentFeedView.frame;
-    newFrame.size.height = 32;
-    self.commentFeedView.frame = newFrame;
+    self.commentFeedView.contentInset = UIEdgeInsetsMake(0, 0, 216, 0);
     return YES;
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSLog(@"should return........");
     [textField resignFirstResponder];
-    CGRect newFrame = self.commentFeedView.frame;
-    newFrame.size.height = 248;
-    self.commentFeedView.frame = newFrame;
-
+    self.commentFeedView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     // post comments
     NSString *txt = textField.text;
     textField.text = @"";
@@ -613,6 +608,7 @@
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     UITextView *txtview = object;
     CGFloat topoffset = ([txtview bounds].size.height - [txtview contentSize].height * [txtview zoomScale])/2.0;
+    NSLog(@"!!!bounds =%f, %f", [txtview bounds].size.width, [txtview bounds].size.height);
     topoffset = ( topoffset < 0.0 ? 0.0 : topoffset );
     txtview.contentOffset = (CGPoint){.x = 0, .y = -topoffset};
 }
