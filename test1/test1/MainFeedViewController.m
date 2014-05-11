@@ -220,6 +220,18 @@
             [self.commentField resignFirstResponder];
             [self loadPostsAndScroll:NO];
             [UIApplication sharedApplication].statusBarHidden = NO;
+            // remove comments from commentfeedview
+            [self.commentFeedView beginUpdates];
+            NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+            if ([self.commentArray count] > 0) {
+                for (int i=0; i<[self.commentArray count]; i++) {
+                    [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                }
+                [self.commentFeedView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+                [self.commentArray removeAllObjects];
+                [indexPaths removeAllObjects];
+            }
+            [self.commentFeedView endUpdates];
         });
     }
 }
