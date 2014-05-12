@@ -34,10 +34,12 @@
 - (void) postInfoFromId:(NSInteger)userId
                    body:(NSString *)body
                   image:(UIImage *)image
+                bgColor:(UIColor *)bgColor
                 success:(MLPostInfoSuccess)callback
 {
     [[MLApiClient client] sendPostFromId:userId
                                     body:body
+                                 bgColor:bgColor
                                  success:^(NSHTTPURLResponse *response, id responseJSON) {
                                      int postId = [responseJSON[@"id"] intValue];
                                      if (image) {

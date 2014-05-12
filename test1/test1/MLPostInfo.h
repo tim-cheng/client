@@ -18,6 +18,7 @@ typedef void (^MLPostInfoSuccess)(id responseJSON);
 - (void) postInfoFromId:(NSInteger)userId
                    body:(NSString *)body
                   image:(UIImage *)image
+                bgColor:(UIColor *)bgColor
                 success:(MLPostInfoSuccess)callback;
 
 - (void) loadPostInfoFromId:(NSInteger)userId

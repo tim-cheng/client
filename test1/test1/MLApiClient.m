@@ -222,6 +222,7 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
 
 - (NSURLRequest *)sendPostFromId:(NSInteger)userId
                             body:(NSString *)body
+                         bgColor:(UIColor *)bgColor
                          success:(MLApiClientSuccess)successCallback
                          failure:(MLApiClientFailure)failureCallback
 {
@@ -232,7 +233,16 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:15.0f];
     
-    NSString *params = [NSString stringWithFormat:@"user_id=%d&body=%@", uid, [self urlEncode:body]];
+    CGFloat rf,gf,bf,af;
+    int r,g,b,a;
+    [bgColor getRed:&rf green:&gf blue: &bf alpha: &af];
+    r = (int)(255.0 * rf);
+    g = (int)(255.0 * gf);
+    b = (int)(255.0 * bf);
+    a = (int)(255.0 * af);
+    NSString *colorString = [NSString stringWithFormat:@"%02x%02x%02x%02x",r,g,b,a];
+    
+    NSString *params = [NSString stringWithFormat:@"user_id=%d&bg_color=%@&body=%@", uid, colorString, [self urlEncode:body]];
     NSData *postData = [params dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     
     request.HTTPMethod = @"POST";

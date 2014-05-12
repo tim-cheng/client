@@ -331,7 +331,6 @@
         userImage.layer.cornerRadius = 20;
         userImage.clipsToBounds = YES;
 
-
         // add background
         UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:30];
         if (imageView) {
@@ -355,6 +354,12 @@
                 postTextView.delegate = self;
                 [self observeValueForKeyPath:nil ofObject:postTextView change:nil context:nil];
             });
+        }
+        
+        // set post background color
+        NSString *bgColor = self.postArray[indexPath.row][@"bg_color"];
+        if (bgColor) {
+            cell.contentView.backgroundColor = [self stringToColor:bgColor];
         }
 
         // set time ago
@@ -589,6 +594,7 @@
         [[MLPostInfo instance] postInfoFromId:kApiClientUserSelf
                                          body:txt
                                         image:imagView.image
+                                      bgColor:self.postTextView.backgroundColor
                                       success:^(id responseJSON) {
                                           [self loadPostsAndScroll:YES];
                                       }];
@@ -613,6 +619,11 @@
 - (IBAction)composeShuffleBackground:(UIButton *)button
 {
     
+    CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
+    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
+    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
+    UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+    self.postTextView.backgroundColor = color;
 }
 
 - (IBAction)closeComment:(UIButton *)button
@@ -622,7 +633,8 @@
 #pragma mark - Observer
 
 // http://stackoverflow.com/questions/22013768/center-the-text-in-a-uitextview-vertical-and-horizontal-align
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
     UITextView *txtview = object;
     CGFloat topoffset = ([txtview bounds].size.height - [txtview contentSize].height * [txtview zoomScale])/2.0;
     //NSLog(@"!!!bounds [%@] =%f, %f", txtview.text, [txtview contentSize].width, [txtview contentSize].height);
@@ -632,6 +644,18 @@
         txtview.contentOffset = (CGPoint){.x = 0, .y = -topoffset};
     });
 }
+
+-(UIColor *)stringToColor:(NSString *)s
+{
+    int r,g,b,a;
+    sscanf([s UTF8String], "%02x%02x%02x%02x", &r, &g, &b, &a);
+    CGFloat rf = (CGFloat)r / 255.0f;
+    CGFloat gf = (CGFloat)g / 255.0f;
+    CGFloat bf = (CGFloat)b / 255.0f;
+    CGFloat af = (CGFloat)a / 255.0f;
+    return [UIColor colorWithRed:rf green:gf blue:bf alpha:af];
+}
+
 
 
 @end

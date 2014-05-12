@@ -55,6 +55,7 @@ typedef void (^MLApiClientFailure)(NSHTTPURLResponse *response, id responseJSON,
 
 - (NSURLRequest *)sendPostFromId:(NSInteger)userId
                             body:(NSString *)body
+                         bgColor:(UIColor *)bgColor
                          success:(MLApiClientSuccess)successCallback
                          failure:(MLApiClientFailure)failureCallback;
 
