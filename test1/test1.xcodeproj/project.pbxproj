@@ -40,6 +40,7 @@
 		2819F42B18F137B7008DB3F6 /* FB-f-Logo__white_50.png in Resources */ = {isa = PBXBuildFile; fileRef = 2819F42918F137B7008DB3F6 /* FB-f-Logo__white_50.png */; };
 		286AD8B4191B4E620026CDFB /* return_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AD8B3191B4E620026CDFB /* return_64.png */; };
 		286AD8B7191EC6900026CDFB /* MLPostInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 286AD8B6191EC6900026CDFB /* MLPostInfo.m */; };
+		28810B8919212E7D00F55B24 /* trash_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28810B8819212E7D00F55B24 /* trash_64.png */; };
 		288FB5B618E1EA8300214DC5 /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */; };
 		288FB5B718E1EA8300214DC5 /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 288FB5B518E1EA8300214DC5 /* NSDateTimeAgo.bundle */; };
 		288FB5FB18E742EC00214DC5 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288FB5FA18E742EC00214DC5 /* Social.framework */; };
@@ -131,6 +132,7 @@
 		286AD8B3191B4E620026CDFB /* return_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = return_64.png; sourceTree = "<group>"; };
 		286AD8B5191EC6900026CDFB /* MLPostInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPostInfo.h; sourceTree = "<group>"; };
 		286AD8B6191EC6900026CDFB /* MLPostInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPostInfo.m; sourceTree = "<group>"; };
+		28810B8819212E7D00F55B24 /* trash_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash_64.png; sourceTree = "<group>"; };
 		288FB5B318E1EA8300214DC5 /* NSDate+TimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgo.h"; sourceTree = "<group>"; };
 		288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeAgo.m"; sourceTree = "<group>"; };
 		288FB5B518E1EA8300214DC5 /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 		28C7AE8218DE059F004F485D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				28810B8819212E7D00F55B24 /* trash_64.png */,
 				286AD8B3191B4E620026CDFB /* return_64.png */,
 				28F00EAB191A1A2200DC2F42 /* compose2_64.png */,
 				28080FCA19183EF500FE8EF2 /* camera_64.png */,
@@ -492,6 +495,7 @@
 				28F00EAD191A1A2200DC2F42 /* compose2_64.png in Resources */,
 				28080FBC191833FC00FE8EF2 /* comment_off_24.png in Resources */,
 				28080FCD19183EF600FE8EF2 /* camera_64.png in Resources */,
+				28810B8919212E7D00F55B24 /* trash_64.png in Resources */,
 				286AD8B4191B4E620026CDFB /* return_64.png in Resources */,
 				280A68651904D2C700C2475D /* s4.png in Resources */,
 				28080FCF19183EF600FE8EF2 /* shuffle_64.png in Resources */,
