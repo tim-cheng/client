@@ -48,25 +48,15 @@
 		2819F41918F12562008DB3F6 /* RNGridMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 2819F41818F12562008DB3F6 /* RNGridMenu.m */; };
 		2819F41B18F1258A008DB3F6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2819F41A18F1258A008DB3F6 /* QuartzCore.framework */; };
 		2819F41D18F12595008DB3F6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2819F41C18F12595008DB3F6 /* Accelerate.framework */; };
-		2819F42718F13170008DB3F6 /* ComposePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2819F42618F13170008DB3F6 /* ComposePostViewController.m */; };
 		2819F42A18F137B7008DB3F6 /* FB-f-Logo__blue_50.png in Resources */ = {isa = PBXBuildFile; fileRef = 2819F42818F137B7008DB3F6 /* FB-f-Logo__blue_50.png */; };
 		2819F42B18F137B7008DB3F6 /* FB-f-Logo__white_50.png in Resources */ = {isa = PBXBuildFile; fileRef = 2819F42918F137B7008DB3F6 /* FB-f-Logo__white_50.png */; };
-		281DEAE918F525E800119DB6 /* LeaderboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281DEAE818F525E800119DB6 /* LeaderboardViewController.m */; };
 		281DEAEB18F52BAC00119DB6 /* sherry.png in Resources */ = {isa = PBXBuildFile; fileRef = 281DEAEA18F52BAC00119DB6 /* sherry.png */; };
-		281DEAF118F9B65600119DB6 /* ScoreFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281DEAF018F9B65600119DB6 /* ScoreFeedViewController.m */; };
 		286AD8B4191B4E620026CDFB /* return_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AD8B3191B4E620026CDFB /* return_64.png */; };
 		286AD8B7191EC6900026CDFB /* MLPostInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 286AD8B6191EC6900026CDFB /* MLPostInfo.m */; };
 		288FB5B618E1EA8300214DC5 /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */; };
 		288FB5B718E1EA8300214DC5 /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 288FB5B518E1EA8300214DC5 /* NSDateTimeAgo.bundle */; };
-		288FB5C018E2905A00214DC5 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5BF18E2905A00214DC5 /* ProfileViewController.m */; };
-		288FB5F418E6887100214DC5 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5F318E6887100214DC5 /* SignUpViewController.m */; };
-		288FB5F718E68E6300214DC5 /* ConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5F618E68E6300214DC5 /* ConnectViewController.m */; };
-		288FB5F918E742BA00214DC5 /* FirebaseSimpleLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288FB5F818E742BA00214DC5 /* FirebaseSimpleLogin.framework */; };
 		288FB5FB18E742EC00214DC5 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288FB5FA18E742EC00214DC5 /* Social.framework */; };
 		288FB5FD18E742F200214DC5 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288FB5FC18E742F200214DC5 /* Accounts.framework */; };
-		288FB60018E745EB00214DC5 /* DBClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5FF18E745EB00214DC5 /* DBClient.m */; };
-		288FB60318E7495E00214DC5 /* FBClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB60218E7495E00214DC5 /* FBClient.m */; };
-		28BE125A18EE977100077233 /* EmojiPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BE125918EE977100077233 /* EmojiPickerViewController.m */; };
 		28C3733C18DEB974007DCE38 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C3733B18DEB973007DCE38 /* SystemConfiguration.framework */; };
 		28C7AE7C18DE059F004F485D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C7AE7B18DE059F004F485D /* Foundation.framework */; };
 		28C7AE7E18DE059F004F485D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C7AE7D18DE059F004F485D /* CoreGraphics.framework */; };
@@ -75,7 +65,6 @@
 		28C7AE8818DE059F004F485D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C7AE8718DE059F004F485D /* main.m */; };
 		28C7AE8C18DE059F004F485D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C7AE8B18DE059F004F485D /* AppDelegate.m */; };
 		28C7AE8F18DE059F004F485D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28C7AE8D18DE059F004F485D /* Main.storyboard */; };
-		28C7AE9218DE059F004F485D /* StatusUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C7AE9118DE059F004F485D /* StatusUpdateViewController.m */; };
 		28C7AE9418DE059F004F485D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28C7AE9318DE059F004F485D /* Images.xcassets */; };
 		28C7AE9B18DE059F004F485D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C7AE9A18DE059F004F485D /* XCTest.framework */; };
 		28C7AE9C18DE059F004F485D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C7AE7B18DE059F004F485D /* Foundation.framework */; };
@@ -85,11 +74,9 @@
 		28E67A7518FBBDE2001F81E1 /* NewLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E67A7418FBBDE2001F81E1 /* NewLogInViewController.m */; };
 		28F00EAD191A1A2200DC2F42 /* compose2_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F00EAB191A1A2200DC2F42 /* compose2_64.png */; };
 		28F00EB0191A1C3900DC2F42 /* post_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F00EAF191A1C3900DC2F42 /* post_64.png */; };
-		28F1BBDF18E14DB300C59302 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F1BBDE18E14DB300C59302 /* Firebase.framework */; };
 		28F1BBE118E14DD000C59302 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F1BBE018E14DD000C59302 /* libstdc++.dylib */; };
 		28F1BBE318E14DDB00C59302 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F1BBE218E14DDB00C59302 /* libicucore.dylib */; };
 		28F1BBE518E14FDC00C59302 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F1BBE418E14FDC00C59302 /* FacebookSDK.framework */; };
-		28F1BBE818E1556700C59302 /* LoginUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F1BBE718E1556700C59302 /* LoginUIViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,36 +150,17 @@
 		2819F41818F12562008DB3F6 /* RNGridMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNGridMenu.m; sourceTree = "<group>"; };
 		2819F41A18F1258A008DB3F6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2819F41C18F12595008DB3F6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
-		2819F42518F13170008DB3F6 /* ComposePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposePostViewController.h; sourceTree = "<group>"; };
-		2819F42618F13170008DB3F6 /* ComposePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposePostViewController.m; sourceTree = "<group>"; };
 		2819F42818F137B7008DB3F6 /* FB-f-Logo__blue_50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FB-f-Logo__blue_50.png"; sourceTree = "<group>"; };
 		2819F42918F137B7008DB3F6 /* FB-f-Logo__white_50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FB-f-Logo__white_50.png"; sourceTree = "<group>"; };
-		281DEAE718F525E800119DB6 /* LeaderboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderboardViewController.h; sourceTree = "<group>"; };
-		281DEAE818F525E800119DB6 /* LeaderboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaderboardViewController.m; sourceTree = "<group>"; };
 		281DEAEA18F52BAC00119DB6 /* sherry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sherry.png; path = ../../../Desktop/sherry.png; sourceTree = "<group>"; };
-		281DEAEF18F9B65500119DB6 /* ScoreFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreFeedViewController.h; sourceTree = "<group>"; };
-		281DEAF018F9B65600119DB6 /* ScoreFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreFeedViewController.m; sourceTree = "<group>"; };
 		286AD8B3191B4E620026CDFB /* return_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = return_64.png; sourceTree = "<group>"; };
 		286AD8B5191EC6900026CDFB /* MLPostInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPostInfo.h; sourceTree = "<group>"; };
 		286AD8B6191EC6900026CDFB /* MLPostInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPostInfo.m; sourceTree = "<group>"; };
 		288FB5B318E1EA8300214DC5 /* NSDate+TimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgo.h"; sourceTree = "<group>"; };
 		288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeAgo.m"; sourceTree = "<group>"; };
 		288FB5B518E1EA8300214DC5 /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
-		288FB5BE18E2905A00214DC5 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
-		288FB5BF18E2905A00214DC5 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
-		288FB5F218E6887100214DC5 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
-		288FB5F318E6887100214DC5 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
-		288FB5F518E68E6300214DC5 /* ConnectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectViewController.h; sourceTree = "<group>"; };
-		288FB5F618E68E6300214DC5 /* ConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectViewController.m; sourceTree = "<group>"; };
-		288FB5F818E742BA00214DC5 /* FirebaseSimpleLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseSimpleLogin.framework; path = ../FirebaseSimpleLogin.framework; sourceTree = "<group>"; };
 		288FB5FA18E742EC00214DC5 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		288FB5FC18E742F200214DC5 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
-		288FB5FE18E745EB00214DC5 /* DBClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBClient.h; sourceTree = "<group>"; };
-		288FB5FF18E745EB00214DC5 /* DBClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBClient.m; sourceTree = "<group>"; };
-		288FB60118E7495E00214DC5 /* FBClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBClient.h; sourceTree = "<group>"; };
-		288FB60218E7495E00214DC5 /* FBClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBClient.m; sourceTree = "<group>"; };
-		28BE125818EE977100077233 /* EmojiPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiPickerViewController.h; sourceTree = "<group>"; };
-		28BE125918EE977100077233 /* EmojiPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiPickerViewController.m; sourceTree = "<group>"; };
 		28C3733B18DEB973007DCE38 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		28C3733D18DEBBDD007DCE38 /* NSStrinAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStrinAdditions.h; sourceTree = "<group>"; };
 		28C7AE7818DE059F004F485D /* test1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test1.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,8 +174,6 @@
 		28C7AE8A18DE059F004F485D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		28C7AE8B18DE059F004F485D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		28C7AE8E18DE059F004F485D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		28C7AE9018DE059F004F485D /* StatusUpdateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatusUpdateViewController.h; sourceTree = "<group>"; };
-		28C7AE9118DE059F004F485D /* StatusUpdateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StatusUpdateViewController.m; sourceTree = "<group>"; };
 		28C7AE9318DE059F004F485D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		28C7AE9918DE059F004F485D /* test1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = test1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		28C7AE9A18DE059F004F485D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -218,12 +184,9 @@
 		28E67A7418FBBDE2001F81E1 /* NewLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLogInViewController.m; sourceTree = "<group>"; };
 		28F00EAB191A1A2200DC2F42 /* compose2_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compose2_64.png; sourceTree = "<group>"; };
 		28F00EAF191A1C3900DC2F42 /* post_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = post_64.png; sourceTree = "<group>"; };
-		28F1BBDE18E14DB300C59302 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Firebase.framework; path = ../Firebase.framework; sourceTree = "<group>"; };
 		28F1BBE018E14DD000C59302 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		28F1BBE218E14DDB00C59302 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		28F1BBE418E14FDC00C59302 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
-		28F1BBE618E1556700C59302 /* LoginUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginUIViewController.h; sourceTree = "<group>"; };
-		28F1BBE718E1556700C59302 /* LoginUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginUIViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,11 +200,9 @@
 				288FB5FB18E742EC00214DC5 /* Social.framework in Frameworks */,
 				2808BA5518E7C4A700CC64B7 /* Security.framework in Frameworks */,
 				288FB5FD18E742F200214DC5 /* Accounts.framework in Frameworks */,
-				288FB5F918E742BA00214DC5 /* FirebaseSimpleLogin.framework in Frameworks */,
 				28F1BBE518E14FDC00C59302 /* FacebookSDK.framework in Frameworks */,
 				28F1BBE318E14DDB00C59302 /* libicucore.dylib in Frameworks */,
 				28F1BBE118E14DD000C59302 /* libstdc++.dylib in Frameworks */,
-				28F1BBDF18E14DB300C59302 /* Firebase.framework in Frameworks */,
 				28C3733C18DEB974007DCE38 /* SystemConfiguration.framework in Frameworks */,
 				28C7AE7E18DE059F004F485D /* CoreGraphics.framework in Frameworks */,
 				28C7AE8018DE059F004F485D /* UIKit.framework in Frameworks */,
@@ -273,28 +234,6 @@
 		28080FA9191690C900FE8EF2 /* Original */ = {
 			isa = PBXGroup;
 			children = (
-				28F1BBE618E1556700C59302 /* LoginUIViewController.h */,
-				28F1BBE718E1556700C59302 /* LoginUIViewController.m */,
-				288FB5BE18E2905A00214DC5 /* ProfileViewController.h */,
-				288FB5BF18E2905A00214DC5 /* ProfileViewController.m */,
-				288FB5F218E6887100214DC5 /* SignUpViewController.h */,
-				288FB5F318E6887100214DC5 /* SignUpViewController.m */,
-				288FB5F518E68E6300214DC5 /* ConnectViewController.h */,
-				288FB5F618E68E6300214DC5 /* ConnectViewController.m */,
-				288FB5FE18E745EB00214DC5 /* DBClient.h */,
-				288FB5FF18E745EB00214DC5 /* DBClient.m */,
-				288FB60118E7495E00214DC5 /* FBClient.h */,
-				288FB60218E7495E00214DC5 /* FBClient.m */,
-				28BE125818EE977100077233 /* EmojiPickerViewController.h */,
-				28BE125918EE977100077233 /* EmojiPickerViewController.m */,
-				2819F42518F13170008DB3F6 /* ComposePostViewController.h */,
-				2819F42618F13170008DB3F6 /* ComposePostViewController.m */,
-				281DEAE718F525E800119DB6 /* LeaderboardViewController.h */,
-				281DEAE818F525E800119DB6 /* LeaderboardViewController.m */,
-				281DEAEF18F9B65500119DB6 /* ScoreFeedViewController.h */,
-				281DEAF018F9B65600119DB6 /* ScoreFeedViewController.m */,
-				28C7AE9018DE059F004F485D /* StatusUpdateViewController.h */,
-				28C7AE9118DE059F004F485D /* StatusUpdateViewController.m */,
 			);
 			name = Original;
 			sourceTree = "<group>";
@@ -401,14 +340,12 @@
 			isa = PBXGroup;
 			children = (
 				28F1BBE418E14FDC00C59302 /* FacebookSDK.framework */,
-				28F1BBDE18E14DB300C59302 /* Firebase.framework */,
 				2819F41C18F12595008DB3F6 /* Accelerate.framework */,
 				2819F41A18F1258A008DB3F6 /* QuartzCore.framework */,
 				2808BA8018E8D36400CC64B7 /* AdSupport.framework */,
 				2808BA5418E7C4A700CC64B7 /* Security.framework */,
 				288FB5FC18E742F200214DC5 /* Accounts.framework */,
 				288FB5FA18E742EC00214DC5 /* Social.framework */,
-				288FB5F818E742BA00214DC5 /* FirebaseSimpleLogin.framework */,
 				28F1BBE218E14DDB00C59302 /* libicucore.dylib */,
 				28F1BBE018E14DD000C59302 /* libstdc++.dylib */,
 				28C3733B18DEB973007DCE38 /* SystemConfiguration.framework */,
@@ -639,32 +576,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				288FB5B618E1EA8300214DC5 /* NSDate+TimeAgo.m in Sources */,
-				28F1BBE818E1556700C59302 /* LoginUIViewController.m in Sources */,
 				28080FA719161C7100FE8EF2 /* MLApiClient.m in Sources */,
 				2808BA5E18E881DB00CC64B7 /* UIView+viewController.m in Sources */,
-				28BE125A18EE977100077233 /* EmojiPickerViewController.m in Sources */,
-				28C7AE9218DE059F004F485D /* StatusUpdateViewController.m in Sources */,
-				288FB5F718E68E6300214DC5 /* ConnectViewController.m in Sources */,
 				286AD8B7191EC6900026CDFB /* MLPostInfo.m in Sources */,
 				2808BA5B18E881B100CC64B7 /* InfiniteScrollPicker.m in Sources */,
-				281DEAE918F525E800119DB6 /* LeaderboardViewController.m in Sources */,
-				2819F42718F13170008DB3F6 /* ComposePostViewController.m in Sources */,
 				2819F41918F12562008DB3F6 /* RNGridMenu.m in Sources */,
 				28C7AE8C18DE059F004F485D /* AppDelegate.m in Sources */,
 				2808BA7C18E8C87F00CC64B7 /* SWLongPressGestureRecognizer.m in Sources */,
-				288FB5C018E2905A00214DC5 /* ProfileViewController.m in Sources */,
 				2808BA7D18E8C87F00CC64B7 /* SWTableViewCell.m in Sources */,
 				28080FD51918A00100FE8EF2 /* UIImage+BlurredFrame.m in Sources */,
 				2808BA5818E7C5ED00CC64B7 /* KeychainItemWrapper.m in Sources */,
 				28149FDF190E191200AB20D4 /* MainFeedViewController.m in Sources */,
-				288FB60318E7495E00214DC5 /* FBClient.m in Sources */,
 				2808BA7A18E8C87F00CC64B7 /* NSMutableArray+SWUtilityButtons.m in Sources */,
-				288FB60018E745EB00214DC5 /* DBClient.m in Sources */,
 				2808BA7F18E8C87F00CC64B7 /* SWUtilityButtonView.m in Sources */,
-				281DEAF118F9B65600119DB6 /* ScoreFeedViewController.m in Sources */,
 				2808BA7B18E8C87F00CC64B7 /* SWCellScrollView.m in Sources */,
 				28080FAC1916E4A200FE8EF2 /* MLUserInfo.m in Sources */,
-				288FB5F418E6887100214DC5 /* SignUpViewController.m in Sources */,
 				28080FD61918A00100FE8EF2 /* UIImage+ImageEffects.m in Sources */,
 				2808BA7E18E8C87F00CC64B7 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				28C7AE8818DE059F004F485D /* main.m in Sources */,
