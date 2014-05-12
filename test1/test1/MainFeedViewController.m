@@ -30,6 +30,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *headerConnections;
 
 @property (strong, nonatomic) IBOutlet UIView *composeHeaderView;
+@property (strong, nonatomic) IBOutlet UIButton *sendPostButton;
 
 @property (strong, nonatomic) IBOutlet UITableView *mainFeedView;
 @property (strong, nonatomic) IBOutlet UITextView *postTextView;
@@ -512,6 +513,12 @@
     if (textView == self.postTextView) {
         if([text isEqualToString:@"\n"]) {
             return NO;
+        }
+        NSString *newString = [textView.text stringByReplacingCharactersInRange:range withString:text];
+        if (newString.length <= 0 || [newString isEqualToString:@"Share what's new"]) {
+            self.sendPostButton.hidden = YES;
+        } else {
+            self.sendPostButton.hidden = NO;
         }
     }
     return YES;
