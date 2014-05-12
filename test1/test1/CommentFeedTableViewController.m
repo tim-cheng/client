@@ -141,6 +141,10 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    if (textField.text.length <= 0) {
+        return NO;
+    }
+    
     NSLog(@"should return........");
     [textField resignFirstResponder];
     //self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
