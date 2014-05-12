@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 
 typedef void (^MLPostInfoSuccess)(id responseJSON);
+typedef void (^MLPostPictureSuccess)(UIImage *responseImage);
 
 @interface MLPostInfo : NSObject
 
 + (MLPostInfo *)instance;
-- (UIImage *)postPicture:(NSInteger)postId;
+- (void) postPicture:(NSInteger)postId
+                 success:(MLPostPictureSuccess)callback;
 
 - (void) postInfoFromId:(NSInteger)userId
                    body:(NSString *)body

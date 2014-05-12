@@ -342,12 +342,16 @@
         }
         if ([self.postArray[indexPath.row][@"has_picture"] boolValue]) {
             // has picture
-            UIImage *image = [[MLPostInfo instance] postPicture:postId];
-            UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-            imageView.tag = 30;
-//            imageView.contentMode = UIViewContentModeScaleAspectFit;
-            [cell.contentView addSubview:imageView ];
-            [cell.contentView sendSubviewToBack:imageView ];
+            [[MLPostInfo instance] postPicture:postId success:^(UIImage *responseImage) {
+                // if the cell is still for the post
+                if (cell.contentView.tag == postId + 1000 ) {
+                    UIImageView *imageView = [[UIImageView alloc] initWithImage:responseImage];
+                    imageView.tag = 30;
+                    //            imageView.contentMode = UIViewContentModeScaleAspectFit;
+                    [cell.contentView addSubview:imageView ];
+                    [cell.contentView sendSubviewToBack:imageView ];
+                }
+            }];
         }
 
         UITextView *postTextView = (UITextView *)[cell.contentView viewWithTag:10];

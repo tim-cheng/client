@@ -64,10 +64,13 @@
                                  }];
 }
 
-- (UIImage *)postPicture:(NSInteger)postId
+- (void) postPicture:(NSInteger)postId
+                 success:(MLPostPictureSuccess)callback
 {
     if (self.postPictureCache[@(postId)]) {
-        return self.postPictureCache[@(postId)];
+        if (callback) {
+            callback(self.postPictureCache[@(postId)]);
+        }
     } else {
         NSURL *url = [[MLApiClient client] postPictureUrl:postId];
         if (url) {
@@ -76,10 +79,11 @@
             if (image) {
                 self.postPictureCache[@(postId)] = image;
             }
-            return image;
+            if (callback) {
+                callback(image);
+            }
         }
     }
-    return nil;
 }
 
 - (void) loadPostInfoFromId:(NSInteger)userId
