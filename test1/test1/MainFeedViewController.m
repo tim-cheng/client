@@ -104,6 +104,7 @@
     self.profileImage.clipsToBounds = YES;
     
     self.mainFeedView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.mainFeedView.contentInset = UIEdgeInsetsMake(0, 0, 180.0f, 0);
     
     [self loadPostsAndScroll:NO];
 }
