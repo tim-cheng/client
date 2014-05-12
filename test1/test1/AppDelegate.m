@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 # import <FacebookSDK/FacebookSDK.h>
-#import "WXApi.h"
 
 @implementation AppDelegate
 
@@ -17,7 +16,7 @@
     // Override point for customization after application launch.
     [FBLoginView class];
     
-    [WXApi registerApp:@"wx8cf2405f83961488" withDescription:@"ParenLink"];
+//    [WXApi registerApp:@"wx8cf2405f83961488" withDescription:@"ParenLink"];
     
     return YES;
 }
