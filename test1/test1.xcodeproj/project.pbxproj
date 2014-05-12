@@ -41,6 +41,7 @@
 		286AD8B4191B4E620026CDFB /* return_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AD8B3191B4E620026CDFB /* return_64.png */; };
 		286AD8B7191EC6900026CDFB /* MLPostInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 286AD8B6191EC6900026CDFB /* MLPostInfo.m */; };
 		28810B8919212E7D00F55B24 /* trash_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28810B8819212E7D00F55B24 /* trash_64.png */; };
+		28810B8C1921526700F55B24 /* PostFeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28810B8B1921526700F55B24 /* PostFeedTableViewController.m */; };
 		288FB5B618E1EA8300214DC5 /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */; };
 		288FB5B718E1EA8300214DC5 /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 288FB5B518E1EA8300214DC5 /* NSDateTimeAgo.bundle */; };
 		288FB5FB18E742EC00214DC5 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288FB5FA18E742EC00214DC5 /* Social.framework */; };
@@ -133,6 +134,8 @@
 		286AD8B5191EC6900026CDFB /* MLPostInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPostInfo.h; sourceTree = "<group>"; };
 		286AD8B6191EC6900026CDFB /* MLPostInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPostInfo.m; sourceTree = "<group>"; };
 		28810B8819212E7D00F55B24 /* trash_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash_64.png; sourceTree = "<group>"; };
+		28810B8A1921526700F55B24 /* PostFeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostFeedTableViewController.h; sourceTree = "<group>"; };
+		28810B8B1921526700F55B24 /* PostFeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostFeedTableViewController.m; sourceTree = "<group>"; };
 		288FB5B318E1EA8300214DC5 /* NSDate+TimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgo.h"; sourceTree = "<group>"; };
 		288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeAgo.m"; sourceTree = "<group>"; };
 		288FB5B518E1EA8300214DC5 /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
@@ -354,6 +357,8 @@
 				28E67A7418FBBDE2001F81E1 /* NewLogInViewController.m */,
 				28149FDD190E191200AB20D4 /* MainFeedViewController.h */,
 				28149FDE190E191200AB20D4 /* MainFeedViewController.m */,
+				28810B8A1921526700F55B24 /* PostFeedTableViewController.h */,
+				28810B8B1921526700F55B24 /* PostFeedTableViewController.m */,
 				28080FA519161C7100FE8EF2 /* MLApiClient.h */,
 				28080FA619161C7100FE8EF2 /* MLApiClient.m */,
 				28080FAA1916E4A100FE8EF2 /* MLUserInfo.h */,
@@ -547,6 +552,7 @@
 				28080FAC1916E4A200FE8EF2 /* MLUserInfo.m in Sources */,
 				28080FD61918A00100FE8EF2 /* UIImage+ImageEffects.m in Sources */,
 				2808BA7E18E8C87F00CC64B7 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
+				28810B8C1921526700F55B24 /* PostFeedTableViewController.m in Sources */,
 				28C7AE8818DE059F004F485D /* main.m in Sources */,
 				28E67A7518FBBDE2001F81E1 /* NewLogInViewController.m in Sources */,
 			);
