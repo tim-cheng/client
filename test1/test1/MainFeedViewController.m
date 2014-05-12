@@ -13,7 +13,9 @@
 #import "NSDate+TimeAgo.h"
 #import "UIImage+ImageEffects.h"
 
-#define kPostTextViewHeight 228.0f
+#define kFeedPostTextViewHeight 228.0f
+#define kComposeTextViewHeight 320.f
+
 
 @interface MainFeedViewController () <UITableViewDataSource,
                                       UITextViewDelegate,
@@ -93,8 +95,9 @@
                                   }];
     
     // prepare composeView
-    [self.postTextView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
     self.postTextView.delegate = self;
+    self.postTextView.text = @"Share what's new";
+    [self textViewDidChange:self.postTextView];
     
     self.commentField.delegate = self;
     
@@ -364,7 +367,7 @@
             postTextView.text = self.postArray[indexPath.row][@"body"];
             postTextView.delegate = self;
             float height = [postTextView sizeThatFits:postTextView.frame.size].height;
-            postTextView.contentInset = UIEdgeInsetsMake((kPostTextViewHeight-height)/2, 0, 0, 0);
+            postTextView.contentInset = UIEdgeInsetsMake((kFeedPostTextViewHeight-height)/2, 0, 0, 0);
         }
         
         // set post background color
@@ -516,14 +519,23 @@
                 return NO;
             }
         }
-        NSString *newString = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    }
+    return YES;
+}
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    if (textView == self.postTextView) {
+        NSString *newString = textView.text;
         if (newString.length <= 0 || [newString isEqualToString:@"Share what's new"]) {
             self.sendPostButton.hidden = YES;
         } else {
             self.sendPostButton.hidden = NO;
         }
+        
+        float height = [textView sizeThatFits:textView.frame.size].height;
+        textView.contentInset = UIEdgeInsetsMake((kComposeTextViewHeight-height)/2, 0, 0, 0);
     }
-    return YES;
 }
 
 #pragma mark - UIImagePickerControllerDelegate
@@ -567,7 +579,6 @@
     imageView.tag = 30;
     [[self.postTextView superview] insertSubview:imageView belowSubview:self.postTextView];
     self.postTextView.backgroundColor = [UIColor clearColor];
-    [self observeValueForKeyPath:nil ofObject:self.postTextView change:nil context:nil];
     
     UISwipeGestureRecognizer *recognizerR = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(SwipeRecognizer:)];
     recognizerR.direction = UISwipeGestureRecognizerDirectionRight;
@@ -659,20 +670,7 @@
 {
 }
 
-#pragma mark - Observer
-
-// http://stackoverflow.com/questions/22013768/center-the-text-in-a-uitextview-vertical-and-horizontal-align
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    UITextView *txtview = object;
-    CGFloat topoffset = ([txtview bounds].size.height - [txtview contentSize].height * [txtview zoomScale])/2.0;
-    //NSLog(@"!!!bounds [%@] =%f, %f", txtview.text, [txtview contentSize].width, [txtview contentSize].height);
-    topoffset = ( topoffset < 0.0 ? 0.0 : topoffset );
-    //NSLog(@"topoffset=%f", topoffset);
-    dispatch_async(dispatch_get_main_queue(), ^{
-        txtview.contentOffset = (CGPoint){.x = 0, .y = -topoffset};
-    });
-}
+#pragma mark - helper
 
 -(UIColor *)stringToColor:(NSString *)s
 {
