@@ -159,6 +159,8 @@
     
     NSLog(@"should return........");
     [textField resignFirstResponder];
+    self.tableView.frame = CGRectMake(0, 320, 320, 248);
+    
     //self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     // post comments
     NSString *txt = textField.text;
