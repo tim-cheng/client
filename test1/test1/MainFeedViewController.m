@@ -512,7 +512,9 @@
 {
     if (textView == self.postTextView) {
         if([text isEqualToString:@"\n"]) {
-            return NO;
+            if (textView.contentSize.height > 220.0f) {
+                return NO;
+            }
         }
         NSString *newString = [textView.text stringByReplacingCharactersInRange:range withString:text];
         if (newString.length <= 0 || [newString isEqualToString:@"Share what's new"]) {
