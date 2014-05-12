@@ -51,8 +51,8 @@
     self.tableView.hidden = YES;
     [self clearComments];
     [self.commentField resignFirstResponder];
+    self.tableView.frame = CGRectMake(0,320,320,248);
 }
-
 
 - (void)clearComments
 {
@@ -142,6 +142,12 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
 //    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 216, 0);
+    CGFloat height = [self.tableView sizeThatFits:self.tableView.frame.size].height + 212.0f;
+    if (height > 248.0f) {
+        // need to adjust frame size
+        CGFloat y = 320 - (height - 248);
+        self.tableView.frame = CGRectMake(0, y, 320, height);
+    }
     return YES;
 }
 
