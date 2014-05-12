@@ -633,6 +633,7 @@
     [self.postTextView resignFirstResponder];
     self.postTextView.text = @"Share what's new";
     self.postTextView.backgroundColor = [UIColor colorWithRed:0.0991371 green:0.310455 blue:0.515286 alpha:1.0];
+    self.sendPostButton.hidden = YES;
     UIImageView *imagView = (UIImageView *)[[self.postTextView superview] viewWithTag:30];
     [imagView removeFromSuperview];
 }
