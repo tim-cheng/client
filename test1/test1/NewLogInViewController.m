@@ -8,7 +8,6 @@
 
 #import "NewLogInViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
-#import "ScoreFeedViewController.h"
 #import "FBClient.h"
 #import "MLApiClient.h"
 #import "KeychainItemWrapper.h"
@@ -16,7 +15,6 @@
 
 @interface NewLogInViewController () <FBLoginViewDelegate>
 
-@property (weak, nonatomic) ScoreFeedViewController *scoreFeedVC;
 
 @property (strong,nonatomic) IBOutlet UITextField *emailField;
 @property (strong,nonatomic) IBOutlet UITextField *passwordField;
@@ -64,9 +62,6 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"NewLogIn"]) {
-        self.scoreFeedVC = ([segue.destinationViewController isKindOfClass:[ScoreFeedViewController class]]) ? segue.destinationViewController : nil;
-    }
 }
 
 - (IBAction)login:(id)sender
@@ -144,9 +139,6 @@
                               } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
                                   NSLog(@"!!!!!FB Login failed!!!!, %@", responseJSON);
                               }];
-    //[FBClient client].id = user.id;
-    //[FBClient client].user_name = user.name;
-    //[self.scoreFeedVC updateInfo];
 }
 
 
