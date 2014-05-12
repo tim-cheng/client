@@ -13,20 +13,17 @@
 #import "NSDate+TimeAgo.h"
 #import "UIImage+ImageEffects.h"
 #import "PostFeedTableViewController.h"
+#import "CommentFeedTableViewController.h"
 
 #define kFeedPostTextViewHeight 228.0f
 #define kComposeTextViewHeight 320.f
 
 
-@interface MainFeedViewController () <UITableViewDataSource,
-                                      UITextViewDelegate,
-                                      UITextFieldDelegate,
+@interface MainFeedViewController () <UITextViewDelegate,
                                       UIImagePickerControllerDelegate,
                                       UINavigationControllerDelegate,
                                       UIGestureRecognizerDelegate,
                                       PostFeedDelegate>
-
-@property (strong, nonatomic) NSMutableArray *commentArray;
 
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 @property (strong, nonatomic) IBOutlet UIImageView *profileImage;
@@ -46,8 +43,8 @@
 @property (strong, nonatomic) UIImage *composeBgImg;
 @property (assign, nonatomic) NSInteger composeBgImgBlurLvl;
 
+@property (strong, nonatomic) CommentFeedTableViewController *commentFeedVC;
 @property (strong, nonatomic) IBOutlet UITableView *commentFeedView;
-@property (strong, nonatomic) IBOutlet UITextField *commentField;
 @property (assign, nonatomic) NSInteger commentPostId;
 
 @property (strong, nonatomic) NSDateFormatter *myFormatter;
@@ -76,15 +73,6 @@
 {
     [super viewDidLoad];
     
-    // Do any additional setup after loading the view.
-    self.myFormatter = [[NSDateFormatter alloc] init];
-    NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-    [self.myFormatter setLocale:enUSPOSIXLocale];
-    [self.myFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSSSSS'Z'"];
-    [self.myFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"US/Pacific"]];
-
-    self.commentArray = [[NSMutableArray alloc] initWithCapacity:100];
-
     // load user info
     [[MLUserInfo instance] userInfoFromId:[MLApiClient client].userId
                                   success:^(id responseJSON) {
@@ -99,8 +87,6 @@
     self.postTextView.text = @"Share what's new";
     [self textViewDidChange:self.postTextView];
     
-    self.commentField.delegate = self;
-    
     self.profileImage.image = [[MLUserInfo instance] userPicture:[MLApiClient client].userId];
     self.profileImage.layer.borderWidth = 1.0f;
     self.profileImage.layer.borderColor = [[UIColor lightGrayColor] CGColor];
@@ -108,14 +94,19 @@
     self.profileImage.clipsToBounds = YES;
     
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    
     self.postFeedVC = (PostFeedTableViewController *)[sb instantiateViewControllerWithIdentifier:@"PostTable"];
     self.postFeedVC.delegate = self;
     self.mainFeedView = self.postFeedVC.tableView;
-
-    CGRect newFrame = self.mainFeedView.frame;
-    newFrame.origin.y = 68;
-    self.mainFeedView.frame = newFrame;
+    self.mainFeedView.frame = CGRectMake(0, 68.0f, 320.0f, 500.0f);
     [self.view insertSubview:self.mainFeedView belowSubview:self.composeView];
+    
+    
+    self.commentFeedVC = (CommentFeedTableViewController *)[sb instantiateViewControllerWithIdentifier:@"CommentTable"];
+    self.commentFeedView = self.commentFeedVC.tableView;
+    self.commentFeedView.frame = CGRectMake(0, 320.0f, 320.0f, 248.0f);
+    self.commentFeedView.hidden = YES;
+    [self.view insertSubview:self.commentFeedView aboveSubview:self.mainFeedView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -124,48 +115,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)loadCommentsForPostId:(NSInteger)postId
-{
-    [[MLApiClient client] commentsFromId:postId
-                              success:^(NSHTTPURLResponse *response, id responseJSON) {
-                                  NSLog(@"!!!!get comments succeeded!!!!, %@", responseJSON);
-                                  dispatch_async(dispatch_get_main_queue(), ^{
-                                      [self.commentFeedView beginUpdates];
-                                      NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-                                      if ([self.commentArray count] > 0) {
-                                          for (int i=0; i<[self.commentArray count]; i++) {
-                                              [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-                                          }
-                                          [self.commentFeedView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
-                                          [self.commentArray removeAllObjects];
-                                          [indexPaths removeAllObjects];
-                                      }
-
-                                      [self.commentArray addObjectsFromArray:responseJSON];
-                                      for (int i=0; i<[self.commentArray count]; i++) {
-                                          [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-                                      }
-                                      [self.commentFeedView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
-                                      [self.commentFeedView endUpdates];
-                                  });
-                              } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
-                                  NSLog(@"!!!!!get comments failed");
-                                  dispatch_async(dispatch_get_main_queue(), ^{
-                                      // remove all comments
-                                      [self.commentFeedView beginUpdates];
-                                      NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-                                      if ([self.commentArray count] > 0) {
-                                          for (int i=0; i<[self.commentArray count]; i++) {
-                                              [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-                                          }
-                                          [self.commentFeedView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
-                                          [self.commentArray removeAllObjects];
-                                          [indexPaths removeAllObjects];
-                                      }
-                                      [self.commentFeedView endUpdates];
-                                  });
-                              }];
-}
 
 #pragma mark - GestureRecognizer
 
@@ -199,71 +148,6 @@
     }
 }
 
-#pragma mark - UITableViewDataSource
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [self.commentArray count];
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // comment view
-    static NSString *cellIdentifier = @"CommentCell";
-    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-    }
-    UIImageView *userImg = (UIImageView*)[cell.contentView viewWithTag:10];
-    userImg.image = [[MLUserInfo instance] userPicture:[self.commentArray[indexPath.row][@"user_id"] integerValue]];
-    userImg.layer.borderWidth = 1.0f;
-    userImg.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    userImg.layer.cornerRadius = 16;
-    userImg.clipsToBounds = YES;
-
-    // set comment body
-    UILabel *comment = (UILabel *)[cell.contentView viewWithTag:11];
-    comment.text = self.commentArray[indexPath.row][@"body"];
-    // set time ago
-    NSString *timeString = self.commentArray[indexPath.row][@"created_at"];
-    NSString *displayTime = @"long ago";
-    if (timeString) {
-        NSDate *time = [self.myFormatter dateFromString:timeString];
-        displayTime = [time timeAgo];
-    }
-    UILabel *time = (UILabel *)[cell.contentView viewWithTag:12];
-    time.text = displayTime;
-    return cell;
-}
-
-#pragma mark - UITextFieldDelgate
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    self.commentFeedView.contentInset = UIEdgeInsetsMake(0, 0, 216, 0);
-    return YES;
-}
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    NSLog(@"should return........");
-    [textField resignFirstResponder];
-    self.commentFeedView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    // post comments
-    NSString *txt = textField.text;
-    textField.text = @"";
-    [[MLApiClient client] sendCommentFromId:[MLApiClient client].userId
-                                     postId:self.commentPostId
-                                       body:txt
-                                    success:^(NSHTTPURLResponse *response, id responseJSON) {
-                                        NSLog(@"!!!!post comment succeeded");
-                                        if (self.commentPostId) {
-                                            [self loadCommentsForPostId:self.commentPostId];
-                                        }
-                                    } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
-                                        NSLog(@"!!!!post comment failed");
-                                    }];
-    
-    return YES;
-}
 
 #pragma mark - UITextViewDelgate
 
@@ -370,7 +254,7 @@
 #pragma mark - PostFeedDelegate
 - (void)postFeed:(PostFeedTableViewController*)postFeed willOpenComment:(NSInteger)postId atIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.commentFeedView.hidden) {
+    if (self.commentPostId == 0) {
         self.commentPostId = postId;
         dispatch_async(dispatch_get_main_queue(), ^{
             self.headerView.hidden = YES;
@@ -381,10 +265,7 @@
                                      atScrollPosition:UITableViewScrollPositionTop
                                              animated:NO];
             self.mainFeedView.scrollEnabled = NO;
-            self.commentFeedView.hidden = NO;
-            self.commentFeedView.dataSource = self;
-            NSLog(@"post id = %d\n", self.commentPostId);
-            [self loadCommentsForPostId:self.commentPostId];
+            [self.commentFeedVC showComment:self.commentPostId];
             [UIApplication sharedApplication].statusBarHidden = YES;
         });
     }
@@ -399,23 +280,9 @@
         newFrame.origin.y = 68;
         self.mainFeedView.frame = newFrame;
         self.mainFeedView.scrollEnabled = YES;
-        self.commentFeedView.hidden = YES;
-        self.commentFeedView.dataSource = nil;
-        [self.commentField resignFirstResponder];
+        [self.commentFeedVC hideComment];
         [self.postFeedVC loadPostsAndScroll:NO];
         [UIApplication sharedApplication].statusBarHidden = NO;
-        // remove comments from commentfeedview
-        [self.commentFeedView beginUpdates];
-        NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-        if ([self.commentArray count] > 0) {
-            for (int i=0; i<[self.commentArray count]; i++) {
-                [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-            }
-            [self.commentFeedView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
-            [self.commentArray removeAllObjects];
-            [indexPaths removeAllObjects];
-        }
-        [self.commentFeedView endUpdates];
     });
 }
 

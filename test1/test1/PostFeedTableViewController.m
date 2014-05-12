@@ -30,7 +30,6 @@
 {
     [super viewDidLoad];
     
-    NSLog(@"!!!!!!!!! I am here tableview!!!!!!!!!!");
     // Do any additional setup after loading the view.
     self.myFormatter = [[NSDateFormatter alloc] init];
     NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
