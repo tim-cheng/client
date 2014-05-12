@@ -44,7 +44,17 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 180.0f, 0);
 
+    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+    [refresh addTarget:self action:@selector(loadPosts) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refresh;
     [self loadPostsAndScroll:NO];
+}
+
+- (void)loadPosts
+{
+    [self loadPostsAndScroll:NO];
+    [self.refreshControl endRefreshing];
 }
 
 - (void)loadPostsAndScroll:(BOOL)needScroll
