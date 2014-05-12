@@ -29,6 +29,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *headerName;
 @property (strong, nonatomic) IBOutlet UILabel *headerConnections;
 
+@property (strong, nonatomic) IBOutlet UIView *composeHeaderView;
+
 @property (strong, nonatomic) IBOutlet UITableView *mainFeedView;
 @property (strong, nonatomic) IBOutlet UITextView *postTextView;
 
@@ -48,6 +50,8 @@
 - (IBAction)composeSelectImage:(id)sender;
 - (IBAction)composeShuffleBackground:(id)sender;
 - (IBAction)closeComment:(UIButton *)button;
+- (IBAction)sendPost:(UIButton *)button;
+- (IBAction)cancelPost:(id)sender;
 
 @end
 
@@ -576,36 +580,45 @@
 #pragma mark - IBAction
 - (IBAction)compose:(id)sender
 {
-    self.composeView.hidden = !self.composeView.hidden;
-    UIButton *icon = (UIButton *)sender;
-    if (!self.composeView.hidden) {
-        // composing
-        dispatch_async(dispatch_get_main_queue(), ^{
-            icon.imageView.image = [UIImage imageNamed:@"post_64.png"];
-        });
-    } else {
-        NSString *txt = self.postTextView.text;
-        if ([txt isEqualToString:@"Share what's new"]) {
-            return;
-        }
-        [self.postTextView resignFirstResponder];
-        
-        UIImageView *imagView = (UIImageView *)[[self.postTextView superview] viewWithTag:30];
-        [[MLPostInfo instance] postInfoFromId:kApiClientUserSelf
-                                         body:txt
-                                        image:imagView.image
-                                      bgColor:self.postTextView.backgroundColor
-                                      success:^(id responseJSON) {
-                                          [self loadPostsAndScroll:YES];
-                                      }];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            icon.imageView.image = [UIImage imageNamed:@"compose2_64.png"];
-            self.postTextView.text = @"Share what's new";
-            [imagView removeFromSuperview];
-            self.postTextView.backgroundColor = [UIColor colorWithRed:0.0991371 green:0.310455 blue:0.515286 alpha:1.0];
-        });
+    self.composeView.hidden = NO;
+    self.composeHeaderView.hidden = NO;
+}
+
+- (IBAction)sendPost:(id)sender
+{
+    self.composeView.hidden = YES;
+    self.composeHeaderView.hidden = YES;
+
+    NSString *txt = self.postTextView.text;
+    if ([txt isEqualToString:@"Share what's new"]) {
+        return;
     }
+    [self.postTextView resignFirstResponder];
     
+    UIImageView *imagView = (UIImageView *)[[self.postTextView superview] viewWithTag:30];
+    [[MLPostInfo instance] postInfoFromId:kApiClientUserSelf
+                                     body:txt
+                                    image:imagView.image
+                                  bgColor:self.postTextView.backgroundColor
+                                  success:^(id responseJSON) {
+                                      [self loadPostsAndScroll:YES];
+                                  }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.postTextView.text = @"Share what's new";
+        [imagView removeFromSuperview];
+        self.postTextView.backgroundColor = [UIColor colorWithRed:0.0991371 green:0.310455 blue:0.515286 alpha:1.0];
+    });
+}
+
+- (IBAction)cancelPost:(id)sender
+{
+    self.composeView.hidden = YES;
+    self.composeHeaderView.hidden = YES;
+    [self.postTextView resignFirstResponder];
+    self.postTextView.text = @"Share what's new";
+    self.postTextView.backgroundColor = [UIColor colorWithRed:0.0991371 green:0.310455 blue:0.515286 alpha:1.0];
+    UIImageView *imagView = (UIImageView *)[[self.postTextView superview] viewWithTag:30];
+    [imagView removeFromSuperview];
 }
 
 - (IBAction)composeSelectImage:(id)sender

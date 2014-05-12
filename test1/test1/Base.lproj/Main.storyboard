@@ -582,6 +582,34 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" id="3D5-Ua-V2k">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WUc-6b-4tN">
+                                        <rect key="frame" x="268" y="23" width="32" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="post_64.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="compose:" destination="Yva-45-7iu" eventType="touchUpInside" id="c2u-my-gxA"/>
+                                            <action selector="sendPost:" destination="Yva-45-7iu" eventType="touchUpInside" id="kAz-Fx-lf8"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0kd-xa-io0">
+                                        <rect key="frame" x="27" y="23" width="32" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="return_64.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelPost:" destination="Yva-45-7iu" eventType="touchUpInside" id="V9C-A5-DoP"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="37" sectionHeaderHeight="22" sectionFooterHeight="22" id="sPN-7O-e5z">
                                 <rect key="frame" x="0.0" y="320" width="320" height="248"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -630,6 +658,7 @@
                         <outlet property="commentFeedView" destination="sPN-7O-e5z" id="krm-S7-YhF"/>
                         <outlet property="commentField" destination="i5j-18-Fvm" id="Q51-Sh-vem"/>
                         <outlet property="composeCameraButton" destination="EBe-Dc-Yye" id="j0U-vp-mA6"/>
+                        <outlet property="composeHeaderView" destination="3D5-Ua-V2k" id="0K5-b6-9Hz"/>
                         <outlet property="composeView" destination="rfQ-tT-ey6" id="BVR-an-zoj"/>
                         <outlet property="composeswitchButton" destination="Ll2-0Q-R4x" id="kwc-ma-mCq"/>
                         <outlet property="headerConnections" destination="mCn-nH-vWU" id="khg-PO-ygX"/>
@@ -1016,6 +1045,7 @@
         <image name="compose2_64.png" width="64" height="64"/>
         <image name="heart_off_24.png" width="24" height="24"/>
         <image name="heart_on_24.png" width="24" height="24"/>
+        <image name="post_64.png" width="64" height="64"/>
         <image name="return_64.png" width="64" height="64"/>
         <image name="s2.png" width="195" height="195"/>
         <image name="s3.png" width="195" height="194"/>
