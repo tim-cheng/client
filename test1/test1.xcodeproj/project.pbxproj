@@ -49,7 +49,6 @@
 		2819F41D18F12595008DB3F6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2819F41C18F12595008DB3F6 /* Accelerate.framework */; };
 		2819F42A18F137B7008DB3F6 /* FB-f-Logo__blue_50.png in Resources */ = {isa = PBXBuildFile; fileRef = 2819F42818F137B7008DB3F6 /* FB-f-Logo__blue_50.png */; };
 		2819F42B18F137B7008DB3F6 /* FB-f-Logo__white_50.png in Resources */ = {isa = PBXBuildFile; fileRef = 2819F42918F137B7008DB3F6 /* FB-f-Logo__white_50.png */; };
-		281DEAEB18F52BAC00119DB6 /* sherry.png in Resources */ = {isa = PBXBuildFile; fileRef = 281DEAEA18F52BAC00119DB6 /* sherry.png */; };
 		286AD8B4191B4E620026CDFB /* return_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 286AD8B3191B4E620026CDFB /* return_64.png */; };
 		286AD8B7191EC6900026CDFB /* MLPostInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 286AD8B6191EC6900026CDFB /* MLPostInfo.m */; };
 		288FB5B618E1EA8300214DC5 /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */; };
@@ -151,7 +150,6 @@
 		2819F41C18F12595008DB3F6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		2819F42818F137B7008DB3F6 /* FB-f-Logo__blue_50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FB-f-Logo__blue_50.png"; sourceTree = "<group>"; };
 		2819F42918F137B7008DB3F6 /* FB-f-Logo__white_50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FB-f-Logo__white_50.png"; sourceTree = "<group>"; };
-		281DEAEA18F52BAC00119DB6 /* sherry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sherry.png; path = ../../../Desktop/sherry.png; sourceTree = "<group>"; };
 		286AD8B3191B4E620026CDFB /* return_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = return_64.png; sourceTree = "<group>"; };
 		286AD8B5191EC6900026CDFB /* MLPostInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLPostInfo.h; sourceTree = "<group>"; };
 		286AD8B6191EC6900026CDFB /* MLPostInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLPostInfo.m; sourceTree = "<group>"; };
@@ -407,7 +405,6 @@
 				280A685F1904D2C700C2475D /* s2.png */,
 				280A68601904D2C700C2475D /* s3.png */,
 				280A68611904D2C700C2475D /* s4.png */,
-				281DEAEA18F52BAC00119DB6 /* sherry.png */,
 				2819F42818F137B7008DB3F6 /* FB-f-Logo__blue_50.png */,
 				2819F42918F137B7008DB3F6 /* FB-f-Logo__white_50.png */,
 				2808BA6518E885A900CC64B7 /* emoticon_lol.png */,
@@ -531,7 +528,6 @@
 				28080FBC191833FC00FE8EF2 /* comment_off_24.png in Resources */,
 				28080FCD19183EF600FE8EF2 /* camera_64.png in Resources */,
 				2808BA6218E8846800CC64B7 /* emoticon_happy.png in Resources */,
-				281DEAEB18F52BAC00119DB6 /* sherry.png in Resources */,
 				286AD8B4191B4E620026CDFB /* return_64.png in Resources */,
 				280A68651904D2C700C2475D /* s4.png in Resources */,
 				28080FCF19183EF600FE8EF2 /* shuffle_64.png in Resources */,
