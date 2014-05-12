@@ -85,6 +85,12 @@
                                          }
                                          [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
                                          [self.tableView endUpdates];
+                                         if ([self.commentArray count] > 0) {
+                                             [self.tableView scrollToRowAtIndexPath:indexPaths[[self.commentArray count]-1]
+                                                                      atScrollPosition:UITableViewScrollPositionTop
+                                                                              animated:NO];
+                                         }
+
                                      });
                                  } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
                                      NSLog(@"!!!!!get comments failed");
