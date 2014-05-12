@@ -72,17 +72,18 @@
             callback(self.postPictureCache[@(postId)]);
         }
     } else {
-        NSURL *url = [[MLApiClient client] postPictureUrl:postId];
-        if (url) {
-            NSData *imageData = [NSData dataWithContentsOfURL:url];
-            UIImage *image = [UIImage imageWithData:imageData scale:2.0f];
-            if (image) {
-                self.postPictureCache[@(postId)] = image;
-            }
-            if (callback) {
-                callback(image);
-            }
-        }
+        [[MLApiClient client] postPictureFromeId:postId
+                                         success:^(NSHTTPURLResponse *response, NSData *data) {
+                                             UIImage *image = [UIImage imageWithData:data scale:2.0f];
+                                             if (image) {
+                                                 self.postPictureCache[@(postId)] = image;
+                                             }
+                                             if (callback) {
+                                                 callback(image);
+                                             }
+                                         } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+                                             NSLog(@"failed to load picture");
+                                         }];
     }
 }
 

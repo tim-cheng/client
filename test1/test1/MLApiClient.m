@@ -166,6 +166,49 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
     return request;
 }
 
+- (NSURLRequest *)makeDataRequest:(NSURLRequest *)request
+                      success:(MLApiClientDataSuccess)success
+                      failure:(MLApiClientFailure)failure
+{
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:self.requestQueue
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if (error != nil) {
+                                   NSLog(@"Error sending request: %@\nerror: %@", request, error);
+                               }
+                               NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                               NSUInteger code = httpResponse.statusCode;
+                               if (NSURLErrorDomain == [error domain] && NSURLErrorTimedOut == [error code]) {
+                                   code = 408; //request timeout
+                               }
+                               NSError *parseError;
+                               id JSON = nil;
+                               if (code > 399) {
+                                   if (data != nil) {
+                                       JSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&parseError];
+                                       if (parseError && data.length > 1) {
+                                           NSLog(@"Parse error: %@", parseError);
+                                           NSLog(@"Error parsing JSON for request.");
+                                           
+                                           if (failure) {
+                                               failure(httpResponse, @{}, parseError);
+                                           }
+                                           return;
+                                       }
+                                   } else {
+                                       JSON = @{};
+                                   }
+                                   if (failure) {
+                                       failure(httpResponse, JSON, error);
+                                   }
+                               } else if (code >= 200 && code <= 299 && success) {
+                                   success(httpResponse, data);
+                               }
+                           }];
+    return request;
+}
+
+
 - (void) setLoggedInInfoWithEmail:(NSString *)email
                          password:(NSString *)password
                            userId:(NSInteger)userId
@@ -271,6 +314,21 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
     request.HTTPBody = postData;
     return [self makeRequest:request success:successCallback failure:failureCallback];
 }
+
+- (NSURLRequest *)postPictureFromeId:(NSInteger)postId
+                             success:(MLApiClientDataSuccess)successCallback
+                             failure:(MLApiClientFailure)failureCallback
+{
+    NSString * path = @"/posts";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/%d/picture", self.protocol, self.baseURLString, path, postId]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:15.0f];
+    request.HTTPMethod = @"GET";
+    [request setValue:self.loggedInAuth forHTTPHeaderField:@"Authorization"];
+    return [self makeDataRequest:request success:successCallback failure:failureCallback];
+}
+
 
 
 - (NSURLRequest *)sendCommentFromId:(NSInteger)userId

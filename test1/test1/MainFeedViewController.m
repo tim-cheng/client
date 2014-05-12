@@ -343,14 +343,16 @@
         if ([self.postArray[indexPath.row][@"has_picture"] boolValue]) {
             // has picture
             [[MLPostInfo instance] postPicture:postId success:^(UIImage *responseImage) {
-                // if the cell is still for the post
-                if (cell.contentView.tag == postId + 1000 ) {
-                    UIImageView *imageView = [[UIImageView alloc] initWithImage:responseImage];
-                    imageView.tag = 30;
-                    //            imageView.contentMode = UIViewContentModeScaleAspectFit;
-                    [cell.contentView addSubview:imageView ];
-                    [cell.contentView sendSubviewToBack:imageView ];
-                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // if the cell is still for the post
+                    if (cell.contentView.tag == postId + 1000 ) {
+                        NSLog(@"!!!!!!!!!!!!!!!!!!!!!!!! callback pic, postId: %d", postId);
+                        UIImageView *imageView = [[UIImageView alloc] initWithImage:responseImage];
+                        imageView.tag = 30;
+                        [cell.contentView addSubview:imageView ];
+                        [cell.contentView sendSubviewToBack:imageView ];
+                    }
+                });
             }];
         }
 

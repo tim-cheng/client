@@ -8,6 +8,7 @@
 
 typedef void (^MLApiClientSuccess)(NSHTTPURLResponse *response, id responseJSON);
 typedef void (^MLApiClientFailure)(NSHTTPURLResponse *response, id responseJSON, NSError *error);
+typedef void (^MLApiClientDataSuccess)(NSHTTPURLResponse *response, NSData *data);
 
 #define kApiClientUserSelf -1
 
@@ -58,6 +59,10 @@ typedef void (^MLApiClientFailure)(NSHTTPURLResponse *response, id responseJSON,
                          bgColor:(UIColor *)bgColor
                          success:(MLApiClientSuccess)successCallback
                          failure:(MLApiClientFailure)failureCallback;
+
+- (NSURLRequest *)postPictureFromeId:(NSInteger)postId
+                             success:(MLApiClientDataSuccess)successCallback
+                             failure:(MLApiClientFailure)failureCallback;
 
 - (NSURLRequest *)sendPostPictureId:(NSInteger)postId
                               image:(UIImage *)image
