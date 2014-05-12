@@ -13,6 +13,7 @@
 #import "NSDate+TimeAgo.h"
 #import "UIImage+ImageEffects.h"
 
+#define kPostTextViewHeight 228.0f
 
 @interface MainFeedViewController () <UITableViewDataSource,
                                       UITextViewDelegate,
@@ -360,12 +361,10 @@
 
         UITextView *postTextView = (UITextView *)[cell.contentView viewWithTag:10];
         if (postTextView) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                postTextView.text = self.postArray[indexPath.row][@"body"];
-                //[postTextView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
-                postTextView.delegate = self;
-                [self observeValueForKeyPath:nil ofObject:postTextView change:nil context:nil];
-            });
+            postTextView.text = self.postArray[indexPath.row][@"body"];
+            postTextView.delegate = self;
+            float height = [postTextView sizeThatFits:postTextView.frame.size].height;
+            postTextView.contentInset = UIEdgeInsetsMake((kPostTextViewHeight-height)/2, 0, 0, 0);
         }
         
         // set post background color
