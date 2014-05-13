@@ -103,6 +103,19 @@
                               }];
 }
 
+- (void) deletePostId:(NSInteger)postId
+              success:(MLPostInfoSuccess)callback
+{
+    [[MLApiClient client] deletePostId:postId success:^(NSHTTPURLResponse *response, id responseJSON) {
+        NSLog(@"post deleted!");
+        if (callback ) {
+            callback(responseJSON);
+        }
+    } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+        NSLog(@"failed to delete post");
+    }];
+}
+
 
 - (id) init
 {

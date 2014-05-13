@@ -27,5 +27,7 @@ typedef void (^MLPostPictureSuccess)(UIImage *responseImage);
                      degree:(NSInteger)degree
                     success:(MLPostInfoSuccess)callback;
 
+- (void) deletePostId:(NSInteger)postId
+              success:(MLPostInfoSuccess)callback;
 
 @end

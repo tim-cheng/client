@@ -81,4 +81,8 @@ typedef void (^MLApiClientDataSuccess)(NSHTTPURLResponse *response, NSData *data
                         success:(MLApiClientSuccess)successCallback
                         failure:(MLApiClientFailure)failureCallback;
 
+- (NSURLRequest *)deletePostId:(NSInteger)postId
+                       success:(MLApiClientSuccess)successCallback
+                       failure:(MLApiClientFailure)failureCallback;
+
 @end

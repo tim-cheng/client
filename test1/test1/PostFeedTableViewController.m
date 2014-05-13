@@ -14,7 +14,7 @@
 
 #define kFeedPostTextViewHeight 228.0f
 
-@interface PostFeedTableViewController () <UITableViewDataSource, UITextViewDelegate, UITextViewDelegate>
+@interface PostFeedTableViewController () <UITableViewDataSource, UITextViewDelegate, UITextViewDelegate, UIActionSheetDelegate>
 
 @property (strong, nonatomic) NSMutableArray *postArray;
 @property (strong, nonatomic) NSDateFormatter *myFormatter;
@@ -133,6 +133,20 @@
                                 }];
 }
 
+- (void)tapOnMore:(UITapGestureRecognizer *)gest
+{
+    NSLog(@"tap... ");
+    UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:nil
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                         destructiveButtonTitle:nil
+                                              otherButtonTitles:@"Share on Facebook", @"Delete Post", nil];
+    UIImageView *img = (UIImageView*)gest.view;
+    NSInteger postId = [img superview].tag - 1000;
+    popup.tag = postId;
+    //[popup showInView:self.tableView];
+    [popup showInView:[UIApplication sharedApplication].keyWindow];
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -245,10 +259,19 @@
         }
     }
     
-    
+    UIImageView *more = (UIImageView *)[cell.contentView viewWithTag:19];
+    if (star) {
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]
+                                             initWithTarget:self
+                                             action:@selector(tapOnMore:)];
+        [singleTap setNumberOfTapsRequired:1];
+        more.userInteractionEnabled = YES;
+        [more addGestureRecognizer:singleTap];
+    }
     
     // set user name / description
-    [[MLUserInfo instance] userInfoFromId:([self.postArray[indexPath.row][@"user_id"] integerValue])
+    NSInteger userId = [self.postArray[indexPath.row][@"user_id"] integerValue];
+    [[MLUserInfo instance] userInfoFromId:userId
                                   success:^(id responseJSON) {
                                       dispatch_async(dispatch_get_main_queue(), ^{
                                           UILabel *posterName = (UILabel *)[cell.contentView viewWithTag:14];
@@ -270,6 +293,34 @@
     UITableViewCell *cell = (UITableViewCell*)[[[textView superview] superview] superview];
     [self toggleComment:postId cell:cell];
     return NO;
+}
+
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)popup clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"index = %d", buttonIndex);
+    switch (buttonIndex) {
+        case 0:
+            NSLog(@"share on facebook");
+            break;
+        case 1:
+        {
+            // delete post
+            [[MLPostInfo instance] deletePostId:popup.tag success:^(id responseJSON) {
+                if (self.commentPostId == 0) {
+                    [self loadPosts];
+                } else {
+                    self.commentPostId = 0;
+                    if (self.delegate) {
+                        [self.delegate postFeed:self willCloseComment:popup.tag];
+                    }
+                }
+            }];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 #pragma mark - helper
