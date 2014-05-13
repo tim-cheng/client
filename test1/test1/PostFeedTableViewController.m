@@ -273,10 +273,11 @@
 
     // only show more button to post owner
     UIImageView *more = (UIImageView *)[cell.contentView viewWithTag:19];
-    if (userId != [MLApiClient client].userId) {
-        more.hidden = YES;
-    } else {
-        if (more) {
+    if (more) {
+        if (userId != [MLApiClient client].userId) {
+            more.hidden = YES;
+        } else {
+            more.hidden = NO;
             UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]
                                                  initWithTarget:self
                                                  action:@selector(tapOnMore:)];
@@ -285,7 +286,6 @@
             [more addGestureRecognizer:singleTap];
         }
     }
-    
     return cell;
 }
 
