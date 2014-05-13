@@ -18,6 +18,7 @@
 @property (assign, nonatomic) NSInteger commentPostId;
 @property (strong, nonatomic) IBOutlet UITextField *commentField;
 
+-(IBAction)tapPost:(id)sender;
 
 @end
 
@@ -158,13 +159,28 @@
     }
     
     NSLog(@"should return........");
-    [textField resignFirstResponder];
+    [self postComment];
+    return YES;
+}
+
+#pragma mark - IBAction
+-(IBAction)tapPost:(id)sender
+{
+    if (self.commentField.text.length <= 0) {
+        return;
+    }
+    [self postComment];
+}
+
+- (void)postComment
+{
+    [self.commentField resignFirstResponder];
     self.tableView.frame = CGRectMake(0, 320, 320, 248);
     
     //self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     // post comments
-    NSString *txt = textField.text;
-    textField.text = @"";
+    NSString *txt = self.commentField.text;
+    self.commentField.text = @"";
     [[MLApiClient client] sendCommentFromId:[MLApiClient client].userId
                                      postId:self.commentPostId
                                        body:txt
@@ -176,7 +192,6 @@
                                     } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
                                         NSLog(@"!!!!post comment failed");
                                     }];
-    return YES;
 }
 
 
