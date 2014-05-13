@@ -259,16 +259,6 @@
         }
     }
     
-    UIImageView *more = (UIImageView *)[cell.contentView viewWithTag:19];
-    if (star) {
-        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]
-                                             initWithTarget:self
-                                             action:@selector(tapOnMore:)];
-        [singleTap setNumberOfTapsRequired:1];
-        more.userInteractionEnabled = YES;
-        [more addGestureRecognizer:singleTap];
-    }
-    
     // set user name / description
     NSInteger userId = [self.postArray[indexPath.row][@"user_id"] integerValue];
     [[MLUserInfo instance] userInfoFromId:userId
@@ -280,6 +270,21 @@
                                           posterDesc.text = responseJSON[@"description"];
                                       });
                                   }];
+
+    // only show more button to post owner
+    UIImageView *more = (UIImageView *)[cell.contentView viewWithTag:19];
+    if (userId != [MLApiClient client].userId) {
+        more.hidden = YES;
+    } else {
+        if (more) {
+            UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]
+                                                 initWithTarget:self
+                                                 action:@selector(tapOnMore:)];
+            [singleTap setNumberOfTapsRequired:1];
+            more.userInteractionEnabled = YES;
+            [more addGestureRecognizer:singleTap];
+        }
+    }
     
     return cell;
 }
