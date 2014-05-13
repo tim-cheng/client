@@ -14,11 +14,12 @@
 
 #define kFeedPostTextViewHeight 228.0f
 
-@interface PostFeedTableViewController () <UITableViewDataSource, UITextViewDelegate, UITextViewDelegate, UIActionSheetDelegate>
+@interface PostFeedTableViewController () <UITableViewDataSource, UITextViewDelegate, UITextViewDelegate, UIActionSheetDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *postArray;
 @property (strong, nonatomic) NSDateFormatter *myFormatter;
 @property (assign, nonatomic) NSInteger commentPostId;
+@property (assign, nonatomic) NSInteger moreActionPostId;
 
 
 @end
@@ -143,7 +144,7 @@
                                               otherButtonTitles:@"Share on Facebook", @"Delete Post", nil];
     UIImageView *img = (UIImageView*)gest.view;
     NSInteger postId = [img superview].tag - 1000;
-    popup.tag = postId;
+    self.moreActionPostId = postId;
     //[popup showInView:self.tableView];
     [popup showInView:[UIApplication sharedApplication].keyWindow];
 }
@@ -300,6 +301,25 @@
     return NO;
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        // delete post
+        [[MLPostInfo instance] deletePostId:self.moreActionPostId success:^(id responseJSON) {
+            if (self.commentPostId == 0) {
+                [self loadPosts];
+            } else {
+                self.commentPostId = 0;
+                if (self.delegate) {
+                    [self.delegate postFeed:self willCloseComment:self.moreActionPostId];
+                }
+            }
+        }];
+    } else {
+        // cancel delete
+    }
+}
+
 #pragma mark - UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)popup clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -310,17 +330,12 @@
             break;
         case 1:
         {
-            // delete post
-            [[MLPostInfo instance] deletePostId:popup.tag success:^(id responseJSON) {
-                if (self.commentPostId == 0) {
-                    [self loadPosts];
-                } else {
-                    self.commentPostId = 0;
-                    if (self.delegate) {
-                        [self.delegate postFeed:self willCloseComment:popup.tag];
-                    }
-                }
-            }];
+            UIAlertView *confirm = [[UIAlertView alloc] initWithTitle:@"Confirm"
+                                                              message:@"Do you really want to delete this post?"
+                                                             delegate:self
+                                                    cancelButtonTitle:nil
+                                                    otherButtonTitles:@"No", @"Yes", nil];
+            [confirm show];
             break;
         }
         default:
