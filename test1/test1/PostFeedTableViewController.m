@@ -35,7 +35,7 @@
     NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
     [self.myFormatter setLocale:enUSPOSIXLocale];
     [self.myFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSSSSS'Z'"];
-    [self.myFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"US/Pacific"]];
+    [self.myFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"US/Eastern"]];
 
     self.postArray = [[NSMutableArray alloc] initWithCapacity:100];
     self.tableView.dataSource = self;
