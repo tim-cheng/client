@@ -14,11 +14,11 @@
 
 #define kFeedPostTextViewHeight 228.0f
 
-@interface PostFeedTableViewController () <UITableViewDataSource, UITextViewDelegate, UITextViewDelegate, UIActionSheetDelegate, UIAlertViewDelegate>
+@interface PostFeedTableViewController () <UITableViewDataSource, UITextViewDelegate, UITextViewDelegate, UIActionSheetDelegate, UIAlertViewDelegate, CommentFeedDelegate>
 
 @property (strong, nonatomic) NSMutableArray *postArray;
 @property (strong, nonatomic) NSDateFormatter *myFormatter;
-@property (assign, nonatomic) NSInteger commentPostId;
+@property (weak, nonatomic) UITableViewCell *commentPostCell;
 @property (assign, nonatomic) NSInteger moreActionPostId;
 
 
@@ -93,13 +93,13 @@
 - (void)toggleComment:(NSInteger)postId cell:(UITableViewCell *)cell
 {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    if (self.commentPostId == 0) {
-        self.commentPostId = postId;
+    if (self.commentPostCell ==nil) {
+        self.commentPostCell = cell;
         if (self.delegate) {
             [self.delegate postFeed:self willOpenComment:postId atIndexPath:indexPath];
         }
     } else {
-        self.commentPostId = 0;
+        self.commentPostCell = nil;
         if (self.delegate) {
             [self.delegate postFeed:self willCloseComment:postId];
         }
@@ -311,10 +311,10 @@
     if (buttonIndex == 1) {
         // delete post
         [[MLPostInfo instance] deletePostId:self.moreActionPostId success:^(id responseJSON) {
-            if (self.commentPostId == 0) {
+            if (self.commentPostCell == nil) {
                 [self loadPosts];
             } else {
-                self.commentPostId = 0;
+                self.commentPostCell = nil;
                 if (self.delegate) {
                     [self.delegate postFeed:self willCloseComment:self.moreActionPostId];
                 }
@@ -345,6 +345,20 @@
         }
         default:
             break;
+    }
+}
+
+#pragma mark - CommentFeedDelegate
+- (void)commentFeed:(CommentFeedTableViewController*)commentFeed updateCommentCount:(NSInteger)commentCount
+{
+    NSLog(@"update comment count to %d", commentCount);
+    if (self.commentPostCell) {
+        UILabel *cntLabel = (UILabel *)[self.commentPostCell.contentView viewWithTag:12];
+        cntLabel.text = [NSString stringWithFormat:@"%d", commentCount];
+        if (commentCount > 0) {
+            UIImageView *img = (UIImageView *)[self.commentPostCell.contentView viewWithTag:16];
+            img.highlighted = YES;
+        }
     }
 }
 

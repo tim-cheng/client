@@ -92,7 +92,9 @@
                                                                       atScrollPosition:UITableViewScrollPositionTop
                                                                               animated:NO];
                                          }
-
+                                         if (self.delegate) {
+                                             [self.delegate commentFeed:self updateCommentCount:[self.commentArray count]];
+                                         }
                                      });
                                  } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
                                      NSLog(@"!!!!!get comments failed");

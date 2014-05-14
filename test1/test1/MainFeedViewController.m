@@ -108,6 +108,9 @@
     self.commentFeedView.frame = CGRectMake(0, 320.0f, 320.0f, 248.0f);
     self.commentFeedView.hidden = YES;
     [self.view insertSubview:self.commentFeedView aboveSubview:self.mainFeedView];
+    
+    // update
+    self.commentFeedVC.delegate = self.postFeedVC;
 }
 
 - (void)didReceiveMemoryWarning

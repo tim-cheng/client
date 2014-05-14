@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+#import "CommentFeedTableViewController.h"
+
 @protocol PostFeedDelegate;
 
 
-@interface PostFeedTableViewController : UITableViewController
+@interface PostFeedTableViewController : UITableViewController <CommentFeedDelegate>
 - (void)loadPostsAndScroll:(BOOL)needScroll;
 @property (nonatomic, weak) id<PostFeedDelegate> delegate;
 @end
