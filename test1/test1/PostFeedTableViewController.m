@@ -13,6 +13,7 @@
 #import "MLUserInfo.h"
 #import "NSDate+TimeAgo.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "WXApi.h"
 
 #define kFeedPostTextViewHeight 228.0f
 
@@ -149,7 +150,7 @@
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Share on Facebook", @"Delete Post", nil];
+                                              otherButtonTitles:@"Share on Facebook", @"Share on WeChat", @"Delete Post", nil];
     UIImageView *img = (UIImageView*)gest.view;
     NSInteger postId = [img superview].tag - 1000;
     self.moreActionPostId = postId;
@@ -368,6 +369,27 @@
             break;
         }
         case 1:
+        {
+            NSLog(@"Share to WeChat");
+            // share to WeChat
+            WXMediaMessage *message = [WXMediaMessage message];
+            message.title = @"share from ParentLink";
+            message.description = @"try it out";
+//            [message setThumbImage:img];
+            UIImage *img = [self imageWithView:self.moreActionCell];
+            WXImageObject *imgObj = [WXImageObject object];
+            imgObj.imageData = UIImageJPEGRepresentation(img, 1.0);
+            imgObj.imageUrl = @"http://parentlinkapp.com";
+            message.mediaObject = imgObj;
+            
+            SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+            req.bText = NO;
+            req.message = message;
+            req.scene = WXSceneTimeline;
+            [WXApi sendReq:req];
+            break;
+        }
+        case 2:
         {
             UIAlertView *confirm = [[UIAlertView alloc] initWithTitle:@"Confirm"
                                                               message:@"Do you really want to delete this post?"

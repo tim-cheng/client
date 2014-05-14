@@ -33,6 +33,7 @@
 		280A68641904D2C700C2475D /* s3.png in Resources */ = {isa = PBXBuildFile; fileRef = 280A68601904D2C700C2475D /* s3.png */; };
 		280A68651904D2C700C2475D /* s4.png in Resources */ = {isa = PBXBuildFile; fileRef = 280A68611904D2C700C2475D /* s4.png */; };
 		28149FDF190E191200AB20D4 /* MainFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28149FDE190E191200AB20D4 /* MainFeedViewController.m */; };
+		281570B4192352B100D169B3 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2808BA8718E921EF00CC64B7 /* libWeChatSDK.a */; };
 		2819F41918F12562008DB3F6 /* RNGridMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 2819F41818F12562008DB3F6 /* RNGridMenu.m */; };
 		2819F41B18F1258A008DB3F6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2819F41A18F1258A008DB3F6 /* QuartzCore.framework */; };
 		2819F41D18F12595008DB3F6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2819F41C18F12595008DB3F6 /* Accelerate.framework */; };
@@ -179,6 +180,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				281570B4192352B100D169B3 /* libWeChatSDK.a in Frameworks */,
 				2893CB991920ADD800F7E6B8 /* FacebookSDK.framework in Frameworks */,
 				2819F41D18F12595008DB3F6 /* Accelerate.framework in Frameworks */,
 				2819F41B18F1258A008DB3F6 /* QuartzCore.framework in Frameworks */,
