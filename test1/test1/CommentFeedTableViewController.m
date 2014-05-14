@@ -11,7 +11,7 @@
 #import "MLUserInfo.h"
 #import "NSDate+TimeAgo.h"
 
-@interface CommentFeedTableViewController() <UITableViewDataSource, UITextFieldDelegate>
+@interface CommentFeedTableViewController() <UITableViewDataSource, UITextFieldDelegate, UITableViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *commentArray;
 @property (strong, nonatomic) NSDateFormatter *myFormatter;
@@ -39,6 +39,7 @@
     self.commentArray = [[NSMutableArray alloc] initWithCapacity:100];
     self.commentField.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.delegate = self;
 }
 
 - (void)showComment:(NSInteger)postId
@@ -116,6 +117,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
+    
     UIImageView *userImg = (UIImageView*)[cell.contentView viewWithTag:10];
     userImg.image = [[MLUserInfo instance] userPicture:[self.commentArray[indexPath.row][@"user_id"] integerValue]];
     userImg.layer.borderWidth = 1.0f;
@@ -126,6 +128,11 @@
     // set comment body
     UILabel *comment = (UILabel *)[cell.contentView viewWithTag:11];
     comment.text = self.commentArray[indexPath.row][@"body"];
+    comment.numberOfLines = 0;
+    CGRect newFrame = comment.frame;
+    newFrame.size.height = [self commentLabelHeight:comment.text];
+    comment.frame = newFrame;
+    
     // set time ago
     NSString *timeString = self.commentArray[indexPath.row][@"created_at"];
     NSString *displayTime = @"long ago";
@@ -163,6 +170,14 @@
     return YES;
 }
 
+#pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *text = self.commentArray[indexPath.row][@"body"];
+    CGFloat height = [self commentLabelHeight:text];
+    return height + 20.0f;
+}
+
 #pragma mark - IBAction
 -(IBAction)tapPost:(id)sender
 {
@@ -194,5 +209,14 @@
                                     }];
 }
 
+#pragma mark - helper
+
+- (CGFloat)commentLabelHeight:(NSString *)text
+{
+    CGSize constraintSize = CGSizeMake(250.0f, 150.0f);
+    return [text sizeWithFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:14.0]
+            constrainedToSize:constraintSize
+                lineBreakMode:NSLineBreakByWordWrapping].height;
+}
 
 @end
