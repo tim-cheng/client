@@ -122,6 +122,11 @@
     
     BOOL enable = img.highlighted ? NO : YES;
     
+    img.highlighted = enable;
+    UILabel *cntLabel = (UILabel *)[[img superview] viewWithTag:13];
+    NSInteger cnt = [cntLabel.text integerValue];
+    cntLabel.text = [NSString stringWithFormat:@"%d", cnt+(enable ? 1 : -1)];
+    
     NSLog(@"tap on star: %d", enable);
     [[MLApiClient client] setStarFromId: kApiClientUserSelf
                                  postId:postId
