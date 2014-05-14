@@ -177,7 +177,7 @@
 {
     NSString *text = self.commentArray[indexPath.row][@"body"];
     CGFloat height = [self commentLabelHeight:text];
-    return height + 20.0f;
+    return height + 24.0f;
 }
 
 #pragma mark - IBAction
