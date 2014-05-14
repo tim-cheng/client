@@ -6,11 +6,13 @@
 //  Copyright (c) 2014 Tim. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "PostFeedTableViewController.h"
 #import "MLApiClient.h"
 #import "MLPostInfo.h"
 #import "MLUserInfo.h"
 #import "NSDate+TimeAgo.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 #define kFeedPostTextViewHeight 228.0f
 
@@ -20,6 +22,7 @@
 @property (strong, nonatomic) NSDateFormatter *myFormatter;
 @property (weak, nonatomic) UITableViewCell *commentPostCell;
 @property (assign, nonatomic) NSInteger moreActionPostId;
+@property (weak, nonatomic) UITableViewCell *moreActionCell;
 
 
 @end
@@ -150,6 +153,7 @@
     UIImageView *img = (UIImageView*)gest.view;
     NSInteger postId = [img superview].tag - 1000;
     self.moreActionPostId = postId;
+    self.moreActionCell = (UITableViewCell *)[[img superview] superview];
     //[popup showInView:self.tableView];
     [popup showInView:[UIApplication sharedApplication].keyWindow];
 }
@@ -331,8 +335,38 @@
     NSLog(@"index = %d", buttonIndex);
     switch (buttonIndex) {
         case 0:
+        {
             NSLog(@"share on facebook");
+            if (!self.moreActionCell) {
+                return;
+            }
+            
+            UIImage *img = [self imageWithView:self.moreActionCell];
+            NSArray *permissionsNeeded = @[@"publish_actions"];
+            [FBSession openActiveSessionWithPublishPermissions:permissionsNeeded
+                                               defaultAudience:FBSessionDefaultAudienceOnlyMe
+                                                  allowLoginUI:YES
+                                             completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+                                                 if (!error) {
+                                                     NSLog(@"got publish permission");
+                                                     [FBDialogs presentOSIntegratedShareDialogModallyFrom:self
+                                                                                              initialText:@"share from ParentLink"
+                                                                                                    image:img
+                                                                                                      url:nil
+                                                                                                  handler:^(FBOSIntegratedShareDialogResult result, NSError *error) {
+                                                                                                      NSLog(@"dialog dismissed: %d, %@", result, error);
+                                                                                                  }];
+                                                     
+                                                     //                     [FBDialogs presentShareDialogWithLink:nil name:postTxt handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+                                                     //                     }];
+                                                     
+                                                 } else {
+                                                     NSLog(@"got error: %@", error);
+                                                 }
+                                             }];
+
             break;
+        }
         case 1:
         {
             UIAlertView *confirm = [[UIAlertView alloc] initWithTitle:@"Confirm"
@@ -375,4 +409,12 @@
     return [UIColor colorWithRed:rf green:gf blue:bf alpha:af];
 }
 
+- (UIImage *) imageWithView:(UIView *)view
+{
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
+}
 @end
