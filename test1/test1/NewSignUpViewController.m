@@ -7,8 +7,15 @@
 //
 
 #import "NewSignUpViewController.h"
+#import "MLApiClient.h"
 
 @interface NewSignUpViewController ()
+
+@property (strong, nonatomic) IBOutlet UITextField *emailField;
+@property (strong, nonatomic) IBOutlet UITextField *passwordField;
+@property (strong, nonatomic) IBOutlet UITextField *firstNameField;
+@property (strong, nonatomic) IBOutlet UITextField *lastNameField;
+
 
 - (IBAction)nextStep:(id)sender;
 - (IBAction)addChild:(id)sender;
@@ -18,9 +25,44 @@
 @implementation NewSignUpViewController
 
 
+- (void)viewDidLoad
+{
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+}
+
+- (void)dismissKeyboard
+{
+    [self.view endEditing:YES];
+}
+
+#pragma mark - IBAction
 - (IBAction)nextStep:(id)sender
 {
-    [self performSegueWithIdentifier:@"InviteUser" sender:self];
+    [[MLApiClient client] createUser:self.emailField.text
+                            password:self.passwordField.text
+                           firstName:self.firstNameField.text
+                            lastName:self.lastNameField.text
+                             success:^(NSHTTPURLResponse *response, id responseJSON) {
+                                 NSLog(@"user account created!");
+                                 [[MLApiClient client] setLoggedInInfoWithEmail:self.emailField.text
+                                                                       password:self.passwordField.text
+                                                                         userId:[responseJSON[@"id"] integerValue]];
+
+                                 // TODO: save cred to keychain
+                                 [self performSegueWithIdentifier:@"InviteUser" sender:self];
+                             } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+                                 // TODO: error message should come from backend
+                                 UIAlertView *warn = [[UIAlertView alloc] initWithTitle:@"Create Accout"
+                                                                                message:@"Failed to create user, please double check your email/password"
+                                                                               delegate:self
+                                                                      cancelButtonTitle:nil
+                                                                      otherButtonTitles:nil];
+                                 [warn show];
+                             }];
 }
 
 - (IBAction)addChild:(id)sender

@@ -123,6 +123,27 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
     return [self makeRequest:request success:successCallback failure:failureCallback];
 }
 
+- (NSURLRequest *)createUser:(NSString *)email
+                    password:(NSString *)password
+                   firstName:(NSString *)firstName
+                    lastName:(NSString *)lastName
+                     success:(MLApiClientSuccess)successCallback
+                     failure:(MLApiClientFailure)failureCallback
+{
+    NSString * path = @"/users";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@", self.protocol, self.baseURLString, path]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:15.0f];
+    NSString *params = [NSString stringWithFormat:@"email=%@&password=%@&first_name=%@&last_name=%@",
+        [self urlEncode:email], [self urlEncode:password], [self urlEncode:firstName], [self urlEncode:lastName]];
+    NSData *postData = [params dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    request.HTTPMethod = @"POST";
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%d", [postData length]] forHTTPHeaderField:@"Content-Length"];
+    request.HTTPBody = postData;
+    return [self makeRequest:request success:successCallback failure:failureCallback];
+}
 
 - (NSURLRequest *)makeRequest:(NSURLRequest *)request
                       success:(MLApiClientSuccess)success
