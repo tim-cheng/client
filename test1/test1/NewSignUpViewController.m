@@ -60,7 +60,7 @@
                                  NSLog(@"create account failed...");
                                  // TODO: error message should come from backend
                                  dispatch_async(dispatch_get_main_queue(), ^{
-                                     UIAlertView *warn = [[UIAlertView alloc] initWithTitle:@"Create Accout"
+                                     UIAlertView *warn = [[UIAlertView alloc] initWithTitle:@"Create Accout Failed"
                                                                                     message:@"Failed to create user, please double check your email/password"
                                                                                    delegate:self
                                                                           cancelButtonTitle:@"OK"
