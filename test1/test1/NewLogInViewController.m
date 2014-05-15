@@ -22,6 +22,7 @@
 @property (strong,nonatomic) IBOutlet FBLoginView *fbLoginView;
 
 - (IBAction)login:(id)sender;
+- (IBAction)signUp:(id)sender;
 
 @end
 
@@ -66,7 +67,6 @@
 
 - (IBAction)login:(id)sender
 {
-    
     NSString *email = self.emailField.text;
     NSString *password = self.passwordField.text;
     [[MLApiClient client] loginWithEmail:email
@@ -90,6 +90,10 @@
                                  }];
 }
 
+- (IBAction)signUp:(id)sender
+{
+    [self performSegueWithIdentifier:@"NewSignUp" sender:self];
+}
 /*
 #pragma mark - Navigation
 

@@ -34,6 +34,9 @@
 		280A68651904D2C700C2475D /* s4.png in Resources */ = {isa = PBXBuildFile; fileRef = 280A68611904D2C700C2475D /* s4.png */; };
 		28149FDF190E191200AB20D4 /* MainFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28149FDE190E191200AB20D4 /* MainFeedViewController.m */; };
 		281570B4192352B100D169B3 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2808BA8718E921EF00CC64B7 /* libWeChatSDK.a */; };
+		281570B719248C3300D169B3 /* NewSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281570B619248C3300D169B3 /* NewSignUpViewController.m */; };
+		281570BA19248D5B00D169B3 /* AddChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281570B919248D5B00D169B3 /* AddChildViewController.m */; };
+		281570BD1924908B00D169B3 /* InviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281570BC1924908B00D169B3 /* InviteViewController.m */; };
 		2819F41918F12562008DB3F6 /* RNGridMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 2819F41818F12562008DB3F6 /* RNGridMenu.m */; };
 		2819F41B18F1258A008DB3F6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2819F41A18F1258A008DB3F6 /* QuartzCore.framework */; };
 		2819F41D18F12595008DB3F6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2819F41C18F12595008DB3F6 /* Accelerate.framework */; };
@@ -127,6 +130,12 @@
 		280A68611904D2C700C2475D /* s4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s4.png; sourceTree = "<group>"; };
 		28149FDD190E191200AB20D4 /* MainFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainFeedViewController.h; sourceTree = "<group>"; };
 		28149FDE190E191200AB20D4 /* MainFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainFeedViewController.m; sourceTree = "<group>"; };
+		281570B519248C3300D169B3 /* NewSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewSignUpViewController.h; sourceTree = "<group>"; };
+		281570B619248C3300D169B3 /* NewSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewSignUpViewController.m; sourceTree = "<group>"; };
+		281570B819248D5B00D169B3 /* AddChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddChildViewController.h; sourceTree = "<group>"; };
+		281570B919248D5B00D169B3 /* AddChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddChildViewController.m; sourceTree = "<group>"; };
+		281570BB1924908B00D169B3 /* InviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteViewController.h; sourceTree = "<group>"; };
+		281570BC1924908B00D169B3 /* InviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteViewController.m; sourceTree = "<group>"; };
 		2819F41718F12562008DB3F6 /* RNGridMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNGridMenu.h; sourceTree = "<group>"; };
 		2819F41818F12562008DB3F6 /* RNGridMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNGridMenu.m; sourceTree = "<group>"; };
 		2819F41A18F1258A008DB3F6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -356,6 +365,10 @@
 				2819F41618F12541008DB3F6 /* RNGridMenu */,
 				2808BA8618E921D600CC64B7 /* WeChat */,
 				28C7AE8D18DE059F004F485D /* Main.storyboard */,
+				281570BB1924908B00D169B3 /* InviteViewController.h */,
+				281570BC1924908B00D169B3 /* InviteViewController.m */,
+				281570B819248D5B00D169B3 /* AddChildViewController.h */,
+				281570B919248D5B00D169B3 /* AddChildViewController.m */,
 				28C7AE8A18DE059F004F485D /* AppDelegate.h */,
 				28C7AE8B18DE059F004F485D /* AppDelegate.m */,
 				28C7AE9318DE059F004F485D /* Images.xcassets */,
@@ -374,6 +387,8 @@
 				286AD8B6191EC6900026CDFB /* MLPostInfo.m */,
 				28810B8D1921794600F55B24 /* CommentFeedTableViewController.h */,
 				28810B8E1921794600F55B24 /* CommentFeedTableViewController.m */,
+				281570B519248C3300D169B3 /* NewSignUpViewController.h */,
+				281570B619248C3300D169B3 /* NewSignUpViewController.m */,
 			);
 			path = test1;
 			sourceTree = "<group>";
@@ -551,11 +566,13 @@
 				2808BA5E18E881DB00CC64B7 /* UIView+viewController.m in Sources */,
 				286AD8B7191EC6900026CDFB /* MLPostInfo.m in Sources */,
 				2808BA5B18E881B100CC64B7 /* InfiniteScrollPicker.m in Sources */,
+				281570BD1924908B00D169B3 /* InviteViewController.m in Sources */,
 				2819F41918F12562008DB3F6 /* RNGridMenu.m in Sources */,
 				28C7AE8C18DE059F004F485D /* AppDelegate.m in Sources */,
 				2808BA7C18E8C87F00CC64B7 /* SWLongPressGestureRecognizer.m in Sources */,
 				2808BA7D18E8C87F00CC64B7 /* SWTableViewCell.m in Sources */,
 				28080FD51918A00100FE8EF2 /* UIImage+BlurredFrame.m in Sources */,
+				281570B719248C3300D169B3 /* NewSignUpViewController.m in Sources */,
 				2808BA5818E7C5ED00CC64B7 /* KeychainItemWrapper.m in Sources */,
 				28149FDF190E191200AB20D4 /* MainFeedViewController.m in Sources */,
 				2808BA7A18E8C87F00CC64B7 /* NSMutableArray+SWUtilityButtons.m in Sources */,
@@ -567,6 +584,7 @@
 				28810B8C1921526700F55B24 /* PostFeedTableViewController.m in Sources */,
 				28C7AE8818DE059F004F485D /* main.m in Sources */,
 				28E67A7518FBBDE2001F81E1 /* NewLogInViewController.m in Sources */,
+				281570BA19248D5B00D169B3 /* AddChildViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
