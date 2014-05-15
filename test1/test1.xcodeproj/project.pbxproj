@@ -37,6 +37,14 @@
 		281570B719248C3300D169B3 /* NewSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281570B619248C3300D169B3 /* NewSignUpViewController.m */; };
 		281570BA19248D5B00D169B3 /* AddChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281570B919248D5B00D169B3 /* AddChildViewController.m */; };
 		281570BD1924908B00D169B3 /* InviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281570BC1924908B00D169B3 /* InviteViewController.m */; };
+		281570CB1924A75700D169B3 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 281570C01924A75700D169B3 /* RECommonFunctions.m */; };
+		281570CC1924A75700D169B3 /* REFrostedContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281570C21924A75700D169B3 /* REFrostedContainerViewController.m */; };
+		281570CD1924A75700D169B3 /* REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281570C41924A75700D169B3 /* REFrostedViewController.m */; };
+		281570CE1924A75700D169B3 /* UIImage+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281570C61924A75700D169B3 /* UIImage+REFrostedViewController.m */; };
+		281570CF1924A75700D169B3 /* UIView+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281570C81924A75700D169B3 /* UIView+REFrostedViewController.m */; };
+		281570D01924A75700D169B3 /* UIViewController+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281570CA1924A75700D169B3 /* UIViewController+REFrostedViewController.m */; };
+		281570D91924AC3A00D169B3 /* SettingMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281570D81924AC3A00D169B3 /* SettingMenuViewController.m */; };
+		281570DC192511CD00D169B3 /* MainRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281570DB192511CD00D169B3 /* MainRootViewController.m */; };
 		2819F41918F12562008DB3F6 /* RNGridMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 2819F41818F12562008DB3F6 /* RNGridMenu.m */; };
 		2819F41B18F1258A008DB3F6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2819F41A18F1258A008DB3F6 /* QuartzCore.framework */; };
 		2819F41D18F12595008DB3F6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2819F41C18F12595008DB3F6 /* Accelerate.framework */; };
@@ -136,6 +144,22 @@
 		281570B919248D5B00D169B3 /* AddChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddChildViewController.m; sourceTree = "<group>"; };
 		281570BB1924908B00D169B3 /* InviteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteViewController.h; sourceTree = "<group>"; };
 		281570BC1924908B00D169B3 /* InviteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteViewController.m; sourceTree = "<group>"; };
+		281570BF1924A75700D169B3 /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
+		281570C01924A75700D169B3 /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
+		281570C11924A75700D169B3 /* REFrostedContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REFrostedContainerViewController.h; sourceTree = "<group>"; };
+		281570C21924A75700D169B3 /* REFrostedContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REFrostedContainerViewController.m; sourceTree = "<group>"; };
+		281570C31924A75700D169B3 /* REFrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REFrostedViewController.h; sourceTree = "<group>"; };
+		281570C41924A75700D169B3 /* REFrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REFrostedViewController.m; sourceTree = "<group>"; };
+		281570C51924A75700D169B3 /* UIImage+REFrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+REFrostedViewController.h"; sourceTree = "<group>"; };
+		281570C61924A75700D169B3 /* UIImage+REFrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+REFrostedViewController.m"; sourceTree = "<group>"; };
+		281570C71924A75700D169B3 /* UIView+REFrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+REFrostedViewController.h"; sourceTree = "<group>"; };
+		281570C81924A75700D169B3 /* UIView+REFrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+REFrostedViewController.m"; sourceTree = "<group>"; };
+		281570C91924A75700D169B3 /* UIViewController+REFrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+REFrostedViewController.h"; sourceTree = "<group>"; };
+		281570CA1924A75700D169B3 /* UIViewController+REFrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+REFrostedViewController.m"; sourceTree = "<group>"; };
+		281570D71924AC3A00D169B3 /* SettingMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingMenuViewController.h; sourceTree = "<group>"; };
+		281570D81924AC3A00D169B3 /* SettingMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingMenuViewController.m; sourceTree = "<group>"; };
+		281570DA192511CD00D169B3 /* MainRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainRootViewController.h; sourceTree = "<group>"; };
+		281570DB192511CD00D169B3 /* MainRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainRootViewController.m; sourceTree = "<group>"; };
 		2819F41718F12562008DB3F6 /* RNGridMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNGridMenu.h; sourceTree = "<group>"; };
 		2819F41818F12562008DB3F6 /* RNGridMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNGridMenu.m; sourceTree = "<group>"; };
 		2819F41A18F1258A008DB3F6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -254,6 +278,25 @@
 			name = WeChat;
 			sourceTree = "<group>";
 		};
+		281570BE1924A72600D169B3 /* REFrostedViewController */ = {
+			isa = PBXGroup;
+			children = (
+				281570BF1924A75700D169B3 /* RECommonFunctions.h */,
+				281570C01924A75700D169B3 /* RECommonFunctions.m */,
+				281570C11924A75700D169B3 /* REFrostedContainerViewController.h */,
+				281570C21924A75700D169B3 /* REFrostedContainerViewController.m */,
+				281570C31924A75700D169B3 /* REFrostedViewController.h */,
+				281570C41924A75700D169B3 /* REFrostedViewController.m */,
+				281570C51924A75700D169B3 /* UIImage+REFrostedViewController.h */,
+				281570C61924A75700D169B3 /* UIImage+REFrostedViewController.m */,
+				281570C71924A75700D169B3 /* UIView+REFrostedViewController.h */,
+				281570C81924A75700D169B3 /* UIView+REFrostedViewController.m */,
+				281570C91924A75700D169B3 /* UIViewController+REFrostedViewController.h */,
+				281570CA1924A75700D169B3 /* UIViewController+REFrostedViewController.m */,
+			);
+			name = REFrostedViewController;
+			sourceTree = "<group>";
+		};
 		2819F41618F12541008DB3F6 /* RNGridMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +398,7 @@
 		28C7AE8118DE059F004F485D /* test1 */ = {
 			isa = PBXGroup;
 			children = (
+				281570BE1924A72600D169B3 /* REFrostedViewController */,
 				28080FD019189FD600FE8EF2 /* UIImageBlur */,
 				28080FA9191690C900FE8EF2 /* Original */,
 				28080FA81916909500FE8EF2 /* third-party */,
@@ -389,6 +433,10 @@
 				28810B8E1921794600F55B24 /* CommentFeedTableViewController.m */,
 				281570B519248C3300D169B3 /* NewSignUpViewController.h */,
 				281570B619248C3300D169B3 /* NewSignUpViewController.m */,
+				281570D71924AC3A00D169B3 /* SettingMenuViewController.h */,
+				281570D81924AC3A00D169B3 /* SettingMenuViewController.m */,
+				281570DA192511CD00D169B3 /* MainRootViewController.h */,
+				281570DB192511CD00D169B3 /* MainRootViewController.m */,
 			);
 			path = test1;
 			sourceTree = "<group>";
@@ -561,10 +609,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				28810B8F1921794600F55B24 /* CommentFeedTableViewController.m in Sources */,
+				281570CC1924A75700D169B3 /* REFrostedContainerViewController.m in Sources */,
+				281570D91924AC3A00D169B3 /* SettingMenuViewController.m in Sources */,
+				281570CF1924A75700D169B3 /* UIView+REFrostedViewController.m in Sources */,
 				288FB5B618E1EA8300214DC5 /* NSDate+TimeAgo.m in Sources */,
+				281570D01924A75700D169B3 /* UIViewController+REFrostedViewController.m in Sources */,
 				28080FA719161C7100FE8EF2 /* MLApiClient.m in Sources */,
+				281570DC192511CD00D169B3 /* MainRootViewController.m in Sources */,
 				2808BA5E18E881DB00CC64B7 /* UIView+viewController.m in Sources */,
 				286AD8B7191EC6900026CDFB /* MLPostInfo.m in Sources */,
+				281570CE1924A75700D169B3 /* UIImage+REFrostedViewController.m in Sources */,
 				2808BA5B18E881B100CC64B7 /* InfiniteScrollPicker.m in Sources */,
 				281570BD1924908B00D169B3 /* InviteViewController.m in Sources */,
 				2819F41918F12562008DB3F6 /* RNGridMenu.m in Sources */,
@@ -572,9 +626,11 @@
 				2808BA7C18E8C87F00CC64B7 /* SWLongPressGestureRecognizer.m in Sources */,
 				2808BA7D18E8C87F00CC64B7 /* SWTableViewCell.m in Sources */,
 				28080FD51918A00100FE8EF2 /* UIImage+BlurredFrame.m in Sources */,
+				281570CD1924A75700D169B3 /* REFrostedViewController.m in Sources */,
 				281570B719248C3300D169B3 /* NewSignUpViewController.m in Sources */,
 				2808BA5818E7C5ED00CC64B7 /* KeychainItemWrapper.m in Sources */,
 				28149FDF190E191200AB20D4 /* MainFeedViewController.m in Sources */,
+				281570CB1924A75700D169B3 /* RECommonFunctions.m in Sources */,
 				2808BA7A18E8C87F00CC64B7 /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				2808BA7F18E8C87F00CC64B7 /* SWUtilityButtonView.m in Sources */,
 				2808BA7B18E8C87F00CC64B7 /* SWCellScrollView.m in Sources */,

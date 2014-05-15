@@ -93,6 +93,13 @@
     self.profileImage.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.profileImage.layer.cornerRadius = 20;
     self.profileImage.clipsToBounds = YES;
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]
+                                         initWithTarget:self
+                                         action:@selector(tapOnProf:)];
+    [singleTap setNumberOfTapsRequired:1];
+    self.profileImage.userInteractionEnabled = YES;
+    [self.profileImage addGestureRecognizer:singleTap];
+
     
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     
@@ -117,6 +124,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)tapOnProf:(UITapGestureRecognizer *)gest
+{
+    [self.frostedViewController presentMenuViewController];
 }
 
 
