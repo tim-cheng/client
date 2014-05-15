@@ -42,6 +42,8 @@
 #pragma mark - IBAction
 - (IBAction)nextStep:(id)sender
 {
+    // TODO: email/password/validation
+    
     [[MLApiClient client] createUser:self.emailField.text
                             password:self.passwordField.text
                            firstName:self.firstNameField.text
@@ -55,13 +57,16 @@
                                  // TODO: save cred to keychain
                                  [self performSegueWithIdentifier:@"InviteUser" sender:self];
                              } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+                                 NSLog(@"create account failed...");
                                  // TODO: error message should come from backend
-                                 UIAlertView *warn = [[UIAlertView alloc] initWithTitle:@"Create Accout"
-                                                                                message:@"Failed to create user, please double check your email/password"
-                                                                               delegate:self
-                                                                      cancelButtonTitle:nil
-                                                                      otherButtonTitles:nil];
-                                 [warn show];
+                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                     UIAlertView *warn = [[UIAlertView alloc] initWithTitle:@"Create Accout"
+                                                                                    message:@"Failed to create user, please double check your email/password"
+                                                                                   delegate:self
+                                                                          cancelButtonTitle:@"OK"
+                                                                          otherButtonTitles:nil];
+                                     [warn show];
+                                 });
                              }];
 }
 
