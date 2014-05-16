@@ -55,7 +55,9 @@
                                                                          userId:[responseJSON[@"id"] integerValue]];
 
                                  // TODO: save cred to keychain
-                                 [self performSegueWithIdentifier:@"InviteUser" sender:self];
+                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                     [self performSegueWithIdentifier:@"InviteUser" sender:self];
+                                 });
                              } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
                                  NSLog(@"create account failed...");
                                  // TODO: error message should come from backend
