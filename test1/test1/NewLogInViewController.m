@@ -131,7 +131,7 @@
                               success:^(NSHTTPURLResponse *response, id responseJSON) {
                                   NSLog(@"!!!!!FB Login succeeded!!!!, %@", responseJSON);
                                   [[MLApiClient client] setLoggedInInfoWithEmail:loginEmail
-                                                                        password:@"fAcEbOoK"
+                                                                        password:accessToken
                                                                           userId:[responseJSON[@"id"] integerValue]];
                                   if (response.statusCode == 201) {
                                       // just created new user, need to upload photo
