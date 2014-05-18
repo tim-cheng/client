@@ -8,13 +8,14 @@
 
 #import <FacebookSDK/FacebookSDK.h>
 #import "InviteViewController.h"
+#import "MainFeedViewController.h"
 
 
 @interface InviteViewController () <FBFriendPickerDelegate>
 
 @property (strong, nonatomic) FBFriendPickerViewController *friendPickerController;
 
-- (IBAction)finishInvite:(id)sender;
+- (IBAction)tapBack:(id)sender;
 - (IBAction)selectFacebook:(id)sender;
 
 @end
@@ -28,9 +29,13 @@
 
 
 #pragma mark - IBAction
-- (IBAction)finishInvite:(id)sender
+- (IBAction)tapBack:(id)sender
 {
-    [self performSegueWithIdentifier:@"FinishInvite" sender:self];
+    UINavigationController *navigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentController"];
+    
+    MainFeedViewController *feedController = [self.storyboard instantiateViewControllerWithIdentifier:@"feedController"];
+    navigationController.viewControllers = @[feedController];
+    self.frostedViewController.contentViewController = navigationController;
 }
 
 - (IBAction)selectFacebook:(id)sender

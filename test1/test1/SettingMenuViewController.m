@@ -9,8 +9,13 @@
 #import "SettingMenuViewController.h"
 #import "MLUserInfo.h"
 #import "MLApiClient.h"
+#import "MainFeedViewController.h"
+#import "ActivityTableViewController.h"
+#import "UserProfileViewController.h"
+#import "InviteViewController.h"
 
-@interface SettingMenuViewController () <UITableViewDataSource>
+
+@interface SettingMenuViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *profPicView;
 @property (strong, nonatomic) IBOutlet UITableView *settingsView;
@@ -27,18 +32,19 @@
     self.profPicView.image = [[MLUserInfo instance] userPicture:[MLApiClient client].userId];
     
     self.settingsView.dataSource = self;
+    self.settingsView.delegate = self;
     self.iconArray = @[
                        [UIImage imageNamed:@"profile_96.png"],
+                       [UIImage imageNamed:@"connect_96.png"],
                        [UIImage imageNamed:@"message_96.png"],
                        [UIImage imageNamed:@"setting_96.png"],
-                       [UIImage imageNamed:@"connect_96.png"],
                        [UIImage imageNamed:@"support_96.png"],
                        ];
     self.labelArray = @[
                         @"Profile",
-                        @"Message",
+                        @"Contacts",
+                        @"Activities",
                         @"Setting",
-                        @"Invite",
                         @"Support",
                         ];
 }
@@ -69,5 +75,27 @@
     return cell;
 
 }
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UINavigationController *navigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentController"];
+    
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        UserProfileViewController *profileController = [self.storyboard instantiateViewControllerWithIdentifier:@"profileController"];
+        navigationController.viewControllers = @[profileController];
+    } else if (indexPath.section == 0 && indexPath.row == 1) {
+        InviteViewController *contactController = [self.storyboard instantiateViewControllerWithIdentifier:@"contactController"];
+        navigationController.viewControllers = @[contactController];
+    } else if (indexPath.section == 0 && indexPath.row == 2) {
+        ActivityTableViewController *activityController = [self.storyboard instantiateViewControllerWithIdentifier:@"activityController"];
+        navigationController.viewControllers = @[activityController];
+    }
+    self.frostedViewController.contentViewController = navigationController;
+    [self.frostedViewController hideMenuViewController];
+}
+
 
 @end
