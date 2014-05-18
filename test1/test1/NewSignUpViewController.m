@@ -56,7 +56,7 @@
 
                                  // TODO: save cred to keychain
                                  dispatch_async(dispatch_get_main_queue(), ^{
-                                     [self performSegueWithIdentifier:@"InviteUser" sender:self];
+                                     [self performSegueWithIdentifier:@"GoMain" sender:self];
                                  });
                              } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
                                  NSLog(@"create account failed...");

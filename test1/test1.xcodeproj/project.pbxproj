@@ -80,6 +80,8 @@
 		28C7AE9D18DE059F004F485D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C7AE7F18DE059F004F485D /* UIKit.framework */; };
 		28C7AEA518DE059F004F485D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 28C7AEA318DE059F004F485D /* InfoPlist.strings */; };
 		28C7AEA718DE059F004F485D /* test1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C7AEA618DE059F004F485D /* test1Tests.m */; };
+		28D16CFB1929116100BCC820 /* ActivityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D16CFA1929116100BCC820 /* ActivityTableViewController.m */; };
+		28D16CFE1929118400BCC820 /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D16CFD1929118400BCC820 /* UserProfileViewController.m */; };
 		28E67A7518FBBDE2001F81E1 /* NewLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E67A7418FBBDE2001F81E1 /* NewLogInViewController.m */; };
 		28F00EAD191A1A2200DC2F42 /* compose2_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F00EAB191A1A2200DC2F42 /* compose2_64.png */; };
 		28F00EB0191A1C3900DC2F42 /* post_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F00EAF191A1C3900DC2F42 /* post_64.png */; };
@@ -210,6 +212,10 @@
 		28C7AEA218DE059F004F485D /* test1Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "test1Tests-Info.plist"; sourceTree = "<group>"; };
 		28C7AEA418DE059F004F485D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		28C7AEA618DE059F004F485D /* test1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = test1Tests.m; sourceTree = "<group>"; };
+		28D16CF91929116100BCC820 /* ActivityTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityTableViewController.h; sourceTree = "<group>"; };
+		28D16CFA1929116100BCC820 /* ActivityTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityTableViewController.m; sourceTree = "<group>"; };
+		28D16CFC1929118400BCC820 /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileViewController.h; sourceTree = "<group>"; };
+		28D16CFD1929118400BCC820 /* UserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileViewController.m; sourceTree = "<group>"; };
 		28E67A7318FBBDE2001F81E1 /* NewLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewLogInViewController.h; sourceTree = "<group>"; };
 		28E67A7418FBBDE2001F81E1 /* NewLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLogInViewController.m; sourceTree = "<group>"; };
 		28F00EAB191A1A2200DC2F42 /* compose2_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compose2_64.png; sourceTree = "<group>"; };
@@ -447,6 +453,10 @@
 				281570D81924AC3A00D169B3 /* SettingMenuViewController.m */,
 				281570DA192511CD00D169B3 /* MainRootViewController.h */,
 				281570DB192511CD00D169B3 /* MainRootViewController.m */,
+				28D16CF91929116100BCC820 /* ActivityTableViewController.h */,
+				28D16CFA1929116100BCC820 /* ActivityTableViewController.m */,
+				28D16CFC1929118400BCC820 /* UserProfileViewController.h */,
+				28D16CFD1929118400BCC820 /* UserProfileViewController.m */,
 			);
 			path = test1;
 			sourceTree = "<group>";
@@ -646,7 +656,9 @@
 				2808BA7C18E8C87F00CC64B7 /* SWLongPressGestureRecognizer.m in Sources */,
 				2808BA7D18E8C87F00CC64B7 /* SWTableViewCell.m in Sources */,
 				28080FD51918A00100FE8EF2 /* UIImage+BlurredFrame.m in Sources */,
+				28D16CFB1929116100BCC820 /* ActivityTableViewController.m in Sources */,
 				281570CD1924A75700D169B3 /* REFrostedViewController.m in Sources */,
+				28D16CFE1929118400BCC820 /* UserProfileViewController.m in Sources */,
 				281570B719248C3300D169B3 /* NewSignUpViewController.m in Sources */,
 				2808BA5818E7C5ED00CC64B7 /* KeychainItemWrapper.m in Sources */,
 				28149FDF190E191200AB20D4 /* MainFeedViewController.m in Sources */,
