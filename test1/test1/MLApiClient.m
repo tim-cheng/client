@@ -422,6 +422,22 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
     return [self makeRequest:request success:successCallback failure:failureCallback];
 }
 
+- (NSURLRequest *)inviteUserFromId:(NSInteger)userId
+                          inviteId:(NSInteger)inviteId
+                           success:(MLApiClientSuccess)successCallback
+                           failure:(MLApiClientFailure)failureCallback
+{
+    NSInteger uid = (userId < 0) ? self.loggedInUserId : userId;
+    NSString * path = @"/users";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/%d/invite/%d", self.protocol, self.baseURLString, path, uid, inviteId]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:15.0f];
+    request.HTTPMethod = @"POST";
+    [request setValue:self.loggedInAuth forHTTPHeaderField:@"Authorization"];
+    return [self makeRequest:request success:successCallback failure:failureCallback];
+}
+
 - (NSURL *)userPictureUrl:(NSInteger)userId
 {
     NSInteger uid = (userId < 0) ? self.loggedInUserId : userId;

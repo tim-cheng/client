@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSMutableArray *userIds;
 
 - (IBAction)tapBack:(id)sender;
+- (IBAction)tapInvite:(UIButton *)button;
 @end
 
 @implementation FindUserViewController
@@ -76,9 +77,11 @@
     }
 
     NSDictionary *userInfo = (NSDictionary *)self.userIds[indexPath.row];
+    NSInteger userId = [userInfo[@"id"] integerValue];
+    cell.tag = userId;
     UIImageView *pic = (UIImageView *)[cell.contentView viewWithTag:10];
     if (pic) {
-        pic.image = [[MLUserInfo instance] userPicture:[userInfo[@"id"] integerValue]];
+        pic.image = [[MLUserInfo instance] userPicture:userId];
     }
     
     UILabel *nameLabel = (UILabel *)[cell.contentView viewWithTag:11];
@@ -91,6 +94,10 @@
         locationLabel.text = @"San Jose, California";
     }
     
+    UIButton *inviteButton = (UIButton *)[cell.contentView viewWithTag:13];
+    if (inviteButton) {
+        inviteButton.imageView.image = [UIImage imageNamed:@"adduser_64.png"];
+    }
     return cell;
 }
 
@@ -117,4 +124,21 @@
         });
     }];
 }
+
+#pragma mark - IBAction
+- (IBAction)tapInvite:(UIButton *)button
+{
+    NSLog(@"tapped invite");
+    
+    NSInteger inviteUser = [[[button superview] superview] superview].tag;
+    [[MLApiClient client] inviteUserFromId:kApiClientUserSelf inviteId:inviteUser success:^(NSHTTPURLResponse *response, id responseJSON) {
+        NSLog(@"user %d invited", inviteUser);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            button.imageView.image = [UIImage imageNamed:@"check_64.png"];
+        });
+    } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+        NSLog(@"user invite failed");
+    }];
+}
+
 @end

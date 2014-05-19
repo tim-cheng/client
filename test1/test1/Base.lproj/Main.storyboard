@@ -693,6 +693,9 @@
                                                     <state key="normal" image="adduser_64.png">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="tapInvite:" destination="X0A-lX-e6r" eventType="touchUpInside" id="ckC-Lm-c9k"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
