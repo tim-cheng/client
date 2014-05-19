@@ -114,11 +114,11 @@
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
-                                        <imageView userInteractionEnabled="NO" tag="16" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="comment_off_24.png" highlightedImage="comment_on_24.png" id="tj9-fp-2bR">
+                                        <imageView userInteractionEnabled="NO" tag="16" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="comment_off_32.png" highlightedImage="comment_on_32.png" id="tj9-fp-2bR">
                                             <rect key="frame" x="204" y="275" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" tag="17" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart_off_24.png" highlightedImage="heart_on_24.png" id="uUB-8x-tlb">
+                                        <imageView userInteractionEnabled="NO" tag="17" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart_off_32.png" highlightedImage="heart_on_32.png" id="uUB-8x-tlb">
                                             <rect key="frame" x="258" y="275" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
@@ -126,12 +126,14 @@
                                             <rect key="frame" x="239" y="282" width="16" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="13" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lEo-cO-xjI">
                                             <rect key="frame" x="291" y="282" width="16" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" tag="19" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="more_64.png" id="GES-c4-Iwx">
@@ -836,11 +838,11 @@
     <resources>
         <image name="adduser_64.png" width="64" height="64"/>
         <image name="camera_64.png" width="64" height="64"/>
-        <image name="comment_off_24.png" width="24" height="24"/>
-        <image name="comment_on_24.png" width="24" height="24"/>
+        <image name="comment_off_32.png" width="32" height="32"/>
+        <image name="comment_on_32.png" width="32" height="32"/>
         <image name="compose2_64.png" width="64" height="64"/>
-        <image name="heart_off_24.png" width="24" height="24"/>
-        <image name="heart_on_24.png" width="24" height="24"/>
+        <image name="heart_off_32.png" width="32" height="32"/>
+        <image name="heart_on_32.png" width="32" height="32"/>
         <image name="more_64.png" width="64" height="64"/>
         <image name="post_64.png" width="64" height="64"/>
         <image name="return_64.png" width="64" height="64"/>
