@@ -34,10 +34,9 @@
 
 - (id)init
 {
-//    return [self initWithProtocol:@"http" baseURLString:@"localhost:8080"];
+    return [self initWithProtocol:@"http" baseURLString:@"localhost:8080"];
 //    return [self initWithProtocol:@"http" baseURLString:@"192.168.0.102:8080"];
-    return [self initWithProtocol:@"https" baseURLString:@"parent2d.com"];
-
+//    return [self initWithProtocol:@"https" baseURLString:@"parent2d.com"];
 }
 
 - (id)initWithProtocol:(NSString *)protocol baseURLString:(NSString *)baseURLString
@@ -405,6 +404,20 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
                                                        timeoutInterval:15.0f];
     
     request.HTTPMethod = enable ? @"PUT" : @"DELETE";
+    [request setValue:self.loggedInAuth forHTTPHeaderField:@"Authorization"];
+    return [self makeRequest:request success:successCallback failure:failureCallback];
+}
+
+- (NSURLRequest *)findUser:(NSString *)name
+                   success:(MLApiClientSuccess)successCallback
+                   failure:(MLApiClientFailure)failureCallback
+{
+    NSString * path = @"/users";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@?search=%@", self.protocol, self.baseURLString, path, [self urlEncode:name]]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:15.0f];
+    request.HTTPMethod = @"GET";
     [request setValue:self.loggedInAuth forHTTPHeaderField:@"Authorization"];
     return [self makeRequest:request success:successCallback failure:failureCallback];
 }

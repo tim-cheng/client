@@ -7,14 +7,24 @@
 //
 
 #import "FindUserViewController.h"
+#import "MLApiClient.h"
 
-@interface FindUserViewController () <UITableViewDataSource>
+@interface FindUserViewController () <UITableViewDataSource, UISearchBarDelegate>
+
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet UITableView *resultsView;
 
 - (IBAction)tapBack:(id)sender;
 @end
 
 @implementation FindUserViewController
 
+
+- (void)viewDidLoad
+{
+    self.searchBar.delegate = self;
+    self.resultsView.dataSource = self;
+}
 
 - (IBAction)tapBack:(id)sender
 {
@@ -31,5 +41,20 @@
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return nil;
+}
+
+#pragma mark - UISearchBarDelegate
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    NSLog(@"start editing");
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [[MLApiClient client] findUser:searchBar.text success:^(NSHTTPURLResponse *response, id responseJSON) {
+        NSLog(@"search success: %@", (NSDictionary *)responseJSON);
+    } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+        NSLog(@"search failed: %@", responseJSON);
+    }];
 }
 @end
