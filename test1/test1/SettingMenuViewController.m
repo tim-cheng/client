@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Tim. All rights reserved.
 //
 
+#import <FacebookSDK/FacebookSDK.h>
 #import "SettingMenuViewController.h"
 #import "MLUserInfo.h"
 #import "MLApiClient.h"
@@ -37,15 +38,13 @@
                        [UIImage imageNamed:@"profile_96.png"],
                        [UIImage imageNamed:@"connect_96.png"],
                        [UIImage imageNamed:@"message_96.png"],
-                       [UIImage imageNamed:@"setting_96.png"],
                        [UIImage imageNamed:@"support_96.png"],
                        ];
     self.labelArray = @[
                         @"Profile",
                         @"Contacts",
                         @"Activities",
-                        @"Setting",
-                        @"Support",
+                        @"Logout",
                         ];
 }
 
@@ -53,7 +52,7 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return 4;
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -92,6 +91,9 @@
     } else if (indexPath.section == 0 && indexPath.row == 2) {
         ActivityTableViewController *activityController = [self.storyboard instantiateViewControllerWithIdentifier:@"activityController"];
         navigationController.viewControllers = @[activityController];
+    } else if (indexPath.section == 0 && indexPath.row == 3) {
+        [FBSession.activeSession closeAndClearTokenInformation];
+        [self.frostedViewController performSegueWithIdentifier:@"LogoutMain" sender:self.frostedViewController];
     }
     self.frostedViewController.contentViewController = navigationController;
     [self.frostedViewController hideMenuViewController];
