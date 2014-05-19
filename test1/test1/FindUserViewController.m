@@ -8,11 +8,13 @@
 
 #import "FindUserViewController.h"
 #import "MLApiClient.h"
+#import "MLUserInfo.h"
 
 @interface FindUserViewController () <UITableViewDataSource, UISearchBarDelegate>
 
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UITableView *resultsView;
+@property (strong, nonatomic) NSMutableArray *userIds;
 
 - (IBAction)tapBack:(id)sender;
 @end
@@ -22,8 +24,35 @@
 
 - (void)viewDidLoad
 {
+    self.userIds = [[NSMutableArray alloc] init];
     self.searchBar.delegate = self;
     self.resultsView.dataSource = self;
+}
+
+- (void)clearUsers
+{
+    if ([self.userIds count] > 0) {
+        [self.resultsView beginUpdates];
+        NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+        for (int i=0; i<[self.userIds count]; i++) {
+            [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+        }
+        [self.resultsView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+        [self.userIds removeAllObjects];
+        [indexPaths removeAllObjects];
+        [self.resultsView endUpdates];
+    }
+}
+
+- (void)loadUsers
+{
+    [self.resultsView beginUpdates];
+    NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+    for (int i=0; i<[self.userIds count]; i++) {
+        [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+    }
+    [self.resultsView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+    [self.resultsView endUpdates];
 }
 
 - (IBAction)tapBack:(id)sender
@@ -35,12 +64,34 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return [self.userIds count];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    static NSString *cellIdentifier = @"FindUserCell";
+    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+    }
+
+    NSDictionary *userInfo = (NSDictionary *)self.userIds[indexPath.row];
+    UIImageView *pic = (UIImageView *)[cell.contentView viewWithTag:10];
+    if (pic) {
+        pic.image = [[MLUserInfo instance] userPicture:[userInfo[@"id"] integerValue]];
+    }
+    
+    UILabel *nameLabel = (UILabel *)[cell.contentView viewWithTag:11];
+    if (nameLabel) {
+        nameLabel.text = [NSString stringWithFormat:@"%@ %@", userInfo[@"first_name"], userInfo[@"last_name"]];
+    }
+    
+    UILabel *locationLabel = (UILabel *)[cell.contentView viewWithTag:12];
+    if (locationLabel) {
+        locationLabel.text = @"San Jose, California";
+    }
+    
+    return cell;
 }
 
 #pragma mark - UISearchBarDelegate
@@ -53,8 +104,17 @@
 {
     [[MLApiClient client] findUser:searchBar.text success:^(NSHTTPURLResponse *response, id responseJSON) {
         NSLog(@"search success: %@", (NSDictionary *)responseJSON);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self clearUsers];
+            [self.userIds addObjectsFromArray:responseJSON];
+            [self loadUsers];
+        });
     } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
         NSLog(@"search failed: %@", responseJSON);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self clearUsers];
+            [self.view endEditing:YES];
+        });
     }];
 }
 @end
