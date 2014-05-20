@@ -12,6 +12,7 @@
 #import "MLApiClient.h"
 #import "KeychainItemWrapper.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import <Parse/Parse.h>
 
 @interface NewLogInViewController () <FBLoginViewDelegate>
 
@@ -65,6 +66,14 @@
 {
 }
 
+- (void)subscribePush:(NSInteger)userId
+{
+    NSString *parseChannel = [NSString stringWithFormat:@"user_%d", userId];
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation addUniqueObject:parseChannel forKey:@"channels"];
+    [currentInstallation saveInBackground];
+}
+
 - (IBAction)login:(id)sender
 {
     NSString *email = self.emailField.text;
@@ -76,6 +85,8 @@
                                      [[MLApiClient client] setLoggedInInfoWithEmail:email
                                                                            password:password
                                                                              userId:[responseJSON[@"id"] integerValue]];
+                                     
+                                     [self subscribePush:[responseJSON[@"id"] integerValue]];
                                      // save credential to keychain
                                      [self.keychainItem setObject:[self.passwordField.text dataUsingEncoding:NSUTF8StringEncoding]
                                                            forKey:(__bridge id)kSecValueData];
@@ -133,6 +144,7 @@
                                   [[MLApiClient client] setLoggedInInfoWithEmail:loginEmail
                                                                         password:accessToken
                                                                           userId:[responseJSON[@"id"] integerValue]];
+                                  [self subscribePush:[responseJSON[@"id"] integerValue]];
                                   if (response.statusCode == 201) {
                                       // just created new user, need to upload photo
                                       NSLog(@"new FB user created!!!");
