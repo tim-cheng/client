@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 # import <FacebookSDK/FacebookSDK.h>
 #import "WXApi.h"
+#import <Parse/Parse.h>
 
 @implementation AppDelegate
 
@@ -19,9 +20,16 @@
     
     [WXApi registerApp:@"wx8cf2405f83961488" withDescription:@"ParenLink"];
     
+    [Parse setApplicationId:@"hR6yp7Uqz7B0JL8mflpbGKiQa9jsZS4IFFfToHxC"
+                  clientKey:@"K8Vez10WZXmrUh36mfRBgbn4pchGndmBm3sjJnQF"];
+    
+    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|
+                                                    UIRemoteNotificationTypeAlert|
+                                                    UIRemoteNotificationTypeSound];
+    
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -79,5 +87,18 @@
 //{
 //    return  [WXApi handleOpenURL:url delegate:_sendMsgToWechatMgr];
 //}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    // Store the deviceToken in the current installation and save it to Parse.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation saveInBackground];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    [PFPush handlePush:userInfo];
+}
 
 @end
