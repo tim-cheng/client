@@ -88,6 +88,10 @@
 		28E67A7518FBBDE2001F81E1 /* NewLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E67A7418FBBDE2001F81E1 /* NewLogInViewController.m */; };
 		28F00EAD191A1A2200DC2F42 /* compose2_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F00EAB191A1A2200DC2F42 /* compose2_64.png */; };
 		28F00EB0191A1C3900DC2F42 /* post_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F00EAF191A1C3900DC2F42 /* post_64.png */; };
+		28F0C945192B096D00585125 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F0C944192B096D00585125 /* Parse.framework */; };
+		28F0C947192B098900585125 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F0C946192B098900585125 /* AudioToolbox.framework */; };
+		28F0C949192B099900585125 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F0C948192B099900585125 /* StoreKit.framework */; };
+		28F0C94B192B09D000585125 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F0C94A192B09D000585125 /* MobileCoreServices.framework */; };
 		28F1BBE118E14DD000C59302 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F1BBE018E14DD000C59302 /* libstdc++.dylib */; };
 		28F1BBE318E14DDB00C59302 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F1BBE218E14DDB00C59302 /* libicucore.dylib */; };
 /* End PBXBuildFile section */
@@ -227,6 +231,10 @@
 		28E67A7418FBBDE2001F81E1 /* NewLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewLogInViewController.m; sourceTree = "<group>"; };
 		28F00EAB191A1A2200DC2F42 /* compose2_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compose2_64.png; sourceTree = "<group>"; };
 		28F00EAF191A1C3900DC2F42 /* post_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = post_64.png; sourceTree = "<group>"; };
+		28F0C944192B096D00585125 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../Parse.framework; sourceTree = "<group>"; };
+		28F0C946192B098900585125 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		28F0C948192B099900585125 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		28F0C94A192B09D000585125 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		28F1BBE018E14DD000C59302 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		28F1BBE218E14DDB00C59302 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -236,6 +244,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28F0C94B192B09D000585125 /* MobileCoreServices.framework in Frameworks */,
+				28F0C949192B099900585125 /* StoreKit.framework in Frameworks */,
+				28F0C947192B098900585125 /* AudioToolbox.framework in Frameworks */,
+				28F0C945192B096D00585125 /* Parse.framework in Frameworks */,
 				281570B4192352B100D169B3 /* libWeChatSDK.a in Frameworks */,
 				2893CB991920ADD800F7E6B8 /* FacebookSDK.framework in Frameworks */,
 				2819F41D18F12595008DB3F6 /* Accelerate.framework in Frameworks */,
@@ -400,6 +412,10 @@
 		28C7AE7A18DE059F004F485D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				28F0C94A192B09D000585125 /* MobileCoreServices.framework */,
+				28F0C948192B099900585125 /* StoreKit.framework */,
+				28F0C946192B098900585125 /* AudioToolbox.framework */,
+				28F0C944192B096D00585125 /* Parse.framework */,
 				2893CB981920ADD800F7E6B8 /* FacebookSDK.framework */,
 				2819F41C18F12595008DB3F6 /* Accelerate.framework */,
 				2819F41A18F1258A008DB3F6 /* QuartzCore.framework */,
@@ -819,6 +835,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					../,
 					"$(inherited)",
+					/Users/timcheng/tutor,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "test1/test1-Prefix.pch";
@@ -849,6 +866,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					../,
 					"$(inherited)",
+					/Users/timcheng/tutor,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "test1/test1-Prefix.pch";
