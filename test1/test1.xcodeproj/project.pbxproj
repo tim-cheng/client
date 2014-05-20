@@ -589,7 +589,7 @@
 				ORGANIZATIONNAME = Tim;
 				TargetAttributes = {
 					28C7AE7718DE059F004F485D = {
-						DevelopmentTeam = 8CCURL78W6;
+						DevelopmentTeam = 32CLVGCA49;
 					};
 					28C7AE9818DE059F004F485D = {
 						TestTargetID = 28C7AE7718DE059F004F485D;
