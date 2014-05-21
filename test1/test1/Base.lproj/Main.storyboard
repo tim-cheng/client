@@ -136,7 +136,7 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" tag="19" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="more_64.png" id="GES-c4-Iwx">
+                                        <imageView userInteractionEnabled="NO" tag="19" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="more_32.png" id="GES-c4-Iwx">
                                             <rect key="frame" x="164" y="275" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
@@ -875,7 +875,7 @@
         <image name="compose2_64.png" width="64" height="64"/>
         <image name="heart_off_32.png" width="32" height="32"/>
         <image name="heart_on_32.png" width="32" height="32"/>
-        <image name="more_64.png" width="64" height="64"/>
+        <image name="more_32.png" width="32" height="32"/>
         <image name="post_64.png" width="64" height="64"/>
         <image name="return_64.png" width="64" height="64"/>
         <image name="s2.png" width="195" height="195"/>
