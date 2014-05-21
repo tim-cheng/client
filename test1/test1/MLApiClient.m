@@ -34,9 +34,9 @@
 
 - (id)init
 {
-//    return [self initWithProtocol:@"http" baseURLString:@"localhost:8080"];
+    return [self initWithProtocol:@"http" baseURLString:@"localhost:8080"];
 //    return [self initWithProtocol:@"http" baseURLString:@"192.168.0.102:8080"];
-    return [self initWithProtocol:@"https" baseURLString:@"parent2d.com"];
+//    return [self initWithProtocol:@"https" baseURLString:@"parent2d.com"];
 }
 
 - (id)initWithProtocol:(NSString *)protocol baseURLString:(NSString *)baseURLString
@@ -428,8 +428,9 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
                            failure:(MLApiClientFailure)failureCallback
 {
     NSInteger uid = (userId < 0) ? self.loggedInUserId : userId;
+    NSInteger invId = (inviteId < 0) ? self.loggedInUserId : inviteId;
     NSString * path = @"/users";
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/%d/invite/%d", self.protocol, self.baseURLString, path, uid, inviteId]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/%d/invite/%d", self.protocol, self.baseURLString, path, uid, invId]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:15.0f];
@@ -453,6 +454,24 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
     return [self makeRequest:request success:successCallback failure:failureCallback];
     
 }
+
+- (NSURLRequest *)acceptInviteUserFromId:(NSInteger)userId
+                                inviteId:(NSInteger)inviteId
+                                 success:(MLApiClientSuccess)successCallback
+                                 failure:(MLApiClientFailure)failureCallback
+{
+    NSInteger uid = (userId < 0) ? self.loggedInUserId : userId;
+    NSInteger invId = (inviteId < 0) ? self.loggedInUserId : inviteId;
+    NSString * path = @"/users";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/%d/invite/%d", self.protocol, self.baseURLString, path, uid, invId]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:15.0f];
+    request.HTTPMethod = @"DELETE";
+    [request setValue:self.loggedInAuth forHTTPHeaderField:@"Authorization"];
+    return [self makeRequest:request success:successCallback failure:failureCallback];
+}
+
 
 - (NSURLRequest *)connectionsForId:(NSInteger)userId
                            success:(MLApiClientSuccess)successCallback

@@ -207,6 +207,13 @@
 - (IBAction)tapAccept:(UIButton *)button
 {
     NSLog(@"accept request");
+    NSInteger inviteUser = [[[button superview] superview] superview].tag;
+    [[MLApiClient client] acceptInviteUserFromId:inviteUser inviteId:kApiClientUserSelf success:^(NSHTTPURLResponse *response, id responseJSON) {
+        NSLog(@"accept invite success");
+        [self loadContacts];
+    } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+        NSLog(@"accept invite failure");
+    }];
     
 }
 
