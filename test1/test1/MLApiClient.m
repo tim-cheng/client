@@ -438,6 +438,38 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
     return [self makeRequest:request success:successCallback failure:failureCallback];
 }
 
+- (NSURLRequest *)invitesForId:(NSInteger)userId
+                       success:(MLApiClientSuccess)successCallback
+                       failure:(MLApiClientFailure)failureCallback
+{
+    NSInteger uid = (userId < 0) ? self.loggedInUserId : userId;
+    NSString * path = @"/users";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/%d/invite", self.protocol, self.baseURLString, path, uid]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:15.0f];
+    request.HTTPMethod = @"GET";
+    [request setValue:self.loggedInAuth forHTTPHeaderField:@"Authorization"];
+    return [self makeRequest:request success:successCallback failure:failureCallback];
+    
+}
+
+- (NSURLRequest *)connectionsForId:(NSInteger)userId
+                           success:(MLApiClientSuccess)successCallback
+                           failure:(MLApiClientFailure)failureCallback
+{
+    NSInteger uid = (userId < 0) ? self.loggedInUserId : userId;
+    NSString * path = @"/connections";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/%d", self.protocol, self.baseURLString, path, uid]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:15.0f];
+    request.HTTPMethod = @"GET";
+    [request setValue:self.loggedInAuth forHTTPHeaderField:@"Authorization"];
+    return [self makeRequest:request success:successCallback failure:failureCallback];
+}
+
+
 - (NSURL *)userPictureUrl:(NSInteger)userId
 {
     NSInteger uid = (userId < 0) ? self.loggedInUserId : userId;

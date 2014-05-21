@@ -11,25 +11,99 @@
 #import "MainFeedViewController.h"
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
+#import "MLApiClient.h"
+#import "MLUserInfo.h"
 
 
-@interface InviteViewController () <FBFriendPickerDelegate, ABPeoplePickerNavigationControllerDelegate>
+@interface InviteViewController () <FBFriendPickerDelegate,
+                                    ABPeoplePickerNavigationControllerDelegate,
+                                    UITableViewDataSource>
 
 @property (strong, nonatomic) FBFriendPickerViewController *friendPickerController;
+
+@property (strong, nonatomic) IBOutlet UITableView *contactView;
+@property (strong, nonatomic) NSMutableArray *inviterArray;
+@property (strong, nonatomic) NSMutableArray *connectionArray;
 
 - (IBAction)tapBack:(id)sender;
 - (IBAction)selectFacebook:(id)sender;
 - (IBAction)selectEmail:(id)sender;
 - (IBAction)findUser:(id)sender;
+- (IBAction)tapAccept:(UIButton *)button;
 @end
 
 @implementation InviteViewController
 
-- (void)viewDidUnload {
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.inviterArray = [[NSMutableArray alloc] init];
+    self.connectionArray = [[NSMutableArray alloc] init];
+    self.contactView.dataSource = self;
+    [self loadContacts];
+}
+
+- (void)viewDidUnload
+{
     self.friendPickerController = nil;
     [super viewDidUnload];
 }
 
+- (void) clearContacts
+{
+    [self.contactView beginUpdates];
+    NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+    for (int i=0; i<[self.inviterArray count]; i++) {
+        [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+    }
+    for (int i=0; i<[self.connectionArray count]; i++) {
+        [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:1]];
+    }
+    [self.contactView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+    [self.inviterArray removeAllObjects];
+    [self.connectionArray removeAllObjects];
+    [self.contactView endUpdates];
+}
+
+
+- (void)loadContacts
+{
+    [self clearContacts];
+    
+    [[MLApiClient client] invitesForId:kApiClientUserSelf success:^(NSHTTPURLResponse *response, id responseJSON) {
+        NSLog(@"received invites: %@", responseJSON);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.contactView beginUpdates];
+            [self.inviterArray addObjectsFromArray:responseJSON];
+            NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+            for (int i=0; i<[self.inviterArray count]; i++) {
+                [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+            }
+            [self.contactView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+            [self.contactView endUpdates];
+        });
+    } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+        NSLog(@"no invites");
+    }];
+
+    [[MLApiClient client] connectionsForId:kApiClientUserSelf success:^(NSHTTPURLResponse *response, id responseJSON) {
+        NSLog(@"received connections: %@", responseJSON);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.contactView beginUpdates];
+            [self.connectionArray addObjectsFromArray:responseJSON];
+            NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+            for (int i=0; i<[self.connectionArray count]; i++) {
+                [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:1]];
+            }
+            [self.contactView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+            [self.contactView endUpdates];
+        });
+        
+    } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+        NSLog(@"no connections");
+    }];
+
+}
 
 #pragma mark - IBAction
 - (IBAction)tapBack:(id)sender
@@ -130,6 +204,12 @@
     [self performSegueWithIdentifier:@"FindUser" sender:self];
 }
 
+- (IBAction)tapAccept:(UIButton *)button
+{
+    NSLog(@"accept request");
+    
+}
+
 #pragma mark - FBFriendPickerDelegate
 
 - (void)facebookViewControllerDoneWasPressed:(id)sender {
@@ -175,6 +255,75 @@
 - (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker;
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+    
+}
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return @"Pending Requests";
+    } else {
+        return @"Connections";
+    }
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return [self.inviterArray count];
+    } else {
+        return [self.connectionArray count];
+    }
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"ContactUserCell";
+    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+    }
+    
+    NSDictionary *userInfo;
+    if (indexPath.section == 0) {
+        userInfo = (NSDictionary *)self.inviterArray[indexPath.row];
+    } else {
+        userInfo = (NSDictionary *)self.connectionArray[indexPath.row];
+    }
+    
+    NSInteger userId = [userInfo[@"user_id"] integerValue];
+    cell.tag = userId;
+    UIImageView *pic = (UIImageView *)[cell.contentView viewWithTag:10];
+    if (pic) {
+        pic.image = [[MLUserInfo instance] userPicture:userId];
+    }
+    
+    UILabel *nameLabel = (UILabel *)[cell.contentView viewWithTag:11];
+    if (nameLabel) {
+        nameLabel.text = [NSString stringWithFormat:@"%@ %@", userInfo[@"first_name"], userInfo[@"last_name"]];
+    }
+    
+    UILabel *locationLabel = (UILabel *)[cell.contentView viewWithTag:12];
+    if (locationLabel) {
+        locationLabel.text = @"San Jose, California";
+    }
+    
+    UIButton *inviteButton = (UIButton *)[cell.contentView viewWithTag:13];
+    if (indexPath.section == 1) {
+        inviteButton.hidden = YES;
+    } else {
+        inviteButton.hidden = NO;
+    }
+//    if (inviteButton) {
+//        inviteButton.imageView.image = [UIImage imageNamed:@"adduser_64.png"];
+//    }
+    return cell;
 }
 
 
