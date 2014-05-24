@@ -109,6 +109,11 @@ typedef void (^MLApiClientDataSuccess)(NSHTTPURLResponse *response, NSData *data
                            success:(MLApiClientSuccess)successCallback
                            failure:(MLApiClientFailure)failureCallback;
 
+- (NSURLRequest *)activitiesForId:(NSInteger)userId
+                          success:(MLApiClientSuccess)successCallback
+                          failure:(MLApiClientFailure)failureCallback;
+
+
 - (NSURLRequest *)acceptInviteUserFromId:(NSInteger)userId
                                 inviteId:(NSInteger)inviteId
                                  success:(MLApiClientSuccess)successCallback
