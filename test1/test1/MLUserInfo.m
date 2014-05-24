@@ -71,6 +71,8 @@
             UIImage *image = [UIImage imageWithData:imageData];
             if (image) {
                 self.userPictureCache[@(userId)] = image;
+            } else {
+                image = [UIImage imageNamed:@"user_128.png"];
             }
             return image;
         }
