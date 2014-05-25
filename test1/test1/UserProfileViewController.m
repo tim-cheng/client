@@ -10,8 +10,9 @@
 #import "MainFeedViewController.h"
 #import "MLApiClient.h"
 #import "MLUserInfo.h"
+#import "AddChildViewController.h"
 
-@interface UserProfileViewController () <UITableViewDataSource>
+@interface UserProfileViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *profImgView;
 
@@ -20,6 +21,8 @@
 @property (strong, nonatomic) IBOutlet UITableView *kidsView;
 
 @property (strong, nonatomic) NSMutableArray *kidsArray;
+
+@property (assign, nonatomic) NSInteger editKidRow;
 
 
 -(IBAction)tapBack:(id)sender;
@@ -44,6 +47,16 @@
     }];
     
     self.kidsView.dataSource = self;
+    self.kidsView.delegate = self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self loadKids];
+}
+
+-(void)loadKids
+{
     [[MLApiClient client] kidsForId:kApiClientUserSelf success:^(NSHTTPURLResponse *response, id responseJSON) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self clearKids];
@@ -78,6 +91,7 @@
 
 -(IBAction)addKid:(id)sender
 {
+    self.editKidRow = -1;
     [self performSegueWithIdentifier:@"AddKid" sender:self];
 }
 
@@ -128,5 +142,26 @@
     return cell;
 }
 
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.editKidRow = indexPath.row;
+    [self performSegueWithIdentifier:@"AddKid" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"AddKid"]) {
+        AddChildViewController *childVC = segue.destinationViewController;
+        if (self.editKidRow >= 0) {
+            childVC.kidId = [self.kidsArray[self.editKidRow][@"id"] integerValue];
+            childVC.kidName = self.kidsArray[self.editKidRow][@"name"];
+            childVC.kidBirthday = @"2010-10-10";
+            childVC.kidIsBoy = [self.kidsArray[self.editKidRow][@"boy"] boolValue];
+        } else {
+            childVC.kidId = -1;
+        }
+    }
+}
 
 @end

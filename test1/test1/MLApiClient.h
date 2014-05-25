@@ -117,6 +117,18 @@ typedef void (^MLApiClientDataSuccess)(NSHTTPURLResponse *response, NSData *data
                     success:(MLApiClientSuccess)successCallback
                     failure:(MLApiClientFailure)failureCallback;
 
+- (NSURLRequest *)addKidFromId:(NSInteger)userId
+                          name:(NSString *)name
+                      birthday:(NSString *)birthday
+                         isBoy:(BOOL)isBoy
+                       success:(MLApiClientSuccess)successCallback
+                       failure:(MLApiClientFailure)failureCallback;
+
+- (NSURLRequest *)deleteKidFromId:(NSInteger)userId
+                            kidId:(NSInteger)kidId
+                          success:(MLApiClientSuccess)successCallback
+                          failure:(MLApiClientFailure)failureCallback;
+
 - (NSURLRequest *)acceptInviteUserFromId:(NSInteger)userId
                                 inviteId:(NSInteger)inviteId
                                  success:(MLApiClientSuccess)successCallback

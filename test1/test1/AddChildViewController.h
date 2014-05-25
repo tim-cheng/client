@@ -10,4 +10,9 @@
 
 @interface AddChildViewController : UIViewController
 
+@property (assign, nonatomic) NSInteger kidId;
+@property (strong, nonatomic) NSString *kidName;
+@property (strong, nonatomic) NSString *kidBirthday;
+@property (assign, nonatomic) BOOL kidIsBoy;
+
 @end

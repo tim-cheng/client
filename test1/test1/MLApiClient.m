@@ -34,9 +34,9 @@
 
 - (id)init
 {
-    return [self initWithProtocol:@"http" baseURLString:@"localhost:8080"];
+//    return [self initWithProtocol:@"http" baseURLString:@"localhost:8080"];
 //    return [self initWithProtocol:@"http" baseURLString:@"192.168.0.102:8080"];
-//    return [self initWithProtocol:@"https" baseURLString:@"parent2d.com"];
+    return [self initWithProtocol:@"https" baseURLString:@"parent2d.com"];
 }
 
 - (id)initWithProtocol:(NSString *)protocol baseURLString:(NSString *)baseURLString
@@ -514,6 +514,46 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:15.0f];
     request.HTTPMethod = @"GET";
+    [request setValue:self.loggedInAuth forHTTPHeaderField:@"Authorization"];
+    return [self makeRequest:request success:successCallback failure:failureCallback];
+}
+
+- (NSURLRequest *)addKidFromId:(NSInteger)userId
+                          name:(NSString *)name
+                      birthday:(NSString *)birthday
+                         isBoy:(BOOL)isBoy
+                       success:(MLApiClientSuccess)successCallback
+                       failure:(MLApiClientFailure)failureCallback
+{
+    NSInteger uid = (userId < 0) ? self.loggedInUserId : userId;
+    NSString * path = @"/users";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/%d/kids", self.protocol, self.baseURLString, path, uid]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:15.0f];
+    NSString *params = [NSString stringWithFormat:@"name=%@&birthday=%@&type=%@",
+                        [self urlEncode:name], [self urlEncode:birthday], (isBoy ? @"boy":@"girl")];
+    NSData *postData = [params dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    request.HTTPMethod = @"POST";
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%d", [postData length]] forHTTPHeaderField:@"Content-Length"];
+    request.HTTPBody = postData;
+    return [self makeRequest:request success:successCallback failure:failureCallback];
+}
+
+
+- (NSURLRequest *)deleteKidFromId:(NSInteger)userId
+                            kidId:(NSInteger)kidId
+                          success:(MLApiClientSuccess)successCallback
+                          failure:(MLApiClientFailure)failureCallback
+{
+    NSInteger uid = (userId < 0) ? self.loggedInUserId : userId;
+    NSString * path = @"/users";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/%d/kids/%d", self.protocol, self.baseURLString, path, uid, kidId]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:15.0f];
+    request.HTTPMethod = @"DELETE";
     [request setValue:self.loggedInAuth forHTTPHeaderField:@"Authorization"];
     return [self makeRequest:request success:successCallback failure:failureCallback];
 }
