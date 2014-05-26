@@ -38,6 +38,11 @@
     self.kidsArray = [[NSMutableArray alloc] init];
     
     self.profImgView.image = [[MLUserInfo instance] userPicture:kApiClientUserSelf];
+    self.profImgView.layer.borderWidth = 1.0f;
+    self.profImgView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.profImgView.layer.cornerRadius = 36;
+    self.profImgView.clipsToBounds = YES;
+    
     [[MLUserInfo instance] userInfoFromId:kApiClientUserSelf success:^(id responseJSON) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"get user info: %@", responseJSON);
@@ -52,6 +57,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self loadKids];
 }
 
