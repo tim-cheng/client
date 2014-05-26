@@ -10,6 +10,7 @@
 #import "MLApiClient.h"
 #import "MLUserInfo.h"
 #import "NSDate+TimeAgo.h"
+#import "MLHelpers.h"
 
 @interface CommentFeedTableViewController() <UITableViewDataSource, UITextFieldDelegate, UITableViewDelegate>
 

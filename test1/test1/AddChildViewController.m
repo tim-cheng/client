@@ -92,12 +92,14 @@
 
 -(IBAction)tapBoy:(id)sender
 {
+    NSLog(@"tap boy!!!");
     self.boyButton.selected = YES;
     self.girlButton.selected = NO;
 }
 
 -(IBAction)tapGirl:(id)sender
 {
+    NSLog(@"tap girl!!!");
     self.boyButton.selected = NO;
     self.girlButton.selected = YES;
 }

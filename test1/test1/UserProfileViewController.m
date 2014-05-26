@@ -11,22 +11,28 @@
 #import "MLApiClient.h"
 #import "MLUserInfo.h"
 #import "AddChildViewController.h"
+#import "MLHelpers.h"
 
-@interface UserProfileViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface UserProfileViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *profImgView;
 
 @property (strong, nonatomic) IBOutlet UITextField *nameField;
 @property (strong, nonatomic) IBOutlet UITextField *locationField;
+@property (strong, nonatomic) IBOutlet UILabel *connectionLabel;
+@property (strong, nonatomic) IBOutlet UITextView *bioView;
+
 @property (strong, nonatomic) IBOutlet UITableView *kidsView;
 
 @property (strong, nonatomic) NSMutableArray *kidsArray;
 
 @property (assign, nonatomic) NSInteger editKidRow;
 
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *saveButtonItem;
 
--(IBAction)tapBack:(id)sender;
+
 -(IBAction)addKid:(id)sender;
+
 @end
 
 @implementation UserProfileViewController
@@ -34,12 +40,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
     
+    [self.view addGestureRecognizer:tap];
+
     self.kidsArray = [[NSMutableArray alloc] init];
     
     self.profImgView.image = [[MLUserInfo instance] userPicture:kApiClientUserSelf];
     self.profImgView.layer.borderWidth = 1.0f;
-    self.profImgView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.profImgView.layer.borderColor = [MLColor CGColor];
     self.profImgView.layer.cornerRadius = 36;
     self.profImgView.clipsToBounds = YES;
     
@@ -48,11 +59,20 @@
             NSLog(@"get user info: %@", responseJSON);
             NSDictionary *userInfo = (NSDictionary *)responseJSON;
             self.nameField.text = userInfo[@"full_name"];
+            self.connectionLabel.text = [NSString stringWithFormat:@"%d 1°   %d 2°", [userInfo[@"num_degree1"] integerValue], [userInfo[@"num_degree2"] integerValue]];
+            self.bioView.text = userInfo[@"description"];
         });
     }];
     
     self.kidsView.dataSource = self;
     self.kidsView.delegate = self;
+    self.nameField.delegate = self;
+    self.locationField.delegate = self;
+}
+
+- (void)dismissKeyboard
+{
+    [self.view endEditing:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -83,16 +103,6 @@
             [self clearKids];
         });
     }];
-}
-
--(IBAction)tapBack:(id)sender
-{
-    UINavigationController *navigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentController"];
-    
-    MainFeedViewController *feedController = [self.storyboard instantiateViewControllerWithIdentifier:@"feedController"];
-    navigationController.viewControllers = @[feedController];
-    self.frostedViewController.contentViewController = navigationController;
-
 }
 
 -(IBAction)addKid:(id)sender
@@ -170,4 +180,11 @@
     }
 }
 
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    NSLog(@"enable save");
+    self.saveButtonItem.enabled = YES;
+    return YES;
+}
 @end

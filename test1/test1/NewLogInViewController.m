@@ -13,6 +13,7 @@
 #import "MLApiClient.h"
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "MLHelpers.h"
 
 @interface NewLogInViewController ()
 
@@ -39,6 +40,7 @@
 {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
+    self.view.backgroundColor = MLColor;
 }
 
 - (void)didReceiveMemoryWarning

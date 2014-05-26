@@ -48,14 +48,14 @@
                                 <rect key="frame" x="83" y="149" width="154" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="34"/>
-                                <color key="textColor" red="0.8862745098" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect and be better informed parents" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="suv-17-xQw" customClass="CustomUILabel">
                                 <rect key="frame" x="42" y="211" width="236" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <color key="textColor" red="0.8862745098" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -372,6 +372,7 @@
                         <outlet property="postTextView" destination="qqP-tA-spz" id="dCf-qa-HBO"/>
                         <outlet property="profileImage" destination="RbR-hu-hOc" id="IJV-cB-59i"/>
                         <outlet property="sendPostButton" destination="WUc-6b-4tN" id="91v-77-9YF"/>
+                        <segue destination="0dF-FO-NdS" kind="push" id="KZf-Ny-YAd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yva-45-7iu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -405,7 +406,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="NnL-C6-Cge">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="107"/>
+                            <rect key="frame" x="0.0" y="64" width="320" height="107"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="5KM-dZ-Eba">
@@ -416,7 +417,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingCell" rowHeight="69" id="Fg3-5c-7GN">
-                                <rect key="frame" x="0.0" y="129" width="320" height="69"/>
+                                <rect key="frame" x="0.0" y="193" width="320" height="69"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fg3-5c-7GN" id="bgw-gv-Gdg">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
@@ -445,6 +446,9 @@
                     <navigationItem key="navigationItem" id="gJU-LC-HrU"/>
                     <connections>
                         <outlet property="profPicView" destination="5KM-dZ-Eba" id="PaF-66-M88"/>
+                        <segue destination="oga-b2-5Er" kind="push" id="BEY-ns-YVa"/>
+                        <segue destination="7u8-BR-Dte" kind="push" id="aU1-W3-ei1"/>
+                        <segue destination="j8L-EZ-MZz" kind="push" id="qPS-Cr-1hS"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NGy-MH-KzT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -463,7 +467,7 @@
                                 <rect key="frame" x="44" y="94" width="233" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" minimumFontSize="17" id="Nqd-Z2-N2E" customClass="CustomUITextField">
                                 <rect key="frame" x="44" y="142" width="233" height="30"/>
@@ -567,7 +571,7 @@
             </objects>
             <point key="canvasLocation" x="-3824" y="-950"/>
         </scene>
-        <!--Add Child View Controller-->
+        <!--Add Child View Controller - Add a Kid-->
         <scene sceneID="V7X-GU-9Wt">
             <objects>
                 <viewController id="oO3-C5-Rlu" customClass="AddChildViewController" sceneMemberID="viewController">
@@ -575,61 +579,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="name" minimumFontSize="17" id="4Om-0Y-NHc" customClass="CustomUITextField">
-                                <rect key="frame" x="44" y="210" width="233" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="name (optional)" minimumFontSize="17" id="4Om-0Y-NHc" customClass="CustomUITextField">
+                                <rect key="frame" x="44" y="134" width="233" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Lmh-qj-Dkt" customClass="CustomUIButton">
-                                <rect key="frame" x="95" y="445" width="130" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Done">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="tapDone:" destination="A0O-Sc-sld" eventType="touchUpInside" id="cdz-3E-vPh"/>
-                                </connections>
-                            </button>
-                            <navigationBar contentMode="scaleToFill" id="nkD-pj-Ukn">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem id="bUv-TH-sMQ">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="0sX-Bd-HcI">
-                                            <connections>
-                                                <action selector="tapBack:" destination="A0O-Sc-sld" id="k1V-bY-Nt9"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="HJG-Nj-hSz">
-                                <rect key="frame" x="77" y="131" width="64" height="64"/>
+                                <rect key="frame" x="77" y="72" width="64" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="boy_bnw_64.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="selected" image="boy_color_64.png"/>
                                 <state key="highlighted" image="boy_color_64.png"/>
+                                <connections>
+                                    <action selector="tapBoy:" destination="A0O-Sc-sld" eventType="touchUpInside" id="5mU-mp-2CV"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="N9O-wy-nxo">
-                                <rect key="frame" x="177" y="131" width="64" height="64"/>
+                                <rect key="frame" x="177" y="72" width="64" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="girl_bnw_64.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="selected" image="girl_color_64.png"/>
                                 <state key="highlighted" image="girl_color_64.png"/>
+                                <connections>
+                                    <action selector="tapGirl:" destination="A0O-Sc-sld" eventType="touchUpInside" id="JYK-YC-EPW"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthday" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hr6-62-pIH" customClass="CustomUILabel">
-                                <rect key="frame" x="44" y="255" width="65" height="21"/>
+                                <rect key="frame" x="44" y="172" width="65" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.8862745098" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" id="Shx-r0-PGH">
-                                <rect key="frame" x="0.0" y="275" width="320" height="162"/>
+                                <rect key="frame" x="0.0" y="194" width="320" height="162"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <date key="date" timeIntervalSinceReferenceDate="422747178.604379">
                                     <!--2014-05-25 21:46:18 +0000-->
@@ -662,10 +650,17 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="xrp-Ot-nNg"/>
+                    <navigationItem key="navigationItem" title="Add a Kid" id="xrp-Ot-nNg">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="A7t-Zf-R6b">
+                            <connections>
+                                <action selector="tapDone:" destination="A0O-Sc-sld" id="Kyn-mY-6Ke"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="boyButton" destination="HJG-Nj-hSz" id="k4K-TB-pJH"/>
                         <outlet property="datePicker" destination="Shx-r0-PGH" id="0Db-Bl-mYO"/>
-                        <outlet property="doneButton" destination="Lmh-qj-Dkt" id="KUW-jm-f8M"/>
+                        <outlet property="girlButton" destination="N9O-wy-nxo" id="PRP-76-VJK"/>
                         <outlet property="nameField" destination="4Om-0Y-NHc" id="FGw-fd-F2s"/>
                     </connections>
                 </viewController>
@@ -673,7 +668,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="-2013" y="145"/>
         </scene>
-        <!--Invite View Controller-->
+        <!--Invite View Controller - Contacts-->
         <scene sceneID="ezi-hb-yms">
             <objects>
                 <viewController storyboardIdentifier="contactController" id="j8L-EZ-MZz" customClass="InviteViewController" sceneMemberID="viewController">
@@ -682,12 +677,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ld1-xR-CcS">
-                                <rect key="frame" x="0.0" y="140" width="320" height="448"/>
+                                <rect key="frame" x="0.0" y="160" width="320" height="448"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactUserCell" id="GBM-Ej-KH3">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GBM-Ej-KH3" id="wlS-1F-4Bt">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -728,7 +723,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="OPE-q0-012" customClass="CustomUIButton">
-                                <rect key="frame" x="67" y="51" width="186" height="30"/>
+                                <rect key="frame" x="67" y="71" width="186" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Invite users via Facebook">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -737,21 +732,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <action selector="selectFacebook:" destination="1F7-Mf-MrI" eventType="touchUpInside" id="kMz-9o-uTe"/>
                                 </connections>
                             </button>
-                            <navigationBar contentMode="scaleToFill" id="KBZ-3c-YHr">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Contacts" id="H1i-FJ-x6I">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="8OD-zM-PrL">
-                                            <connections>
-                                                <action selector="tapBack:" destination="1F7-Mf-MrI" id="Fuv-7B-cpr"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SFT-Zh-QJI" customClass="CustomUIButton">
-                                <rect key="frame" x="88" y="77" width="144" height="30"/>
+                                <rect key="frame" x="88" y="97" width="144" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Invite users via Email">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -761,7 +743,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PlA-Dn-pOU" customClass="CustomUIButton">
-                                <rect key="frame" x="124" y="102" width="72" height="30"/>
+                                <rect key="frame" x="124" y="122" width="72" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Find users">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -773,6 +755,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Contacts" id="Scg-CT-OXs">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="Rrp-qx-VdO">
+                            <connections>
+                                <action selector="tapBackToFeed:" destination="1F7-Mf-MrI" id="W0F-3H-erU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="contactView" destination="ld1-xR-CcS" id="Y8q-Xc-oyI"/>
                         <segue destination="7ab-Yw-TLK" kind="push" identifier="FindUser" id="XNe-rf-cUR"/>
@@ -790,26 +779,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" id="mVa-67-0lV">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Find users" id="Lz6-1n-cGa">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="lCS-A2-7lC">
-                                            <connections>
-                                                <action selector="tapBack:" destination="X0A-lX-e6r" id="gXu-Jy-x3H"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <searchBar contentMode="redraw" id="C1p-gb-MC7">
-                                <rect key="frame" x="0.0" y="44" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="65" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="A3H-VR-3UU">
-                                <rect key="frame" x="0.0" y="88" width="320" height="480"/>
+                                <rect key="frame" x="0.0" y="109" width="320" height="459"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -875,7 +851,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="-2088" y="-1450"/>
         </scene>
-        <!--Activity Table View Controller-->
+        <!--Activity Table View Controller - Activities-->
         <scene sceneID="SOx-uz-Ebv">
             <objects>
                 <tableViewController storyboardIdentifier="activityController" id="7u8-BR-Dte" customClass="ActivityTableViewController" sceneMemberID="viewController">
@@ -883,22 +859,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="Ti8-FQ-P9g">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <items>
-                                <navigationItem title="Activities" id="yGy-nD-Iju">
-                                    <barButtonItem key="leftBarButtonItem" title="Back" id="lPg-jg-mNZ">
-                                        <connections>
-                                            <action selector="tapBack:" destination="XNE-Xm-ayX" id="XPz-nd-s73"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </navigationItem>
-                            </items>
-                        </navigationBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActivityCell" id="Rcn-eI-7vs">
-                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rcn-eI-7vs" id="x5J-p6-p8C">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -924,12 +887,19 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <outlet property="delegate" destination="7u8-BR-Dte" id="2J0-VQ-PLi"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Activities" id="mLt-0o-7lf">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="bmV-bg-66O">
+                            <connections>
+                                <action selector="tapBackToFeed:" destination="XNE-Xm-ayX" id="qlb-jt-9Tu"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XNE-Xm-ayX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2508" y="-680"/>
         </scene>
-        <!--User Profile View Controller - Title-->
+        <!--User Profile View Controller - Profile-->
         <scene sceneID="tMt-tT-DlH">
             <objects>
                 <viewController storyboardIdentifier="profileController" id="oga-b2-5Er" customClass="UserProfileViewController" sceneMemberID="viewController">
@@ -937,38 +907,24 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" id="TsH-s3-Sbw">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Profile" id="okv-1V-JJx">
-                                        <barButtonItem key="backBarButtonItem" title="Back" id="1w1-iC-mCg"/>
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="gbD-ho-WKH">
-                                            <connections>
-                                                <action selector="tapBack:" destination="D0I-yS-pHJ" id="SOp-t3-ft9"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="zsc-Jg-BKC">
-                                <rect key="frame" x="124" y="81" width="72" height="72"/>
+                                <rect key="frame" x="43" y="87" width="72" height="72"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" id="Adq-kw-ZYt" customClass="CustomUITextField">
-                                <rect key="frame" x="45" y="167" width="164" height="30"/>
+                                <rect key="frame" x="136" y="87" width="164" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Location" minimumFontSize="17" id="Swf-ad-ue5" customClass="CustomUITextField">
-                                <rect key="frame" x="45" y="205" width="164" height="30"/>
+                                <rect key="frame" x="136" y="114" width="164" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OgV-RQ-Gsv">
-                                <rect key="frame" x="43" y="248" width="234" height="287"/>
+                                <rect key="frame" x="43" y="256" width="234" height="279"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="A7d-YA-S5U" customClass="CustomUIButton">
@@ -1012,15 +968,44 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="About me" id="X0a-kg-Rtx" customClass="CustomUITextView">
+                                <rect key="frame" x="43" y="173" width="234" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IN2-eM-xyk" customClass="CustomUILabel">
+                                <rect key="frame" x="139" y="152" width="138" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="3Zm-d4-8nE"/>
+                    <navigationItem key="navigationItem" title="Profile" id="hUk-9g-F9h">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="DvX-E3-v2g">
+                            <connections>
+                                <action selector="tapBackToFeed:" destination="D0I-yS-pHJ" id="Udl-c0-K2I"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Save" id="NnQ-NC-3IU">
+                            <connections>
+                                <action selector="tapSaveProfile:" destination="D0I-yS-pHJ" id="5lN-x3-d44"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="bioView" destination="X0a-kg-Rtx" id="tfF-Uf-9Ls"/>
+                        <outlet property="connectionLabel" destination="IN2-eM-xyk" id="w4C-Zs-WoK"/>
                         <outlet property="kidsView" destination="OgV-RQ-Gsv" id="NIr-KS-Z7u"/>
                         <outlet property="locationField" destination="Swf-ad-ue5" id="TMx-6g-AP8"/>
                         <outlet property="nameField" destination="Adq-kw-ZYt" id="etN-E5-3Tz"/>
                         <outlet property="profImgView" destination="zsc-Jg-BKC" id="Rqw-nI-Eiu"/>
+                        <outlet property="saveButtonItem" destination="NnQ-NC-3IU" id="4Ds-LD-tDF"/>
                         <segue destination="oO3-C5-Rlu" kind="push" identifier="AddKid" id="EyY-J5-Nha"/>
                     </connections>
                 </viewController>
@@ -1028,11 +1013,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="-2495" y="145"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Main Navigation Controller-->
         <scene sceneID="Bkj-h8-naO">
             <objects>
-                <navigationController storyboardIdentifier="contentController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Z3N-IL-EeI" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="contentController" automaticallyAdjustsScrollViewInsets="NO" id="Z3N-IL-EeI" customClass="MainNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="AxU-km-jh1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1093,6 +1079,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="tGd-IJ-lLP"/>
+        <segue reference="SF2-3U-aEa"/>
     </inferredMetricsTieBreakers>
 </document>

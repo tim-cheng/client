@@ -15,8 +15,6 @@
 
 @property (strong, nonatomic) NSMutableArray *activityArray;
 
-- (IBAction)tapBack:(id)sender;
-
 @end
 
 @implementation ActivityTableViewController
@@ -47,15 +45,6 @@
         });
     }];
     
-}
-
-- (IBAction)tapBack:(id)sender
-{
-    UINavigationController *navigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentController"];
-    
-    MainFeedViewController *feedController = [self.storyboard instantiateViewControllerWithIdentifier:@"feedController"];
-    navigationController.viewControllers = @[feedController];
-    self.frostedViewController.contentViewController = navigationController;
 }
 
 - (void)clearActivities

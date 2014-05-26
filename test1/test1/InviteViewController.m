@@ -25,7 +25,6 @@
 @property (strong, nonatomic) NSMutableArray *inviterArray;
 @property (strong, nonatomic) NSMutableArray *connectionArray;
 
-- (IBAction)tapBack:(id)sender;
 - (IBAction)selectFacebook:(id)sender;
 - (IBAction)selectEmail:(id)sender;
 - (IBAction)findUser:(id)sender;
@@ -106,15 +105,6 @@
 }
 
 #pragma mark - IBAction
-- (IBAction)tapBack:(id)sender
-{
-    UINavigationController *navigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentController"];
-    
-    MainFeedViewController *feedController = [self.storyboard instantiateViewControllerWithIdentifier:@"feedController"];
-    navigationController.viewControllers = @[feedController];
-    self.frostedViewController.contentViewController = navigationController;
-}
-
 - (IBAction)selectEmail:(id)sender
 {
     ABPeoplePickerNavigationController *picker = [[ABPeoplePickerNavigationController alloc] init];

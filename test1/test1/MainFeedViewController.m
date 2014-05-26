@@ -73,7 +73,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self.navigationController setNavigationBarHidden:YES];
     // load user info
     [[MLUserInfo instance] userInfoFromId:[MLApiClient client].userId
                                   success:^(id responseJSON) {
