@@ -9,7 +9,7 @@
 #import "NewSignUpViewController.h"
 #import "MLApiClient.h"
 
-@interface NewSignUpViewController ()
+@interface NewSignUpViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *emailField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordField;
@@ -18,8 +18,12 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *profButton;
 
+@property (assign, nonatomic) BOOL hasProfPicture;
+
 - (IBAction)nextStep:(id)sender;
 - (IBAction)addChild:(id)sender;
+
+-(IBAction)addPhoto:(id)sender;
 
 @end
 
@@ -47,6 +51,17 @@
     [self.view endEditing:YES];
 }
 
+- (IBAction)addPhoto:(id)sender
+{
+    UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:nil
+                                                       delegate:self
+                                              cancelButtonTitle:nil
+                                         destructiveButtonTitle:nil
+                                              otherButtonTitles:@"Take Photo", @"Choose Exising", nil];
+    [popup showInView:[UIApplication sharedApplication].keyWindow];
+}
+
+
 #pragma mark - IBAction
 - (IBAction)nextStep:(id)sender
 {
@@ -61,6 +76,16 @@
                                  [[MLApiClient client] setLoggedInInfoWithEmail:self.emailField.text
                                                                        password:self.passwordField.text
                                                                          userId:[responseJSON[@"id"] integerValue]];
+                                 
+                                 if (self.hasProfPicture) {
+                                     [[MLApiClient client] sendUserPictureId:kApiClientUserSelf
+                                                                       image:self.profButton.imageView.image
+                                                                     success:^(NSHTTPURLResponse *response, id responseJSON) {
+                                                                         NSLog(@"user picture uploaded: %@", responseJSON);
+                                                                     } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+                                                                         NSLog(@"user picture upload failed");
+                                                                     }];
+                                 }
 
                                  // TODO: save cred to keychain
                                  dispatch_async(dispatch_get_main_queue(), ^{
@@ -84,5 +109,51 @@
 {
     [self performSegueWithIdentifier:@"AddChild" sender:self];
 }
+
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)popup clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    UIImagePickerController *pickerController = [[UIImagePickerController alloc]
+                                                 init];
+    pickerController.delegate = self;
+    pickerController.sourceType = (buttonIndex == 0) ?
+    UIImagePickerControllerSourceTypeCamera : UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:pickerController animated:YES completion:NULL];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void) imagePickerController:(UIImagePickerController *)picker
+         didFinishPickingImage:(UIImage *)image
+                   editingInfo:(NSDictionary *)editingInfo
+{
+    // crop
+    CGRect newRect;
+    if (image.size.width < image.size.height) {
+        float offset = (image.size.height - image.size.width) / 2;
+        // note, CGImage is not rotated
+        newRect = CGRectMake(offset, 0, image.size.width, image.size.width);
+    } else {
+        float offset = (image.size.width - image.size.height) / 2;
+        newRect = CGRectMake(offset, 0, image.size.height, image.size.height);
+    }
+    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], newRect);
+    UIImage *cropImage = [UIImage imageWithCGImage:imageRef scale:image.scale orientation:image.imageOrientation];
+    CGImageRelease(imageRef);
+    
+    // scale
+    CGSize newSize = CGSizeMake(128.0, 128.0);
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [cropImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    [self dismissModalViewControllerAnimated:YES];
+    UIGraphicsEndImageContext();
+    
+    self.profButton.imageView.image = newImage;
+    self.hasProfPicture = YES;
+}
+
+
+
 
 @end

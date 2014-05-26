@@ -76,6 +76,11 @@ typedef void (^MLApiClientDataSuccess)(NSHTTPURLResponse *response, NSData *data
                             success:(MLApiClientSuccess)successCallback
                             failure:(MLApiClientFailure)failureCallback;
 
+- (NSURLRequest *)sendUserPictureId:(NSInteger)userId
+                              image:(UIImage *)image
+                            success:(MLApiClientSuccess)successCallback
+                            failure:(MLApiClientFailure)failureCallback;
+
 - (NSURLRequest *)sendCommentFromId:(NSInteger)userId
                              postId:(NSInteger)postId
                                body:(NSString *)body
