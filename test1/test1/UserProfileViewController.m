@@ -68,6 +68,11 @@
     self.kidsView.delegate = self;
     self.nameField.delegate = self;
     self.locationField.delegate = self;
+    
+    self.bioView.layer.borderWidth = 1.0f;
+    self.bioView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.bioView.layer.cornerRadius = 4;
+
 }
 
 - (void)dismissKeyboard
