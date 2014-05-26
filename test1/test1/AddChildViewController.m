@@ -17,11 +17,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *girlButton;
 
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
-@property (strong, nonatomic) IBOutlet UIButton *doneButton;
 @property (strong, nonatomic) NSDateFormatter *bdFormat;
 
--(IBAction)tapDone:(id)sender;
--(IBAction)tapBack:(id)sender;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *saveBarItem;
 
 @end
 @implementation AddChildViewController
@@ -35,13 +33,13 @@
     self.nameField.delegate = self;
     if (self.kidId >= 0) {
         self.nameField.text = self.kidName;
-        self.doneButton.titleLabel.text = @"Delete";
+        self.saveBarItem.title = @"Delete";
         self.boyButton.selected = self.kidIsBoy;
         self.girlButton.selected = !self.kidIsBoy;
         self.datePicker.date = [self.bdFormat dateFromString:self.kidBirthday];
     } else {
         self.nameField.text = @"";
-        self.doneButton.titleLabel.text = @"Add";
+        self.saveBarItem.title = @"Add";
         self.boyButton.selected = YES;
         self.girlButton.selected = NO;
         NSLog(@"!!!I am here..");
@@ -56,7 +54,7 @@
     return YES;
 }
 
--(IBAction)tapDone:(id)sender
+-(void)doneChild
 {
     
     if (self.kidId >= 0) {
@@ -83,11 +81,6 @@
                                    }];
     }
   
-}
-
--(IBAction)tapBack:(id)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(IBAction)tapBoy:(id)sender

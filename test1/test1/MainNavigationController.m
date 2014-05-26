@@ -8,10 +8,12 @@
 
 #import "MainNavigationController.h"
 #import "MainFeedViewController.h"
+#import "AddChildViewController.h"
 
 @interface MainNavigationController()
 -(IBAction)tapBackToFeed:(id)sender;
 -(IBAction)tapSaveProfile:(id)sender;
+-(IBAction)tapDoneChild:(id)sender;
 
 
 @end
@@ -30,6 +32,13 @@
 -(IBAction)tapSaveProfile:(id)sender
 {
     NSLog(@"tap save...");
+}
+
+-(IBAction)tapDoneChild:(id)sender
+{
+    NSLog(@"tap done child");
+    AddChildViewController *vc = (AddChildViewController *)self.topViewController;
+    [vc doneChild];
 }
 
 

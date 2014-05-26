@@ -653,7 +653,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" title="Add a Kid" id="xrp-Ot-nNg">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="A7t-Zf-R6b">
                             <connections>
-                                <action selector="tapDone:" destination="A0O-Sc-sld" id="Kyn-mY-6Ke"/>
+                                <action selector="tapDoneChild:" destination="A0O-Sc-sld" id="GW9-wT-InB"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -662,6 +662,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="datePicker" destination="Shx-r0-PGH" id="0Db-Bl-mYO"/>
                         <outlet property="girlButton" destination="N9O-wy-nxo" id="PRP-76-VJK"/>
                         <outlet property="nameField" destination="4Om-0Y-NHc" id="FGw-fd-F2s"/>
+                        <outlet property="saveBarItem" destination="A7t-Zf-R6b" id="Dtq-Zp-Iot"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A0O-Sc-sld" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1001,7 +1002,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <connections>
                         <outlet property="bioView" destination="X0a-kg-Rtx" id="tfF-Uf-9Ls"/>
                         <outlet property="connectionLabel" destination="IN2-eM-xyk" id="w4C-Zs-WoK"/>
-                        <outlet property="kidsView" destination="OgV-RQ-Gsv" id="NIr-KS-Z7u"/>
+                        <outlet property="kidsView" destination="OgV-RQ-Gsv" id="gZi-iO-dGD"/>
                         <outlet property="locationField" destination="Swf-ad-ue5" id="TMx-6g-AP8"/>
                         <outlet property="nameField" destination="Adq-kw-ZYt" id="etN-E5-3Tz"/>
                         <outlet property="profImgView" destination="zsc-Jg-BKC" id="Rqw-nI-Eiu"/>

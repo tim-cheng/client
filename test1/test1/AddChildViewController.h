@@ -15,4 +15,7 @@
 @property (strong, nonatomic) NSString *kidBirthday;
 @property (assign, nonatomic) BOOL kidIsBoy;
 
+- (void)doneChild;
+
 @end
+
