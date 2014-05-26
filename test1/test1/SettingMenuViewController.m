@@ -31,6 +31,7 @@
 {
     self.view.backgroundColor = [UIColor clearColor];
     self.profPicView.image = [[MLUserInfo instance] userPicture:[MLApiClient client].userId];
+    self.profPicView.backgroundColor = [UIColor redColor];
     
     self.settingsView.dataSource = self;
     self.settingsView.delegate = self;

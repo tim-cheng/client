@@ -404,13 +404,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="gFH-Q1-I8s">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="106"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="NnL-C6-Cge">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="107"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="5KM-dZ-Eba">
+                                    <rect key="frame" x="106" y="39" width="108" height="59"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </imageView>
+                            </subviews>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingCell" rowHeight="69" id="Fg3-5c-7GN">
-                                <rect key="frame" x="0.0" y="128" width="320" height="69"/>
+                                <rect key="frame" x="0.0" y="129" width="320" height="69"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fg3-5c-7GN" id="bgw-gv-Gdg">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
@@ -438,7 +444,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="gJU-LC-HrU"/>
                     <connections>
-                        <outlet property="profPicView" destination="gFH-Q1-I8s" id="JLW-4F-iwV"/>
+                        <outlet property="profPicView" destination="5KM-dZ-Eba" id="PaF-66-M88"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NGy-MH-KzT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1067,7 +1073,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="camera_64.png" width="64" height="64"/>
         <image name="comment_off_32.png" width="32" height="32"/>
         <image name="comment_on_32.png" width="32" height="32"/>
-        <image name="compose2_64.png" width="64" height="64"/>
+        <image name="compose2_64.png" width="40" height="40"/>
         <image name="email_signup.png" width="307" height="53"/>
         <image name="facebook_signup.png" width="307" height="53"/>
         <image name="girl_bnw_64.png" width="64" height="64"/>
