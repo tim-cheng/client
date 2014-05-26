@@ -14,11 +14,12 @@
 #import "MLApiClient.h"
 #import "MLUserInfo.h"
 #import "MLHelpers.h"
+#import "CustomUILabel.h"
 
 
 @interface InviteViewController () <FBFriendPickerDelegate,
                                     ABPeoplePickerNavigationControllerDelegate,
-                                    UITableViewDataSource>
+                                    UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) FBFriendPickerViewController *friendPickerController;
 
@@ -40,6 +41,7 @@
     self.inviterArray = [[NSMutableArray alloc] init];
     self.connectionArray = [[NSMutableArray alloc] init];
     self.contactView.dataSource = self;
+    self.contactView.delegate = self;
     [self loadContacts];
 }
 
@@ -327,6 +329,23 @@
 //        inviteButton.imageView.image = [UIImage imageNamed:@"adduser_64.png"];
 //    }
     return cell;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
+    CustomUILabel *label = [[CustomUILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.frame.size.width, 18)];
+    label.font = [UIFont fontWithName:@"bariol-regular" size:14];
+    label.textColor = MLColorBrown;
+
+    if (section == 0) {
+        [label setText:@"Pending Requests"];
+    } else {
+        [label setText:@"Connections"];
+    }
+    [view addSubview:label];
+    [view setBackgroundColor:[UIColor whiteColor]];
+    return view;
 }
 
 
