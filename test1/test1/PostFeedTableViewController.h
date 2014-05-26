@@ -16,6 +16,7 @@
 @interface PostFeedTableViewController : UITableViewController <CommentFeedDelegate>
 - (void)loadPostsAndScroll:(BOOL)needScroll;
 @property (nonatomic, weak) id<PostFeedDelegate> delegate;
+@property (assign, nonatomic) NSInteger initPostId;
 @end
 
 

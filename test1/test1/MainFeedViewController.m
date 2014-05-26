@@ -47,7 +47,6 @@
 @property (strong, nonatomic) CommentFeedTableViewController *commentFeedVC;
 @property (strong, nonatomic) IBOutlet UITableView *commentFeedView;
 @property (assign, nonatomic) NSInteger commentPostId;
-
 @property (strong, nonatomic) NSDateFormatter *myFormatter;
 
 - (IBAction)compose:(id)sender;
@@ -105,6 +104,9 @@
     
     self.postFeedVC = (PostFeedTableViewController *)[sb instantiateViewControllerWithIdentifier:@"PostTable"];
     self.postFeedVC.delegate = self;
+    // TODO: to fix...
+    self.postFeedVC.initPostId = self.initPostId;
+    self.initPostId = 0;
     self.mainFeedView = self.postFeedVC.tableView;
     self.mainFeedView.frame = CGRectMake(0, 68.0f, 320.0f, 500.0f);
     [self.view insertSubview:self.mainFeedView belowSubview:self.composeView];
@@ -118,6 +120,7 @@
     
     // update
     self.commentFeedVC.delegate = self.postFeedVC;
+    
 }
 
 - (void)didReceiveMemoryWarning

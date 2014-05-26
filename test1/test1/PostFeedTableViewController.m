@@ -86,13 +86,30 @@
                                               [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
                                               
                                               [self.tableView endUpdates];
-                                              if (needScroll) {
+                                              if (self.initPostId) {
+                                                  [self openPost:self.initPostId];
+                                                  self.initPostId = 0;
+                                              } else if (needScroll) {
                                                   // scroll to top
                                                   [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
                                               }
                                           });
                                       }];
 }
+
+- (void)openPost:(NSInteger)postId
+{
+    for (int i=0; i<[self.postArray count]; i++) {
+        if ([self.postArray[i][@"id"] integerValue] == postId) {
+            // found the post, find the indexPath
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+            [self.tableView scrollToRowAtIndexPath:indexPath
+                                  atScrollPosition:UITableViewScrollPositionTop
+                                          animated:NO];
+        }
+    }
+}
+
 
 - (void)toggleComment:(NSInteger)postId cell:(UITableViewCell *)cell
 {

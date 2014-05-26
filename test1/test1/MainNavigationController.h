@@ -10,4 +10,6 @@
 
 @interface MainNavigationController : UINavigationController
 
+- (void)switchToFeedAtId:(NSInteger)postId;
+
 @end

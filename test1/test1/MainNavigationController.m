@@ -22,12 +22,20 @@
 
 -(IBAction)tapBackToFeed:(id)sender
 {
+    [self switchToFeedAtId:0];
+}
+
+- (void)switchToFeedAtId:(NSInteger)postId
+{
+    NSLog(@"switch to post_id: %d", postId);
     UINavigationController *navigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentController"];
     
     MainFeedViewController *feedController = [self.storyboard instantiateViewControllerWithIdentifier:@"feedController"];
+    feedController.initPostId = postId;
     navigationController.viewControllers = @[feedController];
     self.frostedViewController.contentViewController = navigationController;
 }
+
 
 -(IBAction)tapSaveProfile:(id)sender
 {

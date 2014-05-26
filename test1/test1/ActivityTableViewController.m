@@ -8,6 +8,7 @@
 
 #import "ActivityTableViewController.h"
 #import "MainFeedViewController.h"
+#import "MainNavigationController.h"
 #import "MLUserInfo.h"
 #import "MLApiClient.h"
 #import "MLHelpers.h"
@@ -97,7 +98,13 @@
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"select post: %d", [self.activityArray[indexPath.row][@"post_id"] integerValue]);
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSNumber *postId = self.activityArray[indexPath.row][@"post_id"];
+    if (postId)  {
+        NSLog(@"select post: %d", [postId integerValue]);
+        MainNavigationController *nav = (MainNavigationController *)self.navigationController;
+        [nav switchToFeedAtId:[postId integerValue]];
+    }
 }
 
 
