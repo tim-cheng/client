@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *firstNameField;
 @property (strong, nonatomic) IBOutlet UITextField *lastNameField;
 
+@property (strong, nonatomic) IBOutlet UIButton *profButton;
 
 - (IBAction)nextStep:(id)sender;
 - (IBAction)addChild:(id)sender;
@@ -27,11 +28,18 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
     
     [self.view addGestureRecognizer:tap];
+    
+    UIImageView *img = self.profButton.imageView;
+    img.layer.borderWidth = 1.0f;
+    img.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    img.layer.cornerRadius = 36;
+    img.clipsToBounds = YES;
 }
 
 - (void)dismissKeyboard

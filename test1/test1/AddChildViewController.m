@@ -13,11 +13,12 @@
 @interface AddChildViewController () <UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *nameField;
-@property (strong, nonatomic) IBOutlet UITextField *bdField;
-@property (strong, nonatomic) IBOutlet UISwitch *typeSwitch;
+@property (strong, nonatomic) IBOutlet UIButton *boyButton;
+@property (strong, nonatomic) IBOutlet UIButton *girlButton;
 
+@property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (strong, nonatomic) IBOutlet UIButton *doneButton;
-
+@property (strong, nonatomic) NSDateFormatter *bdFormat;
 
 -(IBAction)tapDone:(id)sender;
 -(IBAction)tapBack:(id)sender;
@@ -27,17 +28,23 @@
 
 -(void)viewDidLoad
 {
+    [super viewDidLoad];
+    self.bdFormat = [[NSDateFormatter alloc] init];
+    self.bdFormat.dateFormat = @"yyyy'-'MM'-'dd";
+    
     self.nameField.delegate = self;
-    self.bdField.delegate = self;
     if (self.kidId >= 0) {
         self.nameField.text = self.kidName;
-        self.bdField.text = self.kidBirthday;
-        self.typeSwitch.enabled = self.kidIsBoy;
         self.doneButton.titleLabel.text = @"Delete";
+        self.boyButton.selected = self.kidIsBoy;
+        self.girlButton.selected = !self.kidIsBoy;
+        self.datePicker.date = [self.bdFormat dateFromString:self.kidBirthday];
     } else {
         self.nameField.text = @"";
-        self.bdField.text = @"";
         self.doneButton.titleLabel.text = @"Add";
+        self.boyButton.selected = YES;
+        self.girlButton.selected = NO;
+        NSLog(@"!!!I am here..");
     }
 }
 
@@ -65,8 +72,8 @@
     } else {
         [[MLApiClient client] addKidFromId:kApiClientUserSelf
                                       name:self.nameField.text
-                                  birthday:self.bdField.text
-                                     isBoy:self.typeSwitch.isOn
+                                  birthday:[self.bdFormat stringFromDate:self.datePicker.date]
+                                     isBoy:self.boyButton.selected
                                    success:^(NSHTTPURLResponse *response, id responseJSON) {
                                        dispatch_async(dispatch_get_main_queue(), ^{
                                            [self.navigationController popViewControllerAnimated:YES];
@@ -83,5 +90,16 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(IBAction)tapBoy:(id)sender
+{
+    self.boyButton.selected = YES;
+    self.girlButton.selected = NO;
+}
+
+-(IBAction)tapGirl:(id)sender
+{
+    self.boyButton.selected = NO;
+    self.girlButton.selected = YES;
+}
 
 @end

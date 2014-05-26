@@ -127,10 +127,10 @@
     
     NSDictionary *kidInfo = self.kidsArray[indexPath.row];
     UIImageView *picView = (UIImageView *)[cell.contentView viewWithTag:10];
-    if ([kidInfo[@"type"] isEqualToString:@"boy"]) {
-        picView.image = [UIImage imageNamed:@"boy_64.png"];
+    if ([kidInfo[@"boy"] boolValue]) {
+        picView.image = [UIImage imageNamed:@"boy_color_64.png"];
     } else {
-        picView.image = [UIImage imageNamed:@"girl_64.png"];
+        picView.image = [UIImage imageNamed:@"girl_color_64.png"];
     }
 
     UILabel *nameLabel = (UILabel *)[cell.contentView viewWithTag:11];

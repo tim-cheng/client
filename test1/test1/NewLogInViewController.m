@@ -41,6 +41,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     self.fbLoginView.readPermissions = @[@"basic_info", @"email"];
     self.fbLoginView.delegate = self;
     
@@ -157,5 +158,8 @@
                               }];
 }
 
-
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
 @end
