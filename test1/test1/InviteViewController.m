@@ -13,6 +13,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import "MLApiClient.h"
 #import "MLUserInfo.h"
+#import "MLHelpers.h"
 
 
 @interface InviteViewController () <FBFriendPickerDelegate,
@@ -299,6 +300,11 @@
     UIImageView *pic = (UIImageView *)[cell.contentView viewWithTag:10];
     if (pic) {
         pic.image = [[MLUserInfo instance] userPicture:userId];
+        pic.layer.borderWidth = 1.0f;
+        pic.layer.borderColor = [MLColor CGColor];
+        pic.layer.cornerRadius = 20;
+        pic.clipsToBounds = YES;
+
     }
     
     UILabel *nameLabel = (UILabel *)[cell.contentView viewWithTag:11];
