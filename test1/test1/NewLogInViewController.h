@@ -10,4 +10,7 @@
 
 @interface NewLogInViewController : UIViewController
 
+- (void)userLoggedIn;
+- (void)userLoggedOut;
+
 @end
