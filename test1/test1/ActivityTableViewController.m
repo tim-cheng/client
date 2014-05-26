@@ -10,6 +10,7 @@
 #import "MainFeedViewController.h"
 #import "MLUserInfo.h"
 #import "MLApiClient.h"
+#import "MLHelpers.h"
 
 @interface ActivityTableViewController ()
 
@@ -26,7 +27,7 @@
     self.activityArray = [[NSMutableArray alloc] init];
     
     [[MLApiClient client] activitiesForId:kApiClientUserSelf success:^(NSHTTPURLResponse *response, id responseJSON) {
-        NSLog(@"received activities");
+        NSLog(@"received activities %@", responseJSON);
         dispatch_async(dispatch_get_main_queue(), ^{
             [self clearActivities];
             [self.activityArray addObjectsFromArray:responseJSON];
@@ -81,11 +82,22 @@
     NSDictionary *userInfo = self.activityArray[indexPath.row];
     UIImageView *picView = (UIImageView *)[cell.contentView viewWithTag:10];
     picView.image = [[MLUserInfo instance] userPicture:[userInfo[@"friend_id"] integerValue]];
+    picView.layer.borderWidth = 1.0f;
+    picView.layer.borderColor = [MLColor CGColor];
+    picView.layer.cornerRadius = 16;
+    picView.clipsToBounds = YES;
+
     
     UILabel *labelView = (UILabel *)[cell.contentView viewWithTag:11];
     labelView.text = userInfo[@"activity"];
     
     return cell;
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"select post: %d", [self.activityArray[indexPath.row][@"post_id"] integerValue]);
 }
 
 
