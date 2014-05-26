@@ -38,9 +38,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.titleLabel.font = [UIFont fontWithName:@"bariol-regular" size:34];
-    self.subtitleLabel.font = [UIFont fontWithName:@"bariol-regular" size:20];
-    self.loginButton.titleLabel.font = [UIFont fontWithName:@"bariol-regular" size:12];
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning

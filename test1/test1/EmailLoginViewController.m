@@ -29,7 +29,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self.navigationController setNavigationBarHidden:NO];
+
+
     self.keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"MLLogin" accessGroup:nil];
     NSString *username = [self.keychainItem objectForKey:(__bridge id)kSecAttrAccount];
     if (username && username.length) {

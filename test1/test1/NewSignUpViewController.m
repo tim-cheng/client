@@ -33,6 +33,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    [self.navigationController setNavigationBarHidden:NO];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
@@ -45,6 +47,7 @@
     img.layer.cornerRadius = 36;
     img.clipsToBounds = YES;
 }
+
 
 - (void)dismissKeyboard
 {
