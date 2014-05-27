@@ -119,7 +119,7 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="18" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="via" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="b2E-4W-dcE" customClass="CustomUILabel">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="18" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="b2E-4W-dcE" customClass="CustomUILabel">
                                             <rect key="frame" x="215" y="13" width="100" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
@@ -258,7 +258,7 @@
             </objects>
             <point key="canvasLocation" x="-1288" y="-2183"/>
         </scene>
-        <!--Main Feed View Controller-->
+        <!--Main Feed View Controller - Feed-->
         <scene sceneID="zcS-Wy-yQF">
             <objects>
                 <viewController storyboardIdentifier="feedController" id="r5F-NV-Qj7" customClass="MainFeedViewController" sceneMemberID="viewController">
@@ -267,7 +267,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" id="rfQ-tT-ey6">
-                                <rect key="frame" x="0.0" y="68" width="320" height="520"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="520"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Share what's new" textAlignment="center" id="qqP-tA-spz" customClass="CustomUITextView">
@@ -301,41 +301,6 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" id="HLV-lY-PMw">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="s2.png" id="RbR-hu-hOc">
-                                        <rect key="frame" x="20" y="23" width="40" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="45 1'  256 2'" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mCn-nH-vWU" customClass="CustomUILabel">
-                                        <rect key="frame" x="73" y="47" width="174" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Azp-hf-q61" customClass="CustomUILabel">
-                                        <rect key="frame" x="73" y="23" width="169" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lJX-1T-Znv">
-                                        <rect key="frame" x="260" y="15" width="48" height="48"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="compose2_64.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="compose:" destination="Yva-45-7iu" eventType="touchUpInside" id="ujj-Ks-ETw"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.8480292559" green="0.45721828190000002" blue="0.55098011899999999" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                             <view hidden="YES" contentMode="scaleToFill" id="3D5-Ua-V2k">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -367,17 +332,24 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="StF-ZE-vnL"/>
+                    <navigationItem key="navigationItem" title="Feed" id="StF-ZE-vnL">
+                        <barButtonItem key="leftBarButtonItem" image="drag_40.png" id="g3l-0m-kua">
+                            <connections>
+                                <action selector="tapOnDrag:" destination="Yva-45-7iu" id="z7U-aw-SiW"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="compose2_64.png" id="ZJd-ua-Ezq">
+                            <connections>
+                                <action selector="tapOnCompose:" destination="Yva-45-7iu" id="QKo-Hy-4aB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="composeCameraButton" destination="EBe-Dc-Yye" id="j0U-vp-mA6"/>
                         <outlet property="composeHeaderView" destination="3D5-Ua-V2k" id="0K5-b6-9Hz"/>
                         <outlet property="composeView" destination="rfQ-tT-ey6" id="BVR-an-zoj"/>
                         <outlet property="composeswitchButton" destination="Ll2-0Q-R4x" id="kwc-ma-mCq"/>
-                        <outlet property="headerConnections" destination="mCn-nH-vWU" id="khg-PO-ygX"/>
-                        <outlet property="headerName" destination="Azp-hf-q61" id="SHe-ym-gM3"/>
-                        <outlet property="headerView" destination="HLV-lY-PMw" id="kij-62-G43"/>
                         <outlet property="postTextView" destination="qqP-tA-spz" id="dCf-qa-HBO"/>
-                        <outlet property="profileImage" destination="RbR-hu-hOc" id="IJV-cB-59i"/>
                         <outlet property="sendPostButton" destination="WUc-6b-4tN" id="91v-77-9YF"/>
                         <segue destination="0dF-FO-NdS" kind="push" id="KZf-Ny-YAd"/>
                     </connections>
@@ -1069,6 +1041,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="comment_off_32.png" width="32" height="32"/>
         <image name="comment_on_32.png" width="32" height="32"/>
         <image name="compose2_64.png" width="40" height="40"/>
+        <image name="drag_40.png" width="40" height="40"/>
         <image name="email_96.png" width="96" height="96"/>
         <image name="email_signup.png" width="307" height="53"/>
         <image name="facebook_signup.png" width="307" height="53"/>
@@ -1080,7 +1053,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="more_32.png" width="32" height="32"/>
         <image name="post_64.png" width="64" height="64"/>
         <image name="return_64.png" width="64" height="64"/>
-        <image name="s2.png" width="195" height="195"/>
         <image name="s3.png" width="195" height="194"/>
         <image name="search_96.png" width="96" height="96"/>
         <image name="shuffle_64.png" width="64" height="64"/>

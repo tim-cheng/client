@@ -27,11 +27,6 @@
                                       PostFeedDelegate,
                                       UIActionSheetDelegate>
 
-@property (strong, nonatomic) IBOutlet UIView *headerView;
-@property (strong, nonatomic) IBOutlet UIImageView *profileImage;
-@property (strong, nonatomic) IBOutlet UILabel *headerName;
-@property (strong, nonatomic) IBOutlet UILabel *headerConnections;
-
 @property (strong, nonatomic) IBOutlet UIView *composeHeaderView;
 @property (strong, nonatomic) IBOutlet UIButton *sendPostButton;
 
@@ -50,7 +45,6 @@
 @property (assign, nonatomic) NSInteger commentPostId;
 @property (strong, nonatomic) NSDateFormatter *myFormatter;
 
-- (IBAction)compose:(id)sender;
 - (IBAction)composeSelectImage:(id)sender;
 - (IBAction)composeShuffleBackground:(id)sender;
 - (IBAction)closeComment:(UIButton *)button;
@@ -73,33 +67,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.navigationController setNavigationBarHidden:YES];
-    // load user info
-    [[MLUserInfo instance] userInfoFromId:[MLApiClient client].userId
-                                  success:^(id responseJSON) {
-                                      dispatch_async(dispatch_get_main_queue(), ^{
-                                          self.headerName.text = responseJSON[@"full_name"];
-                                          self.headerConnections.text = [NSString stringWithFormat:@"%d 1°   %d 2°", [responseJSON[@"num_degree1"] integerValue], [responseJSON[@"num_degree2"] integerValue]];
-                                      });
-                                  }];
-    
+    //[self.navigationController setNavigationBarHidden:YES];
     // prepare composeView
     self.postTextView.delegate = self;
     self.postTextView.text = @"Share what's new";
     [self textViewDidChange:self.postTextView];
-    
-    self.profileImage.image = [[MLUserInfo instance] userPicture:[MLApiClient client].userId];
-    self.profileImage.layer.borderWidth = 1.0f;
-    self.profileImage.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.profileImage.layer.cornerRadius = 20;
-    self.profileImage.clipsToBounds = YES;
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]
-                                         initWithTarget:self
-                                         action:@selector(tapOnProf:)];
-    [singleTap setNumberOfTapsRequired:1];
-    self.profileImage.userInteractionEnabled = YES;
-    [self.profileImage addGestureRecognizer:singleTap];
-
     
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     
@@ -109,7 +81,7 @@
     self.postFeedVC.initPostId = self.initPostId;
     self.initPostId = 0;
     self.mainFeedView = self.postFeedVC.tableView;
-    self.mainFeedView.frame = CGRectMake(0, 68.0f, 320.0f, 500.0f);
+    self.mainFeedView.frame = CGRectMake(0, 64.0f, 320.0f, 504.0f);
     [self.view insertSubview:self.mainFeedView belowSubview:self.composeView];
     
     
@@ -129,12 +101,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-- (void)tapOnProf:(UITapGestureRecognizer *)gest
-{
-    [self.frostedViewController presentMenuViewController];
-}
-
 
 #pragma mark - GestureRecognizer
 
@@ -277,7 +243,7 @@
     if (self.commentPostId == 0) {
         self.commentPostId = postId;
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.headerView.hidden = YES;
+            [self.navigationController setNavigationBarHidden:YES];
             CGRect newFrame = self.mainFeedView.frame;
             newFrame.origin.y = 0;
             self.mainFeedView.frame = newFrame;
@@ -295,9 +261,9 @@
 {
     self.commentPostId = 0;
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.headerView.hidden = NO;
+        [self.navigationController setNavigationBarHidden:NO];
         CGRect newFrame = self.mainFeedView.frame;
-        newFrame.origin.y = 68;
+        newFrame.origin.y = 64;
         self.mainFeedView.frame = newFrame;
         self.mainFeedView.scrollEnabled = YES;
         [self.commentFeedVC hideComment];
@@ -312,16 +278,19 @@
     [nav switchToProfileForUserId:userId];
 }
 
-
-#pragma mark - IBAction
-- (IBAction)compose:(id)sender
+- (void)doCompose
 {
+    NSLog(@"!!!!I am here");
+    [self.navigationController setNavigationBarHidden:YES];
     self.composeView.hidden = NO;
     self.composeHeaderView.hidden = NO;
 }
 
+#pragma mark - IBAction
+
 - (IBAction)sendPost:(id)sender
 {
+    [self.navigationController setNavigationBarHidden:NO];
     self.composeView.hidden = YES;
     self.composeHeaderView.hidden = YES;
 
@@ -348,6 +317,7 @@
 
 - (IBAction)cancelPost:(id)sender
 {
+    [self.navigationController setNavigationBarHidden:NO];
     self.composeView.hidden = YES;
     self.composeHeaderView.hidden = YES;
     [self.postTextView resignFirstResponder];

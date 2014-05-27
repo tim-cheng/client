@@ -15,6 +15,8 @@
 -(IBAction)tapBackToFeed:(id)sender;
 -(IBAction)tapSaveProfile:(id)sender;
 -(IBAction)tapDoneChild:(id)sender;
+-(IBAction)tapOnDrag:(id)sender;
+-(IBAction)tapOnCompose:(id)sender;
 
 
 @end
@@ -62,5 +64,16 @@
     [vc doneChild];
 }
 
+-(IBAction)tapOnDrag:(id)sender
+{
+    [self.frostedViewController presentMenuViewController];
+}
+
+-(IBAction)tapOnCompose:(id)sender
+{
+    NSLog(@"!!!! i am tap");
+    MainFeedViewController *vc = (MainFeedViewController *)self.topViewController;
+    [vc doCompose];
+}
 
 @end
