@@ -164,7 +164,7 @@
     
     [FBWebDialogs
      presentRequestsDialogModallyWithSession:nil
-     message:@"YOUR_MESSAGE_HERE"
+     message:@"Please download and try Parent2D"
      title:nil
      parameters:nil
      handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
@@ -219,9 +219,12 @@
     // at the bottom of the display; note that self.selection is a property inherited from our base class
     for (id<FBGraphUser> user in self.friendPickerController.selection) {
         if ([text length]) {
-            [text appendString:@", "];
+            [text appendString:@"|"];
         }
+        NSLog(@"!!!!! %@", user);
         [text appendString:user.name];
+//        [text appendString:@"@"];
+//        [text appendString:user.username];
     }
     
     [self fillTextBoxAndDismiss:text.length > 0 ? text : @"<None>"];
@@ -232,8 +235,8 @@
 }
 
 - (void)fillTextBoxAndDismiss:(NSString *)text {
-//    self.selectedFriendsView.text = text;
     NSLog(@"selected following friends: %@", text);
+    
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 

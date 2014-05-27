@@ -134,6 +134,11 @@ typedef void (^MLApiClientDataSuccess)(NSHTTPURLResponse *response, NSData *data
                           success:(MLApiClientSuccess)successCallback
                           failure:(MLApiClientFailure)failureCallback;
 
+- (NSURLRequest *)sendFBInviteFromId:(NSInteger)userId
+                            NSString:(NSString *)fbUsers
+                             success:(MLApiClientSuccess)successCallback
+                             failure:(MLApiClientFailure)failureCallback;
+
 - (NSURLRequest *)acceptInviteUserFromId:(NSInteger)userId
                                 inviteId:(NSInteger)inviteId
                                  success:(MLApiClientSuccess)successCallback
