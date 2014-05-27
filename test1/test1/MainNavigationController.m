@@ -9,6 +9,7 @@
 #import "MainNavigationController.h"
 #import "MainFeedViewController.h"
 #import "AddChildViewController.h"
+#import "UserProfileViewController.h"
 
 @interface MainNavigationController()
 -(IBAction)tapBackToFeed:(id)sender;
@@ -31,11 +32,23 @@
     UINavigationController *navigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentController"];
     
     MainFeedViewController *feedController = [self.storyboard instantiateViewControllerWithIdentifier:@"feedController"];
+    
     feedController.initPostId = postId;
     navigationController.viewControllers = @[feedController];
     self.frostedViewController.contentViewController = navigationController;
 }
 
+- (void)switchToProfileForUserId:(NSInteger)userId
+{
+    NSLog(@"switch to profile for user_id: %d", userId);
+    UINavigationController *navigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentController"];
+    
+    UserProfileViewController *profController = [self.storyboard instantiateViewControllerWithIdentifier:@"profileController"];
+    profController.userId = userId;
+    
+    navigationController.viewControllers = @[profController];
+    self.frostedViewController.contentViewController = navigationController;
+}
 
 -(IBAction)tapSaveProfile:(id)sender
 {

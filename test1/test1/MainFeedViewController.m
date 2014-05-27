@@ -14,6 +14,7 @@
 #import "UIImage+ImageEffects.h"
 #import "PostFeedTableViewController.h"
 #import "CommentFeedTableViewController.h"
+#import "MainNavigationController.h"
 
 #define kFeedPostTextViewHeight 228.0f
 #define kComposeTextViewHeight 320.f
@@ -304,6 +305,13 @@
         [UIApplication sharedApplication].statusBarHidden = NO;
     });
 }
+
+- (void)postFeed:(PostFeedTableViewController*)postFeed willOpenProfile:(NSInteger)userId
+{
+    MainNavigationController *nav = (MainNavigationController *)self.navigationController;
+    [nav switchToProfileForUserId:userId];
+}
+
 
 #pragma mark - IBAction
 - (IBAction)compose:(id)sender

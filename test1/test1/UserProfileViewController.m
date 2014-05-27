@@ -13,7 +13,7 @@
 #import "AddChildViewController.h"
 #import "MLHelpers.h"
 
-@interface UserProfileViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface UserProfileViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *profImgView;
 
@@ -29,6 +29,10 @@
 @property (assign, nonatomic) NSInteger editKidRow;
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *saveButtonItem;
+
+@property (strong, nonatomic) IBOutlet UIButton *addKidButton;
+
+@property (assign, nonatomic) BOOL isSelf;
 
 
 -(IBAction)addKid:(id)sender;
@@ -48,13 +52,22 @@
 
     self.kidsArray = [[NSMutableArray alloc] init];
     
-    self.profImgView.image = [[MLUserInfo instance] userPicture:kApiClientUserSelf];
+    if (self.userId == 0) {
+        self.userId = [MLApiClient client].userId;
+        self.isSelf = YES;
+    } else {
+        self.isSelf = NO;
+    }
+    
+    self.addKidButton.hidden = !self.isSelf;
+    
+    self.profImgView.image = [[MLUserInfo instance] userPicture:self.userId];
     self.profImgView.layer.borderWidth = 1.0f;
     self.profImgView.layer.borderColor = [MLColor CGColor];
     self.profImgView.layer.cornerRadius = 36;
     self.profImgView.clipsToBounds = YES;
     
-    [[MLUserInfo instance] userInfoFromId:kApiClientUserSelf success:^(id responseJSON) {
+    [[MLUserInfo instance] userInfoFromId:self.userId success:^(id responseJSON) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"get user info: %@", responseJSON);
             NSDictionary *userInfo = (NSDictionary *)responseJSON;
@@ -72,6 +85,7 @@
     self.bioView.layer.borderWidth = 1.0f;
     self.bioView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.bioView.layer.cornerRadius = 4;
+    self.bioView.delegate = self;
 
 }
 
@@ -88,7 +102,7 @@
 
 -(void)loadKids
 {
-    [[MLApiClient client] kidsForId:kApiClientUserSelf success:^(NSHTTPURLResponse *response, id responseJSON) {
+    [[MLApiClient client] kidsForId:self.userId success:^(NSHTTPURLResponse *response, id responseJSON) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self clearKids];
             NSLog(@"got kids %@", responseJSON);
@@ -166,9 +180,13 @@
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.editKidRow = indexPath.row;
-    [self performSegueWithIdentifier:@"AddKid" sender:self];
+    if (self.isSelf) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        self.editKidRow = indexPath.row;
+        [self performSegueWithIdentifier:@"AddKid" sender:self];
+    }
 }
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -192,4 +210,15 @@
     self.saveButtonItem.enabled = YES;
     return YES;
 }
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return self.isSelf;
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    return self.isSelf;
+}
+
 @end

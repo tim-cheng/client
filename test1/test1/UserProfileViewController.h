@@ -11,4 +11,6 @@
 
 @interface UserProfileViewController : UIViewController
 
+@property (nonatomic, assign) NSInteger userId;
+
 @end

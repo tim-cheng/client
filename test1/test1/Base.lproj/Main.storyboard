@@ -997,6 +997,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addKidButton" destination="A7d-YA-S5U" id="JLD-DP-841"/>
                         <outlet property="bioView" destination="X0a-kg-Rtx" id="tfF-Uf-9Ls"/>
                         <outlet property="connectionLabel" destination="IN2-eM-xyk" id="w4C-Zs-WoK"/>
                         <outlet property="kidsView" destination="OgV-RQ-Gsv" id="gZi-iO-dGD"/>

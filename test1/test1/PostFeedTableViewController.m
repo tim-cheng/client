@@ -131,7 +131,7 @@
 - (void)tapOnComment:(UITapGestureRecognizer *)gest
 {
     UIImageView *img = (UIImageView*)gest.view;
-    NSInteger postId = [img superview].tag - 1000;
+    NSInteger postId = [self tagToPostId:[img superview].tag];
     UITableViewCell *cell = (UITableViewCell*)[[[img superview] superview] superview];
     [self toggleComment:postId cell:cell];
 }
@@ -139,7 +139,7 @@
 - (void)tapOnStar:(UITapGestureRecognizer *)gest
 {
     UIImageView *img = (UIImageView*)gest.view;
-    NSInteger postId = [img superview].tag - 1000;
+    NSInteger postId = [self tagToPostId:[img superview].tag];
     
     BOOL enable = img.highlighted ? NO : YES;
     
@@ -169,11 +169,22 @@
                                          destructiveButtonTitle:nil
                                               otherButtonTitles:@"Share on Facebook", @"Share on WeChat", @"Delete Post", nil];
     UIImageView *img = (UIImageView*)gest.view;
-    NSInteger postId = [img superview].tag - 1000;
+    NSInteger postId = [self tagToPostId:[img superview].tag];
     self.moreActionPostId = postId;
     self.moreActionCell = (UITableViewCell *)[[img superview] superview];
     //[popup showInView:self.tableView];
     [popup showInView:[UIApplication sharedApplication].keyWindow];
+}
+
+- (void)tapOnProfile:(UITapGestureRecognizer *)gest
+{
+    UIImageView *img = (UIImageView*)gest.view;
+    NSInteger userId = [self tagToUserId:[img superview].tag];
+
+    NSLog(@"tapped on profile: %d", userId);
+    if (self.delegate) {
+        [self.delegate postFeed:self willOpenProfile:userId];
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -197,7 +208,7 @@
     
     // TODO: save post_id tag
     NSInteger postId = [self.postArray[indexPath.row][@"id"] integerValue];
-    cell.contentView.tag = postId + 1000;
+    cell.contentView.tag = indexPath.row + 1000;
     
     // set post text
     UIImageView *userImage = (UIImageView *)[cell.contentView viewWithTag:20];
@@ -206,6 +217,13 @@
     userImage.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     userImage.layer.cornerRadius = 20;
     userImage.clipsToBounds = YES;
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]
+                                         initWithTarget:self
+                                         action:@selector(tapOnProfile:)];
+    [singleTap setNumberOfTapsRequired:1];
+    userImage.userInteractionEnabled = YES;
+    [userImage addGestureRecognizer:singleTap];
+
     
     // add background
     UIImageView *imageView = (UIImageView *)[cell.contentView viewWithTag:30];
@@ -217,7 +235,7 @@
         [[MLPostInfo instance] postPicture:postId success:^(UIImage *responseImage) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 // if the cell is still for the post
-                if (cell.contentView.tag == postId + 1000 ) {
+                if (cell.contentView.tag == indexPath.row + 1000 ) {
                     UIImageView *imageView = [[UIImageView alloc] initWithImage:responseImage];
                     imageView.tag = 30;
                     [cell.contentView addSubview:imageView ];
@@ -322,7 +340,8 @@
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
     NSLog(@"I am here... ");
-    NSInteger postId = [textView superview].tag - 1000;
+    NSInteger postId = [self tagToPostId:[textView superview].tag];
+
     UITableViewCell *cell = (UITableViewCell*)[[[textView superview] superview] superview];
     [self toggleComment:postId cell:cell];
     return NO;
@@ -456,4 +475,15 @@
     UIGraphicsEndImageContext();
     return img;
 }
+
+- (NSInteger)tagToPostId:(NSInteger)tag
+{
+    return [self.postArray[tag - 1000][@"id"] integerValue];
+}
+
+- (NSInteger)tagToUserId:(NSInteger)tag
+{
+    return [self.postArray[tag - 1000][@"user_id"] integerValue];
+}
+
 @end

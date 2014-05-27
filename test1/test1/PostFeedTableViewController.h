@@ -24,4 +24,6 @@
 @optional
 - (void)postFeed:(PostFeedTableViewController*)postFeed willOpenComment:(NSInteger)postId atIndexPath:(NSIndexPath *)indexPath;
 - (void)postFeed:(PostFeedTableViewController*)postFeed willCloseComment:(NSInteger)postId;
+- (void)postFeed:(PostFeedTableViewController*)postFeed willOpenProfile:(NSInteger)userId;
+
 @end
