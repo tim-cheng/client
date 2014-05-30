@@ -94,7 +94,9 @@
         navigationController.viewControllers = @[activityController];
     } else if (indexPath.section == 0 && indexPath.row == 3) {
         [FBSession.activeSession closeAndClearTokenInformation];
-        [self.frostedViewController performSegueWithIdentifier:@"LogoutMain" sender:self.frostedViewController];
+        [self dismissViewControllerAnimated:NO completion:^{
+            [self.frostedViewController performSegueWithIdentifier:@"LogoutMain" sender:self.frostedViewController];
+        }];
     }
     self.frostedViewController.contentViewController = navigationController;
     [self.frostedViewController hideMenuViewController];

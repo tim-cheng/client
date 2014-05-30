@@ -64,7 +64,7 @@
 - (void)loadPostsAndScroll:(BOOL)needScroll
 {
     [[MLPostInfo instance] loadPostInfoFromId:[MLApiClient client].userId
-                                       degree:1
+                                       degree:2
                                       success:^(id responseJSON) {
                                           dispatch_async(dispatch_get_main_queue(), ^{
                                               
