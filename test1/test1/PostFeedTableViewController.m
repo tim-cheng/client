@@ -238,11 +238,14 @@
     cell.contentView.tag = postId + 1000;
     
     // set post text
-    UIImageView *userImage = (UIImageView *)[cell.contentView viewWithTag:20];
+    UIView *headerView = (UIView *)[cell.contentView viewWithTag:40];
+    headerView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.3];
+    
+    UIImageView *userImage = (UIImageView *)[headerView viewWithTag:20];
     userImage.image = [[MLUserInfo instance] userPicture:[self.postArray[indexPath.row][@"user_id"] integerValue]];
     userImage.layer.borderWidth = 1.0f;
     userImage.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    userImage.layer.cornerRadius = 20;
+    userImage.layer.cornerRadius = 16;
     userImage.clipsToBounds = YES;
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]
                                          initWithTarget:self
@@ -293,7 +296,7 @@
         NSDate *time = [self.myFormatter dateFromString:timeString];
         displayTime = [time timeAgo];
     }
-    UILabel *time = (UILabel *)[cell.contentView viewWithTag:11];
+    UILabel *time = (UILabel *)[headerView viewWithTag:11];
     time.text = displayTime;
     
     // set comments/stars
@@ -337,16 +340,16 @@
     [[MLUserInfo instance] userInfoFromId:userId
                                   success:^(id responseJSON) {
                                       dispatch_async(dispatch_get_main_queue(), ^{
-                                          UILabel *posterName = (UILabel *)[cell.contentView viewWithTag:14];
+                                          UILabel *posterName = (UILabel *)[headerView viewWithTag:14];
                                           posterName.text = responseJSON[@"full_name"];
-                                          UILabel *posterDesc = (UILabel *)[cell.contentView viewWithTag:15];
+                                          UILabel *posterDesc = (UILabel *)[headerView viewWithTag:15];
                                           posterDesc.text = responseJSON[@"description"];
                                       });
                                   }];
     
 
     NSInteger refId = [self.postArray[indexPath.row][@"ref_user_id"] integerValue];
-    UILabel *refName = (UILabel *)[cell.contentView viewWithTag:18];
+    UILabel *refName = (UILabel *)[headerView viewWithTag:18];
     if (refId != [MLApiClient client].userId) {
         [[MLUserInfo instance] userInfoFromId:refId
                                       success:^(id responseJSON) {
