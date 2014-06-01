@@ -61,31 +61,59 @@
     [self.refreshControl endRefreshing];
 }
 
+- (void)updateTable:(NSMutableArray*)array2
+{
+    NSMutableArray *array1 = self.postArray;
+    int idx1 = 0, idx2=0;
+    int cnt1 = [array1 count], cnt2 = [array2 count];
+    NSMutableArray *insertPaths = [[NSMutableArray alloc] init];
+    NSMutableArray *reloadPaths = [[NSMutableArray alloc] init];
+    NSMutableArray *deletePaths = [[NSMutableArray alloc] init];
+    while (idx1 < cnt1 && idx2 < cnt2) {
+        if ([array2[idx2][@"id"] integerValue] > [array1[idx1][@"id"] integerValue]) {
+            // new element, insert
+            [insertPaths addObject:[NSIndexPath indexPathForRow:idx2 inSection:0]];
+            idx2++;
+        } else if ([array2[idx2][@"id"] integerValue] == [array1[idx1][@"id"] integerValue]) {
+            // same element
+            if (![array1[idx1] isEqualToDictionary:array2[idx2]]) {
+                [reloadPaths addObject:[NSIndexPath indexPathForRow:idx2 inSection:0]];
+            }
+            idx1++;
+            idx2++;
+        } else {
+            // old element need to be deleted
+            [deletePaths addObject:[NSIndexPath indexPathForRow:idx1 inSection:0]];
+            idx1++;
+        }
+    }
+    if (idx1 < cnt1) {
+        for (int i=idx1; i<cnt1; i++) {
+            [deletePaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+        }
+    }
+    if (idx2 < cnt2) {
+        for (int i=idx2; i<cnt2; i++) {
+            [insertPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+        }
+    }
+    [self.tableView beginUpdates];
+    NSLog(@"insert: %@, delete %@, reload %@", insertPaths, deletePaths, reloadPaths);
+    [self.tableView deleteRowsAtIndexPaths:deletePaths withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView insertRowsAtIndexPaths:insertPaths withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadRowsAtIndexPaths:reloadPaths withRowAnimation:UITableViewRowAnimationNone];
+    [self.postArray removeAllObjects];
+    [self.postArray addObjectsFromArray:array2];
+    [self.tableView endUpdates];
+}
+
 - (void)loadPostsAndScroll:(BOOL)needScroll
 {
     [[MLPostInfo instance] loadPostInfoFromId:[MLApiClient client].userId
                                        degree:2
                                       success:^(id responseJSON) {
                                           dispatch_async(dispatch_get_main_queue(), ^{
-                                              
-                                              [self.tableView beginUpdates];
-                                              NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-                                              if ([self.postArray count] > 0) {
-                                                  for (int i=0; i<[self.postArray count]; i++) {
-                                                      [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-                                                  }
-                                                  [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
-                                                  [self.postArray removeAllObjects];
-                                                  [indexPaths removeAllObjects];
-                                              }
-                                              
-                                              [self.postArray addObjectsFromArray:responseJSON];
-                                              for (int i=0; i<[self.postArray count]; i++) {
-                                                  [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-                                              }
-                                              [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
-                                              
-                                              [self.tableView endUpdates];
+                                              [self updateTable:responseJSON];
                                               if (self.initPostId) {
                                                   [self openPost:self.initPostId];
                                                   self.initPostId = 0;
@@ -162,7 +190,6 @@
 
 - (void)tapOnMore:(UITapGestureRecognizer *)gest
 {
-    NSLog(@"tap... ");
     UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:nil
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
@@ -170,6 +197,7 @@
                                               otherButtonTitles:@"Share on Facebook", @"Share on WeChat", @"Delete Post", nil];
     UIImageView *img = (UIImageView*)gest.view;
     NSInteger postId = [self tagToPostId:[img superview].tag];
+    NSLog(@"tap postid %d", postId);
     self.moreActionPostId = postId;
     self.moreActionCell = (UITableViewCell *)[[img superview] superview];
     //[popup showInView:self.tableView];
