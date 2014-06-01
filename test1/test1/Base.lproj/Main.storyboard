@@ -746,7 +746,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Contacts" id="Scg-CT-OXs">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="Rrp-qx-VdO">
+                        <barButtonItem key="leftBarButtonItem" title="&lt; Back" id="Rrp-qx-VdO">
                             <connections>
                                 <action selector="tapBackToFeed:" destination="1F7-Mf-MrI" id="W0F-3H-erU"/>
                             </connections>
@@ -878,7 +878,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Activities" id="mLt-0o-7lf">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="bmV-bg-66O">
+                        <barButtonItem key="leftBarButtonItem" title="&lt; Back" id="bmV-bg-66O">
                             <connections>
                                 <action selector="tapBackToFeed:" destination="XNE-Xm-ayX" id="qlb-jt-9Tu"/>
                             </connections>
@@ -1003,7 +1003,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="hUk-9g-F9h">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="DvX-E3-v2g">
+                        <barButtonItem key="leftBarButtonItem" title="&lt; Back" id="DvX-E3-v2g">
                             <connections>
                                 <action selector="tapBackToFeed:" destination="D0I-yS-pHJ" id="Udl-c0-K2I"/>
                             </connections>
