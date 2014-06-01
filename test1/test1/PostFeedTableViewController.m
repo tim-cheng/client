@@ -14,6 +14,7 @@
 #import "NSDate+TimeAgo.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "WXApi.h"
+#import "MLHelpers.h"
 
 #define kFeedPostTextViewHeight 228.0f
 
@@ -49,7 +50,8 @@
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 180.0f, 0);
 
     UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
-    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+//    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+    refresh.tintColor = MLColorBrown;
     [refresh addTarget:self action:@selector(loadPosts) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refresh;
     [self loadPostsAndScroll:NO];
