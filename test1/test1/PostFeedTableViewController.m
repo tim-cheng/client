@@ -98,7 +98,6 @@
         }
     }
     [self.tableView beginUpdates];
-    NSLog(@"insert: %@, delete %@, reload %@", insertPaths, deletePaths, reloadPaths);
     [self.tableView deleteRowsAtIndexPaths:deletePaths withRowAnimation:UITableViewRowAnimationNone];
     [self.tableView insertRowsAtIndexPaths:insertPaths withRowAnimation:UITableViewRowAnimationNone];
     [self.tableView reloadRowsAtIndexPaths:reloadPaths withRowAnimation:UITableViewRowAnimationNone];
@@ -188,18 +187,16 @@
                                 }];
 }
 
-- (void)tapOnMore:(UITapGestureRecognizer *)gest
+- (void)tapOnMore:(UIButton *)button
 {
     UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:nil
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
                                               otherButtonTitles:@"Share on Facebook", @"Share on WeChat", @"Delete Post", nil];
-    UIImageView *img = (UIImageView*)gest.view;
-    NSInteger postId = [self tagToPostId:[img superview].tag];
-    NSLog(@"tap postid %d", postId);
+    NSInteger postId = [self tagToPostId:[button superview].tag];
     self.moreActionPostId = postId;
-    self.moreActionCell = (UITableViewCell *)[[img superview] superview];
+    self.moreActionCell = (UITableViewCell *)[[button superview] superview];
     //[popup showInView:self.tableView];
     [popup showInView:[UIApplication sharedApplication].keyWindow];
 }
@@ -236,7 +233,7 @@
     
     // TODO: save post_id tag
     NSInteger postId = [self.postArray[indexPath.row][@"id"] integerValue];
-    cell.contentView.tag = indexPath.row + 1000;
+    cell.contentView.tag = postId + 1000;
     
     // set post text
     UIImageView *userImage = (UIImageView *)[cell.contentView viewWithTag:20];
@@ -263,7 +260,7 @@
         [[MLPostInfo instance] postPicture:postId success:^(UIImage *responseImage) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 // if the cell is still for the post
-                if (cell.contentView.tag == indexPath.row + 1000 ) {
+                if (cell.contentView.tag == postId + 1000 ) {
                     UIImageView *imageView = [[UIImageView alloc] initWithImage:responseImage];
                     imageView.tag = 30;
                     [cell.contentView addSubview:imageView ];
@@ -360,18 +357,13 @@
     }
     
     // only show more button to post owner
-    UIImageView *more = (UIImageView *)[cell.contentView viewWithTag:19];
+    UIButton *more = (UIButton *)[cell.contentView viewWithTag:19];
     if (more) {
         if (userId != [MLApiClient client].userId) {
             more.hidden = YES;
         } else {
             more.hidden = NO;
-            UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]
-                                                 initWithTarget:self
-                                                 action:@selector(tapOnMore:)];
-            [singleTap setNumberOfTapsRequired:1];
-            more.userInteractionEnabled = YES;
-            [more addGestureRecognizer:singleTap];
+            [more addTarget:self action:@selector(tapOnMore:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
     return cell;
@@ -520,12 +512,17 @@
 
 - (NSInteger)tagToPostId:(NSInteger)tag
 {
-    return [self.postArray[tag - 1000][@"id"] integerValue];
+    return tag - 1000;
 }
 
 - (NSInteger)tagToUserId:(NSInteger)tag
 {
-    return [self.postArray[tag - 1000][@"user_id"] integerValue];
+    for (NSDictionary *post in self.postArray) {
+        if ([post[@"id"] integerValue] == (tag-1000)) {
+            return [post[@"user_id"] integerValue];
+        }
+    }
+    return -1;
 }
 
 @end
