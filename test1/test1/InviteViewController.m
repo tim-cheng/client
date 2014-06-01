@@ -336,6 +336,10 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    if (section == 0 && [self.inviterArray count] == 0) {
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 0)];
+        return view;
+    }
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
     CustomUILabel *label = [[CustomUILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.frame.size.width, 18)];
     label.font = [UIFont fontWithName:@"bariol-regular" size:14];
