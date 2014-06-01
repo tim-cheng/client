@@ -319,7 +319,9 @@
     
     UILabel *locationLabel = (UILabel *)[cell.contentView viewWithTag:12];
     if (locationLabel) {
-        locationLabel.text = @"San Jose, California";
+        [[MLUserInfo instance] userInfoFromId:userId success:^(id responseJSON) {
+            locationLabel.text = responseJSON[@"location"];
+        }];
     }
     
     UIButton *inviteButton = (UIButton *)[cell.contentView viewWithTag:13];
