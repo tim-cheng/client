@@ -80,7 +80,8 @@
                                        NSLog(@" failed to add kid");
                                    }];
     }
-  
+    
+    [[MLUserInfo instance] invalidateUserInfoFromId:[MLApiClient client].userId];
 }
 
 -(IBAction)tapBoy:(id)sender
