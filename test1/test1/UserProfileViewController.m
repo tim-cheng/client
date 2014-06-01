@@ -64,7 +64,7 @@
     self.profImgView.image = [[MLUserInfo instance] userPicture:self.userId];
     self.profImgView.layer.borderWidth = 1.0f;
     self.profImgView.layer.borderColor = [MLColor CGColor];
-    self.profImgView.layer.cornerRadius = 24;
+    self.profImgView.layer.cornerRadius = 32;
     self.profImgView.clipsToBounds = YES;
     
     [[MLUserInfo instance] userInfoFromId:self.userId success:^(id responseJSON) {
