@@ -15,6 +15,7 @@
 #import "MLUserInfo.h"
 #import "MLHelpers.h"
 #import "CustomUILabel.h"
+#import "MainNavigationController.h"
 
 
 @interface InviteViewController () <FBFriendPickerDelegate,
@@ -210,6 +211,16 @@
     
 }
 
+- (void)tapOnProfile:(UITapGestureRecognizer *)gest
+{
+    NSLog(@"tapped here!!!");
+    UIImageView *img = (UIImageView*)gest.view;
+    NSInteger userId = [[[img superview] superview] superview].tag;
+    
+    MainNavigationController *nav = (MainNavigationController *)self.navigationController;
+    [nav switchToProfileForUserId:userId];
+}
+
 #pragma mark - FBFriendPickerDelegate
 
 - (void)facebookViewControllerDoneWasPressed:(id)sender {
@@ -309,7 +320,12 @@
         pic.layer.borderColor = [MLColor CGColor];
         pic.layer.cornerRadius = 20;
         pic.clipsToBounds = YES;
-
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]
+                                             initWithTarget:self
+                                             action:@selector(tapOnProfile:)];
+        [singleTap setNumberOfTapsRequired:1];
+        pic.userInteractionEnabled = YES;
+        [pic addGestureRecognizer:singleTap];
     }
     
     UILabel *nameLabel = (UILabel *)[cell.contentView viewWithTag:11];
