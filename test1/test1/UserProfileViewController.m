@@ -44,11 +44,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(dismissKeyboard)];
-    
-    [self.view addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+//                                   initWithTarget:self
+//                                   action:@selector(dismissKeyboard)];
+//    
+//    [self.view addGestureRecognizer:tap];
 
     self.kidsArray = [[NSMutableArray alloc] init];
     
@@ -164,7 +164,7 @@
                                                                                   cancelButtonTitle:@"OK"
                                                                                   otherButtonTitles:nil];
                                              [warn show];
-                                             self.saveButtonItem.enabled = YES;
+                                             self.saveButtonItem.enabled = NO;
                                              [self dismissKeyboard];
                                          });
 
@@ -241,11 +241,17 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    if (self.isSelf) {
+        self.saveButtonItem.enabled = YES;
+    }
     return self.isSelf;
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
+    if (self.isSelf) {
+        self.saveButtonItem.enabled = YES;
+    }
     return self.isSelf;
 }
 
