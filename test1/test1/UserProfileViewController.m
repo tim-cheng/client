@@ -64,7 +64,7 @@
     self.profImgView.image = [[MLUserInfo instance] userPicture:self.userId];
     self.profImgView.layer.borderWidth = 1.0f;
     self.profImgView.layer.borderColor = [MLColor CGColor];
-    self.profImgView.layer.cornerRadius = 36;
+    self.profImgView.layer.cornerRadius = 24;
     self.profImgView.clipsToBounds = YES;
     
     [[MLUserInfo instance] userInfoFromId:self.userId success:^(id responseJSON) {
@@ -72,8 +72,9 @@
             NSLog(@"get user info: %@", responseJSON);
             NSDictionary *userInfo = (NSDictionary *)responseJSON;
             self.nameField.text = userInfo[@"full_name"];
-            self.connectionLabel.text = [NSString stringWithFormat:@"%d 1°   %d 2°", [userInfo[@"num_degree1"] integerValue], [userInfo[@"num_degree2"] integerValue]];
-            self.bioView.text = userInfo[@"description"];
+            self.connectionLabel.text = [NSString stringWithFormat:@"%d Connections   %d Parents in 2° network", [userInfo[@"num_degree1"] integerValue], [userInfo[@"num_degree2"] integerValue]];
+            self.bioView.text = userInfo[@"interests"];
+            self.locationField.text = userInfo[@"location"];
         });
     }];
     
@@ -82,9 +83,6 @@
     self.nameField.delegate = self;
     self.locationField.delegate = self;
     
-    self.bioView.layer.borderWidth = 1.0f;
-    self.bioView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    self.bioView.layer.cornerRadius = 4;
     self.bioView.delegate = self;
 
 }
@@ -143,6 +141,36 @@
         [indexPaths removeAllObjects];
         [self.kidsView endUpdates];
     }
+}
+
+-(void)saveProfile
+{
+    NSArray *names = [self.nameField.text componentsSeparatedByString:@" "];
+    if ([names count] < 2) {
+        NSLog(@"malformatted name... ");
+        return;
+    }
+    
+    [[MLApiClient client] updateUserInfoFromId:kApiClientUserSelf firstName:names[0]
+                                      lastName:names[1]
+                                      location:self.locationField.text
+                                     interests:self.bioView.text success:^(NSHTTPURLResponse *response, id responseJSON) {
+                                         NSLog(@"user info updated...");
+                                         [[MLUserInfo instance] invalidateUserInfoFromId:[MLApiClient client].userId];
+                                         dispatch_async(dispatch_get_main_queue(), ^{
+                                             UIAlertView *warn = [[UIAlertView alloc] initWithTitle:nil
+                                                                                            message:@"User profile updated"
+                                                                                           delegate:self
+                                                                                  cancelButtonTitle:@"OK"
+                                                                                  otherButtonTitles:nil];
+                                             [warn show];
+                                             self.saveButtonItem.enabled = YES;
+                                             [self dismissKeyboard];
+                                         });
+
+                                     } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+                                         NSLog(@"user info update failed...");
+                                     }];
 }
 
 #pragma mark - UITableViewDataSource

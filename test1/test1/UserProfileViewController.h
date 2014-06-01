@@ -13,4 +13,7 @@
 
 @property (nonatomic, assign) NSInteger userId;
 
+-(void)saveProfile;
+
+
 @end

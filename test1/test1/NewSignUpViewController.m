@@ -69,11 +69,13 @@
 - (IBAction)nextStep:(id)sender
 {
     // TODO: email/password/validation
-    
+    // TOOD: location / zip
     [[MLApiClient client] createUser:self.emailField.text
                             password:self.passwordField.text
                            firstName:self.firstNameField.text
                             lastName:self.lastNameField.text
+                            location:@""
+                                 zip:@""
                              success:^(NSHTTPURLResponse *response, id responseJSON) {
                                  NSLog(@"user account created!");
                                  [[MLApiClient client] setLoggedInInfoWithEmail:self.emailField.text

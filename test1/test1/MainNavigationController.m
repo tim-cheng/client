@@ -54,7 +54,10 @@
 
 -(IBAction)tapSaveProfile:(id)sender
 {
-    NSLog(@"tap save...");
+    NSLog(@"update user info");
+    
+    UserProfileViewController *vc = (UserProfileViewController *)self.topViewController;
+    [vc saveProfile];
 }
 
 -(IBAction)tapDoneChild:(id)sender

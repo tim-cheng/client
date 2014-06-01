@@ -34,6 +34,8 @@ typedef void (^MLApiClientDataSuccess)(NSHTTPURLResponse *response, NSData *data
                     firstName:(NSString *)firstName
                      lastName:(NSString *)lastName
                          fbId:(NSString *)fbId
+                     location:(NSString *)location
+                          zip:(NSString *)zip
                       success:(MLApiClientSuccess)successCallback
                       failure:(MLApiClientFailure)failureCallback;
 
@@ -41,8 +43,18 @@ typedef void (^MLApiClientDataSuccess)(NSHTTPURLResponse *response, NSData *data
                     password:(NSString *)password
                    firstName:(NSString *)firstName
                     lastName:(NSString *)lastName
+                    location:(NSString *)location
+                         zip:(NSString *)zip
                      success:(MLApiClientSuccess)successCallback
                      failure:(MLApiClientFailure)failureCallback;
+
+- (NSURLRequest *)updateUserInfoFromId:(NSInteger)userId
+                             firstName:(NSString *)firstName
+                              lastName:(NSString *)lastName
+                              location:(NSString *)location
+                             interests:(NSString*)interests
+                               success:(MLApiClientSuccess)successCallback
+                               failure:(MLApiClientFailure)failureCallback;
 
 - (void) setLoggedInInfoWithEmail:(NSString *)email
                          password:(NSString *)password

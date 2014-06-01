@@ -34,9 +34,9 @@
 
 - (id)init
 {
-//    return [self initWithProtocol:@"http" baseURLString:@"localhost:8080"];
+    return [self initWithProtocol:@"http" baseURLString:@"localhost:8080"];
 //    return [self initWithProtocol:@"http" baseURLString:@"192.168.0.102:8080"];
-    return [self initWithProtocol:@"https" baseURLString:@"parent2d.com"];
+//    return [self initWithProtocol:@"https" baseURLString:@"parent2d.com"];
 }
 
 - (id)initWithProtocol:(NSString *)protocol baseURLString:(NSString *)baseURLString
@@ -108,11 +108,13 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
                     firstName:(NSString *)firstName
                      lastName:(NSString *)lastName
                          fbId:(NSString *)fbId
+                     location:(NSString *)location
+                          zip:(NSString *)zip
                       success:(MLApiClientSuccess)successCallback
                       failure:(MLApiClientFailure)failureCallback
 {
     NSString * path = @"/login_facebook";
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@?first_name=%@&last_name=%@&fb_id=%@", self.protocol, self.baseURLString, path, [self urlEncode:firstName], [self urlEncode:lastName], [self urlEncode:fbId]]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@?first_name=%@&last_name=%@&fb_id=%@&location=%@&zip=%@", self.protocol, self.baseURLString, path, [self urlEncode:firstName], [self urlEncode:lastName], [self urlEncode:fbId], [self urlEncode:location], [self urlEncode:zip]]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:15.0f];
@@ -126,6 +128,8 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
                     password:(NSString *)password
                    firstName:(NSString *)firstName
                     lastName:(NSString *)lastName
+                    location:(NSString *)location
+                         zip:(NSString *)zip
                      success:(MLApiClientSuccess)successCallback
                      failure:(MLApiClientFailure)failureCallback
 {
@@ -134,8 +138,8 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:15.0f];
-    NSString *params = [NSString stringWithFormat:@"email=%@&password=%@&first_name=%@&last_name=%@",
-        [self urlEncode:email], [self urlEncode:password], [self urlEncode:firstName], [self urlEncode:lastName]];
+    NSString *params = [NSString stringWithFormat:@"email=%@&password=%@&first_name=%@&last_name=%@&location=%@&zip=%@",
+        [self urlEncode:email], [self urlEncode:password], [self urlEncode:firstName], [self urlEncode:lastName], [self urlEncode:location], [self urlEncode:zip]];
     NSData *postData = [params dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     request.HTTPMethod = @"POST";
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
@@ -250,6 +254,31 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
                                                        timeoutInterval:15.0f];
     request.HTTPMethod = @"GET";
     [request setValue:self.loggedInAuth forHTTPHeaderField:@"Authorization"];
+    return [self makeRequest:request success:successCallback failure:failureCallback];
+}
+
+- (NSURLRequest *)updateUserInfoFromId:(NSInteger)userId
+                             firstName:(NSString *)firstName
+                              lastName:(NSString *)lastName
+                              location:(NSString *)location
+                             interests:(NSString*)interests
+                               success:(MLApiClientSuccess)successCallback
+                               failure:(MLApiClientFailure)failureCallback
+{
+    NSInteger uid = (userId < 0) ? self.loggedInUserId : userId;
+    NSString * path = @"/users";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@/%d", self.protocol, self.baseURLString, path, uid]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:15.0f];
+    NSString *params = [NSString stringWithFormat:@"first_name=%@&last_name=%@&location=%@&interests=%@",
+                        [self urlEncode:firstName],[self urlEncode:lastName],[self urlEncode:location],[self urlEncode:interests]];
+    NSData *postData = [params dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    request.HTTPMethod = @"PUT";
+    [request setValue:self.loggedInAuth forHTTPHeaderField:@"Authorization"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%d", [postData length]] forHTTPHeaderField:@"Content-Length"];
+    request.HTTPBody = postData;
     return [self makeRequest:request success:successCallback failure:failureCallback];
 }
 

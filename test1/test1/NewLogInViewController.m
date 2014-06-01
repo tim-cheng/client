@@ -115,6 +115,8 @@
                 NSString *firstName = user.first_name;
                 NSString *lastName = user.last_name;
                 NSString *facebookId = user.id;
+                NSString *location = user.location.name;
+                NSString *zip = @"";
                 NSString *email = [user objectForKey:@"email"];
                 NSString *accessToken = [[[FBSession activeSession] accessTokenData] accessToken];
                 NSString *loginEmail = [NSString stringWithFormat:@"%@@fb", email];
@@ -125,6 +127,8 @@
                                         firstName:firstName
                                          lastName:lastName
                                              fbId:facebookId
+                                         location:location
+                                              zip:zip
                                           success:^(NSHTTPURLResponse *response, id responseJSON) {
                                               NSLog(@"!!!!!FB Login succeeded!!!!, %@", responseJSON);
                                               [[MLApiClient client] setLoggedInInfoWithEmail:loginEmail

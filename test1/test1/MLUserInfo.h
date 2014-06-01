@@ -16,6 +16,7 @@ typedef void (^MLUserInfoSuccess)(id responseJSON);
 
 + (MLUserInfo *)instance;
 - (void) userInfoFromId:(NSInteger)userId success:(MLUserInfoSuccess)callback;
+- (void) invalidateUserInfoFromId:(NSInteger)userId;
 - (UIImage *)userPicture:(NSInteger)userId;
 
 

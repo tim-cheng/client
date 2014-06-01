@@ -62,6 +62,11 @@
 		28810B8C1921526700F55B24 /* PostFeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28810B8B1921526700F55B24 /* PostFeedTableViewController.m */; };
 		28810B8F1921794600F55B24 /* CommentFeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28810B8E1921794600F55B24 /* CommentFeedTableViewController.m */; };
 		28810B911921BA4000F55B24 /* more_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28810B901921BA4000F55B24 /* more_64.png */; };
+		2881B83B193A9EAF00800AF3 /* line_480.png in Resources */ = {isa = PBXBuildFile; fileRef = 2881B83A193A9EAF00800AF3 /* line_480.png */; };
+		2881B840193AA0CA00800AF3 /* boy_bnw_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 2881B83C193AA0CA00800AF3 /* boy_bnw_64.png */; };
+		2881B841193AA0CA00800AF3 /* boy_color_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 2881B83D193AA0CA00800AF3 /* boy_color_64.png */; };
+		2881B842193AA0CA00800AF3 /* girl_bnw_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 2881B83E193AA0CA00800AF3 /* girl_bnw_64.png */; };
+		2881B843193AA0CA00800AF3 /* girl_color_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 2881B83F193AA0CA00800AF3 /* girl_color_64.png */; };
 		288FB5B618E1EA8300214DC5 /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */; };
 		288FB5B718E1EA8300214DC5 /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 288FB5B518E1EA8300214DC5 /* NSDateTimeAgo.bundle */; };
 		288FB5FB18E742EC00214DC5 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288FB5FA18E742EC00214DC5 /* Social.framework */; };
@@ -92,10 +97,6 @@
 		28D16D121929F14C00BCC820 /* adduser_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D16D111929F14C00BCC820 /* adduser_64.png */; };
 		28DB23D5193026D5004CA7F0 /* edit_32.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DB23D4193026D5004CA7F0 /* edit_32.png */; };
 		28DB23D719302905004CA7F0 /* user_128.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DB23D619302905004CA7F0 /* user_128.png */; };
-		28DB23DC19328FA3004CA7F0 /* boy_bnw_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DB23D819328FA3004CA7F0 /* boy_bnw_64.png */; };
-		28DB23DD19328FA3004CA7F0 /* boy_color_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DB23D919328FA3004CA7F0 /* boy_color_64.png */; };
-		28DB23DE19328FA3004CA7F0 /* girl_bnw_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DB23DA19328FA3004CA7F0 /* girl_bnw_64.png */; };
-		28DB23DF19328FA3004CA7F0 /* girl_color_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DB23DB19328FA3004CA7F0 /* girl_color_64.png */; };
 		28DB23E51932AF78004CA7F0 /* adduser_128.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DB23E41932AF78004CA7F0 /* adduser_128.png */; };
 		28DB23E8193314CC004CA7F0 /* EmailLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DB23E7193314CC004CA7F0 /* EmailLoginViewController.m */; };
 		28DB23EE1933326B004CA7F0 /* bariol-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28DB23ED1933320A004CA7F0 /* bariol-regular.ttf */; };
@@ -217,6 +218,11 @@
 		28810B8D1921794600F55B24 /* CommentFeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentFeedTableViewController.h; sourceTree = "<group>"; };
 		28810B8E1921794600F55B24 /* CommentFeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentFeedTableViewController.m; sourceTree = "<group>"; };
 		28810B901921BA4000F55B24 /* more_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more_64.png; sourceTree = "<group>"; };
+		2881B83A193A9EAF00800AF3 /* line_480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line_480.png; sourceTree = "<group>"; };
+		2881B83C193AA0CA00800AF3 /* boy_bnw_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boy_bnw_64.png; sourceTree = "<group>"; };
+		2881B83D193AA0CA00800AF3 /* boy_color_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boy_color_64.png; sourceTree = "<group>"; };
+		2881B83E193AA0CA00800AF3 /* girl_bnw_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = girl_bnw_64.png; sourceTree = "<group>"; };
+		2881B83F193AA0CA00800AF3 /* girl_color_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = girl_color_64.png; sourceTree = "<group>"; };
 		288FB5B318E1EA8300214DC5 /* NSDate+TimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgo.h"; sourceTree = "<group>"; };
 		288FB5B418E1EA8300214DC5 /* NSDate+TimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeAgo.m"; sourceTree = "<group>"; };
 		288FB5B518E1EA8300214DC5 /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
@@ -256,10 +262,6 @@
 		28D16D111929F14C00BCC820 /* adduser_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = adduser_64.png; sourceTree = "<group>"; };
 		28DB23D4193026D5004CA7F0 /* edit_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit_32.png; sourceTree = "<group>"; };
 		28DB23D619302905004CA7F0 /* user_128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_128.png; sourceTree = "<group>"; };
-		28DB23D819328FA3004CA7F0 /* boy_bnw_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boy_bnw_64.png; sourceTree = "<group>"; };
-		28DB23D919328FA3004CA7F0 /* boy_color_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boy_color_64.png; sourceTree = "<group>"; };
-		28DB23DA19328FA3004CA7F0 /* girl_bnw_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = girl_bnw_64.png; sourceTree = "<group>"; };
-		28DB23DB19328FA3004CA7F0 /* girl_color_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = girl_color_64.png; sourceTree = "<group>"; };
 		28DB23E41932AF78004CA7F0 /* adduser_128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = adduser_128.png; sourceTree = "<group>"; };
 		28DB23E6193314CC004CA7F0 /* EmailLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailLoginViewController.h; sourceTree = "<group>"; };
 		28DB23E7193314CC004CA7F0 /* EmailLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailLoginViewController.m; sourceTree = "<group>"; };
@@ -551,6 +553,11 @@
 		28C7AE8218DE059F004F485D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2881B83C193AA0CA00800AF3 /* boy_bnw_64.png */,
+				2881B83D193AA0CA00800AF3 /* boy_color_64.png */,
+				2881B83E193AA0CA00800AF3 /* girl_bnw_64.png */,
+				2881B83F193AA0CA00800AF3 /* girl_color_64.png */,
+				2881B83A193A9EAF00800AF3 /* line_480.png */,
 				286FDA191934766D0010A94B /* drag_40.png */,
 				286FDA171934762B0010A94B /* drag_96.png */,
 				286FDA111933F5EE0010A94B /* email_96.png */,
@@ -560,10 +567,6 @@
 				28DB23F319333D8A004CA7F0 /* email_signup.png */,
 				28DB23F419333D8A004CA7F0 /* facebook_signup.png */,
 				28DB23E41932AF78004CA7F0 /* adduser_128.png */,
-				28DB23D819328FA3004CA7F0 /* boy_bnw_64.png */,
-				28DB23D919328FA3004CA7F0 /* boy_color_64.png */,
-				28DB23DA19328FA3004CA7F0 /* girl_bnw_64.png */,
-				28DB23DB19328FA3004CA7F0 /* girl_color_64.png */,
 				28DB23D619302905004CA7F0 /* user_128.png */,
 				28DB23D4193026D5004CA7F0 /* edit_32.png */,
 				28D16D111929F14C00BCC820 /* adduser_64.png */,
@@ -702,20 +705,22 @@
 				280A68641904D2C700C2475D /* s3.png in Resources */,
 				286FDA151933F5EE0010A94B /* fb_96.png in Resources */,
 				28DB23F519333D8A004CA7F0 /* email_signup.png in Resources */,
+				2881B843193AA0CA00800AF3 /* girl_color_64.png in Resources */,
 				28D16D0E1929EF1800BCC820 /* comment_on_32.png in Resources */,
 				28DB23F619333D8A004CA7F0 /* facebook_signup.png in Resources */,
+				2881B841193AA0CA00800AF3 /* boy_color_64.png in Resources */,
 				281570E51925D4E000D169B3 /* setting_96.png in Resources */,
-				28DB23DF19328FA3004CA7F0 /* girl_color_64.png in Resources */,
 				281570E31925D4E000D169B3 /* message_96.png in Resources */,
 				28080FCD19183EF600FE8EF2 /* camera_64.png in Resources */,
 				28810B8919212E7D00F55B24 /* trash_64.png in Resources */,
 				28810B911921BA4000F55B24 /* more_64.png in Resources */,
 				286AD8B4191B4E620026CDFB /* return_64.png in Resources */,
-				28DB23DE19328FA3004CA7F0 /* girl_bnw_64.png in Resources */,
 				280A68651904D2C700C2475D /* s4.png in Resources */,
+				2881B840193AA0CA00800AF3 /* boy_bnw_64.png in Resources */,
 				281570E61925D4E000D169B3 /* support_96.png in Resources */,
 				28080FCF19183EF600FE8EF2 /* shuffle_64.png in Resources */,
 				286FDA161933F5EE0010A94B /* search_96.png in Resources */,
+				2881B842193AA0CA00800AF3 /* girl_bnw_64.png in Resources */,
 				28D16D121929F14C00BCC820 /* adduser_64.png in Resources */,
 				2819F42B18F137B7008DB3F6 /* FB-f-Logo__white_50.png in Resources */,
 				28D16D0D1929EF1800BCC820 /* comment_off_32.png in Resources */,
@@ -727,17 +732,16 @@
 				28C7AE8F18DE059F004F485D /* Main.storyboard in Resources */,
 				286FDA181934762B0010A94B /* drag_96.png in Resources */,
 				28D16D081929C45F00BCC820 /* check_64.png in Resources */,
-				28DB23DD19328FA3004CA7F0 /* boy_color_64.png in Resources */,
 				286FDA1A1934766D0010A94B /* drag_40.png in Resources */,
 				28D16D0F1929EF1800BCC820 /* heart_off_32.png in Resources */,
 				286FDA141933F5EE0010A94B /* email_96.png in Resources */,
 				280A68621904D2C700C2475D /* s1.png in Resources */,
+				2881B83B193A9EAF00800AF3 /* line_480.png in Resources */,
 				28DB23D719302905004CA7F0 /* user_128.png in Resources */,
 				28DB23E51932AF78004CA7F0 /* adduser_128.png in Resources */,
 				281570E41925D4E000D169B3 /* profile_96.png in Resources */,
 				28DB23D5193026D5004CA7F0 /* edit_32.png in Resources */,
 				2819F42A18F137B7008DB3F6 /* FB-f-Logo__blue_50.png in Resources */,
-				28DB23DC19328FA3004CA7F0 /* boy_bnw_64.png in Resources */,
 				28F00EB0191A1C3900DC2F42 /* post_64.png in Resources */,
 				281570E21925D4E000D169B3 /* connect_96.png in Resources */,
 				280A68631904D2C700C2475D /* s2.png in Resources */,

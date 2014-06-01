@@ -28,6 +28,11 @@
     return sharedInstance;
 }
 
+- (void) invalidateUserInfoFromId:(NSInteger)userId
+{
+    [self.userInfoCache removeObjectForKey:@(userId)];
+}
+
 - (void) userInfoFromId:(NSInteger)userId success:(MLUserInfoSuccess)callback
 {
     NSDictionary *dict = self.userInfoCache[@(userId)];
@@ -46,11 +51,17 @@
                                          NSString *desc = responseJSON[@"description"];
                                          NSNumber *deg1 = responseJSON[@"num_degree1"];
                                          NSNumber *deg2 = responseJSON[@"num_degree2"];
+                                         NSString *location = responseJSON[@"location"];
+                                         NSString *zip = responseJSON[@"zip"];
+                                         NSString *interests = responseJSON[@"interests"];
                                          self.userInfoCache[@(userId)] = @{
                                                                            @"full_name" : fullName,
-                                                                           @"description" : desc ? desc : @"unknown",
+                                                                           @"description" : desc ? desc : @"",
                                                                            @"num_degree1" : deg1 ? deg1 : @(0),
                                                                            @"num_degree2" : deg2 ? deg2 : @(0),
+                                                                           @"location" : location ? location : @"",
+                                                                           @"zip" : zip ? zip : @"",
+                                                                           @"interests" : interests ? interests : @"",
                                                                            };
                                          if (callback) {
                                              callback(self.userInfoCache[@(userId)]);
