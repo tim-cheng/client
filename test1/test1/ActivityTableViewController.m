@@ -9,6 +9,7 @@
 #import "ActivityTableViewController.h"
 #import "MainFeedViewController.h"
 #import "MainNavigationController.h"
+#import "NSDate+TimeAgo.h"
 #import "MLUserInfo.h"
 #import "MLApiClient.h"
 #import "MLHelpers.h"
@@ -16,6 +17,7 @@
 @interface ActivityTableViewController ()
 
 @property (strong, nonatomic) NSMutableArray *activityArray;
+@property (strong, nonatomic) NSDateFormatter *myFormatter;
 
 @end
 
@@ -24,7 +26,14 @@
 - (void) viewDidLoad
 {
     [super viewDidLoad];
-    
+
+    // Do any additional setup after loading the view.
+    self.myFormatter = [[NSDateFormatter alloc] init];
+    NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+    [self.myFormatter setLocale:enUSPOSIXLocale];
+    [self.myFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSSSSS'Z'"];
+    [self.myFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"US/Eastern"]];
+
     self.activityArray = [[NSMutableArray alloc] init];
     
     [[MLApiClient client] activitiesForId:kApiClientUserSelf success:^(NSHTTPURLResponse *response, id responseJSON) {
@@ -91,6 +100,15 @@
     
     UILabel *labelView = (UILabel *)[cell.contentView viewWithTag:11];
     labelView.text = userInfo[@"activity"];
+
+    NSString *timeString = userInfo[@"created_at"];
+    NSString *displayTime = @"long ago";
+    if (timeString) {
+        NSDate *time = [self.myFormatter dateFromString:timeString];
+        displayTime = [time timeAgo];
+    }
+    UILabel *timeView = (UILabel *)[cell.contentView viewWithTag:12];
+    timeView.text = displayTime;
     
     return cell;
 }
