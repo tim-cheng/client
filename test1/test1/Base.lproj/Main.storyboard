@@ -198,11 +198,11 @@
                             <rect key="frame" x="0.0" y="59" width="320" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Say something" minimumFontSize="17" id="Rf7-gh-1ai" customClass="CustomUITextField">
-                                    <rect key="frame" x="0.0" y="0.0" width="270" height="30"/>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Say something" minimumFontSize="17" id="Rf7-gh-1ai" customClass="CustomUITextField">
+                                    <rect key="frame" x="21" y="0.0" width="250" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="12"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="send"/>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5pt-rD-tGw">
                                     <rect key="frame" x="274" y="0.0" width="46" height="30"/>
@@ -248,7 +248,6 @@
                                             <rect key="frame" x="63" y="17" width="250" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
-                                            <color key="textColor" red="0.38431372549999998" green="0.34901960780000002" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -262,6 +261,7 @@
                     </tableView>
                     <connections>
                         <outlet property="commentField" destination="Rf7-gh-1ai" id="KZd-jn-0Ti"/>
+                        <outlet property="composeView" destination="kP7-Si-3O8" id="72E-bC-BZK"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nfp-cb-BT7" userLabel="First Responder" sceneMemberID="firstResponder"/>

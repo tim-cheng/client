@@ -18,6 +18,7 @@
 @property (strong, nonatomic) NSDateFormatter *myFormatter;
 @property (assign, nonatomic) NSInteger commentPostId;
 @property (strong, nonatomic) IBOutlet UITextField *commentField;
+@property (strong, nonatomic) IBOutlet UIView *composeView;
 
 -(IBAction)tapPost:(id)sender;
 
@@ -30,6 +31,11 @@
 {
     [super viewDidLoad];
 
+    CALayer *topBorder = [CALayer layer];
+    topBorder.frame = CGRectMake(0.0f, 0.0f, self.composeView.frame.size.width, 1.0f);
+    topBorder.backgroundColor = [MLColor CGColor];
+    [self.composeView.layer addSublayer:topBorder];
+    
     // Do any additional setup after loading the view.
     self.myFormatter = [[NSDateFormatter alloc] init];
     NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
