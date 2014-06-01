@@ -13,7 +13,7 @@
 #import "AddChildViewController.h"
 #import "MLHelpers.h"
 
-@interface UserProfileViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate>
+@interface UserProfileViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *profImgView;
 
@@ -33,6 +33,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *addKidButton;
 
 @property (assign, nonatomic) BOOL isSelf;
+@property (assign, nonatomic) BOOL picChanged;
 
 
 -(IBAction)addKid:(id)sender;
@@ -66,6 +67,13 @@
     self.profImgView.layer.borderColor = [MLColor CGColor];
     self.profImgView.layer.cornerRadius = 32;
     self.profImgView.clipsToBounds = YES;
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]
+                                         initWithTarget:self
+                                         action:@selector(changePhoto:)];
+    [singleTap setNumberOfTapsRequired:1];
+    self.profImgView.userInteractionEnabled = YES;
+    [self.profImgView addGestureRecognizer:singleTap];
+
     
     [[MLUserInfo instance] userInfoFromId:self.userId success:^(id responseJSON) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -128,6 +136,16 @@
     [self performSegueWithIdentifier:@"AddKid" sender:self];
 }
 
+- (void)changePhoto:(UITapGestureRecognizer *)gest
+{
+    UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:nil
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                         destructiveButtonTitle:nil
+                                              otherButtonTitles:@"Take Photo", @"Choose Exising", nil];
+    [popup showInView:[UIApplication sharedApplication].keyWindow];
+}
+
 - (void)clearKids
 {
     if ([self.kidsArray count] > 0) {
@@ -171,7 +189,61 @@
                                      } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
                                          NSLog(@"user info update failed...");
                                      }];
+    if (self.picChanged) {
+        [[MLApiClient client] sendUserPictureId:kApiClientUserSelf
+                                          image:self.profImgView.image
+                                        success:^(NSHTTPURLResponse *response, id responseJSON) {
+                                            NSLog(@"user image updated!");
+                                        } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+                                            NSLog(@"user image update failed!");
+                                        }];
+    }
 }
+
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)popup clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    UIImagePickerController *pickerController = [[UIImagePickerController alloc]
+                                                 init];
+    pickerController.delegate = self;
+    pickerController.sourceType = (buttonIndex == 0) ?
+    UIImagePickerControllerSourceTypeCamera : UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:pickerController animated:YES completion:NULL];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void) imagePickerController:(UIImagePickerController *)picker
+         didFinishPickingImage:(UIImage *)image
+                   editingInfo:(NSDictionary *)editingInfo
+{
+    // crop
+    CGRect newRect;
+    if (image.size.width < image.size.height) {
+        float offset = (image.size.height - image.size.width) / 2;
+        // note, CGImage is not rotated
+        newRect = CGRectMake(offset, 0, image.size.width, image.size.width);
+    } else {
+        float offset = (image.size.width - image.size.height) / 2;
+        newRect = CGRectMake(offset, 0, image.size.height, image.size.height);
+    }
+    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], newRect);
+    UIImage *cropImage = [UIImage imageWithCGImage:imageRef scale:image.scale orientation:image.imageOrientation];
+    CGImageRelease(imageRef);
+    
+    // scale
+    CGSize newSize = CGSizeMake(128.0, 128.0);
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [cropImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    [self dismissModalViewControllerAnimated:YES];
+    UIGraphicsEndImageContext();
+    
+    self.profImgView.image = newImage;
+    self.picChanged = YES;
+    self.saveButtonItem.enabled = YES;
+}
+
 
 #pragma mark - UITableViewDataSource
 
