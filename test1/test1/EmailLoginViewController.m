@@ -65,6 +65,7 @@
                                      
                                      dispatch_async(dispatch_get_main_queue(), ^{
                                          [self performSegueWithIdentifier:@"EmailGoMain" sender:self];
+                                         [self.navigationController popViewControllerAnimated:NO];
                                      });
                                  } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
                                      NSLog(@"!!!!!Login failed");

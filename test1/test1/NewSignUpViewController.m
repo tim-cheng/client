@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *passwordField;
 @property (strong, nonatomic) IBOutlet UITextField *firstNameField;
 @property (strong, nonatomic) IBOutlet UITextField *lastNameField;
+@property (strong, nonatomic) IBOutlet UITextField *locationField;
 
 @property (strong, nonatomic) IBOutlet UIButton *profButton;
 
@@ -74,7 +75,7 @@
                             password:self.passwordField.text
                            firstName:self.firstNameField.text
                             lastName:self.lastNameField.text
-                            location:@""
+                            location:self.locationField.text
                                  zip:@""
                              success:^(NSHTTPURLResponse *response, id responseJSON) {
                                  NSLog(@"user account created!");
@@ -91,10 +92,13 @@
                                                                          NSLog(@"user picture upload failed");
                                                                      }];
                                  }
-
                                  // TODO: save cred to keychain
+//                                 [self dismissViewControllerAnimated:NO completion:^{
+//                                     [self performSegueWithIdentifier:@"GoMain" sender:self];
+//                                 }];
                                  dispatch_async(dispatch_get_main_queue(), ^{
                                      [self performSegueWithIdentifier:@"GoMain" sender:self];
+                                     [self.navigationController popViewControllerAnimated:NO];
                                  });
                              } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
                                  NSLog(@"create account failed...");

@@ -473,8 +473,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="login:" destination="MfO-r4-OIb" eventType="touchUpInside" id="aRn-QW-vOT"/>
-                                    <action selector="login:" destination="GMa-YQ-wYL" eventType="touchUpInside" id="tLS-sv-bVs"/>
+                                    <action selector="login:" destination="GMa-YQ-wYL" eventType="touchUpInside" id="RlF-l1-JYC"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -523,17 +522,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Bpj-36-hcP" customClass="CustomUIButton">
-                                <rect key="frame" x="109" y="305" width="107" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Create Account">
-                                    <color key="titleColor" red="0.38431372549019605" green="0.34901960784313724" blue="0.34901960784313724" alpha="1" colorSpace="deviceRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="nextStep:" destination="HkC-vN-l7X" eventType="touchUpInside" id="oDK-PV-xYr"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="8IQ-5v-Usj">
                                 <rect key="frame" x="124" y="77" width="72" height="72"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -544,14 +532,27 @@
                                     <action selector="addPhoto:" destination="HkC-vN-l7X" eventType="touchUpInside" id="Atv-9w-9x9"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="location" minimumFontSize="17" id="A8S-kg-3d7" customClass="CustomUITextField">
+                                <rect key="frame" x="44" y="305" width="233" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Sign Up" id="STp-zX-Rkk"/>
+                    <navigationItem key="navigationItem" title="Sign Up" id="STp-zX-Rkk">
+                        <barButtonItem key="rightBarButtonItem" title="Create" id="ard-cP-hZX">
+                            <connections>
+                                <action selector="nextStep:" destination="HkC-vN-l7X" id="uiJ-Bd-o4j"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="emailField" destination="1uw-6X-hTP" id="tOw-YZ-dFe"/>
                         <outlet property="firstNameField" destination="T7M-Nt-jG0" id="vtZ-wv-ZWc"/>
                         <outlet property="lastNameField" destination="1oV-tE-pLx" id="fhL-FE-qG4"/>
+                        <outlet property="locationField" destination="A8S-kg-3d7" id="42Q-a7-CsO"/>
                         <outlet property="passwordField" destination="ZOD-dZ-Xwh" id="kH1-t4-NFT"/>
                         <outlet property="profButton" destination="8IQ-5v-Usj" id="nmT-ob-k6N"/>
                         <segue destination="DvT-0h-ld9" kind="modal" identifier="GoMain" id="SF2-3U-aEa"/>
@@ -1107,6 +1108,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="tGd-IJ-lLP"/>
+        <segue reference="ArM-mG-Kbk"/>
     </inferredMetricsTieBreakers>
 </document>
