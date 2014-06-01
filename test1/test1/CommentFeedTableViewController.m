@@ -176,7 +176,7 @@
     if (height > 248.0f) {
         // need to adjust frame size
         CGFloat y = 320 - (height - 248);
-        self.tableView.frame = CGRectMake(0, y, 320, height);
+        self.tableView.frame = CGRectMake(0, y, 320, 248);
     }
     return YES;
 }
@@ -236,7 +236,7 @@
 - (CGFloat)commentLabelHeight:(NSString *)text
 {
     CGSize constraintSize = CGSizeMake(250.0f, 150.0f);
-    return [text sizeWithFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:14.0]
+    return [text sizeWithFont:[UIFont fontWithName:@"bariol-regular" size:14.0]
             constrainedToSize:constraintSize
                 lineBreakMode:NSLineBreakByWordWrapping].height;
 }
