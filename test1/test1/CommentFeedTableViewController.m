@@ -79,10 +79,15 @@
                                  success:^(NSHTTPURLResponse *response, id responseJSON) {
                                      NSLog(@"!!!!get comments succeeded!!!!, %@", responseJSON);
                                      dispatch_async(dispatch_get_main_queue(), ^{
-                                         [self clearComments];
-                                         [self.commentArray addObjectsFromArray:responseJSON];
                                          [self.tableView beginUpdates];
                                          NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+                                         for (int i=0; i<[self.commentArray count]; i++) {
+                                             [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                                         }
+                                         [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+                                         [self.commentArray removeAllObjects];
+                                         [indexPaths removeAllObjects];
+                                         [self.commentArray addObjectsFromArray:responseJSON];
                                          for (int i=0; i<[self.commentArray count]; i++) {
                                              [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
                                          }
@@ -99,9 +104,9 @@
                                      });
                                  } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
                                      NSLog(@"!!!!!get comments failed");
-                                     dispatch_async(dispatch_get_main_queue(), ^{
-                                         [self clearComments];
-                                     });
+//                                     dispatch_async(dispatch_get_main_queue(), ^{
+//                                         [self clearComments];
+//                                     });
                                  }];
 }
 
@@ -178,7 +183,7 @@
 {
     NSString *text = self.commentArray[indexPath.row][@"body"];
     CGFloat height = [self commentLabelHeight:text];
-    return height + 24.0f;
+    return height + 20.0f;
 }
 
 #pragma mark - IBAction
