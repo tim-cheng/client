@@ -199,7 +199,7 @@
 {
     NSString *text = self.commentArray[indexPath.row][@"body"];
     CGFloat height = [self commentLabelHeight:text];
-    return height + 23.0f;
+    return height + 24.0f;
 }
 
 #pragma mark - IBAction
@@ -238,7 +238,7 @@
 - (CGFloat)commentLabelHeight:(NSString *)text
 {
     CGSize constraintSize = CGSizeMake(250.0f, 150.0f);
-    return [text sizeWithFont:[UIFont fontWithName:@"bariol-regular" size:14.0]
+    return [text sizeWithFont:[UIFont fontWithName:@"bariol-regular" size:17.0]
             constrainedToSize:constraintSize
                 lineBreakMode:NSLineBreakByWordWrapping].height;
 }

@@ -245,7 +245,7 @@
     userImage.image = [[MLUserInfo instance] userPicture:[self.postArray[indexPath.row][@"user_id"] integerValue]];
     userImage.layer.borderWidth = 1.0f;
     userImage.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-    userImage.layer.cornerRadius = 16;
+    userImage.layer.cornerRadius = 18;
     userImage.clipsToBounds = YES;
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc]
                                          initWithTarget:self
