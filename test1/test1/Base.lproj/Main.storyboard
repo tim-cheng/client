@@ -417,7 +417,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="11" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DQY-jy-xzZ" customClass="CustomUILabel">
-                                            <rect key="frame" x="125" y="23" width="70" height="21"/>
+                                            <rect key="frame" x="125" y="23" width="112" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                             <color key="textColor" red="0.38431372549999998" green="0.34901960780000002" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -660,7 +660,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="-2013" y="145"/>
         </scene>
-        <!--Invite View Controller - Contacts-->
+        <!--Invite View Controller - Connections-->
         <scene sceneID="ezi-hb-yms">
             <objects>
                 <viewController storyboardIdentifier="contactController" id="j8L-EZ-MZz" customClass="InviteViewController" sceneMemberID="viewController">
@@ -746,7 +746,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Contacts" id="Scg-CT-OXs">
+                    <navigationItem key="navigationItem" title="Connections" id="Scg-CT-OXs">
                         <barButtonItem key="leftBarButtonItem" title="&lt; Back" id="Rrp-qx-VdO">
                             <connections>
                                 <action selector="tapBackToFeed:" destination="1F7-Mf-MrI" id="W0F-3H-erU"/>

@@ -43,7 +43,7 @@
                        ];
     self.labelArray = @[
                         @"Profile",
-                        @"Contacts",
+                        @"Connections",
                         @"Activities",
                         @"Logout",
                         ];
