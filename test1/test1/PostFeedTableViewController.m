@@ -343,7 +343,13 @@
                                           UILabel *posterName = (UILabel *)[headerView viewWithTag:14];
                                           posterName.text = responseJSON[@"full_name"];
                                           UILabel *posterDesc = (UILabel *)[headerView viewWithTag:15];
-                                          posterDesc.text = responseJSON[@"description"];
+                                          NSString *desc = responseJSON[@"description"];
+                                          if (desc) {
+                                              desc = [desc stringByReplacingOccurrencesOfString:@" boy" withString:@"\U0001f466"];
+                                              desc = [desc stringByReplacingOccurrencesOfString:@" girl" withString:@"\U0001f467"];
+                                              desc = [desc stringByReplacingOccurrencesOfString:@", " withString:@"     "];
+                                              posterDesc.text = desc;
+                                          }
                                       });
                                   }];
     
