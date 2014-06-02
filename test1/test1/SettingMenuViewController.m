@@ -39,7 +39,7 @@
                        [UIImage imageNamed:@"profile_96.png"],
                        [UIImage imageNamed:@"connect_96.png"],
                        [UIImage imageNamed:@"message_96.png"],
-                       [UIImage imageNamed:@"support_96.png"],
+                       [UIImage imageNamed:@"logout_96.png"],
                        ];
     self.labelArray = @[
                         @"Profile",
