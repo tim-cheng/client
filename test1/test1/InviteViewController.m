@@ -336,7 +336,9 @@
     UILabel *locationLabel = (UILabel *)[cell.contentView viewWithTag:12];
     if (locationLabel) {
         [[MLUserInfo instance] userInfoFromId:userId success:^(id responseJSON) {
-            locationLabel.text = responseJSON[@"location"];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                locationLabel.text = responseJSON[@"location"];
+            });
         }];
     }
     

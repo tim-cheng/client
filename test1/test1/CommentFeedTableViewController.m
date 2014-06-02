@@ -144,7 +144,9 @@
     // set commenter name
     UILabel *name = (UILabel *)[cell.contentView viewWithTag:13];
     [[MLUserInfo instance] userInfoFromId:userId success:^(id responseJSON) {
-        name.text = responseJSON[@"full_name"];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            name.text = responseJSON[@"full_name"];
+        });
     }];
     
     // set comment body
@@ -197,7 +199,7 @@
 {
     NSString *text = self.commentArray[indexPath.row][@"body"];
     CGFloat height = [self commentLabelHeight:text];
-    return height + 20.0f;
+    return height + 23.0f;
 }
 
 #pragma mark - IBAction
