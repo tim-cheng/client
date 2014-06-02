@@ -138,8 +138,8 @@
 
 - (void)userLoggedOut
 {
-    NewLogInViewController *vc = (NewLogInViewController *)((UINavigationController*)self.window.rootViewController).topViewController;
-    [vc userLoggedOut];
+//    NewLogInViewController *vc = (NewLogInViewController *)((UINavigationController*)self.window.rootViewController).topViewController;
+//    [vc userLoggedOut];
 }
 
 - (void)showMessage:(NSString *)text withTitle:(NSString *)title
