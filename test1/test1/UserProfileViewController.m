@@ -45,11 +45,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-//                                   initWithTarget:self
-//                                   action:@selector(dismissKeyboard)];
-//    
-//    [self.view addGestureRecognizer:tap];
+    [UIApplication sharedApplication].statusBarHidden = NO;
 
     self.kidsArray = [[NSMutableArray alloc] init];
     
