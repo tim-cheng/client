@@ -106,20 +106,35 @@
     [self loadKids];
 }
 
+- (BOOL)kidsInfoChanged:(NSArray *)newKidsArray
+{
+    if ([self.kidsArray count] != [newKidsArray count]) {
+        return YES;
+    }
+    for (int i=0; i< [self.kidsArray count]; i++) {
+        if (![self.kidsArray[i] isEqualToDictionary:newKidsArray[i]]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 -(void)loadKids
 {
     [[MLApiClient client] kidsForId:self.userId success:^(NSHTTPURLResponse *response, id responseJSON) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self clearKids];
-            NSLog(@"got kids %@", responseJSON);
-            [self.kidsArray addObjectsFromArray:responseJSON];
-            [self.kidsView beginUpdates];
-            NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-            for (int i=0; i<[self.kidsArray count]; i++) {
-                [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+            if ([self kidsInfoChanged:responseJSON]) {
+                [self clearKids];
+                NSLog(@"got kids %@", responseJSON);
+                [self.kidsArray addObjectsFromArray:responseJSON];
+                [self.kidsView beginUpdates];
+                NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+                for (int i=0; i<[self.kidsArray count]; i++) {
+                    [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                }
+                [self.kidsView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+                [self.kidsView endUpdates];
             }
-            [self.kidsView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
-            [self.kidsView endUpdates];
 
         });
 
