@@ -203,6 +203,10 @@
 #pragma mark - UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)popup clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    if (buttonIndex == 2) {
+        return;
+    }
+    
     UIImagePickerController *pickerController = [[UIImagePickerController alloc]
                                                  init];
     pickerController.delegate = self;
