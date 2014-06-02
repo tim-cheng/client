@@ -54,6 +54,14 @@
     refresh.tintColor = MLColorBrown;
     [refresh addTarget:self action:@selector(loadPosts) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refresh;
+    
+    // load saved posts
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSArray *savedPosts = [defaults objectForKey:@"savedPosts"];
+    if (savedPosts) {
+        self.postArray = [savedPosts mutableCopy];
+    }
+    
     [self loadPostsAndScroll:NO];
 }
 
@@ -115,6 +123,9 @@
                                       success:^(id responseJSON) {
                                           dispatch_async(dispatch_get_main_queue(), ^{
                                               [self updateTable:responseJSON];
+                                              NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                                              [defaults setObject:responseJSON forKey:@"savedPosts"];
+                                              [defaults synchronize];
                                               if (self.initPostId) {
                                                   [self openPost:self.initPostId];
                                                   self.initPostId = 0;

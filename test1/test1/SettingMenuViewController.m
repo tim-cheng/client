@@ -94,6 +94,9 @@
         navigationController.viewControllers = @[activityController];
     } else if (indexPath.section == 0 && indexPath.row == 3) {
         [FBSession.activeSession closeAndClearTokenInformation];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:nil forKey:@"savedPosts"];
+        [defaults synchronize];
         [self dismissViewControllerAnimated:NO completion:^{
             [self.frostedViewController performSegueWithIdentifier:@"LogoutMain" sender:self.frostedViewController];
         }];
