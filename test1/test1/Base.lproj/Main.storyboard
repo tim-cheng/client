@@ -344,12 +344,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Feed" id="StF-ZE-vnL">
-                        <barButtonItem key="leftBarButtonItem" image="drag_40.png" id="g3l-0m-kua">
+                        <barButtonItem key="leftBarButtonItem" image="menu_32.png" id="g3l-0m-kua">
                             <connections>
                                 <action selector="tapOnDrag:" destination="Yva-45-7iu" id="z7U-aw-SiW"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="compose2_64.png" id="ZJd-ua-Ezq">
+                        <barButtonItem key="rightBarButtonItem" image="compose_32.png" id="ZJd-ua-Ezq">
                             <connections>
                                 <action selector="tapOnCompose:" destination="Yva-45-7iu" id="QKo-Hy-4aB"/>
                             </connections>
@@ -1085,9 +1085,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="camera_64.png" width="64" height="64"/>
         <image name="comment_off_64.png" width="64" height="64"/>
         <image name="comment_on_64.png" width="64" height="64"/>
-        <image name="compose2_64.png" width="40" height="40"/>
+        <image name="compose_32.png" width="32" height="32"/>
         <image name="dots_64.png" width="64" height="64"/>
-        <image name="drag_40.png" width="40" height="40"/>
         <image name="email_96.png" width="96" height="96"/>
         <image name="email_signup.png" width="307" height="53"/>
         <image name="facebook_signup.png" width="307" height="53"/>
@@ -1097,6 +1096,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="heart_off_64.png" width="64" height="64"/>
         <image name="heart_on_64.png" width="64" height="64"/>
         <image name="line_480.png" width="480" height="2"/>
+        <image name="menu_32.png" width="32" height="32"/>
         <image name="post_64.png" width="64" height="64"/>
         <image name="return_64.png" width="64" height="64"/>
         <image name="s3.png" width="195" height="194"/>

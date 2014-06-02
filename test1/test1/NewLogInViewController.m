@@ -40,6 +40,10 @@
 {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
+//    UIImageView *splash = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bird.jpg"]];
+//    [self.view addSubview:splash];
+//    [self.view sendSubviewToBack:splash];
+
     self.view.backgroundColor = MLColor;
 }
 
