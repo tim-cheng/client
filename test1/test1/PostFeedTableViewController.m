@@ -206,7 +206,7 @@
 - (void)tapOnProfile:(UITapGestureRecognizer *)gest
 {
     UIImageView *img = (UIImageView*)gest.view;
-    NSInteger userId = [self tagToUserId:[img superview].tag];
+    NSInteger userId = [self tagToUserId:[[img superview] superview].tag];
 
     NSLog(@"tapped on profile: %d", userId);
     if (self.delegate) {
