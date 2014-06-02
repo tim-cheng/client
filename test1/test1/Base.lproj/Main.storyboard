@@ -95,37 +95,37 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="10" contentMode="scaleToFill" text="post text" textAlignment="center" id="PtM-v8-deS" customClass="CustomUITextView">
-                                            <rect key="frame" x="20" y="52" width="280" height="228"/>
+                                            <rect key="frame" x="20" y="52" width="280" height="237"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
-                                        <imageView userInteractionEnabled="NO" tag="16" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="comment_off_32.png" highlightedImage="comment_on_32.png" id="tj9-fp-2bR">
-                                            <rect key="frame" x="204" y="275" width="32" height="32"/>
+                                        <imageView userInteractionEnabled="NO" tag="16" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="comment_off_64.png" highlightedImage="comment_on_64.png" id="tj9-fp-2bR">
+                                            <rect key="frame" x="204" y="281" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" tag="17" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart_off_32.png" highlightedImage="heart_on_32.png" id="uUB-8x-tlb">
-                                            <rect key="frame" x="258" y="275" width="32" height="32"/>
+                                        <imageView userInteractionEnabled="NO" tag="17" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart_off_64.png" highlightedImage="heart_on_64.png" id="uUB-8x-tlb">
+                                            <rect key="frame" x="258" y="281" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="12" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XgL-Or-jYu" customClass="CustomUILabel">
-                                            <rect key="frame" x="239" y="282" width="16" height="20"/>
+                                            <rect key="frame" x="239" y="288" width="16" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="13" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lEo-cO-xjI" customClass="CustomUILabel">
-                                            <rect key="frame" x="291" y="282" width="16" height="20"/>
+                                            <rect key="frame" x="291" y="288" width="16" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" tag="19" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3Sp-fy-DVC">
-                                            <rect key="frame" x="164" y="275" width="32" height="32"/>
+                                            <rect key="frame" x="164" y="281" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" image="more_32.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -399,7 +399,7 @@
                             <rect key="frame" x="0.0" y="64" width="320" height="107"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="5KM-dZ-Eba">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="5KM-dZ-Eba">
                                     <rect key="frame" x="106" y="39" width="108" height="59"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </imageView>
@@ -933,7 +933,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                     <state key="normal" title="    + a child">
-                                        <color key="titleColor" red="0.38431372549999998" green="0.34901960780000002" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleColor" red="0.8862745098" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="deviceRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
@@ -1083,8 +1083,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="boy_bnw_64.png" width="128" height="128"/>
         <image name="boy_color_64.png" width="128" height="128"/>
         <image name="camera_64.png" width="64" height="64"/>
-        <image name="comment_off_32.png" width="32" height="32"/>
-        <image name="comment_on_32.png" width="32" height="32"/>
+        <image name="comment_off_64.png" width="64" height="64"/>
+        <image name="comment_on_64.png" width="64" height="64"/>
         <image name="compose2_64.png" width="40" height="40"/>
         <image name="drag_40.png" width="40" height="40"/>
         <image name="email_96.png" width="96" height="96"/>
@@ -1093,8 +1093,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="fb_96.png" width="96" height="96"/>
         <image name="girl_bnw_64.png" width="128" height="128"/>
         <image name="girl_color_64.png" width="128" height="128"/>
-        <image name="heart_off_32.png" width="32" height="32"/>
-        <image name="heart_on_32.png" width="32" height="32"/>
+        <image name="heart_off_64.png" width="64" height="64"/>
+        <image name="heart_on_64.png" width="64" height="64"/>
         <image name="line_480.png" width="480" height="2"/>
         <image name="more_32.png" width="32" height="32"/>
         <image name="post_64.png" width="64" height="64"/>
