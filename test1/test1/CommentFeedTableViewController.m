@@ -175,10 +175,12 @@
 {
 //    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 216, 0);
     CGFloat height = [self.tableView sizeThatFits:self.tableView.frame.size].height + 212.0f;
-    if (height > 248.0f) {
+    
+    CGFloat viewable = ([[UIScreen mainScreen] bounds].size.height >= 568) ? 248.0f : 160.0f;
+    if (height > viewable) {
         // need to adjust frame size
-        CGFloat y = 320 - (height - 248);
-        self.tableView.frame = CGRectMake(0, y, 320, 248);
+        CGFloat y = 320 - (height - viewable);
+        self.tableView.frame = CGRectMake(0, y, 320, viewable);
     }
     return YES;
 }
