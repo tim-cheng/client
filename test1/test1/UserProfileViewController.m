@@ -57,6 +57,7 @@
     }
     
     self.addKidButton.hidden = !self.isSelf;
+    self.saveButtonItem.title = self.isSelf ? @"Save" : @"";
     
     self.profImgView.image = [[MLUserInfo instance] userPicture:self.userId];
     self.profImgView.layer.borderWidth = 1.0f;
@@ -321,8 +322,9 @@
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
-    NSLog(@"enable save");
-    self.saveButtonItem.enabled = YES;
+    if (self.isSelf) {
+        self.saveButtonItem.enabled = YES;
+    }
     return YES;
 }
 
