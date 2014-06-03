@@ -10,6 +10,8 @@
 #import "MainFeedViewController.h"
 #import "AddChildViewController.h"
 #import "UserProfileViewController.h"
+#import "InviteViewController.h"
+#import "MLApiClient.h"
 
 @interface MainNavigationController()
 -(IBAction)tapBackToFeed:(id)sender;
@@ -23,9 +25,21 @@
 
 @implementation MainNavigationController
 
+
 -(IBAction)tapBackToFeed:(id)sender
 {
-    [self switchToFeedAtId:0];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *firstSignup= [defaults objectForKey:@"firstSignup"];
+    if (firstSignup && [firstSignup boolValue]) {
+        UINavigationController *navigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentController"];
+        InviteViewController *contactController = [self.storyboard instantiateViewControllerWithIdentifier:@"contactController"];
+        navigationController.viewControllers = @[contactController];
+        self.frostedViewController.contentViewController = navigationController;
+        [defaults setObject:@(NO) forKey:@"firstSignup"];
+        [defaults synchronize];
+    } else {
+        [self switchToFeedAtId:0];
+    }
 }
 
 - (void)switchToFeedAtId:(NSInteger)postId

@@ -143,6 +143,11 @@
                                                   // just created new user, need to upload photo
                                                   NSLog(@"new FB user created!!!");
                                               }
+
+                                              NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                                              [defaults setObject:@(YES) forKey:@"firstSignup"];
+                                              [defaults synchronize];
+
                                               dispatch_async(dispatch_get_main_queue(), ^{
                                                   [self performSegueWithIdentifier:@"MainFeed" sender:self];
                                               });

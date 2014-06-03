@@ -96,6 +96,11 @@
 //                                 [self dismissViewControllerAnimated:NO completion:^{
 //                                     [self performSegueWithIdentifier:@"GoMain" sender:self];
 //                                 }];
+                                 
+                                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                                 [defaults setObject:@(YES) forKey:@"firstSignup"];
+                                 [defaults synchronize];
+
                                  dispatch_async(dispatch_get_main_queue(), ^{
                                      [self performSegueWithIdentifier:@"GoMain" sender:self];
                                      [self.navigationController popViewControllerAnimated:NO];
