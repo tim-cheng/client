@@ -13,14 +13,6 @@
 		28080FD61918A00100FE8EF2 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 28080FD41918A00100FE8EF2 /* UIImage+ImageEffects.m */; };
 		2808BA5518E7C4A700CC64B7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2808BA5418E7C4A700CC64B7 /* Security.framework */; };
 		2808BA5818E7C5ED00CC64B7 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA5718E7C5ED00CC64B7 /* KeychainItemWrapper.m */; };
-		2808BA5B18E881B100CC64B7 /* InfiniteScrollPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA5A18E881B100CC64B7 /* InfiniteScrollPicker.m */; };
-		2808BA5E18E881DB00CC64B7 /* UIView+viewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA5D18E881DB00CC64B7 /* UIView+viewController.m */; };
-		2808BA7A18E8C87F00CC64B7 /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA6E18E8C87E00CC64B7 /* NSMutableArray+SWUtilityButtons.m */; };
-		2808BA7B18E8C87F00CC64B7 /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA7018E8C87E00CC64B7 /* SWCellScrollView.m */; };
-		2808BA7C18E8C87F00CC64B7 /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA7318E8C87E00CC64B7 /* SWLongPressGestureRecognizer.m */; };
-		2808BA7D18E8C87F00CC64B7 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA7518E8C87E00CC64B7 /* SWTableViewCell.m */; };
-		2808BA7E18E8C87F00CC64B7 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA7718E8C87E00CC64B7 /* SWUtilityButtonTapGestureRecognizer.m */; };
-		2808BA7F18E8C87F00CC64B7 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA7918E8C87E00CC64B7 /* SWUtilityButtonView.m */; };
 		280A68621904D2C700C2475D /* s1.png in Resources */ = {isa = PBXBuildFile; fileRef = 280A685E1904D2C700C2475D /* s1.png */; };
 		280A68631904D2C700C2475D /* s2.png in Resources */ = {isa = PBXBuildFile; fileRef = 280A685F1904D2C700C2475D /* s2.png */; };
 		280A68641904D2C700C2475D /* s3.png in Resources */ = {isa = PBXBuildFile; fileRef = 280A68601904D2C700C2475D /* s3.png */; };
@@ -42,7 +34,6 @@
 		281570E31925D4E000D169B3 /* message_96.png in Resources */ = {isa = PBXBuildFile; fileRef = 281570DE1925D4E000D169B3 /* message_96.png */; };
 		281570E41925D4E000D169B3 /* profile_96.png in Resources */ = {isa = PBXBuildFile; fileRef = 281570DF1925D4E000D169B3 /* profile_96.png */; };
 		281570E51925D4E000D169B3 /* setting_96.png in Resources */ = {isa = PBXBuildFile; fileRef = 281570E01925D4E000D169B3 /* setting_96.png */; };
-		2819F41918F12562008DB3F6 /* RNGridMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 2819F41818F12562008DB3F6 /* RNGridMenu.m */; };
 		2819F41B18F1258A008DB3F6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2819F41A18F1258A008DB3F6 /* QuartzCore.framework */; };
 		2819F41D18F12595008DB3F6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2819F41C18F12595008DB3F6 /* Accelerate.framework */; };
 		2819F42A18F137B7008DB3F6 /* FB-f-Logo__blue_50.png in Resources */ = {isa = PBXBuildFile; fileRef = 2819F42818F137B7008DB3F6 /* FB-f-Logo__blue_50.png */; };
@@ -143,23 +134,6 @@
 		2808BA5418E7C4A700CC64B7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		2808BA5618E7C5ED00CC64B7 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		2808BA5718E7C5ED00CC64B7 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
-		2808BA5918E881B100CC64B7 /* InfiniteScrollPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfiniteScrollPicker.h; sourceTree = "<group>"; };
-		2808BA5A18E881B100CC64B7 /* InfiniteScrollPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfiniteScrollPicker.m; sourceTree = "<group>"; };
-		2808BA5C18E881DB00CC64B7 /* UIView+viewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+viewController.h"; sourceTree = "<group>"; };
-		2808BA5D18E881DB00CC64B7 /* UIView+viewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+viewController.m"; sourceTree = "<group>"; };
-		2808BA6D18E8C87E00CC64B7 /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
-		2808BA6E18E8C87E00CC64B7 /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
-		2808BA6F18E8C87E00CC64B7 /* SWCellScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCellScrollView.h; sourceTree = "<group>"; };
-		2808BA7018E8C87E00CC64B7 /* SWCellScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWCellScrollView.m; sourceTree = "<group>"; };
-		2808BA7118E8C87E00CC64B7 /* SWConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWConstants.h; sourceTree = "<group>"; };
-		2808BA7218E8C87E00CC64B7 /* SWLongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWLongPressGestureRecognizer.h; sourceTree = "<group>"; };
-		2808BA7318E8C87E00CC64B7 /* SWLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWLongPressGestureRecognizer.m; sourceTree = "<group>"; };
-		2808BA7418E8C87E00CC64B7 /* SWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTableViewCell.h; sourceTree = "<group>"; };
-		2808BA7518E8C87E00CC64B7 /* SWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTableViewCell.m; sourceTree = "<group>"; };
-		2808BA7618E8C87E00CC64B7 /* SWUtilityButtonTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonTapGestureRecognizer.h; sourceTree = "<group>"; };
-		2808BA7718E8C87E00CC64B7 /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
-		2808BA7818E8C87E00CC64B7 /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
-		2808BA7918E8C87E00CC64B7 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
 		2808BA8018E8D36400CC64B7 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		2808BA8718E921EF00CC64B7 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWeChatSDK.a; path = ../../WeChat/libWeChatSDK.a; sourceTree = "<group>"; };
 		2808BA8818E921EF00CC64B7 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WXApi.h; path = ../../WeChat/WXApi.h; sourceTree = "<group>"; };
@@ -196,8 +170,6 @@
 		281570DE1925D4E000D169B3 /* message_96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message_96.png; sourceTree = "<group>"; };
 		281570DF1925D4E000D169B3 /* profile_96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile_96.png; sourceTree = "<group>"; };
 		281570E01925D4E000D169B3 /* setting_96.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting_96.png; sourceTree = "<group>"; };
-		2819F41718F12562008DB3F6 /* RNGridMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNGridMenu.h; sourceTree = "<group>"; };
-		2819F41818F12562008DB3F6 /* RNGridMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNGridMenu.m; sourceTree = "<group>"; };
 		2819F41A18F1258A008DB3F6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2819F41C18F12595008DB3F6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		2819F42818F137B7008DB3F6 /* FB-f-Logo__blue_50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FB-f-Logo__blue_50.png"; sourceTree = "<group>"; };
@@ -389,46 +361,6 @@
 			name = REFrostedViewController;
 			sourceTree = "<group>";
 		};
-		2819F41618F12541008DB3F6 /* RNGridMenu */ = {
-			isa = PBXGroup;
-			children = (
-				2819F41718F12562008DB3F6 /* RNGridMenu.h */,
-				2819F41818F12562008DB3F6 /* RNGridMenu.m */,
-			);
-			name = RNGridMenu;
-			sourceTree = "<group>";
-		};
-		2819F41E18F12C9A008DB3F6 /* SWTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				2808BA6D18E8C87E00CC64B7 /* NSMutableArray+SWUtilityButtons.h */,
-				2808BA6E18E8C87E00CC64B7 /* NSMutableArray+SWUtilityButtons.m */,
-				2808BA6F18E8C87E00CC64B7 /* SWCellScrollView.h */,
-				2808BA7018E8C87E00CC64B7 /* SWCellScrollView.m */,
-				2808BA7118E8C87E00CC64B7 /* SWConstants.h */,
-				2808BA7218E8C87E00CC64B7 /* SWLongPressGestureRecognizer.h */,
-				2808BA7318E8C87E00CC64B7 /* SWLongPressGestureRecognizer.m */,
-				2808BA7418E8C87E00CC64B7 /* SWTableViewCell.h */,
-				2808BA7518E8C87E00CC64B7 /* SWTableViewCell.m */,
-				2808BA7618E8C87E00CC64B7 /* SWUtilityButtonTapGestureRecognizer.h */,
-				2808BA7718E8C87E00CC64B7 /* SWUtilityButtonTapGestureRecognizer.m */,
-				2808BA7818E8C87E00CC64B7 /* SWUtilityButtonView.h */,
-				2808BA7918E8C87E00CC64B7 /* SWUtilityButtonView.m */,
-			);
-			name = SWTableViewCell;
-			sourceTree = "<group>";
-		};
-		2819F41F18F12CDF008DB3F6 /* InfiniteScrollPicker */ = {
-			isa = PBXGroup;
-			children = (
-				2808BA5C18E881DB00CC64B7 /* UIView+viewController.h */,
-				2808BA5D18E881DB00CC64B7 /* UIView+viewController.m */,
-				2808BA5918E881B100CC64B7 /* InfiniteScrollPicker.h */,
-				2808BA5A18E881B100CC64B7 /* InfiniteScrollPicker.m */,
-			);
-			name = InfiniteScrollPicker;
-			sourceTree = "<group>";
-		};
 		2819F42018F12D13008DB3F6 /* KeychainItemWrapper */ = {
 			isa = PBXGroup;
 			children = (
@@ -500,9 +432,6 @@
 				28080FA81916909500FE8EF2 /* third-party */,
 				2819F42118F12D61008DB3F6 /* TimeAgo */,
 				2819F42018F12D13008DB3F6 /* KeychainItemWrapper */,
-				2819F41F18F12CDF008DB3F6 /* InfiniteScrollPicker */,
-				2819F41E18F12C9A008DB3F6 /* SWTableViewCell */,
-				2819F41618F12541008DB3F6 /* RNGridMenu */,
 				2808BA8618E921D600CC64B7 /* WeChat */,
 				28C7AE8D18DE059F004F485D /* Main.storyboard */,
 				281570BB1924908B00D169B3 /* InviteViewController.h */,
@@ -785,16 +714,11 @@
 				28D16D0419297CCE00BCC820 /* FindUserViewController.m in Sources */,
 				28080FA719161C7100FE8EF2 /* MLApiClient.m in Sources */,
 				281570DC192511CD00D169B3 /* MainRootViewController.m in Sources */,
-				2808BA5E18E881DB00CC64B7 /* UIView+viewController.m in Sources */,
 				286AD8B7191EC6900026CDFB /* MLPostInfo.m in Sources */,
 				281570CE1924A75700D169B3 /* UIImage+REFrostedViewController.m in Sources */,
-				2808BA5B18E881B100CC64B7 /* InfiniteScrollPicker.m in Sources */,
 				281570BD1924908B00D169B3 /* InviteViewController.m in Sources */,
-				2819F41918F12562008DB3F6 /* RNGridMenu.m in Sources */,
 				28DB23F9193343D2004CA7F0 /* CustomUILabel.m in Sources */,
 				28C7AE8C18DE059F004F485D /* AppDelegate.m in Sources */,
-				2808BA7C18E8C87F00CC64B7 /* SWLongPressGestureRecognizer.m in Sources */,
-				2808BA7D18E8C87F00CC64B7 /* SWTableViewCell.m in Sources */,
 				28080FD51918A00100FE8EF2 /* UIImage+BlurredFrame.m in Sources */,
 				28D16CFB1929116100BCC820 /* ActivityTableViewController.m in Sources */,
 				281570CD1924A75700D169B3 /* REFrostedViewController.m in Sources */,
@@ -804,14 +728,10 @@
 				2808BA5818E7C5ED00CC64B7 /* KeychainItemWrapper.m in Sources */,
 				28149FDF190E191200AB20D4 /* MainFeedViewController.m in Sources */,
 				281570CB1924A75700D169B3 /* RECommonFunctions.m in Sources */,
-				2808BA7A18E8C87F00CC64B7 /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				28DB23FC19334481004CA7F0 /* CustomUITextField.m in Sources */,
-				2808BA7F18E8C87F00CC64B7 /* SWUtilityButtonView.m in Sources */,
 				28DB24071933A6A2004CA7F0 /* MainNavigationController.m in Sources */,
-				2808BA7B18E8C87F00CC64B7 /* SWCellScrollView.m in Sources */,
 				28080FAC1916E4A200FE8EF2 /* MLUserInfo.m in Sources */,
 				28080FD61918A00100FE8EF2 /* UIImage+ImageEffects.m in Sources */,
-				2808BA7E18E8C87F00CC64B7 /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				28810B8C1921526700F55B24 /* PostFeedTableViewController.m in Sources */,
 				28C7AE8818DE059F004F485D /* main.m in Sources */,
 				28E67A7518FBBDE2001F81E1 /* NewLogInViewController.m in Sources */,
