@@ -19,6 +19,8 @@
 
 - (void) viewDidLoad
 {
+    [super viewDidLoad];
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSNumber *firstSignup= [defaults objectForKey:@"firstSignup"];
     if (firstSignup && [firstSignup boolValue]) {
