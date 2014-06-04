@@ -17,6 +17,8 @@
 - (void)loadPostsAndScroll:(BOOL)needScroll;
 @property (nonatomic, weak) id<PostFeedDelegate> delegate;
 @property (assign, nonatomic) NSInteger initPostId;
+@property (assign, nonatomic) NSInteger initUserId;
+@property (assign, nonatomic) NSInteger initDegree;
 @end
 
 

@@ -79,6 +79,8 @@
     self.postFeedVC.delegate = self;
     // TODO: to fix...
     self.postFeedVC.initPostId = self.initPostId;
+    self.postFeedVC.initUserId = self.initUserId;
+    self.postFeedVC.initDegree = self.initDegree;
     self.initPostId = 0;
     self.mainFeedView = self.postFeedVC.tableView;
     self.mainFeedView.frame = CGRectMake(0, 64.0f, 320.0f, 504.0f);

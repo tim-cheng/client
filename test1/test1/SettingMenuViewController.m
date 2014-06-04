@@ -37,11 +37,13 @@
     self.settingsView.delegate = self;
     self.iconArray = @[
                        [UIImage imageNamed:@"profile_96.png"],
+                       [UIImage imageNamed:@"profile_96.png"],
                        [UIImage imageNamed:@"connect_96.png"],
                        [UIImage imageNamed:@"message_96.png"],
                        [UIImage imageNamed:@"logout_96.png"],
                        ];
     self.labelArray = @[
+                        @"Feed",
                         @"Profile",
                         @"Connections",
                         @"Activities",
@@ -53,7 +55,7 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 5;
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -84,15 +86,18 @@
     UINavigationController *navigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentController"];
     
     if (indexPath.section == 0 && indexPath.row == 0) {
-        UserProfileViewController *profileController = [self.storyboard instantiateViewControllerWithIdentifier:@"profileController"];
+        MainFeedViewController *profileController = [self.storyboard instantiateViewControllerWithIdentifier:@"feedController"];
         navigationController.viewControllers = @[profileController];
     } else if (indexPath.section == 0 && indexPath.row == 1) {
+        UserProfileViewController *profileController = [self.storyboard instantiateViewControllerWithIdentifier:@"profileController"];
+        navigationController.viewControllers = @[profileController];
+    } else if (indexPath.section == 0 && indexPath.row == 2) {
         InviteViewController *contactController = [self.storyboard instantiateViewControllerWithIdentifier:@"contactController"];
         navigationController.viewControllers = @[contactController];
-    } else if (indexPath.section == 0 && indexPath.row == 2) {
+    } else if (indexPath.section == 0 && indexPath.row == 3) {
         ActivityTableViewController *activityController = [self.storyboard instantiateViewControllerWithIdentifier:@"activityController"];
         navigationController.viewControllers = @[activityController];
-    } else if (indexPath.section == 0 && indexPath.row == 3) {
+    } else if (indexPath.section == 0 && indexPath.row == 4) {
         [FBSession.activeSession closeAndClearTokenInformation];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:nil forKey:@"savedPosts"];

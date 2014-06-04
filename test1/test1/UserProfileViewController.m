@@ -7,7 +7,7 @@
 //
 
 #import "UserProfileViewController.h"
-#import "MainFeedViewController.h"
+#import "MainNavigationController.h"
 #import "MLApiClient.h"
 #import "MLUserInfo.h"
 #import "AddChildViewController.h"
@@ -41,6 +41,7 @@
 
 
 -(IBAction)addKid:(id)sender;
+-(IBAction)viewMyPost:(id)sender;
 
 @end
 
@@ -169,6 +170,12 @@
     self.editKidRow = -1;
     self.oobeTip = nil;
     [self performSegueWithIdentifier:@"AddKid" sender:self];
+}
+
+-(IBAction)viewMyPost:(id)sender
+{
+    MainNavigationController *navVC = (MainNavigationController *)self.navigationController;
+    [navVC switchToFeedAtId:0 andUserId:self.userId andDegree:0];
 }
 
 - (void)changePhoto:(UITapGestureRecognizer *)gest

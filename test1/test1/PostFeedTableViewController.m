@@ -35,7 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     // Do any additional setup after loading the view.
     self.myFormatter = [[NSDateFormatter alloc] init];
     NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
@@ -55,11 +55,18 @@
     [refresh addTarget:self action:@selector(loadPosts) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refresh;
     
+    if (self.initUserId == 0) {
+        self.initUserId = [MLApiClient client].userId;
+        self.initDegree = 2;
+    }
+
     // load saved posts
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *savedPosts = [defaults objectForKey:@"savedPosts"];
-    if (savedPosts) {
-        self.postArray = [savedPosts mutableCopy];
+    if ([self isFeed]) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSArray *savedPosts = [defaults objectForKey:@"savedPosts"];
+        if (savedPosts) {
+            self.postArray = [savedPosts mutableCopy];
+        }
     }
     
     [self loadPostsAndScroll:NO];
@@ -116,22 +123,29 @@
     [self.tableView endUpdates];
 }
 
+- (BOOL)isFeed
+{
+    return self.initUserId == [MLApiClient client].userId && self.initDegree == 2;
+}
+
 - (void)loadPostsAndScroll:(BOOL)needScroll
 {
-    [[MLPostInfo instance] loadPostInfoFromId:[MLApiClient client].userId
-                                       degree:2
+    [[MLPostInfo instance] loadPostInfoFromId:self.initUserId
+                                       degree:self.initDegree
                                       success:^(id responseJSON) {
                                           dispatch_async(dispatch_get_main_queue(), ^{
                                               [self updateTable:responseJSON];
-                                              NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                                              [defaults setObject:responseJSON forKey:@"savedPosts"];
-                                              [defaults synchronize];
-                                              if (self.initPostId) {
-                                                  [self openPost:self.initPostId];
-                                                  self.initPostId = 0;
-                                              } else if (needScroll) {
-                                                  // scroll to top
-                                                  [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+                                              if ([self isFeed]) {
+                                                  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                                                  [defaults setObject:responseJSON forKey:@"savedPosts"];
+                                                  [defaults synchronize];
+                                                  if (self.initPostId) {
+                                                      [self openPost:self.initPostId];
+                                                      self.initPostId = 0;
+                                                  } else if (needScroll) {
+                                                      // scroll to top
+                                                      [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+                                                  }
                                               }
                                           });
                                       }];

@@ -42,12 +42,19 @@
 
 - (void)switchToFeedAtId:(NSInteger)postId
 {
+    [self switchToFeedAtId:postId andUserId:[MLApiClient client].userId andDegree:2];
+}
+
+- (void)switchToFeedAtId:(NSInteger)postId andUserId:(NSInteger)userId andDegree:(NSInteger)degree
+{
     NSLog(@"switch to post_id: %d", postId);
     UINavigationController *navigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"contentController"];
     
     MainFeedViewController *feedController = [self.storyboard instantiateViewControllerWithIdentifier:@"feedController"];
     
     feedController.initPostId = postId;
+    feedController.initUserId = userId;
+    feedController.initDegree = degree;
     navigationController.viewControllers = @[feedController];
     self.frostedViewController.contentViewController = navigationController;
 }

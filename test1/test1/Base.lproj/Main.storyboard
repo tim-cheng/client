@@ -1019,6 +1019,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <state key="normal" title="View my posts">
                                     <color key="titleColor" red="0.8862745098" green="0.30980392159999998" blue="0.3921568627" alpha="1" colorSpace="deviceRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="viewMyPost:" destination="D0I-yS-pHJ" eventType="touchUpInside" id="dPy-Eh-dgN"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

@@ -12,6 +12,9 @@
 @interface MainFeedViewController : UIViewController
 
 @property (assign, nonatomic) NSInteger initPostId;
+@property (assign, nonatomic) NSInteger initUserId;
+@property (assign, nonatomic) NSInteger initDegree;
+
 - (void)doCompose;
 
 @end
