@@ -310,6 +310,10 @@
                                             <action selector="composeSelectImage:" destination="Yva-45-7iu" eventType="touchUpInside" id="1fA-oN-ACW"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" id="5u9-Cj-EMN">
+                                        <rect key="frame" x="146" y="185" width="29" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -363,6 +367,7 @@
                         <outlet property="composeswitchButton" destination="Ll2-0Q-R4x" id="kwc-ma-mCq"/>
                         <outlet property="postTextView" destination="qqP-tA-spz" id="dCf-qa-HBO"/>
                         <outlet property="sendPostButton" destination="WUc-6b-4tN" id="91v-77-9YF"/>
+                        <outlet property="tipPosView" destination="5u9-Cj-EMN" id="CnZ-Sq-yEZ"/>
                         <segue destination="0dF-FO-NdS" kind="push" id="KZf-Ny-YAd"/>
                     </connections>
                 </viewController>

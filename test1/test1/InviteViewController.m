@@ -60,7 +60,7 @@
         self.oobeTip.textColor = [UIColor whiteColor];
         self.oobeTip.textFont = [UIFont fontWithName:@"bariol-regular" size:17.0];
         self.oobeTip.borderWidth = 0;
-        [self.oobeTip presentPointingAtView:self.self.findButton inView:self.view animated:YES];
+        [self.oobeTip presentPointingAtView:self.findButton inView:self.view animated:YES];
         [defaults setObject:@(NO) forKey:@"firstSignup"];
         [defaults synchronize];
     }

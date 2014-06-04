@@ -16,6 +16,7 @@
 #import "CommentFeedTableViewController.h"
 #import "MainNavigationController.h"
 #import "MLHelpers.h"
+#import "CMPopTipView.h"
 
 #define kFeedPostTextViewHeight 228.0f
 #define kComposeTextViewHeight 320.f
@@ -26,7 +27,8 @@
                                       UINavigationControllerDelegate,
                                       UIGestureRecognizerDelegate,
                                       PostFeedDelegate,
-                                      UIActionSheetDelegate>
+                                      UIActionSheetDelegate,
+                                      CMPopTipViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *composeHeaderView;
 @property (strong, nonatomic) IBOutlet UIButton *sendPostButton;
@@ -45,6 +47,8 @@
 @property (strong, nonatomic) IBOutlet UITableView *commentFeedView;
 @property (assign, nonatomic) NSInteger commentPostId;
 @property (strong, nonatomic) NSDateFormatter *myFormatter;
+@property (strong, nonatomic) CMPopTipView *oobeTip;
+@property (strong, nonatomic) IBOutlet UIView *tipPosView;
 
 - (IBAction)composeSelectImage:(id)sender;
 - (IBAction)composeShuffleBackground:(id)sender;
@@ -233,7 +237,16 @@
     recognizerL.numberOfTouchesRequired = 1;
     recognizerL.delegate = self;
     [self.postTextView addGestureRecognizer:recognizerL];
-
+    
+    self.oobeTip = [[CMPopTipView alloc] initWithMessage:@"Swipe right to blur the picture"];
+    self.oobeTip.delegate = self;
+    self.oobeTip.has3DStyle = NO;
+    self.oobeTip.hasGradientBackground = NO;
+    self.oobeTip.backgroundColor = MLColor;
+    self.oobeTip.textColor = [UIColor whiteColor];
+    self.oobeTip.textFont = [UIFont fontWithName:@"bariol-regular" size:17.0];
+    self.oobeTip.borderWidth = 0;
+    [self.oobeTip presentPointingAtView:self.tipPosView inView:self.composeView animated:YES];
 }
 
 #pragma mark - UIGestureRecognizerDelegate
@@ -368,6 +381,12 @@
     pickerController.sourceType = (buttonIndex == 0) ?
        UIImagePickerControllerSourceTypeCamera : UIImagePickerControllerSourceTypePhotoLibrary;
     [self presentViewController:pickerController animated:YES completion:NULL];
+}
+
+#pragma mark CMPopTipViewDelegate methods
+- (void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView
+{
+    self.oobeTip = nil;
 }
 
 @end
