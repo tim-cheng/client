@@ -533,7 +533,7 @@
                                     <action selector="addPhoto:" destination="HkC-vN-l7X" eventType="touchUpInside" id="Atv-9w-9x9"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="location" minimumFontSize="17" id="A8S-kg-3d7" customClass="CustomUITextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="location (e.g. &quot;San Jose&quot;)" minimumFontSize="17" id="A8S-kg-3d7" customClass="CustomUITextField">
                                 <rect key="frame" x="44" y="305" width="233" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1117,6 +1117,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="tGd-IJ-lLP"/>
+        <segue reference="SF2-3U-aEa"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -168,6 +168,10 @@
 
 - (void)changePhoto:(UITapGestureRecognizer *)gest
 {
+    if (!self.isSelf) {
+        return;
+    }
+    
     UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:nil
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"

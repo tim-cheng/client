@@ -71,6 +71,19 @@
 {
     // TODO: email/password/validation
     // TOOD: location / zip
+    if (self.emailField.text.length == 0 ||
+        self.passwordField.text.length == 0 ||
+        self.firstNameField.text.length == 0 ||
+        self.lastNameField.text.length == 0 ||
+        self.locationField.text.length == 0) {
+        UIAlertView *warn = [[UIAlertView alloc] initWithTitle:@"Create Accout Failed"
+                                                       message:@"All fields are required"
+                                                      delegate:self
+                                             cancelButtonTitle:@"OK"
+                                             otherButtonTitles:nil];
+        [warn show];
+        return;
+    }
     [[MLApiClient client] createUser:self.emailField.text
                             password:self.passwordField.text
                            firstName:self.firstNameField.text
