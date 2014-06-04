@@ -381,7 +381,7 @@
 
     NSInteger refId = [self.postArray[indexPath.row][@"ref_user_id"] integerValue];
     UILabel *refName = (UILabel *)[headerView viewWithTag:18];
-    if (refId != [MLApiClient client].userId) {
+    if ([self isFeed] && refId != [MLApiClient client].userId) {
         [[MLUserInfo instance] userInfoFromId:refId
                                       success:^(id responseJSON) {
                                           dispatch_async(dispatch_get_main_queue(), ^{
