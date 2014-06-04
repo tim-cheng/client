@@ -13,6 +13,7 @@
 #import "AddChildViewController.h"
 #import "MLHelpers.h"
 #import "CMPopTipView.h"
+#import "MLHelpers.h"
 
 @interface UserProfileViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CMPopTipViewDelegate>
 
@@ -36,6 +37,7 @@
 @property (assign, nonatomic) BOOL isSelf;
 @property (assign, nonatomic) BOOL picChanged;
 @property (strong, nonatomic) CMPopTipView *oobeTip;
+@property (strong, nonatomic) IBOutlet UIButton *myPostsButton;
 
 
 -(IBAction)addKid:(id)sender;
@@ -106,7 +108,10 @@
         self.oobeTip.borderWidth = 0;
         [self.oobeTip presentPointingAtView:self.addKidButton inView:self.view animated:YES];
     }
-
+    
+    self.myPostsButton.layer.borderColor = [MLColor CGColor];
+    self.myPostsButton.layer.borderWidth = 1.0f;
+    self.myPostsButton.layer.cornerRadius = 5;
 }
 
 - (void)dismissKeyboard
