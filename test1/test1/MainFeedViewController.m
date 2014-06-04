@@ -96,6 +96,11 @@
     // update
     self.commentFeedVC.delegate = self.postFeedVC;
     
+    if (self.feedTitle) {
+        self.navigationController.navigationBar.topItem.title = self.feedTitle;
+    } else {
+        self.navigationController.navigationBar.topItem.title = @"Feed";
+    }
 }
 
 - (void)didReceiveMemoryWarning

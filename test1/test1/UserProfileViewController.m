@@ -175,7 +175,7 @@
 -(IBAction)viewMyPost:(id)sender
 {
     MainNavigationController *navVC = (MainNavigationController *)self.navigationController;
-    [navVC switchToFeedAtId:0 andUserId:self.userId andDegree:0];
+    [navVC switchToFeedAtId:0 andUserId:self.userId andDegree:0 andTitle:self.nameField.text];
 }
 
 - (void)changePhoto:(UITapGestureRecognizer *)gest

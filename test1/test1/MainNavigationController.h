@@ -11,6 +11,6 @@
 @interface MainNavigationController : UINavigationController
 
 - (void)switchToFeedAtId:(NSInteger)postId;
-- (void)switchToFeedAtId:(NSInteger)postId andUserId:(NSInteger)userId andDegree:(NSInteger)degree;
+- (void)switchToFeedAtId:(NSInteger)postId andUserId:(NSInteger)userId andDegree:(NSInteger)degree andTitle:(NSString *)title;
 - (void)switchToProfileForUserId:(NSInteger)userId;
 @end

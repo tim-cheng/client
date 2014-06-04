@@ -14,6 +14,7 @@
 @property (assign, nonatomic) NSInteger initPostId;
 @property (assign, nonatomic) NSInteger initUserId;
 @property (assign, nonatomic) NSInteger initDegree;
+@property (strong, nonatomic) NSString *feedTitle;
 
 - (void)doCompose;
 
