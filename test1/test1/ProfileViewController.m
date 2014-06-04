@@ -7,15 +7,19 @@
 //
 
 #import "ProfileViewController.h"
+#import <Firebase/Firebase.h>
+#import "DBClient.h"
 
-@interface ProfileViewController ()
+@interface ProfileViewController () <UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet FBProfilePictureView *profilePictureView;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *numOfFriendsLabel;
+@property (strong, nonatomic) IBOutlet UITableView *friendsView;
 
-@property (strong, nonatomic) IBOutlet UITextView *aboutMeView;
 
 - (IBAction) didTapBackButton:(id)sender;
+- (IBAction) didTapConnectButton:(id)sender;
 @end
 
 @implementation ProfileViewController
@@ -37,16 +41,26 @@
     self.profilePictureView.layer.cornerRadius = 10.0f;
     self.nameLabel.text = self.fbName;
     
-    [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        if (!error) {
-            // Success! Include your code to handle the results here
-            // NSLog(@"user info: %@", result);
-            self.aboutMeView.text = [result description];
-        } else {
-            // An error occurred, we need to handle the error
-            // See: https://developers.facebook.com/docs/ios/errors
-        }
-    }];
+//    [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+//        if (!error) {
+//            // Success! Include your code to handle the results here
+//            // NSLog(@"user info: %@", result);
+//        } else {
+//            // An error occurred, we need to handle the error
+//            // See: https://developers.facebook.com/docs/ios/errors
+//        }
+//    }];
+
+    self.friendsView.dataSource = self;
+    NSLog(@"profile friends: %@", self.friends);
+    
+    self.numOfFriendsLabel.text = [NSString stringWithFormat:@"%d friends", [self.friends count]];
+    
+    for (NSString *fid in self.friends) {
+        NSArray *indexPaths = @[[NSIndexPath indexPathForRow:0 inSection:0]];
+        [self.friendsView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,6 +74,11 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction) didTapConnectButton:(id)sender
+{
+    [self performSegueWithIdentifier:@"ProfileConnect" sender:self];
+}
+
 /*
 #pragma mark - Navigation
 
@@ -70,5 +89,45 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark UITableViewDataSource
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.friends count];
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"FriendCell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    NSString *fid = self.friends[indexPath.row];
+    
+    NSString *userLoc = [DBClient urlForUserId:fid];
+    Firebase *profileRef = [[Firebase alloc] initWithUrl:[userLoc stringByAppendingString:@"/profile"]];
+    [profileRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        NSLog(@"profile: %@", snapshot.value);
+
+        FBProfilePictureView *imgView = (FBProfilePictureView*)[cell.contentView viewWithTag:20];
+        imgView.layer.cornerRadius = 10.0f;
+        if (snapshot.value[@"fb_id"]) {
+            imgView.profileID = snapshot.value[@"fb_id"];
+        }
+
+        UILabel *name = (UILabel *)[cell.contentView viewWithTag:21];
+        name.text = [NSString stringWithFormat:@"%@ %@", snapshot.value[@"first_name"], snapshot.value[@"last_name"]];
+        
+        UILabel *email = (UILabel *)[cell.contentView viewWithTag:22];
+        email.text = snapshot.value[@"email"];
+    }];
+
+    return cell;
+}
 
 @end

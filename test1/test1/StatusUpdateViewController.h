@@ -11,7 +11,4 @@
 
 @interface StatusUpdateViewController : UIViewController
 
-- (void)updateUserInfo:(FBLoginView *)loginView
-                  user:(id<FBGraphUser>)user;
-
 @end

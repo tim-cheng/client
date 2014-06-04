@@ -1,0 +1,9 @@
+
+*.xcuserstate
+
+go/*
+
+
+*.xccheckout
+
+test1/test1.xcworkspace/xcuserdata/timcheng.xcuserdatad/UserInterfaceState.xcuserstate
