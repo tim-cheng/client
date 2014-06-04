@@ -12,8 +12,9 @@
 #import "MLUserInfo.h"
 #import "AddChildViewController.h"
 #import "MLHelpers.h"
+#import "CMPopTipView.h"
 
-@interface UserProfileViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface UserProfileViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CMPopTipViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIImageView *profImgView;
 
@@ -34,6 +35,7 @@
 
 @property (assign, nonatomic) BOOL isSelf;
 @property (assign, nonatomic) BOOL picChanged;
+@property (strong, nonatomic) CMPopTipView *oobeTip;
 
 
 -(IBAction)addKid:(id)sender;
@@ -89,6 +91,21 @@
     self.locationField.delegate = self;
     
     self.bioView.delegate = self;
+    
+    //  add tooltip for firstSignup
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *firstSignup= [defaults objectForKey:@"firstSignup"];
+    if (firstSignup && [firstSignup boolValue]) {
+        self.oobeTip = [[CMPopTipView alloc] initWithMessage:@"Your account has been created. Now please add your kids information."];
+        self.oobeTip.delegate = self;
+        self.oobeTip.has3DStyle = NO;
+        self.oobeTip.hasGradientBackground = NO;
+        self.oobeTip.backgroundColor = MLColor;
+        self.oobeTip.textColor = [UIColor whiteColor];
+        self.oobeTip.textFont = [UIFont fontWithName:@"bariol-regular" size:17.0];
+        self.oobeTip.borderWidth = 0;
+        [self.oobeTip presentPointingAtView:self.addKidButton inView:self.view animated:YES];
+    }
 
 }
 
@@ -145,6 +162,7 @@
 -(IBAction)addKid:(id)sender
 {
     self.editKidRow = -1;
+    self.oobeTip = nil;
     [self performSegueWithIdentifier:@"AddKid" sender:self];
 }
 
@@ -333,6 +351,7 @@
     if (self.isSelf) {
         self.saveButtonItem.enabled = YES;
     }
+    self.oobeTip = nil;
     return self.isSelf;
 }
 
@@ -341,7 +360,14 @@
     if (self.isSelf) {
         self.saveButtonItem.enabled = YES;
     }
+    self.oobeTip = nil;
     return self.isSelf;
+}
+
+#pragma mark CMPopTipViewDelegate methods
+- (void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView
+{
+    self.oobeTip = nil;
 }
 
 @end

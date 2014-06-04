@@ -35,8 +35,6 @@
         InviteViewController *contactController = [self.storyboard instantiateViewControllerWithIdentifier:@"contactController"];
         navigationController.viewControllers = @[contactController];
         self.frostedViewController.contentViewController = navigationController;
-        [defaults setObject:@(NO) forKey:@"firstSignup"];
-        [defaults synchronize];
     } else {
         [self switchToFeedAtId:0];
     }

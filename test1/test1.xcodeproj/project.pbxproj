@@ -38,6 +38,7 @@
 		2819F41D18F12595008DB3F6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2819F41C18F12595008DB3F6 /* Accelerate.framework */; };
 		2819F42A18F137B7008DB3F6 /* FB-f-Logo__blue_50.png in Resources */ = {isa = PBXBuildFile; fileRef = 2819F42818F137B7008DB3F6 /* FB-f-Logo__blue_50.png */; };
 		2819F42B18F137B7008DB3F6 /* FB-f-Logo__white_50.png in Resources */ = {isa = PBXBuildFile; fileRef = 2819F42918F137B7008DB3F6 /* FB-f-Logo__white_50.png */; };
+		283F4D76193EC016000EBB59 /* CMPopTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 283F4D75193EC016000EBB59 /* CMPopTipView.m */; };
 		286829CB193C46D700223411 /* heart_on_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 286829CA193C46D700223411 /* heart_on_64.png */; };
 		286829CF193C48BC00223411 /* comment_off_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 286829CC193C48BC00223411 /* comment_off_64.png */; };
 		286829D0193C48BC00223411 /* comment_on_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 286829CD193C48BC00223411 /* comment_on_64.png */; };
@@ -174,6 +175,8 @@
 		2819F41C18F12595008DB3F6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		2819F42818F137B7008DB3F6 /* FB-f-Logo__blue_50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FB-f-Logo__blue_50.png"; sourceTree = "<group>"; };
 		2819F42918F137B7008DB3F6 /* FB-f-Logo__white_50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FB-f-Logo__white_50.png"; sourceTree = "<group>"; };
+		283F4D74193EC016000EBB59 /* CMPopTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPopTipView.h; sourceTree = "<group>"; };
+		283F4D75193EC016000EBB59 /* CMPopTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPopTipView.m; sourceTree = "<group>"; };
 		286829CA193C46D700223411 /* heart_on_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart_on_64.png; sourceTree = "<group>"; };
 		286829CC193C48BC00223411 /* comment_off_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment_off_64.png; sourceTree = "<group>"; };
 		286829CD193C48BC00223411 /* comment_on_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment_on_64.png; sourceTree = "<group>"; };
@@ -379,6 +382,15 @@
 			name = TimeAgo;
 			sourceTree = "<group>";
 		};
+		283F4D73193EBFF9000EBB59 /* CMPopTipView */ = {
+			isa = PBXGroup;
+			children = (
+				283F4D74193EC016000EBB59 /* CMPopTipView.h */,
+				283F4D75193EC016000EBB59 /* CMPopTipView.m */,
+			);
+			name = CMPopTipView;
+			sourceTree = "<group>";
+		};
 		28C7AE6F18DE059F004F485D = {
 			isa = PBXGroup;
 			children = (
@@ -426,6 +438,7 @@
 		28C7AE8118DE059F004F485D /* test1 */ = {
 			isa = PBXGroup;
 			children = (
+				283F4D73193EBFF9000EBB59 /* CMPopTipView */,
 				281570BE1924A72600D169B3 /* REFrostedViewController */,
 				28080FD019189FD600FE8EF2 /* UIImageBlur */,
 				28080FA9191690C900FE8EF2 /* Original */,
@@ -710,6 +723,7 @@
 				281570D91924AC3A00D169B3 /* SettingMenuViewController.m in Sources */,
 				281570CF1924A75700D169B3 /* UIView+REFrostedViewController.m in Sources */,
 				288FB5B618E1EA8300214DC5 /* NSDate+TimeAgo.m in Sources */,
+				283F4D76193EC016000EBB59 /* CMPopTipView.m in Sources */,
 				281570D01924A75700D169B3 /* UIViewController+REFrostedViewController.m in Sources */,
 				28D16D0419297CCE00BCC820 /* FindUserViewController.m in Sources */,
 				28080FA719161C7100FE8EF2 /* MLApiClient.m in Sources */,

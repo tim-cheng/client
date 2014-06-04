@@ -16,17 +16,20 @@
 #import "MLHelpers.h"
 #import "CustomUILabel.h"
 #import "MainNavigationController.h"
+#import "CMPopTipView.h"
 
 
 @interface InviteViewController () <FBFriendPickerDelegate,
                                     ABPeoplePickerNavigationControllerDelegate,
-                                    UITableViewDataSource, UITableViewDelegate>
+                                    UITableViewDataSource, UITableViewDelegate, CMPopTipViewDelegate>
 
 @property (strong, nonatomic) FBFriendPickerViewController *friendPickerController;
 
 @property (strong, nonatomic) IBOutlet UITableView *contactView;
 @property (strong, nonatomic) NSMutableArray *inviterArray;
 @property (strong, nonatomic) NSMutableArray *connectionArray;
+@property (strong, nonatomic) CMPopTipView *oobeTip;
+@property (strong, nonatomic) IBOutlet UIButton *findButton;
 
 - (IBAction)selectFacebook:(id)sender;
 - (IBAction)selectEmail:(id)sender;
@@ -44,6 +47,24 @@
     self.contactView.dataSource = self;
     self.contactView.delegate = self;
     [self loadContacts];
+    
+    //  add tooltip for firstSignup
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *firstSignup= [defaults objectForKey:@"firstSignup"];
+    if (firstSignup && [firstSignup boolValue]) {
+        self.oobeTip = [[CMPopTipView alloc] initWithMessage:@"Almost there... Now invite existing parents to connect."];
+        self.oobeTip.delegate = self;
+        self.oobeTip.has3DStyle = NO;
+        self.oobeTip.hasGradientBackground = NO;
+        self.oobeTip.backgroundColor = MLColor;
+        self.oobeTip.textColor = [UIColor whiteColor];
+        self.oobeTip.textFont = [UIFont fontWithName:@"bariol-regular" size:17.0];
+        self.oobeTip.borderWidth = 0;
+        [self.oobeTip presentPointingAtView:self.self.findButton inView:self.view animated:YES];
+        [defaults setObject:@(NO) forKey:@"firstSignup"];
+        [defaults synchronize];
+    }
+
 }
 
 - (void)viewDidUnload
@@ -391,6 +412,12 @@
         [params setObject:val forKey:[kv objectAtIndex:0]];
     }
     return params;
+}
+
+#pragma mark CMPopTipViewDelegate methods
+- (void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView
+{
+    self.oobeTip = nil;
 }
 
 @end
