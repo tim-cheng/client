@@ -36,7 +36,7 @@
     self.settingsView.dataSource = self;
     self.settingsView.delegate = self;
     self.iconArray = @[
-                       [UIImage imageNamed:@"profile_96.png"],
+                       [UIImage imageNamed:@"feed_96.png"],
                        [UIImage imageNamed:@"profile_96.png"],
                        [UIImage imageNamed:@"connect_96.png"],
                        [UIImage imageNamed:@"message_96.png"],
