@@ -42,14 +42,16 @@
                                                     UIRemoteNotificationTypeSound];
     
     
-    [[UINavigationBar appearance] setBarTintColor:MLColor];
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor],
-                                                           NSFontAttributeName : [UIFont fontWithName:@"bariol-regular" size:18]}];
-    
-    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"bariol-regular" size:18]} forState:UIControlStateNormal];
-    
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    if (IS_OS_7_OR_LATER) {
+        [[UINavigationBar appearance] setBarTintColor:MLColor];
+        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+        [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor],
+                                                               NSFontAttributeName : [UIFont fontWithName:@"bariol-regular" size:18]}];
+        
+        [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"bariol-regular" size:18]} forState:UIControlStateNormal];
+        
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    }
 
 //    [[UILabel appearance] setFont:[UIFont fontWithName:@"bariol-regular" size:17.0]];
 //    [[UITextView appearance] setFont:[UIFont fontWithName:@"bariol-regular" size:17.0]];

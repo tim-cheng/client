@@ -15,4 +15,9 @@
 #define MLColor UIColorFromRGB(0xe24f64)
 #define MLColorBrown UIColorFromRGB(0x625959)
 
+#define IS_OS_7_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+#define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height-568)? NO : YES)
+
+#define MLDefaultPost @"Ask or share something"
+
 #endif

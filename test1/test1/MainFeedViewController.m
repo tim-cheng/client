@@ -15,6 +15,7 @@
 #import "PostFeedTableViewController.h"
 #import "CommentFeedTableViewController.h"
 #import "MainNavigationController.h"
+#import "MLHelpers.h"
 
 #define kFeedPostTextViewHeight 228.0f
 #define kComposeTextViewHeight 320.f
@@ -70,7 +71,7 @@
     //[self.navigationController setNavigationBarHidden:YES];
     // prepare composeView
     self.postTextView.delegate = self;
-    self.postTextView.text = @"Share what's new";
+    self.postTextView.text = MLDefaultPost;
     [self textViewDidChange:self.postTextView];
     
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
@@ -168,7 +169,7 @@
 {
     if (textView == self.postTextView) {
         NSString *newString = textView.text;
-        if (newString.length <= 0 || [newString isEqualToString:@"Share what's new"]) {
+        if (newString.length <= 0 || [newString isEqualToString:MLDefaultPost]) {
             self.sendPostButton.hidden = YES;
         } else {
             self.sendPostButton.hidden = NO;
@@ -302,7 +303,7 @@
     self.composeHeaderView.hidden = YES;
 
     NSString *txt = self.postTextView.text;
-    if ([txt isEqualToString:@"Share what's new"]) {
+    if ([txt isEqualToString:MLDefaultPost]) {
         return;
     }
     [self.postTextView resignFirstResponder];
@@ -316,7 +317,7 @@
                                       [self.postFeedVC loadPostsAndScroll:YES];
                                   }];
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.postTextView.text = @"Share what's new";
+        self.postTextView.text = MLDefaultPost;
         [imagView removeFromSuperview];
         self.postTextView.backgroundColor = [UIColor colorWithRed:0.0991371 green:0.310455 blue:0.515286 alpha:1.0];
     });
@@ -328,7 +329,7 @@
     self.composeView.hidden = YES;
     self.composeHeaderView.hidden = YES;
     [self.postTextView resignFirstResponder];
-    self.postTextView.text = @"Share what's new";
+    self.postTextView.text = MLDefaultPost;
     self.postTextView.backgroundColor = [UIColor colorWithRed:0.0991371 green:0.310455 blue:0.515286 alpha:1.0];
     self.sendPostButton.hidden = YES;
     UIImageView *imagView = (UIImageView *)[[self.postTextView superview] viewWithTag:30];
