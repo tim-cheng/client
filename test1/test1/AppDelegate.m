@@ -12,6 +12,7 @@
 #import <Parse/Parse.h>
 #import "NewLogInViewController.h"
 #import "MLHelpers.h"
+#import "Flurry.h"
 
 
 @implementation AppDelegate
@@ -56,6 +57,12 @@
 //    [[UILabel appearance] setFont:[UIFont fontWithName:@"bariol-regular" size:17.0]];
 //    [[UITextView appearance] setFont:[UIFont fontWithName:@"bariol-regular" size:17.0]];
 //    [[UITextField appearance] setFont:[UIFont fontWithName:@"bariol-regular" size:17.0]];
+    
+    //note: iOS only allows one crash reporting tool per app; if using another, set to: NO
+    [Flurry setCrashReportingEnabled:YES];
+    
+    // Replace YOUR_API_KEY with the api key in the downloaded package
+    [Flurry startSession:@"58M2T3PGQ35C5CHRG3KX"];
     
     return YES;
 }
