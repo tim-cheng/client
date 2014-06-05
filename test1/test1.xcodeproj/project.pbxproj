@@ -11,6 +11,7 @@
 		28080FAC1916E4A200FE8EF2 /* MLUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 28080FAB1916E4A200FE8EF2 /* MLUserInfo.m */; };
 		28080FD51918A00100FE8EF2 /* UIImage+BlurredFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 28080FD21918A00100FE8EF2 /* UIImage+BlurredFrame.m */; };
 		28080FD61918A00100FE8EF2 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 28080FD41918A00100FE8EF2 /* UIImage+ImageEffects.m */; };
+		28081F4419402F4100CB3A75 /* libFlurry_5.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28081F4319402F4100CB3A75 /* libFlurry_5.0.0.a */; };
 		2808BA5518E7C4A700CC64B7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2808BA5418E7C4A700CC64B7 /* Security.framework */; };
 		2808BA5818E7C5ED00CC64B7 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2808BA5718E7C5ED00CC64B7 /* KeychainItemWrapper.m */; };
 		280A68621904D2C700C2475D /* s1.png in Resources */ = {isa = PBXBuildFile; fileRef = 280A685E1904D2C700C2475D /* s1.png */; };
@@ -133,6 +134,8 @@
 		28080FD21918A00100FE8EF2 /* UIImage+BlurredFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BlurredFrame.m"; sourceTree = "<group>"; };
 		28080FD31918A00100FE8EF2 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		28080FD41918A00100FE8EF2 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		28081F4219402F4100CB3A75 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		28081F4319402F4100CB3A75 /* libFlurry_5.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_5.0.0.a; sourceTree = "<group>"; };
 		2808BA5418E7C4A700CC64B7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		2808BA5618E7C5ED00CC64B7 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		2808BA5718E7C5ED00CC64B7 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
@@ -289,6 +292,7 @@
 				288FB5FB18E742EC00214DC5 /* Social.framework in Frameworks */,
 				2808BA5518E7C4A700CC64B7 /* Security.framework in Frameworks */,
 				288FB5FD18E742F200214DC5 /* Accounts.framework in Frameworks */,
+				28081F4419402F4100CB3A75 /* libFlurry_5.0.0.a in Frameworks */,
 				28F1BBE318E14DDB00C59302 /* libicucore.dylib in Frameworks */,
 				28F1BBE118E14DD000C59302 /* libstdc++.dylib in Frameworks */,
 				28C3733C18DEB974007DCE38 /* SystemConfiguration.framework in Frameworks */,
@@ -335,6 +339,16 @@
 				28080FD41918A00100FE8EF2 /* UIImage+ImageEffects.m */,
 			);
 			name = UIImageBlur;
+			sourceTree = "<group>";
+		};
+		28081F4119402F4100CB3A75 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				28081F4219402F4100CB3A75 /* Flurry.h */,
+				28081F4319402F4100CB3A75 /* libFlurry_5.0.0.a */,
+			);
+			name = Flurry;
+			path = ../../Flurry;
 			sourceTree = "<group>";
 		};
 		2808BA8618E921D600CC64B7 /* WeChat */ = {
@@ -440,6 +454,7 @@
 		28C7AE8118DE059F004F485D /* test1 */ = {
 			isa = PBXGroup;
 			children = (
+				28081F4119402F4100CB3A75 /* Flurry */,
 				283F4D73193EBFF9000EBB59 /* CMPopTipView */,
 				281570BE1924A72600D169B3 /* REFrostedViewController */,
 				28080FD019189FD600FE8EF2 /* UIImageBlur */,
@@ -884,6 +899,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					../,
 					"$(inherited)",
@@ -898,9 +914,11 @@
 					"$(PROJECT_DIR)/test1",
 					/private/tmp/wchat/SDKExport,
 					/Users/timcheng/tutor/WeChat,
+					/Users/timcheng/tutor/Flurry,
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Parent2D;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -915,6 +933,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					../,
 					"$(inherited)",
@@ -929,9 +948,11 @@
 					"$(PROJECT_DIR)/test1",
 					/private/tmp/wchat/SDKExport,
 					/Users/timcheng/tutor/WeChat,
+					/Users/timcheng/tutor/Flurry,
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Parent2D;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
