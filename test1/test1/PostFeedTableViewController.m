@@ -66,6 +66,10 @@
         NSArray *savedPosts = [defaults objectForKey:@"savedPosts"];
         if (savedPosts) {
             self.postArray = [savedPosts mutableCopy];
+            @synchronized(self) {
+                [self.tableView beginUpdates];
+                [self.tableView endUpdates];
+            }
         }
     }
     
@@ -114,13 +118,15 @@
             [insertPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
         }
     }
-    [self.tableView beginUpdates];
-    [self.tableView deleteRowsAtIndexPaths:deletePaths withRowAnimation:UITableViewRowAnimationNone];
-    [self.tableView insertRowsAtIndexPaths:insertPaths withRowAnimation:UITableViewRowAnimationNone];
-    [self.tableView reloadRowsAtIndexPaths:reloadPaths withRowAnimation:UITableViewRowAnimationNone];
-    [self.postArray removeAllObjects];
-    [self.postArray addObjectsFromArray:array2];
-    [self.tableView endUpdates];
+    @synchronized(self) {
+        [self.tableView beginUpdates];
+        [self.tableView deleteRowsAtIndexPaths:deletePaths withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView insertRowsAtIndexPaths:insertPaths withRowAnimation:UITableViewRowAnimationNone];
+        [self.tableView reloadRowsAtIndexPaths:reloadPaths withRowAnimation:UITableViewRowAnimationNone];
+        [self.postArray removeAllObjects];
+        [self.postArray addObjectsFromArray:array2];
+        [self.tableView endUpdates];
+    }
 }
 
 - (BOOL)isFeed
