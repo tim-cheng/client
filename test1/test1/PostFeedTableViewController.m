@@ -66,10 +66,6 @@
         NSArray *savedPosts = [defaults objectForKey:@"savedPosts"];
         if (savedPosts) {
             self.postArray = [savedPosts mutableCopy];
-            @synchronized(self) {
-                [self.tableView beginUpdates];
-                [self.tableView endUpdates];
-            }
         }
     }
     
@@ -98,7 +94,7 @@
         } else if ([array2[idx2][@"id"] integerValue] == [array1[idx1][@"id"] integerValue]) {
             // same element
             if (![array1[idx1] isEqualToDictionary:array2[idx2]]) {
-                [reloadPaths addObject:[NSIndexPath indexPathForRow:idx2 inSection:0]];
+                [reloadPaths addObject:[NSIndexPath indexPathForRow:idx1 inSection:0]];
             }
             idx1++;
             idx2++;
@@ -118,15 +114,13 @@
             [insertPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
         }
     }
-    @synchronized(self) {
-        [self.tableView beginUpdates];
-        [self.tableView deleteRowsAtIndexPaths:deletePaths withRowAnimation:UITableViewRowAnimationNone];
-        [self.tableView insertRowsAtIndexPaths:insertPaths withRowAnimation:UITableViewRowAnimationNone];
-        [self.tableView reloadRowsAtIndexPaths:reloadPaths withRowAnimation:UITableViewRowAnimationNone];
-        [self.postArray removeAllObjects];
-        [self.postArray addObjectsFromArray:array2];
-        [self.tableView endUpdates];
-    }
+    [self.postArray removeAllObjects];
+    [self.postArray addObjectsFromArray:array2];
+    [self.tableView beginUpdates];
+    [self.tableView deleteRowsAtIndexPaths:deletePaths withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView insertRowsAtIndexPaths:insertPaths withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadRowsAtIndexPaths:reloadPaths withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView endUpdates];
 }
 
 - (BOOL)isFeed
