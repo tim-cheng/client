@@ -456,16 +456,30 @@
                                              completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
                                                  if (!error) {
                                                      NSLog(@"got publish permission");
-                                                     [FBDialogs presentOSIntegratedShareDialogModallyFrom:self
-                                                                                              initialText:@"share from ParentLink"
+                                                     BOOL isNative = NO;
+                                                     isNative = [FBDialogs presentOSIntegratedShareDialogModallyFrom:self
+                                                                                              initialText:@"Share from Parent2D"
                                                                                                     image:img
                                                                                                       url:nil
                                                                                                   handler:^(FBOSIntegratedShareDialogResult result, NSError *error) {
                                                                                                       NSLog(@"dialog dismissed: %d, %@", result, error);
                                                                                                   }];
-                                                     
-                                                     //                     [FBDialogs presentShareDialogWithLink:nil name:postTxt handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
-                                                     //                     }];
+                                                     if (!isNative) {
+                                                        BOOL canPresent = [FBDialogs canPresentShareDialogWithPhotos];
+                                                         if (canPresent) {
+                                                             FBAppCall *appCall = [FBDialogs presentShareDialogWithPhotos:@[img]
+                                                                                                                handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+                                                                                                                    if (error) {
+                                                                                                                        NSLog(@"Error: %@", error.description);
+                                                                                                                    } else {
+                                                                                                                        NSLog(@"Success!");
+                                                                                                                    }
+                                                                                                                }];
+                                                             if (!appCall) {
+                                                                 NSLog(@"share failed...");
+                                                             }
+                                                         }
+                                                     }
                                                      
                                                  } else {
                                                      NSLog(@"got error: %@", error);
