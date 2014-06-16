@@ -19,11 +19,8 @@
 #import "CMPopTipView.h"
 
 
-@interface InviteViewController () <FBFriendPickerDelegate,
-                                    ABPeoplePickerNavigationControllerDelegate,
+@interface InviteViewController () <ABPeoplePickerNavigationControllerDelegate,
                                     UITableViewDataSource, UITableViewDelegate, CMPopTipViewDelegate>
-
-@property (strong, nonatomic) FBFriendPickerViewController *friendPickerController;
 
 @property (strong, nonatomic) IBOutlet UITableView *contactView;
 @property (strong, nonatomic) NSMutableArray *inviterArray;
@@ -69,7 +66,6 @@
 
 - (void)viewDidUnload
 {
-    self.friendPickerController = nil;
     [super viewDidUnload];
 }
 
@@ -170,24 +166,11 @@
                                       }];
         return;
     }
-#if 1
-    if (self.friendPickerController == nil) {
-        // Create friend picker, and get data loaded into it.
-        self.friendPickerController = [[FBFriendPickerViewController alloc] init];
-        self.friendPickerController.title = @"Pick Friends";
-        self.friendPickerController.delegate = self;
-    }
-    
-    [self.friendPickerController loadData];
-    [self.friendPickerController clearSelection];
-    
-    [self presentViewController:self.friendPickerController animated:YES completion:nil];
-#else
     
     [FBWebDialogs
      presentRequestsDialogModallyWithSession:nil
-     message:@"Please download and try Parent2D"
-     title:nil
+     message:@"Download and try Parent2D"
+     title:@"Invite Users"
      parameters:nil
      handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
          if (error) {
@@ -211,7 +194,6 @@
              }
          }
      }];
-#endif
 }
 
 - (IBAction)findUser:(id)sender
@@ -232,35 +214,6 @@
     
 }
 
-#pragma mark - FBFriendPickerDelegate
-
-- (void)facebookViewControllerDoneWasPressed:(id)sender {
-    NSMutableString *text = [[NSMutableString alloc] init];
-    
-    // we pick up the users from the selection, and create a string that we use to update the text view
-    // at the bottom of the display; note that self.selection is a property inherited from our base class
-    for (id<FBGraphUser> user in self.friendPickerController.selection) {
-        if ([text length]) {
-            [text appendString:@"|"];
-        }
-        NSLog(@"!!!!! %@", user);
-        [text appendString:user.name];
-//        [text appendString:@"@"];
-//        [text appendString:user.username];
-    }
-    
-    [self fillTextBoxAndDismiss:text.length > 0 ? text : @"<None>"];
-}
-
-- (void)facebookViewControllerCancelWasPressed:(id)sender {
-    [self fillTextBoxAndDismiss:@"<Cancelled>"];
-}
-
-- (void)fillTextBoxAndDismiss:(NSString *)text {
-    NSLog(@"selected following friends: %@", text);
-    
-    [self dismissViewControllerAnimated:YES completion:NULL];
-}
 
 #pragma mark ABPeoplePickerNavigationControllerDelegate methods
 // Displays the information of a selected person
