@@ -471,6 +471,22 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
     return [self makeRequest:request success:successCallback failure:failureCallback];
 }
 
+- (NSURLRequest *)findUserByFbIds:(NSString *)fbIds
+                          success:(MLApiClientSuccess)successCallback
+                          failure:(MLApiClientFailure)failureCallback
+{
+    NSString * path = @"/users";
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@?searchfb=%@", self.protocol, self.baseURLString, path, [self urlEncode:fbIds]]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:15.0f];
+    request.HTTPMethod = @"GET";
+    [request setValue:self.loggedInAuth forHTTPHeaderField:@"Authorization"];
+    return [self makeRequest:request success:successCallback failure:failureCallback];
+}
+
+
+
 - (NSURLRequest *)inviteUserFromId:(NSInteger)userId
                           inviteId:(NSInteger)inviteId
                            success:(MLApiClientSuccess)successCallback

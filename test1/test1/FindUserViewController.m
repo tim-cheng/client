@@ -9,6 +9,7 @@
 #import "FindUserViewController.h"
 #import "MLApiClient.h"
 #import "MLUserInfo.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface FindUserViewController () <UITableViewDataSource, UISearchBarDelegate>
 
@@ -28,6 +29,35 @@
     self.userIds = [[NSMutableArray alloc] init];
     self.searchBar.delegate = self;
     self.resultsView.dataSource = self;
+    
+    FBRequest* friendsRequest = [FBRequest requestForMyFriends];
+    [friendsRequest startWithCompletionHandler: ^(FBRequestConnection *connection,
+                                                  NSDictionary* result,
+                                                  NSError *error) {
+        NSArray* friends = [result objectForKey:@"data"];
+        NSLog(@"Found: %i friends", friends.count);
+        NSMutableArray *friendList = [[NSMutableArray alloc] initWithCapacity:friends.count];
+        for (NSDictionary<FBGraphUser>* friend in friends) {
+            [friendList addObject:friend.id];
+            //            NSLog(@"I have a friend named %@ with id %@", friend.name, friend.id);
+        }
+        NSString *fbIds = [friendList componentsJoinedByString:@"+"];
+        [[MLApiClient client] findUserByFbIds:fbIds
+                                      success:^(NSHTTPURLResponse *response, id responseJSON) {
+            NSLog(@"search success: %@", (NSDictionary *)responseJSON);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self clearUsers];
+                [self.userIds addObjectsFromArray:responseJSON];
+                [self loadUsers];
+            });
+        } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+            NSLog(@"search failed: %@", responseJSON);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self clearUsers];
+                [self.view endEditing:YES];
+            });
+        }];
+    }];
 }
 
 - (void)clearUsers
