@@ -110,10 +110,12 @@ typedef void (^MLApiClientDataSuccess)(NSHTTPURLResponse *response, NSData *data
                        failure:(MLApiClientFailure)failureCallback;
 
 - (NSURLRequest *)findUser:(NSString *)name
+                    fromId:(NSInteger)userId
                    success:(MLApiClientSuccess)successCallback
                    failure:(MLApiClientFailure)failureCallback;
 
 - (NSURLRequest *)findUserByFbIds:(NSString *)fbIds
+                           fromId:(NSInteger)userId
                    success:(MLApiClientSuccess)successCallback
                    failure:(MLApiClientFailure)failureCallback;
 

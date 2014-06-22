@@ -43,6 +43,7 @@
         }
         NSString *fbIds = [friendList componentsJoinedByString:@"+"];
         [[MLApiClient client] findUserByFbIds:fbIds
+                                       fromId:[MLApiClient client].userId
                                       success:^(NSHTTPURLResponse *response, id responseJSON) {
             NSLog(@"search success: %@", (NSDictionary *)responseJSON);
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -121,12 +122,18 @@
     
     UILabel *locationLabel = (UILabel *)[cell.contentView viewWithTag:12];
     if (locationLabel) {
-        locationLabel.text = @"San Jose, California";
+        locationLabel.text = userInfo[@"location"];
     }
     
     UIButton *inviteButton = (UIButton *)[cell.contentView viewWithTag:13];
     if (inviteButton) {
-        inviteButton.imageView.image = [UIImage imageNamed:@"adduser_64.png"];
+        BOOL isConnected = [userInfo[@"connected"] boolValue];
+        if (isConnected) {
+            inviteButton.hidden = YES;
+        } else {
+            inviteButton.hidden = NO;
+            inviteButton.imageView.image = [UIImage imageNamed:@"adduser_64.png"];
+        }
     }
     return cell;
 }
@@ -139,7 +146,9 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    [[MLApiClient client] findUser:searchBar.text success:^(NSHTTPURLResponse *response, id responseJSON) {
+    [[MLApiClient client] findUser:searchBar.text
+                            fromId:[MLApiClient client].userId
+                           success:^(NSHTTPURLResponse *response, id responseJSON) {
         NSLog(@"search success: %@", (NSDictionary *)responseJSON);
         dispatch_async(dispatch_get_main_queue(), ^{
             [self clearUsers];

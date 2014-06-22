@@ -458,11 +458,12 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
 }
 
 - (NSURLRequest *)findUser:(NSString *)name
+                    fromId:(NSInteger)userId
                    success:(MLApiClientSuccess)successCallback
                    failure:(MLApiClientFailure)failureCallback
 {
     NSString * path = @"/users";
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@?search=%@", self.protocol, self.baseURLString, path, [self urlEncode:name]]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@?from=%d&search=%@", self.protocol, self.baseURLString, path, userId, [self urlEncode:name]]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:15.0f];
@@ -472,11 +473,12 @@ static NSString * AFBase64EncodedStringFromString(NSString *string) {
 }
 
 - (NSURLRequest *)findUserByFbIds:(NSString *)fbIds
+                           fromId:(NSInteger)userId
                           success:(MLApiClientSuccess)successCallback
                           failure:(MLApiClientFailure)failureCallback
 {
     NSString * path = @"/users";
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@?searchfb=%@", self.protocol, self.baseURLString, path, [self urlEncode:fbIds]]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@?from=%d&searchfb=%@", self.protocol, self.baseURLString, path, userId, [self urlEncode:fbIds]]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:15.0f];
