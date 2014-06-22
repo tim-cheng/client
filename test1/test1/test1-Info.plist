@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>ParenTip</string>
+	<string>Parent2D</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
@@ -42,7 +42,7 @@
 	<key>FacebookAppID</key>
 	<string>551158834997242</string>
 	<key>FacebookDisplayName</key>
-	<string>ParenTip</string>
+	<string>Parent2D</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIAppFonts</key>
