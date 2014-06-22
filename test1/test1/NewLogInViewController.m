@@ -118,7 +118,7 @@
                 NSLog(@"FB log in info");
                 NSString *firstName = user.first_name;
                 NSString *lastName = user.last_name;
-                NSString *facebookId = user.id;
+                 NSString *facebookId = [user objectForKey:@"id"];
                 NSString *location = user.location.name;
                 NSString *zip = @"";
                 NSString *email = [user objectForKey:@"email"];

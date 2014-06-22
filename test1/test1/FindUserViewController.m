@@ -38,7 +38,7 @@
         NSLog(@"Found: %i friends", friends.count);
         NSMutableArray *friendList = [[NSMutableArray alloc] initWithCapacity:friends.count];
         for (NSDictionary<FBGraphUser>* friend in friends) {
-            [friendList addObject:friend.id];
+            [friendList addObject:[friend objectForKey:@"id"]];
             //            NSLog(@"I have a friend named %@ with id %@", friend.name, friend.id);
         }
         NSString *fbIds = [friendList componentsJoinedByString:@"+"];
