@@ -24,6 +24,7 @@
 @property (strong, nonatomic) NSDateFormatter *myFormatter;
 @property (weak, nonatomic) UITableViewCell *commentPostCell;
 @property (assign, nonatomic) NSInteger moreActionPostId;
+@property (assign, nonatomic) BOOL moreActionIsSelf;
 @property (weak, nonatomic) UITableViewCell *moreActionCell;
 
 
@@ -216,11 +217,18 @@
 
 - (void)tapOnMore:(UIButton *)button
 {
+    NSInteger userId = [self tagToUserId:[button superview].tag];
+    NSLog(@"tapped on more for user: %d", userId);
+    self.moreActionIsSelf = (userId == [MLApiClient client].userId);
     UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:nil
                                                        delegate:self
                                               cancelButtonTitle:@"Cancel"
                                          destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Share on Facebook", @"Share on WeChat", @"Delete Post", nil];
+                                              otherButtonTitles:
+                            @"Share on Facebook",
+                            @"Share on WeChat",
+                            (self.moreActionIsSelf ? @"Delete Post" : @"Report Post"),
+                            nil];
     NSInteger postId = [self tagToPostId:[button superview].tag];
     self.moreActionPostId = postId;
     self.moreActionCell = (UITableViewCell *)[[button superview] superview];
@@ -395,12 +403,7 @@
     // only show more button to post owner
     UIButton *more = (UIButton *)[cell.contentView viewWithTag:19];
     if (more) {
-        if (userId != [MLApiClient client].userId) {
-            more.hidden = YES;
-        } else {
-            more.hidden = NO;
-            [more addTarget:self action:@selector(tapOnMore:) forControlEvents:UIControlEventTouchUpInside];
-        }
+        [more addTarget:self action:@selector(tapOnMore:) forControlEvents:UIControlEventTouchUpInside];
     }
     return cell;
 }
@@ -420,17 +423,32 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1) {
-        // delete post
-        [[MLPostInfo instance] deletePostId:self.moreActionPostId success:^(id responseJSON) {
-            if (self.commentPostCell == nil) {
-                [self loadPosts];
-            } else {
-                self.commentPostCell = nil;
-                if (self.delegate) {
-                    [self.delegate postFeed:self willCloseComment:self.moreActionPostId];
+        if (self.moreActionIsSelf) {
+            // delete post
+            [[MLPostInfo instance] deletePostId:self.moreActionPostId success:^(id responseJSON) {
+                if (self.commentPostCell == nil) {
+                    [self loadPosts];
+                } else {
+                    self.commentPostCell = nil;
+                    if (self.delegate) {
+                        [self.delegate postFeed:self willCloseComment:self.moreActionPostId];
+                    }
                 }
-            }
-        }];
+            }];
+        } else {
+            // report post
+            [[MLApiClient client] reportPostId:self.moreActionPostId success:^(NSHTTPURLResponse *response, id responseJSON) {
+                NSLog(@"reported!");
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                                    message:@"Thanks for reporting. We will review this post take actions accordingly."
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil];
+                [alertView show];
+            } failure:^(NSHTTPURLResponse *response, id responseJSON, NSError *error) {
+                NSLog(@"report failed!");
+            }];
+        }
     } else {
         // cancel delete
     }
@@ -511,12 +529,21 @@
         }
         case 2:
         {
-            UIAlertView *confirm = [[UIAlertView alloc] initWithTitle:@"Confirm"
-                                                              message:@"Do you really want to delete this post?"
-                                                             delegate:self
-                                                    cancelButtonTitle:nil
-                                                    otherButtonTitles:@"No", @"Yes", nil];
-            [confirm show];
+            if (self.moreActionIsSelf) {
+                UIAlertView *confirm = [[UIAlertView alloc] initWithTitle:@"Confirm"
+                                                                  message:@"Do you really want to delete this post?"
+                                                                 delegate:self
+                                                        cancelButtonTitle:nil
+                                                        otherButtonTitles:@"No", @"Yes", nil];
+                [confirm show];
+            } else {
+                UIAlertView *confirm = [[UIAlertView alloc] initWithTitle:@"Confirm"
+                                                                  message:@"Do you want to report inappropriate content in this post?"
+                                                                 delegate:self
+                                                        cancelButtonTitle:nil
+                                                        otherButtonTitles:@"No", @"Yes", nil];
+                [confirm show];
+            }
             break;
         }
         default:
