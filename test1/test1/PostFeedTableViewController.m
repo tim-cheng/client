@@ -440,7 +440,7 @@
             [[MLApiClient client] reportPostId:self.moreActionPostId success:^(NSHTTPURLResponse *response, id responseJSON) {
                 NSLog(@"reported!");
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
-                                                                    message:@"Thanks for reporting. We will review this post take actions accordingly."
+                                                                    message:@"Thanks for reporting. We will review this post and take actions accordingly."
                                                                    delegate:nil
                                                           cancelButtonTitle:@"OK"
                                                           otherButtonTitles:nil];

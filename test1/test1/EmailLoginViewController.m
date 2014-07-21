@@ -42,6 +42,12 @@
             self.passwordField.text = password;
         }
     }
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *autoLogin = [defaults objectForKey:@"autoLogin"];
+    if ([autoLogin isEqualToString:@"email"]) {
+        [self login:self];
+    }
 }
 
 - (IBAction)login:(id)sender
@@ -62,6 +68,10 @@
                                                            forKey:(__bridge id)kSecValueData];
                                      [self.keychainItem setObject:self.emailField.text
                                                            forKey:(__bridge id)kSecAttrAccount];
+
+                                     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                                     [defaults setObject:@"email" forKey:@"autoLogin"];
+                                     [defaults synchronize];
                                      
                                      dispatch_async(dispatch_get_main_queue(), ^{
                                          [self performSegueWithIdentifier:@"EmailGoMain" sender:self];

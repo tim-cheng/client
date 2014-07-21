@@ -8,6 +8,8 @@
 
 #import "NewSignUpViewController.h"
 #import "MLApiClient.h"
+#import "KeychainItemWrapper.h"
+
 
 @interface NewSignUpViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -20,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *profButton;
 
 @property (assign, nonatomic) BOOL hasProfPicture;
+@property (strong,nonatomic) KeychainItemWrapper *keychainItem;
 
 - (IBAction)nextStep:(id)sender;
 - (IBAction)addChild:(id)sender;
@@ -47,6 +50,8 @@
     img.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     img.layer.cornerRadius = 36;
     img.clipsToBounds = YES;
+    
+    self.keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"MLLogin" accessGroup:nil];
 }
 
 
@@ -105,15 +110,20 @@
                                                                          NSLog(@"user picture upload failed");
                                                                      }];
                                  }
-                                 // TODO: save cred to keychain
+                                 [self.keychainItem setObject:[self.passwordField.text dataUsingEncoding:NSUTF8StringEncoding]
+                                                       forKey:(__bridge id)kSecValueData];
+                                 [self.keychainItem setObject:self.emailField.text
+                                                       forKey:(__bridge id)kSecAttrAccount];
+                                 
 //                                 [self dismissViewControllerAnimated:NO completion:^{
 //                                     [self performSegueWithIdentifier:@"GoMain" sender:self];
 //                                 }];
                                  
                                  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                                  [defaults setObject:@(YES) forKey:@"firstSignup"];
+                                 [defaults setObject:@"email" forKey:@"autoLogin"];
                                  [defaults synchronize];
-
+                                 
                                  dispatch_async(dispatch_get_main_queue(), ^{
                                      [self performSegueWithIdentifier:@"GoMain" sender:self];
                                      [self.navigationController popViewControllerAnimated:NO];

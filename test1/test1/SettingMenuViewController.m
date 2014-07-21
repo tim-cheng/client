@@ -101,6 +101,7 @@
         [FBSession.activeSession closeAndClearTokenInformation];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:nil forKey:@"savedPosts"];
+        [defaults setObject:nil forKey:@"autoLogin"];
         [defaults synchronize];
         [self dismissViewControllerAnimated:NO completion:^{
             [self.frostedViewController performSegueWithIdentifier:@"LogoutMain" sender:self.frostedViewController];

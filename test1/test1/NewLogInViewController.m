@@ -45,6 +45,14 @@
 //    [self.view sendSubviewToBack:splash];
 
     self.view.backgroundColor = MLColor;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *autoLogin = [defaults objectForKey:@"autoLogin"];
+    if ([autoLogin isEqualToString:@"fb"]) {
+        [self fbLogin:self];
+    } else if ([autoLogin isEqualToString:@"email"]) {
+        [self emailLogin:self];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -146,7 +154,10 @@
                                                   [defaults setObject:@(YES) forKey:@"firstSignup"];
                                                   [defaults synchronize];
                                               }
-
+                                              
+                                              NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                                              [defaults setObject:@"fb" forKey:@"autoLogin"];
+                                              [defaults synchronize];
 
                                               dispatch_async(dispatch_get_main_queue(), ^{
                                                   [self performSegueWithIdentifier:@"MainFeed" sender:self];
