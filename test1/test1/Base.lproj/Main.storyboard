@@ -551,7 +551,7 @@
                     <navigationItem key="navigationItem" title="Sign Up" id="STp-zX-Rkk">
                         <barButtonItem key="rightBarButtonItem" title="Create" id="ard-cP-hZX">
                             <connections>
-                                <action selector="nextStep:" destination="HkC-vN-l7X" id="uiJ-Bd-o4j"/>
+                                <action selector="nextStep:" destination="n8E-P0-yNR" id="Qin-lF-qYL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1110,6 +1110,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="tGd-IJ-lLP"/>
+        <segue reference="SF2-3U-aEa"/>
     </inferredMetricsTieBreakers>
 </document>
