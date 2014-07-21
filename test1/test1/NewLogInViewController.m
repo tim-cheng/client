@@ -48,9 +48,7 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *autoLogin = [defaults objectForKey:@"autoLogin"];
-    if ([autoLogin isEqualToString:@"fb"]) {
-        [self fbLogin:self];
-    } else if ([autoLogin isEqualToString:@"email"]) {
+    if ([autoLogin isEqualToString:@"email"]) {
         [self emailLogin:self];
     }
 }
@@ -155,10 +153,6 @@
                                                   [defaults synchronize];
                                               }
                                               
-                                              NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                                              [defaults setObject:@"fb" forKey:@"autoLogin"];
-                                              [defaults synchronize];
-
                                               dispatch_async(dispatch_get_main_queue(), ^{
                                                   [self performSegueWithIdentifier:@"MainFeed" sender:self];
                                               });
